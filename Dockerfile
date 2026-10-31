@@ -1,7 +1,5 @@
 FROM --platform=$BUILDPLATFORM node:24-bookworm-slim AS frontend
 
-ARG KOITO_VERSION=dev
-ENV VITE_KOITO_VERSION=$KOITO_VERSION
 ENV BUILD_TARGET=docker
 WORKDIR /client
 
@@ -9,12 +7,13 @@ RUN npm install --global --force corepack@0.34.6 && corepack enable
 COPY client/package.json client/yarn.lock client/.yarnrc.yml ./
 RUN yarn install --immutable
 COPY client/ ./
+ARG KOITO_VERSION=dev
+ENV VITE_KOITO_VERSION=$KOITO_VERSION
 RUN yarn build && \
     find build/client -type f \( -name "*.js" -o -name "*.css" -o -name "*.html" -o -name "*.svg" \) -exec gzip -kf -9 {} \;
 
 FROM golang:1.25-bookworm AS backend
 
-ARG KOITO_VERSION=dev
 ENV CGO_ENABLED=1
 WORKDIR /app
 RUN apt-get update && \
@@ -28,15 +27,11 @@ COPY imagecache/ ./imagecache/
 COPY internal/ ./internal/
 COPY queue/ ./queue/
 COPY db/ ./db/
+ARG KOITO_VERSION=dev
 RUN go build -trimpath -ldflags "-s -w -X main.Version=$KOITO_VERSION" -o /koito ./cmd/api
 
 FROM debian:bookworm-slim AS final
 
-ARG KOITO_VERSION=dev
-LABEL org.opencontainers.image.title="Koito SUM" \
-      org.opencontainers.image.description="ListenBrainz-compatible scrobbling with simple public listening profiles" \
-      org.opencontainers.image.source="https://github.com/ebrgr/Koito-SUM" \
-      org.opencontainers.image.version=$KOITO_VERSION
 WORKDIR /app
 RUN apt-get update && \
     apt-get install -y --no-install-recommends libvips42 curl ca-certificates tzdata && \
@@ -45,6 +40,11 @@ COPY --from=backend /koito ./app
 COPY --from=frontend /client/build/client ./client/build/client
 COPY client/public/ ./client/public/
 COPY assets/ ./assets/
+ARG KOITO_VERSION=dev
+LABEL org.opencontainers.image.title="Koito SUM" \
+      org.opencontainers.image.description="ListenBrainz-compatible scrobbling with simple public listening profiles" \
+      org.opencontainers.image.source="https://github.com/ebrgr/Koito-SUM" \
+      org.opencontainers.image.version=$KOITO_VERSION
 ENV KOITO_CONFIG_DIR=/etc/koito \
     KOITO_BIND_ADDR=0.0.0.0 \
     KOITO_LISTEN_PORT=4110
