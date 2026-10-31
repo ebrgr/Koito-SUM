@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { useAppContext } from "~/providers/AppProvider";
 import { ExternalLink } from "lucide-react";
-import { Link } from "react-router";
+
+import { ProfileLink as Link } from "~/components/ProfileLink";
 
 type VersionInfo = {
   html_url: string;

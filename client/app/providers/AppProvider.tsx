@@ -1,23 +1,36 @@
 import { getCfg, type User } from "api/api";
-import { createContext, useContext, useEffect, useState } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  useCallback,
+} from "react";
 import pkg from "../../package.json";
 import semver from "semver";
 
 function isNewerVersion(current: string, latest: string): boolean {
-  return semver.gt(latest, current);
+  const currentVersion = semver.valid(current);
+  const latestVersion = semver.valid(latest);
+  return (
+    !!currentVersion &&
+    !!latestVersion &&
+    semver.gt(latestVersion, currentVersion)
+  );
 }
 
 interface AppContextType {
-  user: User | null | undefined;
+  adminSession: User | null | undefined;
+  user: User | null | undefined; // Compatibility alias for existing admin controls.
   configurableHomeActivity: boolean;
   homeItems: number;
   defaultTheme: string;
   currentVersion: string;
   updateAvailable: boolean;
-  firstActivity: Date | undefined;
   setConfigurableHomeActivity: (value: boolean) => void;
   setHomeItems: (value: number) => void;
   setUsername: (value: string) => void;
+  refreshAdminSession: () => Promise<void>;
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -39,6 +52,17 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
     useState<boolean>(false);
   const [homeItems, setHomeItems] = useState<number>(0);
 
+  const refreshAdminSession = useCallback(async () => {
+    const response = await fetch("/apis/web/v1/user");
+    if (response.status === 401) {
+      setUser(null);
+      return;
+    }
+    if (!response.ok)
+      throw new Error("Unable to refresh administrator session");
+    setUser(await response.json());
+  }, []);
+
   const setUsername = (value: string) => {
     if (!user) {
       return;
@@ -49,40 +73,26 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
   const currentVersion = import.meta.env.VITE_KOITO_VERSION || pkg.version;
 
   const [updateAvailable, setUpdateAvailable] = useState<boolean>(false);
-  const [firstActivity, setFirstActivity] = useState<Date | undefined>();
 
   useEffect(() => {
-    fetch("/apis/web/v1/user")
-      .then((res) => res.json())
-      .then((data) => {
-        data.error ? setUser(null) : setUser(data);
-      })
-      .catch(() => setUser(null));
+    refreshAdminSession().catch(() => setUser(null));
 
     setConfigurableHomeActivity(true);
     setHomeItems(12);
 
-    getCfg().then((cfg) => {
-      console.log(cfg);
-      if (cfg.default_theme !== "") {
-        setDefaultTheme(cfg.default_theme);
-      } else {
-        setDefaultTheme("yuu");
-      }
-    });
-
-    fetch("/apis/web/v1/first-activity")
-      .then((r) => r.json())
-      .then((data) => {
-        if (!data.error) {
-          setFirstActivity(new Date(data.time));
+    getCfg()
+      .then((cfg) => {
+        if (cfg.default_theme !== "") {
+          setDefaultTheme(cfg.default_theme);
+        } else {
+          setDefaultTheme("yuu");
         }
       })
-      .catch(() => {});
+      .catch(() => setDefaultTheme("yuu"));
   }, []);
 
   useEffect(() => {
-    fetch("https://api.github.com/repos/gabehf/koito/releases/latest")
+    fetch("https://api.github.com/repos/ebrgr/Koito-SUM/releases/latest")
       .then((r) => r.json())
       .then((r) => {
         setUpdateAvailable(isNewerVersion(currentVersion, r.tag_name));
@@ -96,16 +106,17 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
   }
 
   const contextValue: AppContextType = {
+    adminSession: user,
     user,
     configurableHomeActivity,
     homeItems,
     defaultTheme,
     currentVersion,
     updateAvailable,
-    firstActivity,
     setConfigurableHomeActivity,
     setHomeItems,
     setUsername,
+    refreshAdminSession,
   };
 
   return (

@@ -1,0 +1,11 @@
+{
+  "go.alternateTools": {
+    "dlv": "${workspaceFolder}/.bin/dlv"
+  },
+  "go.toolsEnvVars": { "CGO_ENABLED": "1" },
+  "files.watcherExclude": {
+    "**/.local/**": true,
+    "**/client/build/**": true,
+    "**/client/.react-router/**": true
+  }
+}

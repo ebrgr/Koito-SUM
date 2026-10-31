@@ -1,13 +1,6 @@
 name: Deploy to GitHub Pages
 
 on:
-  push:
-    tags:
-      - "v*"
-    paths:
-      - "docs/**"
-      - ".github/workflows/**"
-
   workflow_dispatch:
 
 permissions:

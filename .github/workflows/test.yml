@@ -1,32 +1,70 @@
 name: Test
 
 on:
+  push:
+    branches: [main]
   pull_request:
-    branches:
-      - main
+    branches: [main]
+  workflow_call:
+
+permissions:
+  contents: read
 
 jobs:
-  test:
-    name: Go Test
+  check:
+    name: Go, frontend and multiuser validation
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+          cache: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Install build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libvips-dev pkg-config
+          npm install --global --force corepack@0.34.6
+          corepack enable
+      - run: make client.deps
+      - run: make check
+      - run: make multiuser.check
+      - name: Verify migration and isolation with the race detector
+        run: CGO_ENABLED=1 go test -race ./internal/db/sqlite ./engine -run 'Test(Profile|Consolidated|AdminAccount)' -timeout 120s
+      - name: Validate deployment configuration
+        env:
+          KOITO_ADMIN_PASSWORD: ci-validation-only-password
+        run: docker compose --env-file deploy/.env.example -f deploy/compose.yaml config --quiet
 
-    - name: Set up Go
-      uses: actions/setup-go@v5
-      with:
-        go-version-file: go.mod
-
-    - name: Install libvips
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y libvips-dev
-
-    - name: Verify libvips install
-      run: vips --version
-
-    - name: Build
-      run: go build -v ./...
-
-    - name: Test
-      uses: robherley/go-test-action@v0
+  container:
+    name: Container build and startup
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build the production container
+        run: docker build --build-arg KOITO_VERSION=dev -t koito-sum:ci .
+      - name: Verify container startup and compiled interface
+        shell: bash
+        run: |
+          docker run -d --name koito-ci -p 127.0.0.1:14110:4110 \
+            -e KOITO_DEFAULT_PASSWORD="$(openssl rand -hex 24)" \
+            -e KOITO_LOG_LEVEL=warn -e KOITO_SKIP_IMPORT=true \
+            -e KOITO_DISABLE_MUSICBRAINZ=true -e KOITO_DISABLE_DEEZER=true \
+            -e KOITO_DISABLE_COVER_ART_ARCHIVE=true koito-sum:ci
+          trap 'docker rm -f koito-ci >/dev/null' EXIT
+          healthy=false
+          for attempt in {1..60}; do
+            if curl --fail --silent http://127.0.0.1:14110/apis/web/v1/health >/dev/null; then
+              healthy=true
+              break
+            fi
+            sleep 2
+          done
+          test "$healthy" = true
+          curl --fail --silent http://127.0.0.1:14110/default >/dev/null
+          curl --fail --silent http://127.0.0.1:14110/apis/web/v1/profiles | python3 -c 'import json,sys; p=json.load(sys.stdin); assert len(p)==1 and p[0]["slug"]=="default"'

@@ -6,6 +6,13 @@ _Koito (小糸) is a Japanese surname. It is also homophonous with the words 恋
 
 </div>
 
+> **S**imple **U**ser **M**anager
+>
+> This version adds multiuser scrobble submissions while keeping the experience simple. Approximately 70% of the work on these changes was done with assistance from OpenAI Codex.
+>
+> **Back up your database before testing. This version can upgrade an existing installation that has already migrated to SQLite; use its existing data directory so the database is migrated automatically on startup.**
+
+
 <div align="center">
   
   [![Ko-Fi](https://img.shields.io/badge/Ko--fi-F16061?style=for-the-badge&logo=ko-fi&logoColor=white)](https://ko-fi.com/gabehf)
@@ -40,19 +47,22 @@ You can view my public instance with my listening data at https://koito.mnrva.de
 
 ## Installation
 
-See the [installation guide](https://koito.io/guides/installation/), or, if you just want to cut to the chase, use this docker compose file with a minimal configuration:
+For this multiuser fork, see [DEPLOYMENT.md](DEPLOYMENT.md). The release image is
+`ghcr.io/ebrgr/koito-sum:v0.1.0-rc.1`, available for Linux amd64 and arm64.
 
-```yaml
-services:
-  koito:
-    image: gabehf/koito:latest
-    container_name: koito
-    ports:
-      - "4110:4110"
-    volumes:
-      - ./koito:/etc/koito
-    restart: unless-stopped
+```sh
+cp deploy/.env.example deploy/.env
+# Set the administrator password and your data directory in deploy/.env first.
+docker compose --env-file deploy/.env -f deploy/compose.yaml pull
+docker compose --env-file deploy/.env -f deploy/compose.yaml up -d
 ```
+
+Back up an existing SQLite v2 installation before pointing the volume at its
+existing data directory. Migration to schema v3 runs automatically at startup.
+The [English multiuser design](MULTIUSER_DESIGN.en.md) describes the model,
+permissions, migration, and validation results.
+
+Original Koito documentation: [installation guide](https://koito.io/guides/installation/).
 
 ## Importing Data
 
@@ -65,6 +75,9 @@ Before importing, it is recommended you set up any image sources you want to hav
 See the [configuration reference](https://koito.io/reference/configuration/) in the docs.
 
 ## Contributing
+
+For local editing, running, and debugging (Go API + React frontend), see
+[DEVELOPMENT.md](DEVELOPMENT.md).
 
 There are currently some known issues that I am actively working on, in addition to adding new features. If you want to contribute (especially more and more robust testing) feel free to fork the repository and make a pull request with your changes.
 

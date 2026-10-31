@@ -1,0 +1,46 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Koito: setup",
+      "type": "shell",
+      "command": "make setup",
+      "problemMatcher": []
+    },
+    {
+      "label": "Koito: frontend dev",
+      "type": "shell",
+      "command": "make client.dev",
+      "isBackground": true,
+      "problemMatcher": {
+        "owner": "vite",
+        "pattern": {
+          "regexp": "^(.*):(\\d+):(\\d+): (.*)$",
+          "file": 1,
+          "line": 2,
+          "column": 3,
+          "message": 4
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": ".*corepack yarn run dev.*",
+          "endsPattern": "Local:.*http://localhost:5173"
+        }
+      }
+    },
+    {
+      "label": "Koito: check",
+      "type": "shell",
+      "command": "make check",
+      "group": "test",
+      "problemMatcher": ["$go"]
+    },
+    {
+      "label": "Koito: build",
+      "type": "shell",
+      "command": "make build",
+      "group": "build",
+      "problemMatcher": ["$go"]
+    }
+  ]
+}

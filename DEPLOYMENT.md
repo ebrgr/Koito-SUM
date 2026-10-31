@@ -1,0 +1,112 @@
+# Deploying Koito SUM
+
+Koito SUM adds public listening profiles and administrator-only management to
+[Koito](https://github.com/gabehf/Koito). The first SUM release is
+`v0.1.0-rc.1`, a prerelease intended for testing with a backup of your data.
+
+The image is `ghcr.io/ebrgr/koito-sum:v0.1.0-rc.1`, published for Linux amd64
+and arm64. The image serves both the API and compiled interface on port 4110;
+Node.js, Go, and Vite are not required on the deployment host.
+
+## Start a fresh installation
+
+Install Docker Engine/Desktop with the Docker Compose plugin, then clone this
+repository or extract the release's deployment bundle. From its root:
+
+```sh
+cp deploy/.env.example deploy/.env
+```
+
+Edit `deploy/.env`. Set `KOITO_ADMIN_PASSWORD` to a unique password of at least
+eight characters. `KOITO_ADMIN_USERNAME` defaults to `admin`. These settings
+create the administrator only when the database has no users.
+
+```sh
+docker compose --env-file deploy/.env -f deploy/compose.yaml pull
+docker compose --env-file deploy/.env -f deploy/compose.yaml up -d
+docker compose --env-file deploy/.env -f deploy/compose.yaml ps
+```
+
+Open <http://localhost:4110>. Choose a public profile, or use
+**Settings → Administration** to sign in and create/edit profiles and API keys.
+The initial data directory is `deploy/data` and is mounted at `/etc/koito`.
+Keep `deploy/.env` and the data directory outside version control.
+
+The published host port binds to `127.0.0.1` by default. For remote access, use
+your reverse proxy with HTTPS or explicitly set `KOITO_HOST_BIND` to the host
+address you intend to expose. The container's internal API binds to all container
+interfaces, independently of this host setting.
+
+## Upgrade an existing SQLite v2 installation
+
+**Stop the old Koito process/container and back up its complete data directory
+before testing this release.** Do not run two versions against the same database.
+Preserve the image cache and other files alongside `koito.db`.
+
+Set `KOITO_DATA_DIR` in `deploy/.env` to the absolute path of that existing data
+directory, rather than a new empty directory. Set the intended host port, and run
+the `pull` and `up -d` commands above. Keep the existing administrator's login:
+changing bootstrap environment variables does not reset an existing password.
+
+On first startup, the application:
+
+1. Creates a consistent SQLite backup, including committed WAL, named
+   `koito.db.pre-profiles-*.bak` in the data directory (permissions 0600).
+2. Applies the single `003_listening_profiles.sql` migration, taking v2 to v3.
+3. Preserves administrator credentials, existing tokens, listens, and catalog.
+4. Assigns a single legacy user's history/keys to `/default`; multiple legacy
+   users receive separate profiles.
+
+The migration includes profiles, associations, indexes, per-profile relays, and
+protection against transferring a key. If backup or migration fails, startup
+fails; review logs before retrying. Old experimental SUM databases that already
+used the earlier v3/v4 layout need a v2 backup restored before this consolidated
+migration. Do not relabel their entries in `goose_db_version`.
+
+Automatic directory import is disabled in the supplied Compose file. Import
+history through the Administration tab with an explicit destination profile.
+Profiles are public; only administrative operations require a password. The
+volume contains credentials and listening data and must be retained across
+container upgrades.
+
+## Logs, health, and shutdown
+
+```sh
+docker compose --env-file deploy/.env -f deploy/compose.yaml logs --tail=100 koito
+curl --fail http://127.0.0.1:4110/apis/web/v1/health
+docker compose --env-file deploy/.env -f deploy/compose.yaml stop
+```
+
+The image includes a healthcheck. Compose gives the application up to 30 seconds
+to shut down gracefully. `stop` and `down` preserve the host data directory.
+
+## Rollback
+
+Stop the SUM container. Restore the complete pre-upgrade backup/data directory
+and run the previous application version against that restored copy. The
+migration intentionally does not offer a destructive SQL downgrade. Restoring
+a backup loses writes made after that backup; retain the newer data separately
+if you need to inspect or reconcile it.
+
+## Container registry access
+
+Public GHCR packages can be pulled without logging in. A package initially
+created as private requires a GitHub login with package-read access until the
+owner makes it public. See [GitHub's Container registry documentation](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry).
+
+Version tags identify releases; `sha-...` tags identify their source commit.
+Prereleases do not update a `latest` tag. Set `KOITO_IMAGE_TAG` in `deploy/.env`
+when you intentionally choose a different version.
+
+## Build locally
+
+```sh
+docker build --build-arg KOITO_VERSION=v0.1.0-rc.1 -t koito-sum:local .
+```
+
+The build uses Node.js 24 and the repository's Yarn lockfile, Go 1.25, and
+libvips. Both Go build and runtime use Debian Bookworm to keep native library
+versions aligned. `.dockerignore` excludes local databases, credentials, caches,
+and development dependencies.
+
+For design and validation details, see [MULTIUSER_DESIGN.en.md](MULTIUSER_DESIGN.en.md).
