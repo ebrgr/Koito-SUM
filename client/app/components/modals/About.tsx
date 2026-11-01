@@ -4,21 +4,16 @@ import { ExternalLink } from "lucide-react";
 
 import { ProfileLink as Link } from "~/components/ProfileLink";
 
-type VersionInfo = {
-  html_url: string;
-  name: string;
-  body: string;
-};
+import { latestRelease, type ReleaseInfo } from "api/version";
 
 export default function About() {
   const { updateAvailable, currentVersion } = useAppContext();
   const [latestVersionInfo, setLatestVersionInfo] = useState<
-    VersionInfo | undefined
+    ReleaseInfo | undefined
   >();
 
   useEffect(() => {
-    fetch("https://api.github.com/repos/gabehf/koito/releases/latest")
-      .then((r) => r.json())
+    latestRelease()
       .then((r) => setLatestVersionInfo(r))
       .catch((err) => console.log(err));
   }, []);
@@ -49,7 +44,6 @@ export default function About() {
             </span>
           </Link>
         )}
-        {!latestVersionInfo && <div>Loading...</div>}
       </div>
     </div>
   );

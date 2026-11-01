@@ -1,12 +1,12 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
-import { stripTypeScriptTypes } from "node:module";
+import { compileTypeScript } from "./typescript.mjs";
 const source = await readFile(
   new URL("../api/profile-paths.ts", import.meta.url),
   "utf8",
 );
-const pathsURL = `data:text/javascript,${encodeURIComponent(stripTypeScriptTypes(source))}`;
+const pathsURL = `data:text/javascript,${encodeURIComponent(compileTypeScript(source))}`;
 const { profilePath, profileRequestPath, switchedProfilePath } = await import(
   pathsURL
 );
@@ -14,7 +14,7 @@ const apiSource = (
   await readFile(new URL("../api/api.ts", import.meta.url), "utf8")
 ).replace('"./profile-paths"', JSON.stringify(pathsURL));
 const { createProfileApi, updateUser } = await import(
-  `data:text/javascript,${encodeURIComponent(stripTypeScriptTypes(apiSource))}`
+  `data:text/javascript,${encodeURIComponent(compileTypeScript(apiSource))}`
 );
 
 test("profile reads and private actions always name their destination", () => {

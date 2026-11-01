@@ -2,6 +2,7 @@ test_config_dir
 .env
 .local/
 .bin/
+.vscode/
 /koito
 __debug_bin*
 .DS_Store

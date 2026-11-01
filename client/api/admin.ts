@@ -1,5 +1,11 @@
 import type { ListeningProfile, ApiKey } from "./api";
 
+export interface ProfileRelay {
+  enabled: boolean;
+  url: string;
+  token: string;
+}
+
 const base = "/apis/web/v1/profiles";
 export async function adminRequest<T>(
   path: string,
@@ -57,6 +63,23 @@ export const adminProfiles = {
     adminRequest<ListeningProfile>(profilePath(slug) + "/avatar", {
       method: "DELETE",
     }),
+  relay: (slug: string, signal?: AbortSignal) =>
+    adminRequest<ProfileRelay>(profilePath(slug) + "/relay", {
+      signal,
+      cache: "no-store",
+    }),
+  saveRelay: (slug: string, url: string, token: string) =>
+    adminRequest<void>(
+      profilePath(slug) + "/relay",
+      json("PUT", { url, token }),
+    ),
+  removeRelay: (slug: string) =>
+    adminRequest<void>(profilePath(slug) + "/relay", { method: "DELETE" }),
+  testRelay: (slug: string, url: string, token: string) =>
+    adminRequest<{ valid: boolean; user_name: string }>(
+      profilePath(slug) + "/relay/test",
+      json("POST", { url, token }),
+    ),
   keys: (slug: string, signal?: AbortSignal) =>
     adminRequest<ApiKey[]>(profilePath(slug) + "/user/apikeys", { signal }),
   createKey: (slug: string, label: string) =>

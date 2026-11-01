@@ -1,5 +1,7 @@
 # Design study: listening profiles with a single administrator
 
+Current version: **Koito 0.3.2-SUM-RC2**.
+
 [Portuguese version](MULTIUSER_DESIGN.md)
 
 Status: implementation steps 1–5 have been completed and validated for the local
@@ -316,6 +318,8 @@ All paths below use the `/apis/web/v1` prefix:
 | `PATCH/DELETE /profiles/{slug}/user/apikeys/{id}` | Admin: renames/revokes the associated key |
 | `POST /profiles/{slug}/import` | Admin: imports a file placed in the profile's directory; step 4 also adds upload support |
 | `PUT/DELETE /profiles/{slug}/relay` | Admin: configures/removes this profile's relay; does not return the token |
+| `GET /profiles/{slug}/relay` | Admin: reads saved configuration, including the visible token; `Cache-Control: no-store` |
+| `POST /profiles/{slug}/relay/test` | Admin: validates draft credentials without saving or submitting listens |
 
 Legacy read routes without a profile remain available only when exactly one
 profile exists. With zero or several profiles, they return 409 requesting an
@@ -995,3 +999,66 @@ The old `.sqlexample` directory was no longer available during this run.
 Additional tests therefore used the restored v2 development database as their
 source, always opened read-only. No database version records were manually
 edited to simulate consolidation.
+
+
+## Profile relay administration — November 1, 2026
+
+Settings → Administration → Manage profile now includes ListenBrainz forwarding:
+an enable checkbox, base URL, visible external user token, saved/unsaved state,
+Save forwarding and Test connection. The interface uses the existing per-profile
+PUT and DELETE operations. Saving disabled removes the stored URL and token;
+reactivating later requires entering them again. Existing listens are preserved.
+
+An administrative GET endpoint loads the saved URL/token with `no-store`.
+Public profile responses do not expose relay credentials. A new administrative
+POST `/relay/test` checks the draft URL's `/validate-token` using the Authorization
+header, reports the external username on success, and never saves credentials or
+submits a listen. It accepts only HTTP(S) base URLs without embedded credentials,
+query or fragment, uses a 10-second timeout and bounded response, and refuses
+redirects. External errors are summarized without returning tokens or raw responses.
+The protocol follows [ListenBrainz token validation](https://listenbrainz.readthedocs.io/en/latest/users/api/core.html#get--1-validate-token).
+
+No database migration is required. Global legacy environment variables retain
+their one-time bootstrap behavior; disabling removes the persistent profile relay.
+Persistent delivery queues and changes to relay retry behavior remain future work.
+
+Validation: the full Go suite passed, including authorization, per-profile
+read/removal, invalid credentials/responses, redirects and non-persisting tests.
+Frontend type checking, all four frontend tests and the production build passed.
+Tests used disposable databases and local mock servers without submitting data
+to external services or changing the real relay configuration.
+
+## SUM versioning
+
+The display name is **Koito 0.3.2-SUM-RC2**; the machine version and Docker/Git
+tag are `0.3.2-SUM-RC2` (without spaces). The upstream base remains 0.3.2, with the RC
+number incremented once per new commit. The base matches [upstream v0.3.2](https://github.com/gabehf/Koito/releases/tag/v0.3.2). Only the number after `SUM-RC` advances between commits; change the base only when deliberately adopting another upstream version. The previous fork tag `v0.1.0-rc.1` is historical.
+`internal/version/VERSION` supplies the Go default and Vite build version.
+Frontend package metadata, Docker defaults, deployment examples and current
+documentation are kept synchronized using `make version.bump` before each next
+commit. `make version.check` verifies synchronization; CI additionally checks
+that the committed version is higher than its parent when the parent has the
+version file. Rebuilding or restarting does not increment the number.
+
+The footer and About dialog display Koito followed by the version. Release
+checking includes published prereleases and compares RC numbers numerically
+(RC10 is newer than RC9). Historical release notes and published tags stay intact.
+This source version does not imply its image or GitHub release has been published.
+
+Version validation: the full Go suite, type checking, six frontend tests and
+production build passed. RC2 was confirmed in the compiled assets. Incrementing
+RC2 → RC3 was exercised in a temporary copy, preserving historical notes and
+leaving the actual source tree at RC2.
+
+## PR documentation and warnings checklist
+
+Updated the user-facing documentation site for profiles, migration, API keys,
+imports and forwarding. Replaced the experimental Node API in frontend tests
+with the existing TypeScript compiler, fixed a pre-existing malformed JSON test
+tag, and added Go vet to `make check`. See [PR validation](PR_VALIDATION.md) for
+commands, results and existing dependency/tooling warnings.
+
+Documentation build passed (9 pages), compared with base `a079fa6` (8 pages):
+both emit the same existing Node DEP0190 warning. Application tests/build and
+Dockerfile checks have no warnings. Both corresponding PR checklist items are
+checked, with these limits recorded in the validation report.

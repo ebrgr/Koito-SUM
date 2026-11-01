@@ -3,6 +3,7 @@ import { Link, useSearchParams } from "react-router";
 import { adminProfiles } from "api/admin";
 import type { ApiKey, ListeningProfile } from "api/api";
 import ProfileAvatar from "./ProfileAvatar";
+import ProfileRelayEditor from "./ProfileRelayEditor";
 
 const field = "w-full min-w-0 fg bg rounded-md border p-3";
 const button =
@@ -401,6 +402,7 @@ function ProfileEditor({
             </button>
           </div>
         </form>
+        <ProfileRelayEditor slug={profile.slug} busy={busy} setBusy={setBusy} />
         <section className={section}>
           <h3 className="text-xl">API keys for {profile.display_name}</h3>
           <p>

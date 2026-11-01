@@ -2,7 +2,7 @@ name: Publish GHCR image
 
 on:
   push:
-    tags: ['v*']
+    tags: ['v*', '*-SUM-RC*']
   workflow_dispatch:
 
 permissions:
@@ -27,11 +27,12 @@ jobs:
         shell: bash
         run: |
           echo "name=ghcr.io/${GITHUB_REPOSITORY,,}" >> "$GITHUB_OUTPUT"
-          if [[ "$GITHUB_REF" == refs/tags/* ]]; then
-            echo "version=$GITHUB_REF_NAME" >> "$GITHUB_OUTPUT"
-          else
-            echo "version=dev" >> "$GITHUB_OUTPUT"
+          version="$(cat internal/version/VERSION)"
+          if [[ "$GITHUB_REF" == refs/tags/* && "${GITHUB_REF_NAME#v}" != "$version" ]]; then
+            echo "Tag must match internal/version/VERSION" >&2
+            exit 1
           fi
+          echo "version=$version" >> "$GITHUB_OUTPUT"
       - uses: docker/login-action@v3
         with:
           registry: ghcr.io

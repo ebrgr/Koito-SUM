@@ -7,17 +7,7 @@ import {
   useCallback,
 } from "react";
 import pkg from "../../package.json";
-import semver from "semver";
-
-function isNewerVersion(current: string, latest: string): boolean {
-  const currentVersion = semver.valid(current);
-  const latestVersion = semver.valid(latest);
-  return (
-    !!currentVersion &&
-    !!latestVersion &&
-    semver.gt(latestVersion, currentVersion)
-  );
-}
+import { isNewerVersion, latestRelease } from "api/version";
 
 interface AppContextType {
   adminSession: User | null | undefined;
@@ -92,10 +82,9 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
   }, []);
 
   useEffect(() => {
-    fetch("https://api.github.com/repos/ebrgr/Koito-SUM/releases/latest")
-      .then((r) => r.json())
+    latestRelease()
       .then((r) => {
-        setUpdateAvailable(isNewerVersion(currentVersion, r.tag_name));
+        setUpdateAvailable(!!r && isNewerVersion(currentVersion, r.tag_name));
       })
       .catch((err) => console.log(err));
   }, []);

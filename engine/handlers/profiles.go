@@ -5,8 +5,6 @@ import (
 	"github.com/gabehf/koito/internal/db"
 	"github.com/gabehf/koito/internal/utils"
 	"net/http"
-	"net/url"
-	"strings"
 )
 
 func ListProfilesHandler(store db.ProfileStore) http.HandlerFunc {
@@ -52,33 +50,5 @@ func UpdateProfileHandler(store db.ProfileStore) http.HandlerFunc {
 			return
 		}
 		utils.WriteJSON(w, 200, updated)
-	}
-}
-
-func SetProfileRelayHandler(store db.ProfileStore) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
-		id := db.ProfileID(r.Context())
-		if r.Method == "DELETE" {
-			if err := store.SetProfileRelay(r.Context(), id, "", ""); err != nil {
-				utils.WriteError(w, "failed to remove relay", 500)
-				return
-			}
-			w.WriteHeader(204)
-			return
-		}
-		body, err := utils.DecodeBody[struct {
-			URL   string `json:"url"`
-			Token string `json:"token"`
-		}](r)
-		parsed, parseErr := url.Parse(body.URL)
-		if err != nil || parseErr != nil || parsed.Host == "" || parsed.User != nil || (parsed.Scheme != "http" && parsed.Scheme != "https") || parsed.RawQuery != "" || parsed.Fragment != "" || body.Token == "" {
-			utils.WriteError(w, "valid relay URL and token required", 400)
-			return
-		}
-		if err := store.SetProfileRelay(r.Context(), id, strings.TrimRight(body.URL, "/"), body.Token); err != nil {
-			utils.WriteError(w, "failed to configure relay", 500)
-			return
-		}
-		w.WriteHeader(204)
 	}
 }

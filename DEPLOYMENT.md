@@ -1,11 +1,11 @@
 # Deploying Koito SUM
 
 Koito SUM adds public listening profiles and administrator-only management to
-[Koito](https://github.com/gabehf/Koito). The first SUM release is
-`v0.1.0-rc.1`, a prerelease intended for testing with a backup of your data.
+[Koito](https://github.com/gabehf/Koito). The current source version is
+**Koito 0.3.2-SUM-RC2**, a prerelease intended for testing with a backup of your data.
 
-The image is `ghcr.io/ebrgr/koito-sum:v0.1.0-rc.1`, published for Linux amd64
-and arm64. The image serves both the API and compiled interface on port 4110;
+The target image is `ghcr.io/ebrgr/koito-sum:0.3.2-SUM-RC2`, built for Linux amd64
+and arm64. Publish the matching image before pulling this tag, or build it locally. The image serves both the API and compiled interface on port 4110;
 Node.js, Go, and Vite are not required on the deployment host.
 
 ## Start a fresh installation
@@ -101,7 +101,7 @@ when you intentionally choose a different version.
 ## Build locally
 
 ```sh
-docker build --build-arg KOITO_VERSION=v0.1.0-rc.1 -t koito-sum:local .
+docker build --build-arg KOITO_VERSION=0.3.2-SUM-RC2 -t koito-sum:local .
 ```
 
 The build uses Node.js 24 and the repository's Yarn lockfile, Go 1.25, and
@@ -110,3 +110,5 @@ versions aligned. `.dockerignore` excludes local databases, credentials, caches,
 and development dependencies.
 
 For design and validation details, see [MULTIUSER_DESIGN.en.md](MULTIUSER_DESIGN.en.md).
+
+Current source: **Koito 0.3.2-SUM-RC2**. A matching image must be published before pulling this tag. For an unpublished version, use the local build instructions above. Version numbers advance once per commit using `make version.bump`; historical tags remain unchanged.

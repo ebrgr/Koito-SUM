@@ -8,7 +8,7 @@ export default function Footer() {
         <li>Koito {import.meta.env.VITE_KOITO_VERSION || pkg.version}</li>
         <li>
           <a
-            href="https://github.com/gabehf/koito"
+            href="https://github.com/ebrgr/Koito-SUM"
             target="_blank"
             className="link-underline"
           >

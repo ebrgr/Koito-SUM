@@ -1,6 +1,6 @@
 {
   "name": "koito",
-  "version": "dev",
+  "version": "0.3.2-SUM-RC2",
   "private": true,
   "type": "module",
   "scripts": {

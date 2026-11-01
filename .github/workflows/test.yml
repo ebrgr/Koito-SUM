@@ -17,6 +17,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
       - uses: actions/setup-go@v5
         with:
           go-version-file: go.mod
@@ -30,6 +32,8 @@ jobs:
           sudo apt-get install -y libvips-dev pkg-config
           npm install --global --force corepack@0.34.6
           corepack enable
+      - name: Check synchronized and incrementing version
+        run: python3 scripts/version.py --check-parent
       - run: make client.deps
       - run: make check
       - run: make multiuser.check
@@ -48,7 +52,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Build the production container
-        run: docker build --build-arg KOITO_VERSION=dev -t koito-sum:ci .
+        run: docker build -t koito-sum:ci .
       - name: Verify container startup and compiled interface
         shell: bash
         run: |

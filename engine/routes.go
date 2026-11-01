@@ -56,6 +56,8 @@ func bindRoutes(
 				r.Delete("/avatar", handlers.ProfileAvatarHandler(db))
 				r.Get("/export", handlers.ExportHandler(db))
 				r.Post("/import", profileImportHandler(db, mbz))
+				r.Get("/relay", handlers.GetProfileRelayHandler(db))
+				r.Post("/relay/test", handlers.TestProfileRelayHandler())
 				r.Put("/relay", handlers.SetProfileRelayHandler(db))
 				r.Delete("/relay", handlers.SetProfileRelayHandler(db))
 				r.Post("/listens", handlers.SubmitListenWithIDHandler(db))

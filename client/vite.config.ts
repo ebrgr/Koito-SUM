@@ -1,3 +1,4 @@
+import { readFileSync } from "node:fs";
 import { reactRouter } from "@react-router/dev/vite";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "vite";
@@ -9,6 +10,15 @@ const devApiTarget =
 const isDocker = process.env.BUILD_TARGET === "docker";
 
 export default defineConfig({
+  define: {
+    "import.meta.env.VITE_KOITO_VERSION": JSON.stringify(
+      process.env.VITE_KOITO_VERSION ||
+        readFileSync(
+          new URL("../internal/version/VERSION", import.meta.url),
+          "utf8",
+        ).trim(),
+    ),
+  },
   plugins: [tailwindcss(), reactRouter(), vanillaExtractPlugin()],
   server: {
     host: "localhost",

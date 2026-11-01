@@ -2,14 +2,15 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"os"
 	"strings"
-	"log"
 
 	"github.com/gabehf/koito/engine"
+	"github.com/gabehf/koito/internal/version"
 )
 
-var Version = "dev"
+var Version = version.Current
 
 func main() {
 	if len(os.Args) > 1 && os.Args[1] == "reset-password" {

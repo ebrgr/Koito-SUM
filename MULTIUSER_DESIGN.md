@@ -1,5 +1,7 @@
 # Estudo: perfis de escuta com administração única
 
+Versão atual: **Koito 0.3.2-SUM-RC2**.
+
 Status: passos 1 a 5 implementados e validados para o MVP local. O fluxo completo
 foi exercitado em instalação nova, migração consolidada v2 → v3 e cópia do banco
 de exemplo. O esquema vigente é a versão 3; registros históricos que mencionam
@@ -308,6 +310,8 @@ Todos os caminhos abaixo têm o prefixo `/apis/web/v1`:
 | `PATCH/DELETE /profiles/{slug}/user/apikeys/{id}` | Admin: renomeia/revoga a chave vinculada |
 | `POST /profiles/{slug}/import` | Admin: importa um arquivo previamente colocado no diretório do perfil |
 | `PUT/DELETE /profiles/{slug}/relay` | Admin: configura/remove relay próprio; não retorna o token |
+| `GET /profiles/{slug}/relay` | Admin: lê configuração salva, incluindo token visível; `Cache-Control: no-store` |
+| `POST /profiles/{slug}/relay/test` | Admin: valida credenciais do formulário sem salvar ou enviar escutas |
 
 As rotas de leitura antigas sem perfil continuam disponíveis somente quando há
 exatamente um perfil. Com nenhum ou vários perfis, retornam 409 solicitando uma
@@ -993,3 +997,69 @@ O diretório antigo `.sqlexample` não estava mais disponível nesta execução;
 a origem dos testes adicionais foi o banco v2 restaurado em desenvolvimento,
 sempre aberto apenas para leitura. Nenhum arquivo de versão do banco foi
 editado manualmente para simular a consolidação.
+
+
+## Administração do relay por perfil — 1 de novembro de 2026
+
+Settings → Administration → Manage profile agora inclui ListenBrainz forwarding:
+checkbox para ativar, URL base, token externo em campo aberto, indicação de estado
+salvo/alterações pendentes, Save forwarding e Test connection. A interface utiliza
+os endpoints PUT e DELETE existentes por perfil. Salvar desativado remove a URL
+e o token persistidos; para reativar depois é necessário preenchê-los novamente.
+O histórico local é preservado.
+
+Novo GET administrativo carrega URL/token salvos com `Cache-Control: no-store`.
+Respostas públicas de perfis continuam sem credenciais de relay. O novo POST
+`/relay/test`, também administrativo, consulta `/validate-token` na URL do
+formulário com o token no Authorization, informa o usuário externo quando válido
+e não salva credenciais nem envia reproduções. Aceita somente URL base HTTP(S)
+sem credenciais embutidas, query ou fragmento, limita tempo a 10 segundos e o
+tamanho da resposta, e não segue redirects. Erros externos são resumidos sem
+retornar tokens ou respostas brutas. O protocolo segue a
+[documentação ListenBrainz](https://listenbrainz.readthedocs.io/en/latest/users/api/core.html#get--1-validate-token).
+
+Não requer migração de banco. As variáveis globais legadas mantêm a associação
+única de bootstrap; desativar remove o relay persistido do perfil. Fila persistente
+e alterações nas tentativas de entrega permanecem para uma etapa posterior.
+
+Validação: suíte Go completa, incluindo autorização, leitura/remoção por perfil,
+credenciais inválidas, resposta inválida, redirects e teste sem persistência;
+typecheck, quatro testes do frontend e build de produção passaram. Os testes
+usaram bancos descartáveis e servidores locais simulados, sem enviar dados
+a serviços externos nem alterar a configuração real de relay.
+
+## Numeração SUM
+
+O nome apresentado é **Koito 0.3.2-SUM-RC2**; a versão técnica e a tag Docker/Git
+são `0.3.2-SUM-RC2` (sem espaços). Mantida a base original 0.3.2, incrementa-se o número
+RC uma vez a cada novo commit. A base corresponde ao [release original v0.3.2](https://github.com/gabehf/Koito/releases/tag/v0.3.2). Somente o número após `SUM-RC` avança entre commits; a base muda apenas ao incorporar deliberadamente outra versão original. A identificação anterior do fork `v0.1.0-rc.1` é histórica.
+`internal/version/VERSION` fornece a versão padrão do Go e da compilação Vite.
+Os metadados do pacote frontend, defaults Docker, exemplos de instalação e
+documentos atuais são sincronizados por `make version.bump`, executado antes
+de cada próximo commit. `make version.check` verifica sincronização; o CI também
+exige versão maior que a do commit anterior quando ele já contém esse arquivo.
+Recompilar ou reiniciar não incrementa a numeração.
+
+Rodapé e About exibem Koito seguido da versão. A consulta de atualizações inclui
+pré-releases publicados e compara RC numericamente (RC10 é posterior a RC9).
+Notas de releases antigos e tags publicadas são preservadas. A versão dos fontes
+não significa que sua imagem ou release GitHub já tenha sido publicada.
+
+Validação da numeração: suíte Go completa, typecheck, seis testes frontend e
+build de produção aprovados. Confirmada a versão RC2 nos assets compilados.
+O incremento RC2 → RC3 foi exercitado em cópia temporária, preservando as notas
+antigas e mantendo os fontes reais em RC2.
+
+## Checklist do PR: documentação e avisos
+
+Atualizados os guias de uso do site para perfis, migração, chaves, importação e
+relay. A API experimental Node dos testes foi substituída pelo compilador
+TypeScript existente; corrigida uma tag JSON malformada de teste anterior e
+incluído Go vet em `make check`. O [registro de validação](PR_VALIDATION.md)
+contém comandos, resultados e avisos antigos das ferramentas/dependências.
+
+O site de documentação compilou (9 páginas), comparado com a base `a079fa6`
+(8 páginas): ambos emitem o mesmo aviso antigo Node DEP0190. Testes/build da
+aplicação e verificação do Dockerfile ficaram sem avisos. Os dois itens
+correspondentes do checklist do PR estão marcados, com esses limites registrados
+no relatório de validação.
