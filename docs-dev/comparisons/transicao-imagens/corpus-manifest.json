@@ -1,0 +1,273 @@
+{
+  "generator": "corpus.py: deterministic procedural texture, no personal data; axis/pixel probes are complete PNGs; zero.png has only an invalid header",
+  "icc": "generated matrix/TRC profile, not a production color calibration",
+  "magick": "Version: ImageMagick 7.1.2-34 Q16-HDRI aarch64 c5d4ca8a0:20261014 https://imagemagick.org",
+  "files": [
+    {
+      "file": "alpha.png",
+      "kind": "synthetic",
+      "orientation": null,
+      "bytes": 330607,
+      "sha256": "9069051ee1cd522961ebf727986d087affd097d0d34c1822a4d31cf7257cd49c"
+    },
+    {
+      "file": "animated.gif",
+      "kind": "synthetic",
+      "orientation": null,
+      "bytes": 32708,
+      "sha256": "7ea786fe4e5e65896c760b06cccf91b9d77addd9cc87285bc2ea0c91e50f37a7"
+    },
+    {
+      "file": "animated.webp",
+      "kind": "synthetic",
+      "orientation": null,
+      "bytes": 978,
+      "sha256": "69ddd4f53d8f1ddb3c78b34d4dd19aa361c240ca4ae2506e30a9884c006598c0"
+    },
+    {
+      "file": "axis10000.png",
+      "kind": "synthetic",
+      "orientation": null,
+      "bytes": 1159,
+      "sha256": "3b640ad22e9c5af3bd183863edcfc7f88ac1fd427521529595acd16095f9e125"
+    },
+    {
+      "file": "axis10001.png",
+      "kind": "synthetic",
+      "orientation": null,
+      "bytes": 1159,
+      "sha256": "246b1373b28b5fac1fa0ca9ddff886b6f57c5ba1cbc35722780bf1471f847d43"
+    },
+    {
+      "file": "axis9999.png",
+      "kind": "synthetic",
+      "orientation": null,
+      "bytes": 1159,
+      "sha256": "f7245ed2a2023239254adf4064985f09ead943f758e5b4d874e91784bd5f45b5"
+    },
+    {
+      "file": "bytes+0.jpg",
+      "kind": "synthetic",
+      "orientation": null,
+      "bytes": 10485760,
+      "sha256": "e1033dba697ebe0958a0227d4133fca591422b9987268442321acbd652d4bb41"
+    },
+    {
+      "file": "bytes+1.jpg",
+      "kind": "synthetic",
+      "orientation": null,
+      "bytes": 10485761,
+      "sha256": "8a4a526194c85c1a7ef412002477de29b7bce32edb13ee2efe804502c5bc7c3d"
+    },
+    {
+      "file": "bytes-1.jpg",
+      "kind": "synthetic",
+      "orientation": null,
+      "bytes": 10485759,
+      "sha256": "50b4267b8571295e533bf1a3ea6f34eee5e82dd73480396b8bb7de076fec1d09"
+    },
+    {
+      "file": "cmyk.jpg",
+      "kind": "synthetic",
+      "orientation": null,
+      "bytes": 462810,
+      "sha256": "68f933c3ebfc50ef84aa5e539bc548d291ee1db53fdc5f0ca44d7b1d570fa990"
+    },
+    {
+      "file": "exif-1.jpg",
+      "kind": "synthetic",
+      "orientation": 1,
+      "bytes": 386689,
+      "sha256": "793af6ca3d985a5dbfeaa93b73695ef97e9cca343e8e9badedc000ca43f80d8e"
+    },
+    {
+      "file": "exif-2.jpg",
+      "kind": "synthetic",
+      "orientation": 2,
+      "bytes": 386689,
+      "sha256": "ff5e6eeedd6afa56afbb4a5480636a943595e5f5f3d9b185306f5c3524c62bd8"
+    },
+    {
+      "file": "exif-3.jpg",
+      "kind": "synthetic",
+      "orientation": 3,
+      "bytes": 386689,
+      "sha256": "b42fd23bf91f76729bb1d348a0657ec31e9c0f64b6a9224093e4daa4db5b9eac"
+    },
+    {
+      "file": "exif-4.jpg",
+      "kind": "synthetic",
+      "orientation": 4,
+      "bytes": 386689,
+      "sha256": "54f8cbe55958e2f58dc0abfca0f8824c6a0a29d09f2fe034a8fbae19c5e30985"
+    },
+    {
+      "file": "exif-5.jpg",
+      "kind": "synthetic",
+      "orientation": 5,
+      "bytes": 386689,
+      "sha256": "19023eebde0ca519917fc9748f78b7b7daad9fc8121a8c7299b29b9fc6ca4a6e"
+    },
+    {
+      "file": "exif-6.jpg",
+      "kind": "synthetic",
+      "orientation": 6,
+      "bytes": 386689,
+      "sha256": "56106242dc9aa5d251180228d488d32464fede11301ae5f27721bf67149245de"
+    },
+    {
+      "file": "exif-7.jpg",
+      "kind": "synthetic",
+      "orientation": 7,
+      "bytes": 386689,
+      "sha256": "15edbbb9bfc9aeb837ad0b74b710ff91e79f58256d83df921dc1d74147d4a707"
+    },
+    {
+      "file": "exif-8.jpg",
+      "kind": "synthetic",
+      "orientation": 8,
+      "bytes": 386689,
+      "sha256": "4916be603cd39ed94e21b2a2358499954eb984f9bdc01a4a847b4b0e0efb1278"
+    },
+    {
+      "file": "extra.avif",
+      "kind": "synthetic",
+      "orientation": null,
+      "bytes": 612,
+      "sha256": "47ce2aa2eae5a0a9990ec656e9e7d6fd93981ef8d5e182681feeb576f43f075d"
+    },
+    {
+      "file": "extra.bmp",
+      "kind": "synthetic",
+      "orientation": null,
+      "bytes": 11658,
+      "sha256": "d4c6d907dbe6d8cc6424a816a6e8eba796ee41ef8e1463a414d7d77321124ab8"
+    },
+    {
+      "file": "extra.gif",
+      "kind": "synthetic",
+      "orientation": null,
+      "bytes": 1875,
+      "sha256": "628f762634923ba373a9d1aa62ac22bd720be2b7625dcc38ff0f6a1b534cd5e3"
+    },
+    {
+      "file": "extra.heic",
+      "kind": "synthetic",
+      "orientation": null,
+      "bytes": 948,
+      "sha256": "279e8e3ca0300c8fa9af09cf6bfc4d39979d18e21d841ad0dd521c176337b9da"
+    },
+    {
+      "file": "extra.svg",
+      "kind": "synthetic",
+      "orientation": null,
+      "bytes": 116,
+      "sha256": "1de505c3d0a4557284966b35e7c5bfd10fac7692de857ecfef8ddff35436c25e"
+    },
+    {
+      "file": "extra.tiff",
+      "kind": "synthetic",
+      "orientation": null,
+      "bytes": 11835,
+      "sha256": "83068b16b797117ac5d5447ee4b1fa676a67b52375a50dd8340d1755941f733f"
+    },
+    {
+      "file": "icc.png",
+      "kind": "synthetic",
+      "orientation": null,
+      "bytes": 186093,
+      "sha256": "e1b0047c4cc048806c9c82f19cd1d8313f657e9e05942ca4be086f3da801f114"
+    },
+    {
+      "file": "invalid.bin",
+      "kind": "invalid",
+      "orientation": null,
+      "bytes": 12,
+      "sha256": "5464533c9647b67eb320c40ccc5959537c09102ae75388f6a7675b433e745c9d"
+    },
+    {
+      "file": "large.png",
+      "kind": "synthetic",
+      "orientation": null,
+      "bytes": 1315939,
+      "sha256": "cf1cf6fae4aa1c8d3e0e99d3a38f96373287d8f5dceab2db5ccc5635aaa3b0d7"
+    },
+    {
+      "file": "limit40mp.png",
+      "kind": "synthetic",
+      "orientation": null,
+      "bytes": 4662976,
+      "sha256": "fe5188056a1784827a5bf294c44628dc2102194dfc42c8e15b5a0580c83fd1ba"
+    },
+    {
+      "file": "natural.jpg",
+      "kind": "synthetic",
+      "orientation": null,
+      "bytes": 108052,
+      "sha256": "bc44074b04197f591b715742b4cd27bc9bc1d4d963c7267befe6e87445d74afc"
+    },
+    {
+      "file": "natural.png",
+      "kind": "synthetic",
+      "orientation": null,
+      "bytes": 468944,
+      "sha256": "f698c242077ce4265c09ae184f8dbddb50d84e55f441bec102e23497a74e9cfb"
+    },
+    {
+      "file": "pixels39992000.png",
+      "kind": "synthetic",
+      "orientation": null,
+      "bytes": 4662045,
+      "sha256": "3138f2b7fe457fa23ef3fa052c7052d9a27de16a765f6b9f467f80f093ab5a54"
+    },
+    {
+      "file": "pixels40008000.png",
+      "kind": "synthetic",
+      "orientation": null,
+      "bytes": 4663906,
+      "sha256": "93a32a39fe75cf16fe4c867e68b90cfa2373e85a3194b491c9f7b60227f96ce9"
+    },
+    {
+      "file": "small.png",
+      "kind": "synthetic",
+      "orientation": null,
+      "bytes": 2603,
+      "sha256": "b1613db89ed6713c5e78290e155eda2cf5f1d8fdc7af78c5c83a59474dfc8935"
+    },
+    {
+      "file": "texture.jpg",
+      "kind": "synthetic",
+      "orientation": null,
+      "bytes": 386653,
+      "sha256": "3eca7e36420397d9fd5b80bf9e8a6692c644e3f902c36b753ca893b909e412ff"
+    },
+    {
+      "file": "texture.png",
+      "kind": "synthetic",
+      "orientation": null,
+      "bytes": 376147,
+      "sha256": "3838cb58d4a017fd9b1ee91735d865d81848643069da8f33bea4797d1b633ff1"
+    },
+    {
+      "file": "thin.png",
+      "kind": "synthetic",
+      "orientation": null,
+      "bytes": 138436,
+      "sha256": "4d9e83b08d5836bb10a5626c3220c5a826c9507e3ec282047e7a56b5fba202ae"
+    },
+    {
+      "file": "truncated.jpg",
+      "kind": "invalid",
+      "orientation": null,
+      "bytes": 40,
+      "sha256": "1c54ac763fcc90518ee3b651c6c5306bc3299908286baf7c4fbe0c416f188e87"
+    },
+    {
+      "file": "zero.png",
+      "kind": "invalid",
+      "orientation": null,
+      "bytes": 45,
+      "sha256": "54f347b0914b34fd4c53df3e9cb9defcc746cdf3046833f33e16f1670f138a32"
+    }
+  ]
+}

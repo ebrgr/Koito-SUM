@@ -5,16 +5,16 @@ import (
 	"bufio"
 	"context"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io"
-	"path"
 	"strings"
 	"time"
 
-	"github.com/gabehf/koito/engine/handlers"
 	"github.com/gabehf/koito/internal/catalog"
 	"github.com/gabehf/koito/internal/cfg"
 	"github.com/gabehf/koito/internal/db"
+	"github.com/gabehf/koito/internal/listenbrainz"
 	"github.com/gabehf/koito/internal/logger"
 	"github.com/gabehf/koito/internal/mbz"
 	"github.com/gabehf/koito/internal/utils"
@@ -27,13 +27,35 @@ func ImportListenBrainzExport(ctx context.Context, store importStore, mbzc mbz.M
 	}
 	l := logger.FromContext(ctx)
 
-	r, err := zip.OpenReader(path.Join(path.Join(cfg.ConfigDir(), "import", filename)))
+	r, err := zip.OpenReader(importPath(ctx, filename))
 	if err != nil {
+		if errors.Is(err, zip.ErrFormat) {
+			return invalidFile(err)
+		}
 		return err
 	}
 	defer r.Close()
 
+	const maxMembers = 1000
+	const maxExpanded = 256 << 20
+	if len(r.File) > maxMembers {
+		return invalidFile(fmt.Errorf("too many archive members"))
+	}
+	matched := 0
+	var declared uint64
 	for _, f := range r.File {
+		if f.UncompressedSize64 > maxExpanded || declared > maxExpanded-f.UncompressedSize64 {
+			return invalidFile(fmt.Errorf("archive exceeds expanded limit"))
+		}
+		declared += f.UncompressedSize64
+	}
+	budget := &io.LimitedReader{N: maxExpanded + 1}
+	totalLines := 0
+	ctx = context.WithValue(ctx, archiveLinesKey{}, &totalLines)
+	for _, f := range r.File {
+		if err := ctx.Err(); err != nil {
+			return err
+		}
 
 		if f.FileInfo().IsDir() {
 			l.Debug().Msgf("File %s is dir, skipping...", f.Name)
@@ -41,14 +63,22 @@ func ImportListenBrainzExport(ctx context.Context, store importStore, mbzc mbz.M
 		}
 
 		if strings.HasPrefix(f.Name, "listens/") && strings.HasSuffix(f.Name, ".jsonl") {
+			matched++
 			l.Info().Msgf("Found: %s\n", f.Name)
 
 			rc, err := f.Open()
 			if err != nil {
+				if errors.Is(err, zip.ErrAlgorithm) || errors.Is(err, zip.ErrFormat) {
+					return invalidFile(err)
+				}
 				return fmt.Errorf("open archive member: %w", err)
 			}
 
-			err = ImportListenBrainzFile(ctx, store, mbzc, rc, f.Name)
+			budget.R = rc
+			err = ImportListenBrainzFile(ctx, store, mbzc, &contextReader{ctx: ctx, reader: budget}, f.Name)
+			if err == nil && budget.N <= 0 {
+				err = invalidFile(fmt.Errorf("archive exceeds expanded limit"))
+			}
 			if err != nil {
 				rc.Close()
 				return fmt.Errorf("import archive member: %w", err)
@@ -57,8 +87,13 @@ func ImportListenBrainzExport(ctx context.Context, store importStore, mbzc mbz.M
 			rc.Close()
 		}
 	}
+	if matched == 0 {
+		return invalidFile(fmt.Errorf("archive has no ListenBrainz listen files"))
+	}
 	return finishImport(ctx, filename, 0)
 }
+
+type archiveLinesKey struct{}
 
 func ImportListenBrainzFile(ctx context.Context, store importStore, mbzc mbz.MusicBrainzCaller, r io.Reader, filename string) error {
 	if db.ProfileID(ctx) <= 0 {
@@ -68,25 +103,39 @@ func ImportListenBrainzFile(ctx context.Context, store importStore, mbzc mbz.Mus
 	l.Info().Msgf("Beginning ListenBrainz import on file: %s", filename)
 
 	scanner := bufio.NewScanner(r)
-
-	var throttleFunc = func() {}
-	if ms := cfg.ThrottleImportMs(); ms > 0 {
-		throttleFunc = func() {
-			time.Sleep(time.Duration(ms) * time.Millisecond)
-		}
-	}
+	scanner.Buffer(make([]byte, 4096), 1<<20)
 	count := 0
 	for scanner.Scan() {
+		seen(ctx)
+		if err := ctx.Err(); err != nil {
+			return err
+		}
+		count++
+		if total, ok := ctx.Value(archiveLinesKey{}).(*int); ok {
+			*total++
+			if *total > MaxImportItems {
+				return invalidFile(fmt.Errorf("too many archive lines"))
+			}
+		}
+		if count > MaxImportItems {
+			return invalidFile(fmt.Errorf("too many archive lines"))
+		}
 		line := scanner.Bytes()
-		payload := new(handlers.LbzSubmitListenPayload)
+		payload := new(listenbrainz.LbzSubmitListenPayload)
 		err := json.Unmarshal(line, payload)
 		if err != nil {
 			l.Err(err).Msg("Error unmarshaling JSON")
+			ignored(ctx)
+			continue
+		}
+		if strings.TrimSpace(payload.TrackMeta.ArtistName) == "" || strings.TrimSpace(payload.TrackMeta.TrackName) == "" {
+			ignored(ctx)
 			continue
 		}
 		ts := time.Unix(payload.ListenedAt, 0)
 		if !inImportTimeWindow(ts) {
 			l.Debug().Msgf("Skipping import due to import time rules")
+			ignored(ctx)
 			continue
 		}
 		artistMbzIDs, err := utils.ParseUUIDSlice(payload.TrackMeta.AdditionalInfo.ArtistMBIDs)
@@ -95,7 +144,7 @@ func ImportListenBrainzFile(ctx context.Context, store importStore, mbzc mbz.Mus
 		}
 		if len(artistMbzIDs) < 1 {
 			l.Debug().AnErr("error", err).Msg("ImportListenBrainzFile: Attempting to parse artist UUIDs from mbid_mapping")
-			utils.ParseUUIDSlice(payload.TrackMeta.MBIDMapping.ArtistMBIDs)
+			artistMbzIDs, err = utils.ParseUUIDSlice(payload.TrackMeta.MBIDMapping.ArtistMBIDs)
 			if err != nil {
 				l.Debug().AnErr("error", err).Msg("ImportListenBrainzFile: Failed to parse one or more UUIDs")
 			}
@@ -167,11 +216,15 @@ func ImportListenBrainzFile(ctx context.Context, store importStore, mbzc mbz.Mus
 			l.Err(err).Msg("Failed to import LastFM playback item")
 			return fmt.Errorf("ImportListenBrainzFile: %w", err)
 		}
-		count++
-		throttleFunc()
+		if err := throttle(ctx); err != nil {
+			return err
+		}
 	}
 	if err := scanner.Err(); err != nil {
-		return err
+		if ctx.Err() != nil {
+			return ctx.Err()
+		}
+		return invalidFile(err)
 	}
 	l.Info().Msgf("Finished importing %s; imported %d items", filename, count)
 	return nil

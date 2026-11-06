@@ -3,13 +3,18 @@ package handlers
 import (
 	"net/http"
 
+	"github.com/gabehf/koito/engine/middleware"
+	"github.com/gabehf/koito/internal/admin"
+	"github.com/gabehf/koito/internal/adminweb"
 	"github.com/gabehf/koito/internal/db"
 	"github.com/gabehf/koito/internal/logger"
 	"github.com/gabehf/koito/internal/utils"
 )
 
+// MergeArtistsHandler adapts the shared administrative service without changing its JSON payload.
 func MergeArtistsHandler(store db.ArtistStore) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
+		r.Body = http.MaxBytesReader(w, r.Body, 4096)
 		l := logger.FromContext(r.Context())
 
 		l.Debug().Msg("MergeArtistsHandler: Received request to merge artists")
@@ -22,7 +27,7 @@ func MergeArtistsHandler(store db.ArtistStore) http.HandlerFunc {
 			l.Debug().AnErr("error", err).Msg("MergeArtistsHandler: request body invalid or missing")
 			utils.WriteError(w, "request body is invalid or missing", http.StatusBadRequest)
 			return
-		} else if body.MergeFromID == 0 {
+		} else if body.MergeFromID <= 0 {
 			l.Debug().AnErr("error", err).Msg("MergeArtistsHandler: required body key 'merge_from_id' invalid or missing")
 			utils.WriteError(w, "merge_from_id is invalid or missing", http.StatusBadRequest)
 			return
@@ -37,10 +42,10 @@ func MergeArtistsHandler(store db.ArtistStore) http.HandlerFunc {
 
 		l.Debug().Msgf("MergeArtistsHandler: Merging artists from ID %d to ID %d", body.MergeFromID, toId)
 
-		err = store.MergeArtists(r.Context(), body.MergeFromID, toId, body.ReplaceImage)
+		err = admin.MergeArtists(r.Context(), store, middleware.GetUserFromContext(r.Context()), body.MergeFromID, toId, body.ReplaceImage)
 		if err != nil {
 			l.Err(err).Msg("MergeArtistsHandler: Failed to merge artists")
-			utils.WriteError(w, "Failed to merge artists: "+err.Error(), http.StatusInternalServerError)
+			utils.WriteError(w, adminweb.PublicError(err), adminweb.ErrorStatus(err))
 			return
 		}
 
@@ -49,8 +54,10 @@ func MergeArtistsHandler(store db.ArtistStore) http.HandlerFunc {
 	}
 }
 
+// MergeAlbumsHandler adapts the shared administrative service without changing its JSON payload.
 func MergeAlbumsHandler(store db.AlbumStore) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
+		r.Body = http.MaxBytesReader(w, r.Body, 4096)
 		l := logger.FromContext(r.Context())
 
 		l.Debug().Msg("MergeAlbumsHandler: Received request to merge release groups")
@@ -63,7 +70,7 @@ func MergeAlbumsHandler(store db.AlbumStore) http.HandlerFunc {
 			l.Debug().AnErr("error", err).Msg("MergeAlbumsHandler: request body invalid or missing")
 			utils.WriteError(w, "request body is invalid or missing", http.StatusBadRequest)
 			return
-		} else if body.MergeFromID == 0 {
+		} else if body.MergeFromID <= 0 {
 			l.Debug().AnErr("error", err).Msg("MergeAlbumsHandler: required body key 'merge_from_id' invalid or missing")
 			utils.WriteError(w, "merge_from_id is invalid or missing", http.StatusBadRequest)
 			return
@@ -78,10 +85,10 @@ func MergeAlbumsHandler(store db.AlbumStore) http.HandlerFunc {
 
 		l.Debug().Msgf("MergeAlbumsHandler: Merging albums from ID %d to ID %d", body.MergeFromID, toId)
 
-		err = store.MergeAlbums(r.Context(), body.MergeFromID, toId, body.ReplaceImage)
+		err = admin.MergeAlbums(r.Context(), store, middleware.GetUserFromContext(r.Context()), body.MergeFromID, toId, body.ReplaceImage)
 		if err != nil {
 			l.Err(err).Msg("MergeAlbumsHandler: Failed to merge albums")
-			utils.WriteError(w, "Failed to merge albums: "+err.Error(), http.StatusInternalServerError)
+			utils.WriteError(w, adminweb.PublicError(err), adminweb.ErrorStatus(err))
 			return
 		}
 
@@ -90,8 +97,10 @@ func MergeAlbumsHandler(store db.AlbumStore) http.HandlerFunc {
 	}
 }
 
+// MergeTracksHandler adapts the shared administrative service without changing its JSON payload.
 func MergeTracksHandler(store db.TrackStore) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
+		r.Body = http.MaxBytesReader(w, r.Body, 4096)
 		l := logger.FromContext(r.Context())
 
 		l.Debug().Msg("MergeTracksHandler: Received request to merge tracks")
@@ -103,7 +112,7 @@ func MergeTracksHandler(store db.TrackStore) http.HandlerFunc {
 			l.Debug().AnErr("error", err).Msg("MergeTracksHandler: request body invalid or missing")
 			utils.WriteError(w, "request body is invalid or missing", http.StatusBadRequest)
 			return
-		} else if body.MergeFromID == 0 {
+		} else if body.MergeFromID <= 0 {
 			l.Debug().AnErr("error", err).Msg("MergeTracksHandler: required body key 'merge_from_id' invalid or missing")
 			utils.WriteError(w, "merge_from_id is invalid or missing", http.StatusBadRequest)
 			return
@@ -118,10 +127,10 @@ func MergeTracksHandler(store db.TrackStore) http.HandlerFunc {
 
 		l.Debug().Msgf("MergeTracksHandler: Merging tracks from ID %d to ID %d", body.MergeFromID, toId)
 
-		err = store.MergeTracks(r.Context(), body.MergeFromID, toId)
+		err = admin.MergeTracks(r.Context(), store, middleware.GetUserFromContext(r.Context()), body.MergeFromID, toId)
 		if err != nil {
 			l.Err(err).Msg("MergeTracksHandler: Failed to merge tracks")
-			utils.WriteError(w, "Failed to merge tracks: "+err.Error(), http.StatusInternalServerError)
+			utils.WriteError(w, adminweb.PublicError(err), adminweb.ErrorStatus(err))
 			return
 		}
 

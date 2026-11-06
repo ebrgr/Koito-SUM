@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"github.com/gabehf/koito/internal/webquery"
 	"net/http"
 
 	"github.com/gabehf/koito/internal/db"
@@ -16,6 +17,7 @@ func GetTopAlbumsHandler(store db.AlbumStore) func(w http.ResponseWriter, r *htt
 		l.Debug().Msg("GetTopAlbumsHandler: Received request to retrieve top albums")
 
 		opts := OptsFromRequest(r)
+		opts.Timeframe = webquery.ResolveTimeframe(opts.Timeframe)
 		l.Debug().Msgf("GetTopAlbumsHandler: Retrieving top albums with options: %+v", opts)
 
 		albums, err := store.GetTopAlbumsPaginated(ctx, opts)
@@ -26,6 +28,6 @@ func GetTopAlbumsHandler(store db.AlbumStore) func(w http.ResponseWriter, r *htt
 		}
 
 		l.Debug().Msg("GetTopAlbumsHandler: Successfully retrieved top albums")
-		utils.WriteJSON(w, http.StatusOK, albums)
+		writePage(w, opts.Timeframe, albums)
 	}
 }

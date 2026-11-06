@@ -16,6 +16,7 @@ const (
 )
 
 const (
+	WEB_UI_ENV = "KOITO_WEB_UI"
 	// BASE_URL_ENV                  = "KOITO_BASE_URL"
 	DATABASE_URL_ENV               = "KOITO_DATABASE_URL"
 	SQLITE_ENABLED                 = "KOITO_SQLITE_ENABLED"
@@ -53,6 +54,7 @@ const (
 )
 
 type config struct {
+	webUI      string
 	bindAddr   string
 	listenPort int
 	configDir  string
@@ -112,6 +114,14 @@ func Load(getenv func(string) string, version string) error {
 // loadConfig loads the configuration from environment variables.
 func loadConfig(getenv func(string) string, version string) (*config, error) {
 	cfg := new(config)
+	cfg.webUI = strings.ToLower(getenv(WEB_UI_ENV))
+	if cfg.webUI == "" {
+		cfg.webUI = "go"
+	}
+	// Reject stale React configuration rather than silently changing its meaning.
+	if cfg.webUI != "go" {
+		return nil, fmt.Errorf("%s only supports go; the React interface has been removed", WEB_UI_ENV)
+	}
 
 	cfg.sqliteEnabled = strings.ToLower(getenv(SQLITE_ENABLED)) == "true"
 

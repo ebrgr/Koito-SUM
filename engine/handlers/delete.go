@@ -1,10 +1,14 @@
 package handlers
 
 import (
+	"errors"
 	"net/http"
 	"strconv"
 	"time"
 
+	"github.com/gabehf/koito/engine/middleware"
+	"github.com/gabehf/koito/internal/admin"
+	"github.com/gabehf/koito/internal/adminweb"
 	"github.com/gabehf/koito/internal/db"
 	"github.com/gabehf/koito/internal/logger"
 	"github.com/gabehf/koito/internal/utils"
@@ -24,8 +28,8 @@ func DeleteListenHandler(store db.ListenStore) http.HandlerFunc {
 			return
 		}
 
-		trackID, err := strconv.Atoi(trackIDStr)
-		if err != nil {
+		trackID, err := strconv.ParseInt(trackIDStr, 10, 32)
+		if err != nil || trackID <= 0 {
 			l.Debug().AnErr("error", err).Msg("DeleteListenHandler: Invalid track ID")
 			utils.WriteError(w, "invalid id", http.StatusBadRequest)
 			return
@@ -47,10 +51,14 @@ func DeleteListenHandler(store db.ListenStore) http.HandlerFunc {
 
 		l.Debug().Msgf("DeleteListenHandler: Deleting listen record for track ID %d at timestamp %d", trackID, unix)
 
-		err = store.DeleteListen(ctx, int32(trackID), time.Unix(unix, 0))
+		err = admin.RemovePersonalListen(ctx, store, middleware.GetUserFromContext(ctx), db.ProfileID(ctx), int32(trackID), time.Unix(unix, 0))
 		if err != nil {
+			if errors.Is(err, db.ErrNotFound) {
+				w.WriteHeader(http.StatusNoContent)
+				return
+			}
 			l.Err(err).Msg("DeleteListenHandler: Failed to delete listen record")
-			utils.WriteError(w, "failed to delete listen", http.StatusInternalServerError)
+			utils.WriteError(w, adminweb.PublicError(err), adminweb.ErrorStatus(err))
 			return
 		}
 

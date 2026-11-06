@@ -1,8 +1,12 @@
 package handlers
 
 import (
+	"errors"
 	"net/http"
 
+	"github.com/gabehf/koito/engine/middleware"
+	"github.com/gabehf/koito/internal/admin"
+	"github.com/gabehf/koito/internal/adminweb"
 	"github.com/gabehf/koito/internal/db"
 	"github.com/gabehf/koito/internal/logger"
 	"github.com/gabehf/koito/internal/utils"
@@ -26,8 +30,12 @@ func DeleteTrackHandler(store db.TrackStore) http.HandlerFunc {
 
 		err = store.DeleteTrack(ctx, int32(trackID))
 		if err != nil {
+			if errors.Is(err, db.ErrNotFound) {
+				w.WriteHeader(http.StatusNoContent)
+				return
+			}
 			l.Err(err).Msg("DeleteTrackHandler: Failed to delete track")
-			utils.WriteError(w, "failed to delete track", http.StatusInternalServerError)
+			utils.WriteError(w, adminweb.PublicError(err), adminweb.ErrorStatus(err))
 			return
 		}
 
@@ -37,7 +45,7 @@ func DeleteTrackHandler(store db.TrackStore) http.HandlerFunc {
 }
 
 // DeleteTrackAliasHandler deletes an alias for a given track.
-func DeleteTrackAliasHandler(store db.TrackStore) http.HandlerFunc {
+func DeleteTrackAliasHandler(store db.DB) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		ctx := r.Context()
 		l := logger.FromContext(ctx)
@@ -58,9 +66,9 @@ func DeleteTrackAliasHandler(store db.TrackStore) http.HandlerFunc {
 			return
 		}
 
-		if err = store.DeleteTrackAlias(ctx, trackID, body.Alias); err != nil {
+		if err = admin.EditAlias(ctx, store, middleware.GetUserFromContext(ctx), "track", trackID, "delete", body.Alias); err != nil {
 			l.Error().Err(err).Msg("DeleteTrackAliasHandler: Failed to delete track alias")
-			utils.WriteError(w, "failed to delete alias", http.StatusInternalServerError)
+			utils.WriteError(w, adminweb.PublicError(err), adminweb.ErrorStatus(err))
 			return
 		}
 
@@ -88,12 +96,9 @@ func DeleteTrackArtistHandler(store db.DB) http.HandlerFunc {
 			return
 		}
 
-		if err = store.UpdateTrack(ctx, db.UpdateTrackOpts{
-			ID:            trackID,
-			RemoveArtists: []int32{artistID},
-		}); err != nil {
+		if err = admin.ChangeTrackArtist(ctx, store, middleware.GetUserFromContext(ctx), trackID, artistID, false); err != nil {
 			l.Error().Err(err).Msg("RemoveTrackArtistHandler: Failed to remove artist from track")
-			utils.WriteError(w, "failed to remove artist from track", http.StatusInternalServerError)
+			utils.WriteError(w, adminweb.PublicError(err), adminweb.ErrorStatus(err))
 			return
 		}
 

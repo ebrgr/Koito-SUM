@@ -148,7 +148,17 @@ func (s *Sqlite) artistsForTrack(ctx context.Context, trackID int32) ([]models.S
 // artistsForRelease fetches artists for a release as []models.SimpleArtist,
 // replacing the PG get_artists_for_release() function.
 func (s *Sqlite) artistsForRelease(ctx context.Context, releaseID int32) ([]models.SimpleArtist, error) {
-	rows, err := s.db.QueryContext(ctx, `
+	// Ordinary reads use the pool; transactional callers pass their transaction below.
+	return artistsForReleaseIn(ctx, s.db, releaseID)
+}
+
+type catalogQuerier interface {
+	QueryContext(context.Context, string, ...any) (*sql.Rows, error)
+}
+
+// artistsForReleaseIn keeps merge reads on the same SQLite connection and snapshot.
+func artistsForReleaseIn(ctx context.Context, q catalogQuerier, releaseID int32) ([]models.SimpleArtist, error) {
+	rows, err := q.QueryContext(ctx, `
 		SELECT a.id, awn.name, ar.is_primary
 		FROM artist_releases ar
 		JOIN artists_with_name awn ON awn.id = ar.artist_id

@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"github.com/gabehf/koito/internal/webquery"
 	"net/http"
 
 	"github.com/gabehf/koito/internal/db"
@@ -16,6 +17,7 @@ func GetTopTracksHandler(store db.TrackStore) func(w http.ResponseWriter, r *htt
 		l.Debug().Msg("GetTopTracksHandler: Received request to retrieve top tracks")
 
 		opts := OptsFromRequest(r)
+		opts.Timeframe = webquery.ResolveTimeframe(opts.Timeframe)
 		l.Debug().Msgf("GetTopTracksHandler: Retrieving top tracks with options: %+v", opts)
 
 		tracks, err := store.GetTopTracksPaginated(ctx, opts)
@@ -26,6 +28,6 @@ func GetTopTracksHandler(store db.TrackStore) func(w http.ResponseWriter, r *htt
 		}
 
 		l.Debug().Msg("GetTopTracksHandler: Successfully retrieved top tracks")
-		utils.WriteJSON(w, http.StatusOK, tracks)
+		writePage(w, opts.Timeframe, tracks)
 	}
 }

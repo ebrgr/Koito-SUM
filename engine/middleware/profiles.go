@@ -2,11 +2,13 @@ package middleware
 
 import (
 	"context"
+	"errors"
 	"net/http"
-	"net/url"
 	"strings"
 
+	"github.com/gabehf/koito/internal/adminweb"
 	"github.com/gabehf/koito/internal/db"
+	"github.com/gabehf/koito/internal/logger"
 	"github.com/gabehf/koito/internal/models"
 	"github.com/gabehf/koito/internal/utils"
 	"github.com/go-chi/chi/v5"
@@ -21,6 +23,8 @@ func ProfileFromContext(ctx context.Context) *models.ListeningProfile {
 func withProfile(ctx context.Context, p *models.ListeningProfile) context.Context {
 	return db.WithProfile(context.WithValue(ctx, profileKey{}, p), p.ID)
 }
+
+// ProfileScope resolves an explicit profile without masking store failures as absence.
 func ProfileScope(store db.ProfileStore) func(http.Handler) http.Handler {
 	return func(next http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -30,7 +34,12 @@ func ProfileScope(store db.ProfileStore) func(http.Handler) http.Handler {
 				var err error
 				p, err = store.GetListeningProfile(r.Context(), slug)
 				if err != nil {
-					utils.WriteError(w, "profile not found", 404)
+					if errors.Is(err, db.ErrNotFound) {
+						utils.WriteError(w, "profile not found", http.StatusNotFound)
+					} else {
+						logger.FromContext(r.Context()).Err(err).Msg("Profile lookup failed")
+						utils.WriteError(w, "failed to resolve profile", http.StatusInternalServerError)
+					}
 					return
 				}
 			} else {
@@ -49,6 +58,8 @@ func ProfileScope(store db.ProfileStore) func(http.Handler) http.Handler {
 		})
 	}
 }
+
+// IngestionKey binds a valid player credential to its profile and reports store failures separately.
 func IngestionKey(store db.ProfileStore) func(http.Handler) http.Handler {
 	return func(next http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -59,19 +70,30 @@ func IngestionKey(store db.ProfileStore) func(http.Handler) http.Handler {
 			}
 			p, err := store.GetProfileByAPIKey(r.Context(), strings.TrimSpace(header[6:]))
 			if err != nil {
-				utils.WriteError(w, "invalid API key", 401)
+				if errors.Is(err, db.ErrNotFound) {
+					utils.WriteError(w, "invalid API key", http.StatusUnauthorized)
+				} else {
+					logger.FromContext(r.Context()).Err(err).Msg("Ingestion key lookup failed")
+					utils.WriteError(w, "failed to validate API key", http.StatusInternalServerError)
+				}
 				return
 			}
 			next.ServeHTTP(w, r.WithContext(withProfile(r.Context(), p)))
 		})
 	}
 }
+
+// RequireAdmin shares authentication errors and cache policy with HTML adapters.
 func RequireAdmin(store db.UserStore) func(http.Handler) http.Handler {
 	return func(next http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			w.Header().Set("Cache-Control", "no-store")
 			u, err := validateSession(r.Context(), store, r)
-			if err != nil || u == nil {
-				utils.WriteError(w, "admin session required", 401)
+			if err != nil {
+				if adminweb.ErrorStatus(err) == 500 {
+					logger.FromContext(r.Context()).Err(err).Msg("Administrative session lookup failed")
+				}
+				utils.WriteError(w, adminweb.PublicError(err), adminweb.ErrorStatus(err))
 				return
 			}
 			if u.Role != models.UserRoleAdmin {
@@ -83,27 +105,5 @@ func RequireAdmin(store db.UserStore) func(http.Handler) http.Handler {
 	}
 }
 
-// Cookie-authenticated web mutations must not be triggered by another origin.
-func SameOrigin(next http.Handler) http.Handler {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		if r.Method != "GET" && r.Method != "HEAD" && r.Method != "OPTIONS" {
-			scheme := "http"
-			if r.TLS != nil || r.Header.Get("X-Forwarded-Proto") == "https" {
-				scheme = "https"
-			}
-			origin := r.Header.Get("Origin")
-			if origin != "" {
-				parsed, err := url.Parse(origin)
-				if err != nil || parsed.Scheme != scheme || !strings.EqualFold(parsed.Host, r.Host) {
-					utils.WriteError(w, "cross-origin mutation forbidden", 403)
-					return
-				}
-			}
-			if r.Header.Get("Sec-Fetch-Site") == "cross-site" {
-				utils.WriteError(w, "cross-site mutation forbidden", 403)
-				return
-			}
-		}
-		next.ServeHTTP(w, r)
-	})
-}
+// SameOrigin delegates the shared policy used by JSON and prepared HTML handlers.
+func SameOrigin(next http.Handler) http.Handler { return adminweb.SameOrigin(next) }

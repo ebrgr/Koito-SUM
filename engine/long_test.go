@@ -650,7 +650,15 @@ func TestAuth(t *testing.T) {
 	require.NoError(t, err)
 	require.Equal(t, 204, resp.StatusCode)
 
-	// test /user with updated info
+	// Password changes invalidate all previously issued administrator sessions.
+	revoked, err := makeAuthRequest(t, s, "GET", "/apis/web/v1/user", nil)
+	require.NoError(t, err)
+	require.Equal(t, 401, revoked.StatusCode)
+	fresh, err := http.DefaultClient.Post(host()+"/apis/web/v1/login", "application/json", strings.NewReader(`{"username":"new","password":"supersecret"}`))
+	require.NoError(t, err)
+	require.Equal(t, 204, fresh.StatusCode)
+	s = fresh.Cookies()[0].Value
+	// The replacement session can read the changed account.
 	req, err = http.NewRequest("GET", host()+"/apis/web/v1/user", nil)
 	require.NoError(t, err)
 	req.AddCookie(&http.Cookie{
@@ -683,6 +691,10 @@ func TestAuth(t *testing.T) {
 	require.NoError(t, err)
 	require.Equal(t, 204, resp.StatusCode)
 
+	// Restoring the password also revokes sessions; authenticate again for key operations.
+	loginOnce = sync.Once{}
+	login(t)
+	s = session
 	// creates api key
 	req, err = http.NewRequest("POST", host()+"/apis/web/v1/user/apikeys", strings.NewReader(`{"label":"testing"}`))
 	require.NoError(t, err)
@@ -715,7 +727,8 @@ func TestAuth(t *testing.T) {
 	assert.True(t, assert.ObjectsAreEqual(expected, actual))
 
 	// changes api key label
-	login(t) // i dont care about using the new session anymore
+	loginOnce = sync.Once{}
+	login(t) // Keep an independent live session for subsequent tests.
 	resp, err = makeAuthRequest(t, s, "PATCH", "/apis/web/v1/user/apikeys/2", strings.NewReader(`{"label":"well tested"}`))
 	require.NoError(t, err)
 	assert.Equal(t, 204, resp.StatusCode)

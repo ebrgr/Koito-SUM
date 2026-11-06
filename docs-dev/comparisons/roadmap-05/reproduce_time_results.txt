@@ -1,0 +1,73 @@
+Roadmap 05 — temporal reproductions, 2026-11-05
+
+Runtime: go version go1.26.3 darwin/arm64.
+
+Method: exact transient Go program preserved in reproduce_time.go.txt; direct
+calls to current store/helpers, not an HTTP/browser reproduction. The store is
+sqlite.NewInMemory(), with migrations 001–003 and profile A/track 1. No production
+database, cfg.Load, external request, personal credential or runtime patch.
+
+Run from the repository root (Go dependencies must already be cached):
+
+advisor_tmp=$(mktemp -d ./advisor-timezone-XXXXXX)
+trap 'rm -f "$advisor_tmp/main.go"; rmdir "$advisor_tmp"' EXIT
+cp docs-dev/comparisons/roadmap-05/reproduce_time.go.txt "$advisor_tmp/main.go"
+GOCACHE=/private/tmp/koito-advisor-go-cache GOPROXY=off GOSUMDB=off go run "$advisor_tmp/main.go"
+
+The temporary source must remain inside the repository module to import internal
+packages. The trap removes it on shell exit. GOCACHE is disposable, outside the
+repository, and downloads are disabled. The initial run used the same source
+through a heredoc rather than cp. No source code was left in the repository.
+
+Original complete output (exit code 0):
+
+2026/11/05 15:20:21 OK   001_initial_schema.sql (827.38µs)
+2026/11/05 15:20:21 OK   002_unique_mbid.sql (1.67ms)
+2026/11/05 15:20:21 OK   003_listening_profiles.sql (1.61ms)
+2026/11/05 15:20:21 goose: successfully migrated database to version: 3
+activity expected_day=2024-05-01 actual=[{Start:2024-04-30 00:00:00 +0545 +0545 Listens:1}]
+month_final_second expected_total=2 actual=1
+active_days expected=2 actual=1
+implicit_month local_now=2025-01-01T05:15:00+05:45 expected=2025-01-01 actual=2024-01-01
+implicit_ISO_week now=2021-01-01 expected=2020-12-28 actual=2022-01-03
+
+The preserved .go.txt source was copied and replayed on 2026-11-05 at 15:23:11.
+It exited 0 and printed the same five expected/actual results. Only migration
+timings changed. Its temporary repository directory was removed by the trap.
+
+Independent oracles and limits:
+
+1. The persisted instant is May 1 at 00:05 in Kathmandu (+05:45), so its calendar
+   date is May 1. The returned bucket is April 30. This proves the fractional-
+   offset activity defect, not all possible streak or DST combinations.
+2. Both instants belong to May 2024 in Kathmandu. The last second must belong
+   to May, so the monthly count must be 2. The store returns 1. Investigation
+   points to an inclusive final timestamp truncated to Unix seconds and used
+   with an exclusive SQL comparison.
+3. After clearing listens, the two instants belong to distinct local dates but
+   the same UTC date. The civil active-day count must be 2; it returns 1. This
+   case uses the real current clock only as the upper cutoff. Both 2024 instants
+   are safely historical at execution on 2026-11-05; the clock is not injected
+   into GetActiveDays in this diagnostic.
+4. At 2024-12-31T23:30Z, Kathmandu is already January 1, 2025. The January
+   selection without a year should therefore select January 2025, not 2024.
+5. January 1, 2021 belongs to ISO week 53 of ISO year 2020. Its week begins on
+   December 28, 2020; the helper returns January 3, 2022 instead.
+
+These are diagnostic reproductions, not permanent regression tests. Exit code
+0 means the diagnostic ran; its printed actual values demonstrate the failures.
+Do not treat the diagnostics as approval of the future 018 implementation.
+
+Additional existing tests run during this Advisor review:
+
+GOCACHE=/private/tmp/koito-advisor-go-cache GOPROXY=off GOSUMDB=off go test ./internal/admin ./internal/adminweb ./internal/db ./internal/webquery ./internal/relay
+
+ok  github.com/gabehf/koito/internal/admin       1.000s
+ok  github.com/gabehf/koito/internal/adminweb    (cached)
+ok  github.com/gabehf/koito/internal/db          0.350s
+ok  github.com/gabehf/koito/internal/webquery    0.527s
+ok  github.com/gabehf/koito/internal/relay       0.697s
+
+An initial attempt using the default Go build cache was blocked by filesystem
+permissions before running tests; redirecting only GOCACHE to the disposable
+path above resolved it. No escalation or external network was used.

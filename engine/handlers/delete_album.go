@@ -1,8 +1,12 @@
 package handlers
 
 import (
+	"errors"
 	"net/http"
 
+	"github.com/gabehf/koito/engine/middleware"
+	"github.com/gabehf/koito/internal/admin"
+	"github.com/gabehf/koito/internal/adminweb"
 	"github.com/gabehf/koito/internal/db"
 	"github.com/gabehf/koito/internal/logger"
 	"github.com/gabehf/koito/internal/utils"
@@ -26,8 +30,12 @@ func DeleteAlbumHandler(store db.AlbumStore) http.HandlerFunc {
 
 		err = store.DeleteAlbum(ctx, int32(albumID))
 		if err != nil {
+			if errors.Is(err, db.ErrNotFound) {
+				w.WriteHeader(http.StatusNoContent)
+				return
+			}
 			l.Err(err).Msg("DeleteAlbumHandler: Failed to delete album")
-			utils.WriteError(w, "failed to delete album", http.StatusInternalServerError)
+			utils.WriteError(w, adminweb.PublicError(err), adminweb.ErrorStatus(err))
 			return
 		}
 
@@ -37,7 +45,7 @@ func DeleteAlbumHandler(store db.AlbumStore) http.HandlerFunc {
 }
 
 // DeleteAlbumAliasHandler deletes an alias for a given album.
-func DeleteAlbumAliasHandler(store db.AlbumStore) http.HandlerFunc {
+func DeleteAlbumAliasHandler(store db.DB) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		ctx := r.Context()
 		l := logger.FromContext(ctx)
@@ -58,9 +66,9 @@ func DeleteAlbumAliasHandler(store db.AlbumStore) http.HandlerFunc {
 			return
 		}
 
-		if err = store.DeleteAlbumAlias(ctx, albumID, body.Alias); err != nil {
+		if err = admin.EditAlias(ctx, store, middleware.GetUserFromContext(ctx), "album", albumID, "delete", body.Alias); err != nil {
 			l.Error().Err(err).Msg("DeleteAlbumAliasHandler: Failed to delete album alias")
-			utils.WriteError(w, "failed to delete alias", http.StatusInternalServerError)
+			utils.WriteError(w, adminweb.PublicError(err), adminweb.ErrorStatus(err))
 			return
 		}
 

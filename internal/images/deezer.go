@@ -61,35 +61,35 @@ func (c *DeezerClient) Shutdown() {
 	c.requestQueue.Shutdown()
 }
 
+// queue propagates caller and shutdown cancellation through the HTTP request.
 func (c *DeezerClient) queue(ctx context.Context, req *http.Request) ([]byte, error) {
-	l := logger.FromContext(ctx)
 	req.Header.Set("User-Agent", c.userAgent)
 	req.Header.Set("Accept", "application/json")
-
-	resultChan := c.requestQueue.Enqueue(func(client *http.Client, done chan<- queue.RequestResult) {
-		resp, err := client.Do(req)
+	result := <-c.requestQueue.EnqueueContext(ctx, func(jobCtx context.Context, client *http.Client) queue.RequestResult {
+		resp, err := client.Do(req.WithContext(jobCtx))
 		if err != nil {
-			l.Debug().Err(err).Str("url", req.RequestURI).Msg("Failed to contact ImageSrc")
-			done <- queue.RequestResult{Err: err}
-			return
-		} else if resp.StatusCode >= 300 || resp.StatusCode < 200 {
-			err = fmt.Errorf("received non-ok status from Deezer: %s", resp.Status)
-			done <- queue.RequestResult{Body: nil, Err: err}
+			if jobCtx.Err() != nil {
+				return queue.RequestResult{Err: jobCtx.Err()}
+			}
+			return queue.RequestResult{Err: fmt.Errorf("upstream request failed")}
 		}
 		defer resp.Body.Close()
-
-		body, err := io.ReadAll(resp.Body)
-		done <- queue.RequestResult{Body: body, Err: err}
+		if resp.StatusCode < 200 || resp.StatusCode >= 300 {
+			return queue.RequestResult{Err: fmt.Errorf("Deezer returned HTTP %d", resp.StatusCode)}
+		}
+		body, err := io.ReadAll(io.LimitReader(resp.Body, (8<<20)+1))
+		if err == nil && len(body) > 8<<20 {
+			err = fmt.Errorf("Deezer response exceeds 8 MiB")
+		}
+		return queue.RequestResult{Body: body, Err: err}
 	})
-
-	result := <-resultChan
 	return result.Body, result.Err
 }
 
 func (c *DeezerClient) getEntity(ctx context.Context, endpoint string, result any) error {
 	l := logger.FromContext(ctx)
 	url := deezerBaseUrl + endpoint
-	l.Debug().Msgf("Sending request to ImageSrc: GET %s", url)
+	l.Debug().Msg("Sending request to ImageSrc")
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
 		return fmt.Errorf("getEntity: %w", err)

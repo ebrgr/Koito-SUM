@@ -104,11 +104,11 @@ when you intentionally choose a different version.
 docker build --build-arg KOITO_VERSION=0.3.2-SUM-RC2 -t koito-sum:local .
 ```
 
-The build uses Node.js 24 and the repository's Yarn lockfile, Go 1.25, and
-libvips. Both Go build and runtime use Debian Bookworm to keep native library
-versions aligned. `.dockerignore` excludes local databases, credentials, caches,
-and development dependencies.
+.dockerignore excludes local databases, credentials, caches, and development
+dependencies. The application is built with Go 1.25 and CGO disabled; it does
+not require libvips at build or runtime. The runtime retains CA certificates,
+timezone data and curl for the healthcheck.
 
-For design and validation details, see [MULTIUSER_DESIGN.en.md](MULTIUSER_DESIGN.en.md).
+For local development and validation, see [DEVELOPMENT.md](DEVELOPMENT.md).
 
 Current source: **Koito 0.3.2-SUM-RC2**. A matching image must be published before pulling this tag. For an unpublished version, use the local build instructions above. Version numbers advance once per commit using `make version.bump`; historical tags remain unchanged.

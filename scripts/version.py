@@ -1,15 +1,14 @@
 #!/usr/bin/env python3
 """Check or increment the shared SUM RC version before committing."""
 import argparse
-import json
 from pathlib import Path
 import re
 import subprocess
 
 ROOT = Path(__file__).resolve().parent.parent
 SOURCE = ROOT / "internal/version/VERSION"
-FILES = ["client/package.json", "Dockerfile", "deploy/compose.yaml", "deploy/.env.example",
-         "README.md", "DEPLOYMENT.md", "MULTIUSER_DESIGN.md", "MULTIUSER_DESIGN.en.md"]
+FILES = ["Dockerfile", "deploy/compose.yaml", "deploy/.env.example",
+         "README.md", "DEPLOYMENT.md", "docs-dev/MULTIUSER_DESIGN.md", "docs-dev/MULTIUSER_DESIGN.en.md"]
 PATTERN = r"(\d+\.\d+\.\d+)-SUM-RC([1-9]\d*)"
 
 
@@ -26,8 +25,6 @@ def main():
     for name, text in contents.items():
         if current not in text:
             raise SystemExit(f"Version out of sync: {name}")
-    if json.loads(contents["client/package.json"])["version"] != current:
-        raise SystemExit("Frontend package version out of sync")
     if args.check_parent:
         parent = subprocess.run(["git", "show", "HEAD^:internal/version/VERSION"], cwd=ROOT, capture_output=True, text=True)
         if parent.returncode == 0:

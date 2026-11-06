@@ -1,0 +1,50 @@
+{
+  "profiles": 3,
+  "mara_listens": 152,
+  "history_page_2": 52,
+  "schema": 3,
+  "interest_totals": {
+    "artist": 31,
+    "album": 31,
+    "track": 3
+  },
+  "http_pages": [
+    "/",
+    "/mara?period=all_time",
+    "/mara/chart/top/artists",
+    "/mara/chart/top/albums",
+    "/mara/chart/top/tracks",
+    "/mara/listens?limit=100&page=2",
+    "/iara"
+  ],
+  "checks": [
+    "scoping",
+    "API/HTML parity",
+    "invalid filters",
+    "interest intervals and bounds",
+    "retained SPA",
+    "admin authentication",
+    "same-origin mutations",
+    "SQLite integrity"
+  ],
+  "date": "2026-11-04",
+  "issue": "007",
+  "functional_status": "core implemented and tested; visual acceptance deferred until end of issue 009",
+  "checks_passed": [
+    "make check ui.check",
+    "focused Go race tests",
+    "real binary webui and interest validation",
+    "multiuser fresh database",
+    "multiuser migrated-v2 database"
+  ],
+  "production_media_routes": "React; activation reserved for issue 009",
+  "bucket_contract": {
+    "default_html": 16,
+    "minimum": 1,
+    "maximum": 512,
+    "intervals": "[start,end), last [start,end]",
+    "future_listens": "excluded until their timestamp is reached"
+  },
+  "browser_or_layout_review": false,
+  "new_screenshots": false
+}

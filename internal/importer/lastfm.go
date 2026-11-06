@@ -2,10 +2,8 @@ package importer
 
 import (
 	"context"
-	"encoding/json"
 	"fmt"
 	"os"
-	"path"
 	"strconv"
 	"time"
 
@@ -47,32 +45,43 @@ func ImportLastFMFile(ctx context.Context, store importStore, mbzc mbz.MusicBrai
 	}
 	l := logger.FromContext(ctx)
 	l.Info().Msgf("Beginning LastFM import on file: %s", filename)
-	file, err := os.Open(path.Join(cfg.ConfigDir(), "import", filename))
+	file, err := os.Open(importPath(ctx, filename))
 	if err != nil {
 		l.Err(err).Msgf("Failed to read import file: %s", filename)
 		return fmt.Errorf("ImportLastFMFile: %w", err)
 	}
 	defer file.Close()
-	var throttleFunc = func() {}
-	if ms := cfg.ThrottleImportMs(); ms > 0 {
-		throttleFunc = func() {
-			time.Sleep(time.Duration(ms) * time.Millisecond)
-		}
-	}
+
 	export := make([]LastFMExportPage, 0)
-	err = json.NewDecoder(file).Decode(&export)
+	err = decodeJSON(ctx, file, &export)
 	if err != nil {
 		return fmt.Errorf("ImportLastFMFile: %w", err)
 	}
 	count := 0
+	total := 0
+	if len(export) > MaxImportItems {
+		return invalidFile(fmt.Errorf("too many import items"))
+	}
 	for _, item := range export {
+		if err := ctx.Err(); err != nil {
+			return err
+		}
+		total += len(item.Track)
+		if total > MaxImportItems {
+			return invalidFile(fmt.Errorf("too many import items"))
+		}
 		for _, track := range item.Track {
+			seen(ctx)
+			if err := ctx.Err(); err != nil {
+				return err
+			}
 			album := track.Album.Text
 			if album == "" {
 				album = track.Name
 			}
 			if track.Name == "" || track.Artist.Text == "" {
 				l.Debug().Msg("Skipping invalid LastFM import item")
+				ignored(ctx)
 				continue
 			}
 			albumMbzID, err := uuid.Parse(track.Album.MBID)
@@ -93,6 +102,7 @@ func ImportLastFMFile(ctx context.Context, store importStore, mbzc mbz.MusicBrai
 				ts, err = time.Parse("02 Jan 2006, 15:04", track.Date.Text)
 				if err != nil {
 					l.Err(err).Msg("Could not parse time from listen activity, skipping...")
+					ignored(ctx)
 					continue
 				}
 			} else {
@@ -100,6 +110,7 @@ func ImportLastFMFile(ctx context.Context, store importStore, mbzc mbz.MusicBrai
 			}
 			if !inImportTimeWindow(ts) {
 				l.Debug().Msgf("Skipping import due to import time rules")
+				ignored(ctx)
 				continue
 			}
 
@@ -128,7 +139,9 @@ func ImportLastFMFile(ctx context.Context, store importStore, mbzc mbz.MusicBrai
 				return fmt.Errorf("ImportLastFMFile: %w", err)
 			}
 			count++
-			throttleFunc()
+			if err := throttle(ctx); err != nil {
+				return err
+			}
 		}
 	}
 	return finishImport(ctx, filename, count)

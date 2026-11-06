@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"time"
 
+	"github.com/gabehf/koito/internal/db"
 	"github.com/gabehf/koito/internal/models"
 	"github.com/google/uuid"
 )
@@ -62,4 +63,23 @@ func (s *Sqlite) GetUserBySession(ctx context.Context, sessionId uuid.UUID) (*mo
 	}
 	u.Role = models.UserRole(role)
 	return &u, nil
+}
+
+// SaveAuthenticatedSession cannot resurrect a login authenticated before a password change.
+func (s *Sqlite) SaveAuthenticatedSession(ctx context.Context, userID int32, passwordHash []byte, expiresAt time.Time, persistent bool) (*models.Session, error) {
+	id := uuid.New()
+	now := time.Now().Unix()
+	result, err := s.db.ExecContext(ctx, `INSERT INTO sessions(id,user_id,created_at,expires_at,persistent)
+ SELECT ?,id,?,?,? FROM users WHERE id=? AND password=? AND role='admin'`, id.String(), now, expiresAt.Unix(), persistent, userID, passwordHash)
+	if err != nil {
+		return nil, fmt.Errorf("SaveAuthenticatedSession: %w", err)
+	}
+	n, err := result.RowsAffected()
+	if err != nil {
+		return nil, err
+	}
+	if n != 1 {
+		return nil, db.ErrConflict
+	}
+	return &models.Session{ID: id, UserID: userID, CreatedAt: time.Unix(now, 0).UTC(), ExpiresAt: time.Unix(expiresAt.Unix(), 0).UTC(), Persistent: persistent}, nil
 }

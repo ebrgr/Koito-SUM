@@ -5,13 +5,14 @@ import (
 	"time"
 
 	"github.com/gabehf/koito/engine/middleware"
+	"github.com/gabehf/koito/internal/admin"
+	"github.com/gabehf/koito/internal/adminweb"
 	"github.com/gabehf/koito/internal/db"
 	"github.com/gabehf/koito/internal/logger"
 	"github.com/gabehf/koito/internal/utils"
 )
 
-func SubmitListenWithIDHandler(store db.ListenStore) http.HandlerFunc {
-	var defaultClientStr = "Koito Web UI"
+func SubmitListenWithIDHandler(store db.DB) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		ctx := r.Context()
 		l := logger.FromContext(ctx)
@@ -41,19 +42,10 @@ func SubmitListenWithIDHandler(store db.ListenStore) http.HandlerFunc {
 			return
 		}
 
-		client := body.Client
-		if client == "" {
-			client = defaultClientStr
-		}
-
-		if err = store.SaveListen(ctx, db.SaveListenOpts{
-			TrackID:   body.TrackID,
-			Time:      time.Unix(body.Unix, 0),
-			ProfileID: db.ProfileID(ctx),
-			Client:    client,
-		}); err != nil {
+		_, err = admin.ManualListen(ctx, store, u, db.ProfileID(ctx), body.TrackID, time.Unix(body.Unix, 0), body.Client)
+		if err != nil {
 			l.Err(err).Msg("SubmitListenWithIDHandler: Failed to submit listen")
-			utils.WriteError(w, "failed to submit listen", http.StatusInternalServerError)
+			utils.WriteError(w, adminweb.PublicError(err), adminweb.ErrorStatus(err))
 			return
 		}
 

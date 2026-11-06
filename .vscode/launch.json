@@ -1,0 +1,35 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Koito: Desenvolvimento Go (localhost:4110)",
+      "type": "go",
+      "request": "launch",
+      "mode": "debug",
+      "program": "${workspaceFolder}/cmd/api",
+      "cwd": "${workspaceFolder}",
+      "envFile": "${workspaceFolder}/.env",
+      "env": {
+        "CGO_ENABLED": "0",
+        "KOITO_WEB_UI": "go"
+      },
+      "serverReadyAction": {
+        "pattern": "Engine: Listening on (?:127\\.0\\.0\\.1|localhost|0\\.0\\.0\\.0)?:([0-9]+)",
+        "uriFormat": "http://127.0.0.1:%s",
+        "action": "openExternally"
+      }
+    },
+    {
+      "name": "Koito: API (Go)",
+      "type": "go",
+      "request": "launch",
+      "mode": "debug",
+      "program": "${workspaceFolder}/cmd/api",
+      "cwd": "${workspaceFolder}",
+      "envFile": "${workspaceFolder}/.env",
+      "env": {
+        "CGO_ENABLED": "0"
+      }
+    }
+  ]
+}

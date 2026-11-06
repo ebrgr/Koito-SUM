@@ -31,6 +31,23 @@ The selected directory determines ownership; names inside the file do not change
 it. See [Listening profiles](/guides/profiles). Keep a database backup; a failed
 import can have saved some records, so check before retrying.
 
+## Go upload limits and results
+
+The HTTP upload limit is 100 MiB including multipart overhead. JSON imports are
+limited independently to 32 MiB, 500,000 structural tokens and 250,000 entries;
+the first reached limit applies. ZIP imports allow 1,000 members, 256 MiB of
+expanded content and JSONL lines up to 1 MiB. Split larger exports before upload.
+
+Import runs synchronously. The result distinguishes newly inserted listens,
+duplicates, ignored entries and errors. A failure can leave a saved prefix;
+inspect the result before retrying. Closing the connection can cancel work, and
+there is no persistent job or recoverable progress report. Completed input is
+archived; failed HTTP uploads do not enter the startup import queue.
+
+Export streams only the selected profile. It is a dynamic paginated read rather
+than a database snapshot: concurrent backdated imports, deletion or metadata edits
+can affect its contents. If a download is interrupted, generate it again.
+
 ## Spotify
 
 To get your data from Spotify, you first need to request your extended streaming history from [the Spotify privacy page](https://www.spotify.com/us/account/privacy/).

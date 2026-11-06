@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"github.com/gabehf/koito/internal/listening"
 	"net/http"
 	"strconv"
 	"strings"
@@ -11,6 +12,7 @@ import (
 	"github.com/gabehf/koito/internal/utils"
 )
 
+// GetListenActivityHandler uses one clock for reading and filling the activity response.
 func GetListenActivityHandler(store db.ListenStore) func(w http.ResponseWriter, r *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
 		ctx := r.Context()
@@ -82,6 +84,7 @@ func GetListenActivityHandler(store db.ListenStore) func(w http.ResponseWriter, 
 		}
 
 		opts := db.ListenActivityOpts{
+			Now:      time.Now(),
 			Step:     step,
 			Range:    _range,
 			Month:    month,
@@ -90,11 +93,6 @@ func GetListenActivityHandler(store db.ListenStore) func(w http.ResponseWriter, 
 			AlbumID:  int32(albumId),
 			ArtistID: int32(artistId),
 			TrackID:  int32(trackId),
-		}
-
-		if strings.ToLower(opts.Timezone.String()) == "local" {
-			opts.Timezone, _ = time.LoadLocation("UTC")
-			l.Warn().Msg("GetListenActivityHandler: Timezone is unset, using UTC")
 		}
 
 		l.Debug().Msgf("GetListenActivityHandler: Retrieving listen activity with options: %+v", opts)
@@ -126,65 +124,6 @@ func GetListenActivityHandler(store db.ListenStore) func(w http.ResponseWriter, 
 	}
 }
 
-// ngl i hate this
-func processActivity(
-	items []db.ListenActivityItem,
-	opts db.ListenActivityOpts,
-) []db.ListenActivityItem {
-	from, to := db.ListenActivityOptsToTimes(opts)
-
-	buckets := make(map[string]int64)
-
-	for _, item := range items {
-		bucketStart := normalizeToStep(item.Start, opts.Step)
-		key := bucketStart.Format("2006-01-02")
-		buckets[key] += item.Listens
-	}
-
-	var result []db.ListenActivityItem
-
-	for t := normalizeToStep(from, opts.Step); t.Before(to); t = addStep(t, opts.Step) {
-		key := t.Format("2006-01-02")
-
-		result = append(result, db.ListenActivityItem{
-			Start:   t,
-			Listens: buckets[key],
-		})
-	}
-
-	return result
-}
-
-func normalizeToStep(t time.Time, step db.StepInterval) time.Time {
-	switch step {
-	case db.StepDay:
-		return time.Date(t.Year(), t.Month(), t.Day(), 0, 0, 0, 0, t.Location())
-
-	case db.StepWeek:
-		weekday := int(t.Weekday())
-		if weekday == 0 {
-			weekday = 7
-		}
-		start := t.AddDate(0, 0, -(weekday - 1))
-		return time.Date(start.Year(), start.Month(), start.Day(), 0, 0, 0, 0, t.Location())
-
-	case db.StepMonth:
-		return time.Date(t.Year(), t.Month(), 1, 0, 0, 0, 0, t.Location())
-
-	default:
-		return t
-	}
-}
-
-func addStep(t time.Time, step db.StepInterval) time.Time {
-	switch step {
-	case db.StepDay:
-		return t.AddDate(0, 0, 1)
-	case db.StepWeek:
-		return t.AddDate(0, 0, 7)
-	case db.StepMonth:
-		return t.AddDate(0, 1, 0)
-	default:
-		return t.AddDate(0, 0, 1)
-	}
+func processActivity(items []db.ListenActivityItem, opts db.ListenActivityOpts) []db.ListenActivityItem {
+	return listening.FillActivity(items, opts)
 }

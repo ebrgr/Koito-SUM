@@ -65,3 +65,31 @@ To delete at item, just click the trash icon, which is the fourth and final icon
 Deleting items is irreversible.
 
 :::
+
+## Server-rendered management
+
+In the default Go mode, **Manage this item** opens `/<slug>/manage/<kind>/<id>`.
+The administrator edits shared catalog metadata; the profile is the navigation
+context. Search for an existing artist or merge destination, edit aliases/MBID,
+mark an album as a compilation, or upload artwork. Clearing the MBID input keeps
+the current value; it does not remove an existing MBID. Track artwork always
+targets the track's real album.
+
+Artwork accepts JPEG, PNG and static WebP. Animated images and other formats are
+not supported. Artwork is limited to 10 MiB, 10,000 pixels per dimension and
+40 million pixels.
+HTTP(S) downloads use a ten-second timeout and up to three validated redirects.
+Shared old artwork remains available until orphan collection.
+
+Manual listens use an IANA timezone. Nonexistent daylight-saving times are
+rejected; ambiguous times require an explicit UTC offset. Offsets with historical
+seconds are not supported. The history's **Manage** link selects the exact listen
+for confirmation and returns to the filtered history after deletion.
+
+Deletion and merging require a separate global impact review and final POST.
+The review names the source, destination and surviving ID. **In the Go editor the
+current item starts as the source**; use Reverse direction to change that choice
+and always read the review.
+A changed catalog/history requires a fresh review. Destination aliases, MBID and
+other metadata are retained; source aliases are removed. Track duplicate listens
+are consolidated only within the same profile and timestamp. No undo is provided.

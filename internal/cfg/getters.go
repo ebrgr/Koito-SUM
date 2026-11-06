@@ -204,3 +204,5 @@ func ForceTZ() *time.Location {
 	defer lock.RUnlock()
 	return globalConfig.forceTZ
 }
+
+func WebUI() string { lock.RLock(); defer lock.RUnlock(); return globalConfig.webUI }

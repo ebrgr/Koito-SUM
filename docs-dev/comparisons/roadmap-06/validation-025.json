@@ -1,0 +1,420 @@
+{
+  "migration": "four independent v2 databases migrated at startup to v3",
+  "legacy_fixture": "one admin, one profile, one key, one track and one listen; second committed listen in WAL for admin-react",
+  "legacy_columns": "hashes preserved before authentication",
+  "legacy_hashes": {
+    "api_keys": "a8966fc794b895f2416d4d8f4f155f9149d8553c217cb6d9033a764a7be318f8",
+    "artist_aliases": "7de9e27c88c99928998c13e62d333535aec10ef445a9f75d264b7c515e3e7ce2",
+    "artist_releases": "028ab3525e29917f51cfaa145c5a8753597fae170a7ec147b1bcdf9cb79bc017",
+    "artist_tracks": "028ab3525e29917f51cfaa145c5a8753597fae170a7ec147b1bcdf9cb79bc017",
+    "artists": "c7abe5e76d513543ee83750018febc390fbc79aeb36c5fa02d48faf3b90321fe",
+    "listens": "47bb35cef8663738d03eea882ff918819364641b24f22df46fa89cf891e1d187",
+    "release_aliases": "fa62d808d9745532bdbebf42e90298b16ba01619cf565d60c59863c494cf6cce",
+    "releases": "b7bc8c4672754055cec52876f2062a82477df447abe8bfb7c519558781359662",
+    "sessions": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "track_aliases": "f4cfb4533f89f4685edc68a15e3089291cea607665524344c98fa04571f117c4",
+    "tracks": "8eeccae76c1ed3b776d02bcc797433b9b1ec1451bce7605eb660917a3a59f83c",
+    "users": "a01b1fbe63713e18c498237b90763df79f6e0ad9698b25c5d43bdfcb4f7b05f1"
+  },
+  "wal_legacy_hashes": {
+    "api_keys": "a8966fc794b895f2416d4d8f4f155f9149d8553c217cb6d9033a764a7be318f8",
+    "artist_aliases": "7de9e27c88c99928998c13e62d333535aec10ef445a9f75d264b7c515e3e7ce2",
+    "artist_releases": "028ab3525e29917f51cfaa145c5a8753597fae170a7ec147b1bcdf9cb79bc017",
+    "artist_tracks": "028ab3525e29917f51cfaa145c5a8753597fae170a7ec147b1bcdf9cb79bc017",
+    "artists": "c7abe5e76d513543ee83750018febc390fbc79aeb36c5fa02d48faf3b90321fe",
+    "listens": "e0f35798949165793cb0a52cff0939770ef4a1f48fae224320b67519e7192de3",
+    "release_aliases": "fa62d808d9745532bdbebf42e90298b16ba01619cf565d60c59863c494cf6cce",
+    "releases": "b7bc8c4672754055cec52876f2062a82477df447abe8bfb7c519558781359662",
+    "sessions": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "track_aliases": "f4cfb4533f89f4685edc68a15e3089291cea607665524344c98fa04571f117c4",
+    "tracks": "8eeccae76c1ed3b776d02bcc797433b9b1ec1451bce7605eb660917a3a59f83c",
+    "users": "a01b1fbe63713e18c498237b90763df79f6e0ad9698b25c5d43bdfcb4f7b05f1"
+  },
+  "binary_sha256": "009878b955748fc3d2daefa8274b45479bfa8a293d4be66e415da0a579a8cd15",
+  "source_revision": "72e4be2e582a67d83c37a339be30c94fe8ee8a5d",
+  "source_state": "local uncommitted changes present",
+  "backups": "four v2 backups matched source hashes and were restored into isolated copies",
+  "web": "Go/React browser with hydrated UI, legacy redirect and scoped profile",
+  "theme_helper": "context-error",
+  "admin_go": {
+    "schema": 3,
+    "formats": [
+      "spotify",
+      "maloja",
+      "lastfm",
+      "koito",
+      "listenbrainz"
+    ],
+    "checks": [
+      "HTML login/return",
+      "HEAD",
+      "CSRF/origin",
+      "profiles",
+      "keys/revocation",
+      "local relay",
+      "five import formats",
+      "export/round-trip",
+      "metadata/form state",
+      "DST",
+      "personal deletion",
+      "stale merge/repetition",
+      "zero profiles",
+      "password revocation",
+      "SQLite integrity"
+    ]
+  },
+  "admin_react": "validate_journey JSON/API plus independent browser login",
+  "integrity": "ok",
+  "routes": [
+    {
+      "mode": "go",
+      "method": "GET",
+      "path": "/",
+      "status": 200,
+      "content_type": "text/html"
+    },
+    {
+      "mode": "go",
+      "method": "HEAD",
+      "path": "/",
+      "status": 200,
+      "content_type": "text/html"
+    },
+    {
+      "mode": "go",
+      "method": "GET",
+      "path": "/default",
+      "status": 200,
+      "content_type": "text/html"
+    },
+    {
+      "mode": "go",
+      "method": "HEAD",
+      "path": "/default",
+      "status": 200,
+      "content_type": "text/html"
+    },
+    {
+      "mode": "go",
+      "method": "GET",
+      "path": "/admin",
+      "status": 200,
+      "content_type": "text/html"
+    },
+    {
+      "mode": "go",
+      "method": "HEAD",
+      "path": "/admin",
+      "status": 200,
+      "content_type": "text/html"
+    },
+    {
+      "mode": "go",
+      "method": "GET",
+      "path": "/favicon.svg",
+      "status": 200,
+      "content_type": "image/svg+xml"
+    },
+    {
+      "mode": "go",
+      "method": "HEAD",
+      "path": "/favicon.svg",
+      "status": 200,
+      "content_type": "image/svg+xml"
+    },
+    {
+      "mode": "go",
+      "method": "GET",
+      "path": "/public/yuu.jpg",
+      "status": 200,
+      "content_type": "image/jpeg"
+    },
+    {
+      "mode": "go",
+      "method": "HEAD",
+      "path": "/public/yuu.jpg",
+      "status": 200,
+      "content_type": "image/jpeg"
+    },
+    {
+      "mode": "go",
+      "method": "GET",
+      "path": "/apis/web/v1/profiles",
+      "status": 200,
+      "content_type": "application/json"
+    },
+    {
+      "mode": "go",
+      "method": "HEAD",
+      "path": "/apis/web/v1/profiles",
+      "status": 200,
+      "content_type": "application/json"
+    },
+    {
+      "mode": "go",
+      "method": "GET",
+      "path": "/apis/web/v1/health",
+      "status": 200,
+      "content_type": ""
+    },
+    {
+      "mode": "go",
+      "method": "HEAD",
+      "path": "/apis/web/v1/health",
+      "status": 200,
+      "content_type": ""
+    },
+    {
+      "mode": "go",
+      "method": "GET",
+      "path": "/web-assets/ui.css",
+      "status": 200,
+      "content_type": "text/css"
+    },
+    {
+      "mode": "go",
+      "method": "HEAD",
+      "path": "/web-assets/ui.css",
+      "status": 200,
+      "content_type": "text/css"
+    },
+    {
+      "mode": "go",
+      "method": "GET",
+      "path": "/theme-helper",
+      "status": 404,
+      "content_type": "text/plain"
+    },
+    {
+      "mode": "go",
+      "method": "HEAD",
+      "path": "/theme-helper",
+      "status": 404,
+      "content_type": "text/plain"
+    },
+    {
+      "mode": "go",
+      "method": "GET",
+      "path": "/assets/not-a-real-file.js",
+      "status": 404,
+      "content_type": "text/plain"
+    },
+    {
+      "mode": "go",
+      "method": "HEAD",
+      "path": "/assets/not-a-real-file.js",
+      "status": 404,
+      "content_type": "text/plain"
+    },
+    {
+      "mode": "go",
+      "method": "GET",
+      "path": "/default/not-a-real-page",
+      "status": 404,
+      "content_type": "text/plain"
+    },
+    {
+      "mode": "go",
+      "method": "HEAD",
+      "path": "/default/not-a-real-page",
+      "status": 404,
+      "content_type": "text/plain"
+    },
+    {
+      "mode": "go",
+      "method": "GET",
+      "path": "/listens",
+      "status": 302,
+      "content_type": "text/html"
+    },
+    {
+      "mode": "go",
+      "method": "HEAD",
+      "path": "/listens",
+      "status": 302,
+      "content_type": "text/html"
+    },
+    {
+      "mode": "go",
+      "method": "POST",
+      "path": "/apis/web/v1/profiles",
+      "status": 401,
+      "actor": "visitor"
+    },
+    {
+      "mode": "react",
+      "method": "GET",
+      "path": "/",
+      "status": 200,
+      "content_type": "text/html"
+    },
+    {
+      "mode": "react",
+      "method": "HEAD",
+      "path": "/",
+      "status": 200,
+      "content_type": "text/html"
+    },
+    {
+      "mode": "react",
+      "method": "GET",
+      "path": "/default",
+      "status": 200,
+      "content_type": "text/html"
+    },
+    {
+      "mode": "react",
+      "method": "HEAD",
+      "path": "/default",
+      "status": 200,
+      "content_type": "text/html"
+    },
+    {
+      "mode": "react",
+      "method": "GET",
+      "path": "/admin",
+      "status": 200,
+      "content_type": "text/html"
+    },
+    {
+      "mode": "react",
+      "method": "HEAD",
+      "path": "/admin",
+      "status": 200,
+      "content_type": "text/html"
+    },
+    {
+      "mode": "react",
+      "method": "GET",
+      "path": "/favicon.svg",
+      "status": 200,
+      "content_type": "image/svg+xml"
+    },
+    {
+      "mode": "react",
+      "method": "HEAD",
+      "path": "/favicon.svg",
+      "status": 200,
+      "content_type": "image/svg+xml"
+    },
+    {
+      "mode": "react",
+      "method": "GET",
+      "path": "/public/yuu.jpg",
+      "status": 200,
+      "content_type": "image/jpeg"
+    },
+    {
+      "mode": "react",
+      "method": "HEAD",
+      "path": "/public/yuu.jpg",
+      "status": 200,
+      "content_type": "image/jpeg"
+    },
+    {
+      "mode": "react",
+      "method": "GET",
+      "path": "/apis/web/v1/profiles",
+      "status": 200,
+      "content_type": "application/json"
+    },
+    {
+      "mode": "react",
+      "method": "HEAD",
+      "path": "/apis/web/v1/profiles",
+      "status": 200,
+      "content_type": "application/json"
+    },
+    {
+      "mode": "react",
+      "method": "GET",
+      "path": "/apis/web/v1/health",
+      "status": 200,
+      "content_type": ""
+    },
+    {
+      "mode": "react",
+      "method": "HEAD",
+      "path": "/apis/web/v1/health",
+      "status": 200,
+      "content_type": ""
+    },
+    {
+      "mode": "react",
+      "method": "GET",
+      "path": "/web-assets/ui.css",
+      "status": 200,
+      "content_type": "text/html"
+    },
+    {
+      "mode": "react",
+      "method": "HEAD",
+      "path": "/web-assets/ui.css",
+      "status": 200,
+      "content_type": "text/html"
+    },
+    {
+      "mode": "react",
+      "method": "GET",
+      "path": "/theme-helper",
+      "status": 200,
+      "content_type": "text/html"
+    },
+    {
+      "mode": "react",
+      "method": "HEAD",
+      "path": "/theme-helper",
+      "status": 200,
+      "content_type": "text/html"
+    },
+    {
+      "mode": "react",
+      "method": "GET",
+      "path": "/assets/not-a-real-file.js",
+      "status": 200,
+      "content_type": "text/html"
+    },
+    {
+      "mode": "react",
+      "method": "HEAD",
+      "path": "/assets/not-a-real-file.js",
+      "status": 200,
+      "content_type": "text/html"
+    },
+    {
+      "mode": "react",
+      "method": "GET",
+      "path": "/default/not-a-real-page",
+      "status": 200,
+      "content_type": "text/html"
+    },
+    {
+      "mode": "react",
+      "method": "HEAD",
+      "path": "/default/not-a-real-page",
+      "status": 200,
+      "content_type": "text/html"
+    },
+    {
+      "mode": "react",
+      "method": "GET",
+      "path": "/listens",
+      "status": 200,
+      "content_type": "text/html"
+    },
+    {
+      "mode": "react",
+      "method": "HEAD",
+      "path": "/listens",
+      "status": 200,
+      "content_type": "text/html"
+    },
+    {
+      "mode": "react",
+      "method": "POST",
+      "path": "/apis/web/v1/profiles",
+      "status": 401,
+      "actor": "visitor"
+    }
+  ]
+}

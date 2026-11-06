@@ -1,0 +1,44 @@
+{
+  "calendar_cases": [
+    {
+      "calendar_days": 31,
+      "from": "2026-01-01T00:00:00Z",
+      "month": 1,
+      "summary_current_daycount": 30,
+      "timezone": "UTC",
+      "to": "2026-01-31T23:59:59Z",
+      "year": 2026
+    },
+    {
+      "calendar_days": 28,
+      "from": "2026-02-01T00:00:00Z",
+      "month": 2,
+      "summary_current_daycount": 27,
+      "timezone": "UTC",
+      "to": "2026-02-28T23:59:59Z",
+      "year": 2026
+    },
+    {
+      "calendar_days": 31,
+      "from": "2026-03-01T00:00:00Z",
+      "month": 3,
+      "summary_current_daycount": 30,
+      "timezone": "UTC",
+      "to": "2026-03-31T23:59:59Z",
+      "year": 2026
+    }
+  ],
+  "database_opened": false,
+  "date": "2026-11-04",
+  "http_requests": false,
+  "interest_formula_case": {
+    "assigned_bucket_zero_based": 2,
+    "buckets": 3,
+    "last_listen_timestamp": 110,
+    "last_timestamp_outside_reported_end": true,
+    "now": 110,
+    "reported_last_bucket_end": 109,
+    "start": 100
+  },
+  "method": "TimeframeToTimeRange real; summary daycount and interest labels reproduced from source"
+}

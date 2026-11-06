@@ -3,6 +3,7 @@ package summary
 import (
 	"context"
 	"fmt"
+	"time"
 
 	"github.com/gabehf/koito/internal/db"
 	"github.com/gabehf/koito/internal/models"
@@ -10,6 +11,8 @@ import (
 
 type Summary struct {
 	Title            string                          `json:"title,omitempty"`
+	IntervalFrom     time.Time                       `json:"-"`
+	IntervalTo       time.Time                       `json:"-"`
 	TopArtists       []db.RankedItem[*models.Artist] `json:"top_artists"` // ListenCount and TimeListened are overriden with stats from timeframe
 	TopAlbums        []db.RankedItem[*models.Album]  `json:"top_albums"`  // ListenCount and TimeListened are overriden with stats from timeframe
 	TopTracks        []db.RankedItem[*models.Track]  `json:"top_tracks"`  // ListenCount and TimeListened are overriden with stats from timeframe
@@ -37,8 +40,12 @@ func GenerateSummary(ctx context.Context, store summaryStore, userId int32, time
 		return nil, fmt.Errorf("profile required")
 	}
 	ctx = db.WithProfile(ctx, userId)
+	timeframe, daycount, err := resolveInterval(ctx, store, timeframe, time.Now())
+	if err != nil {
+		return nil, fmt.Errorf("GenerateSummary: %w", err)
+	}
 
-	summary = new(Summary)
+	summary = &Summary{Title: title, IntervalFrom: timeframe.From, IntervalTo: timeframe.To}
 
 	topArtists, err := store.GetTopArtistsPaginated(ctx, db.GetItemsOpts{Page: 1, Limit: 5, Timeframe: timeframe})
 	if err != nil {
@@ -97,19 +104,12 @@ func GenerateSummary(ctx context.Context, store summaryStore, userId int32, time
 		summary.TopTracks[i].Item.ListenCount = listens
 	}
 
-	t1, t2 := db.TimeframeToTimeRange(timeframe)
-	daycount := int(t2.Sub(t1).Hours() / 24)
-	// bandaid
-	if daycount == 0 {
-		daycount = 1
-	}
-
 	tmp, err := store.CountTimeListened(ctx, timeframe)
 	if err != nil {
 		return nil, fmt.Errorf("GenerateSummary: %w", err)
 	}
 	summary.MinutesListened = int(tmp) / 60
-	summary.AvgMinutesPerDay = summary.MinutesListened / daycount
+	summary.AvgMinutesPerDay = int(int64(summary.MinutesListened) / daycount)
 	tmp, err = store.CountListens(ctx, timeframe)
 	if err != nil {
 		return nil, fmt.Errorf("GenerateSummary: %w", err)

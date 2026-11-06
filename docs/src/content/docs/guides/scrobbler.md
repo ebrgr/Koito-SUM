@@ -19,6 +19,8 @@ Configure the player with the base URL `{your_koito_address}/apis/listenbrainz/1
 and that person's Koito API key as its ListenBrainz token. The submission endpoint
 is `/apis/listenbrainz/1/submit-listens`; requests use
 `Authorization: Token YOUR_KEY`. The key determines the destination profile.
+Each request is limited to 1,000 listens and a 16 MiB HTTP body. Split larger
+batches into smaller requests; oversized bodies receive HTTP 413.
 
 Listeners browse public profiles without signing in. The root `/` shows profile
 selection; `/<slug>` opens a particular profile. See [Listening profiles](/guides/profiles)

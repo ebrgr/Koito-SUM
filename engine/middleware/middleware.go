@@ -67,14 +67,7 @@ func Logger(baseLogger *zerolog.Logger) func(next http.Handler) http.Handler {
 
 			loggerCtx := baseLogger.With().Str("request_id", reqID)
 
-			for key, values := range r.URL.Query() {
-				if strings.Contains(strings.ToLower(key), "password") {
-					continue
-				}
-				if len(values) > 0 {
-					loggerCtx = loggerCtx.Str(fmt.Sprintf("query.%s", key), values[0])
-				}
-			}
+			// Query keys and values are untrusted and may contain credentials or nested URLs.
 
 			l := loggerCtx.Logger()
 

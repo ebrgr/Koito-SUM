@@ -1,10 +1,10 @@
 package engine
 
 import (
-	"mime"
+	"fmt"
+	"github.com/gabehf/koito/internal/adminui"
+	"github.com/gabehf/koito/internal/webui"
 	"net/http"
-	"os"
-	"path/filepath"
 	"strings"
 	"sync/atomic"
 	"time"
@@ -20,6 +20,7 @@ import (
 	"github.com/go-chi/httprate"
 )
 
+// bindRoutes composes Go documents, actions and JSON routes.
 func bindRoutes(
 	r *chi.Mux,
 	ready *atomic.Bool,
@@ -37,6 +38,14 @@ func bindRoutes(
 	r.With(chimiddleware.RequestSize(5<<20)).
 		Get("/image/{image_id}/{filename}", handlers.ImageHandler(db))
 
+	// The same global limiter instance counts HTML and JSON login attempts together.
+	loginLimit := func(h http.Handler) http.Handler { return h }
+	if !cfg.RateLimitDisabled() {
+		loginLimit = httprate.Limit(10, time.Minute, httprate.WithLimitHandler(func(w http.ResponseWriter, r *http.Request) {
+			w.Header().Set("Cache-Control", "no-store")
+			http.Error(w, `{"error":"too many requests"}`, http.StatusTooManyRequests)
+		}))
+	}
 	r.Route("/apis/web/v1", func(r chi.Router) {
 		r.Use(middleware.SameOrigin)
 		r.Get("/config", handlers.GetCfgHandler())
@@ -57,7 +66,7 @@ func bindRoutes(
 				r.Get("/export", handlers.ExportHandler(db))
 				r.Post("/import", profileImportHandler(db, mbz))
 				r.Get("/relay", handlers.GetProfileRelayHandler(db))
-				r.Post("/relay/test", handlers.TestProfileRelayHandler())
+				r.Post("/relay/test", handlers.TestProfileRelayHandler(db))
 				r.Put("/relay", handlers.SetProfileRelayHandler(db))
 				r.Delete("/relay", handlers.SetProfileRelayHandler(db))
 				r.Post("/listens", handlers.SubmitListenWithIDHandler(db))
@@ -75,17 +84,7 @@ func bindRoutes(
 		})
 
 		r.Post("/logout", handlers.LogoutHandler(db))
-		if !cfg.RateLimitDisabled() {
-			r.With(httprate.Limit(
-				10,
-				time.Minute,
-				httprate.WithLimitHandler(func(w http.ResponseWriter, r *http.Request) {
-					http.Error(w, `{"error":"too many requests"}`, http.StatusTooManyRequests)
-				}),
-			)).Post("/login", handlers.LoginHandler(db))
-		} else {
-			r.Post("/login", handlers.LoginHandler(db))
-		}
+		r.With(loginLimit).Post("/login", handlers.LoginHandler(db))
 
 		r.Get("/health", func(w http.ResponseWriter, r *http.Request) {
 			if !ready.Load() {
@@ -153,55 +152,48 @@ func bindRoutes(
 			Get("/validate-token", handlers.LbzValidateTokenHandler())
 	})
 
-	// serve react client
-	workDir, _ := os.Getwd()
-	filesDir := http.Dir(filepath.Join(workDir, "client/build/client"))
-	fileServer(r, "/", filesDir)
-
-	// serve client public files
-	filesDir = http.Dir(filepath.Join(workDir, "client/public"))
-	publicServer(r, "/public", filesDir)
-}
-
-func fileServer(r chi.Router, path string, root http.FileSystem) {
-	if strings.ContainsAny(path, "{}*") {
-		panic("FileServer does not permit any URL parameters.")
+	// Serve Go documents and bundled assets independently of the working directory.
+	var pages *webui.Pages
+	var administration *adminui.Handler
+	{
+		var err error
+		pages, err = webui.NewHandler(db, webui.Options{DefaultTheme: cfg.DefaultTheme(), ForcedTimezone: cfg.ForceTZ() != nil})
+		if err != nil {
+			panic(fmt.Errorf("initialize Go pages: %w", err))
+		}
+		adminStore, ok := db.(adminui.Store)
+		if !ok {
+			panic("Go administration requires result-aware SQLite store")
+		}
+		administration, err = adminui.New(adminStore, adminui.Options{RequireSubmissionToken: true, MusicBrainz: mbz, LoginMiddleware: loginLimit, DisableRateLimit: cfg.RateLimitDisabled(), DefaultTheme: cfg.DefaultTheme()})
+		if err != nil {
+			panic(fmt.Errorf("initialize Go administration: %w", err))
+		}
+		r.Post("/admin/*", administration.ServeHTTP)
+		r.Post("/{slug}/manage/{kind}/{id}/{action}", administration.ServeHTTP)
+		r.Handle("/web-assets/*", http.StripPrefix("/web-assets", webui.Assets()))
+		r.Handle("/favicon.svg", webui.Assets())
+		goPageServer(r, pages, administration)
 	}
 
-	fs := http.FileServer(root)
+	publicServer(r, "/public", webui.PublicFiles())
+}
 
-	r.Get(path+"*", func(w http.ResponseWriter, r *http.Request) {
-		filePath := filepath.Join("client/build/client", strings.TrimPrefix(r.URL.Path, path))
-
-		if _, err := os.Stat(filePath); os.IsNotExist(err) {
-			w.Header().Set("Cache-Control", "no-cache, no-store, must-revalidate")
-			http.ServeFile(w, r, filepath.Join("client/build/client", "index.html"))
+// goPageServer routes Go documents and returns 404 for paths outside their scope.
+func goPageServer(r chi.Router, pages *webui.Pages, administration *adminui.Handler) {
+	r.Get("/*", func(w http.ResponseWriter, req *http.Request) {
+		if adminui.IsPage(req.URL.Path) || adminui.IsAction(req.URL.Path) {
+			administration.ServeHTTP(w, req)
 			return
 		}
-
-		ext := strings.ToLower(filepath.Ext(filePath))
-		switch ext {
-		case ".js", ".css", ".woff", ".woff2", ".ttf", ".eot",
-			".png", ".jpg", ".jpeg", ".gif", ".webp", ".svg", ".ico":
-			w.Header().Set("Cache-Control", "public, max-age=31536000, immutable")
-		default:
-			w.Header().Set("Cache-Control", "no-cache")
+		if pages.RedirectLegacy(w, req) {
+			return
 		}
-
-		// Serve pre-compressed file if the client accepts gzip and it exists
-		if strings.Contains(r.Header.Get("Accept-Encoding"), "gzip") {
-			gzPath := filePath + ".gz"
-			if _, err := os.Stat(gzPath); err == nil {
-				w.Header().Set("Content-Encoding", "gzip")
-				w.Header().Set("Vary", "Accept-Encoding")
-				// Set the correct Content-Type for the original file, not .gz
-				w.Header().Set("Content-Type", mime.TypeByExtension(ext))
-				http.ServeFile(w, r, gzPath)
-				return
-			}
+		if webui.IsPage(req.URL.Path) {
+			pages.ServeHTTP(w, req)
+			return
 		}
-
-		fs.ServeHTTP(w, r)
+		http.NotFound(w, req)
 	})
 }
 

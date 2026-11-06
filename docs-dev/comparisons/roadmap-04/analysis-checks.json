@@ -1,0 +1,20 @@
+{
+  "album_merge_single_connection": {
+    "after_listens": 4,
+    "before_listens": 4,
+    "elapsed_ms": 251,
+    "error": "MergeAlbums: fetch from artists: context deadline exceeded",
+    "from": 1,
+    "to": 2
+  },
+  "artist_self_merge": {
+    "after_listens": 2,
+    "before_listens": 4,
+    "error": "\u003cnil\u003e",
+    "from": 1,
+    "remaining_artists": 1,
+    "to": 1
+  },
+  "database": "SQLite v3 in memory; no production database opened",
+  "date": "2026-11-05"
+}

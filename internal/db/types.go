@@ -52,6 +52,7 @@ type ExportItem struct {
 
 type InterestBucket struct {
 	BucketStart time.Time `json:"bucket_start"`
+	// Exclusive, except for the final bucket, whose end is inclusive.
 	BucketEnd   time.Time `json:"bucket_end"`
 	ListenCount int64     `json:"listen_count"`
 }

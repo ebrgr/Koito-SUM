@@ -8,6 +8,7 @@ import (
 type item struct {
 	value     interface{}
 	expiresAt time.Time
+	version   uint64
 }
 
 type InMemoryStore struct {
@@ -15,6 +16,7 @@ type InMemoryStore struct {
 	defaultExpiration time.Duration
 	mu                sync.RWMutex
 	stopJanitor       chan struct{}
+	nextVersion       uint64
 }
 
 var Store *InMemoryStore
@@ -35,6 +37,7 @@ func NewStore(defaultExpiration time.Duration) *InMemoryStore {
 	return s
 }
 
+// Set assigns a new store-wide version even when the value is unchanged.
 func (s *InMemoryStore) Set(key string, value interface{}, expiration ...time.Duration) {
 	s.mu.Lock()
 	defer s.mu.Unlock()
@@ -49,27 +52,50 @@ func (s *InMemoryStore) Set(key string, value interface{}, expiration ...time.Du
 		expiresAt = time.Now().Add(exp)
 	}
 
+	s.nextVersion++
+	if s.nextVersion == 0 {
+		panic("memkv version exhausted")
+	}
 	s.data[key] = item{
 		value:     value,
 		expiresAt: expiresAt,
+		version:   s.nextVersion,
 	}
 }
 
+// Get reads a live value and expires old entries atomically.
 func (s *InMemoryStore) Get(key string) (interface{}, bool) {
-	s.mu.RLock()
+	value, _, ok := s.GetVersioned(key)
+	return value, ok
+}
+
+// GetVersioned identifies the exact observed entry for conditional deletion.
+func (s *InMemoryStore) GetVersioned(key string) (interface{}, uint64, bool) {
+	s.mu.Lock()
+	defer s.mu.Unlock()
 	it, found := s.data[key]
-	s.mu.RUnlock()
 
 	if !found {
-		return nil, false
+		return nil, 0, false
 	}
 
 	if !it.expiresAt.IsZero() && time.Now().After(it.expiresAt) {
-		s.Delete(key)
-		return nil, false
+		delete(s.data, key)
+		return nil, 0, false
 	}
 
-	return it.value, true
+	return it.value, it.version, true
+}
+
+// DeleteVersion removes only the observed entry, never a later replacement.
+func (s *InMemoryStore) DeleteVersion(key string, version uint64) bool {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	if it, ok := s.data[key]; !ok || version == 0 || it.version != version {
+		return false
+	}
+	delete(s.data, key)
+	return true
 }
 
 func (s *InMemoryStore) Delete(key string) {

@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"sort"
 	"time"
 
 	"github.com/gabehf/koito/internal/db"
@@ -13,9 +14,10 @@ import (
 // entire listen history. The PG implementation used generate_series + EXTRACT(EPOCH);
 // here we fetch all timestamps in Go and do the bucketing in memory.
 func (s *Sqlite) GetInterest(ctx context.Context, opts db.GetInterestOpts) ([]db.InterestBucket, error) {
-	if opts.Buckets == 0 {
-		return nil, errors.New("GetInterest: bucket count must be provided")
+	if err := db.ValidateInterestBuckets(opts.Buckets); err != nil {
+		return nil, err
 	}
+	now := time.Now().Unix()
 
 	var query string
 	var arg any
@@ -25,25 +27,25 @@ func (s *Sqlite) GetInterest(ctx context.Context, opts db.GetInterestOpts) ([]db
 			SELECT l.listened_at FROM listens l
 			JOIN tracks t ON t.id = l.track_id
 			JOIN artist_tracks at2 ON at2.track_id = t.id
-			WHERE at2.artist_id = ?
+			WHERE at2.artist_id = ? AND l.listened_at <= ?
 			ORDER BY l.listened_at`
 		arg = opts.ArtistID
 	case opts.AlbumID != 0:
 		query = `
 			SELECT l.listened_at FROM listens l
 			JOIN tracks t ON t.id = l.track_id
-			WHERE t.release_id = ?
+			WHERE t.release_id = ? AND l.listened_at <= ?
 			ORDER BY l.listened_at`
 		arg = opts.AlbumID
 	case opts.TrackID != 0:
 		query = `
-			SELECT listened_at FROM listens WHERE track_id = ? ORDER BY listened_at`
+			SELECT listened_at FROM listens WHERE track_id = ? AND listened_at <= ? ORDER BY listened_at`
 		arg = opts.TrackID
 	default:
 		return nil, errors.New("GetInterest: artist id, album id, or track id must be provided")
 	}
 
-	rows, err := s.queryContext(ctx, query, arg)
+	rows, err := s.queryContext(ctx, query, arg, now)
 	if err != nil {
 		return nil, fmt.Errorf("GetInterest: query: %w", err)
 	}
@@ -61,49 +63,48 @@ func (s *Sqlite) GetInterest(ctx context.Context, opts db.GetInterestOpts) ([]db
 		return nil, err
 	}
 
-	if len(timestamps) == 0 {
-		// return empty buckets spanning now to now
-		now := time.Now().Unix()
-		buckets := make([]db.InterestBucket, opts.Buckets)
-		for i := range buckets {
-			buckets[i] = db.InterestBucket{
-				BucketStart: time.Unix(now, 0).UTC(),
-				BucketEnd:   time.Unix(now, 0).UTC(),
-				ListenCount: 0,
-			}
-		}
-		return buckets, nil
+	return buildInterestBuckets(ctx, timestamps, opts.Buckets, now)
+}
+
+// Input timestamps are sorted and no later than now. Every interval is half-open
+// [start,end), except the last, which includes now. Repeated boundaries describe
+// empty intervals, so even an instant-only history retains the requested shape.
+func buildInterestBuckets(ctx context.Context, timestamps []int64, count int, now int64) ([]db.InterestBucket, error) {
+	if err := db.ValidateInterestBuckets(count); err != nil {
+		return nil, err
 	}
-
-	start := timestamps[0]
-	end := time.Now().Unix()
-	totalSeconds := end - start
-	n := int64(opts.Buckets)
-
-	// bucket duration in seconds (may be 0 if all listens at the same instant)
-	bucketSize := totalSeconds / n
-	if bucketSize == 0 {
-		bucketSize = 1
+	if err := ctx.Err(); err != nil {
+		return nil, err
 	}
-
-	counts := make([]int64, opts.Buckets)
-	for _, ts := range timestamps {
-		idx := (ts - start) * n / (totalSeconds + 1)
-		if idx >= n {
-			idx = n - 1
-		}
-		counts[idx]++
+	start := now
+	if len(timestamps) > 0 {
+		start = timestamps[0]
 	}
-
-	buckets := make([]db.InterestBucket, opts.Buckets)
+	if start > now {
+		return nil, fmt.Errorf("interest timestamps exceed end")
+	}
+	// Unsigned subtraction and quotient/remainder avoid overflow for ancient
+	// timestamps without multiplying the entire time span by the bucket count.
+	span := uint64(now) - uint64(start)
+	n := uint64(count)
+	boundaries := make([]int64, count+1)
+	for i := range boundaries {
+		k := uint64(i)
+		boundaries[i] = int64(uint64(start) + (span/n)*k + (span%n)*k/n)
+	}
+	buckets := make([]db.InterestBucket, count)
 	for i := range buckets {
-		bucketStart := start + int64(i)*bucketSize
-		bucketEnd := bucketStart + bucketSize
-		buckets[i] = db.InterestBucket{
-			BucketStart: time.Unix(bucketStart, 0).UTC(),
-			BucketEnd:   time.Unix(bucketEnd, 0).UTC(),
-			ListenCount: counts[i],
+		buckets[i] = db.InterestBucket{BucketStart: time.Unix(boundaries[i], 0).UTC(), BucketEnd: time.Unix(boundaries[i+1], 0).UTC()}
+	}
+	for _, stamp := range timestamps {
+		if err := ctx.Err(); err != nil {
+			return nil, err
 		}
+		if stamp < start || stamp > now {
+			return nil, fmt.Errorf("interest timestamp outside interval")
+		}
+		index := sort.Search(count, func(i int) bool { return stamp < boundaries[i+1] || i == count-1 })
+		buckets[index].ListenCount++
 	}
 	return buckets, nil
 }

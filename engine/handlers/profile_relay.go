@@ -1,16 +1,14 @@
 package handlers
 
 import (
-	"encoding/json"
-	"io"
-	"net/http"
-	"net/url"
-	"strings"
-	"time"
-
-	"github.com/gabehf/koito/internal/cfg"
+	"errors"
+	"github.com/gabehf/koito/engine/middleware"
+	"github.com/gabehf/koito/internal/admin"
+	"github.com/gabehf/koito/internal/adminweb"
 	"github.com/gabehf/koito/internal/db"
+	"github.com/gabehf/koito/internal/relay"
 	"github.com/gabehf/koito/internal/utils"
+	"net/http"
 )
 
 type profileRelay struct {
@@ -19,98 +17,77 @@ type profileRelay struct {
 	Token   string `json:"token"`
 }
 
+// decodeProfileRelay retains the JSON size and destination validation contract.
 func decodeProfileRelay(w http.ResponseWriter, r *http.Request) (profileRelay, bool) {
 	r.Body = http.MaxBytesReader(w, r.Body, 8192)
 	body, err := utils.DecodeBody[profileRelay](r)
-	body.URL = strings.TrimRight(strings.TrimSpace(body.URL), "/")
-	body.Token = strings.TrimSpace(body.Token)
-	parsed, parseErr := url.Parse(body.URL)
-	if err != nil || parseErr != nil || parsed.Host == "" || parsed.User != nil ||
-		(parsed.Scheme != "http" && parsed.Scheme != "https") || parsed.RawQuery != "" ||
-		parsed.Fragment != "" || body.Token == "" || strings.ContainsAny(body.Token, "\r\n") {
-		utils.WriteError(w, "valid relay base URL and token required", http.StatusBadRequest)
+	if err != nil {
+		utils.WriteError(w, "valid relay base URL and token required", 400)
+		return profileRelay{}, false
+	}
+	body.URL, body.Token, err = relay.Normalize(body.URL, body.Token)
+	if err != nil {
+		utils.WriteError(w, "valid relay base URL and token required", 400)
 		return profileRelay{}, false
 	}
 	return body, true
 }
 
-// Only mounted behind RequireAdmin: the administrator explicitly edits the token.
+// GetProfileRelayHandler returns secrets only in a no-store admin response.
 func GetProfileRelayHandler(store db.ProfileStore) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Cache-Control", "no-store")
-		url, token, err := store.GetProfileRelay(r.Context(), db.ProfileID(r.Context()))
+		p := middleware.ProfileFromContext(r.Context())
+		url, token, err := admin.Relay(r.Context(), store, middleware.GetUserFromContext(r.Context()), p.ID, p.Slug)
 		if err != nil {
-			utils.WriteError(w, "failed to load relay", 500)
+			utils.WriteError(w, adminweb.PublicError(err), adminweb.ErrorStatus(err))
 			return
 		}
 		utils.WriteJSON(w, 200, profileRelay{Enabled: url != "" && token != "", URL: url, Token: token})
 	}
 }
 
+// SetProfileRelayHandler shares profile scope and normalization with HTML.
 func SetProfileRelayHandler(store db.ProfileStore) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		id := db.ProfileID(r.Context())
+		p := middleware.ProfileFromContext(r.Context())
+		user := middleware.GetUserFromContext(r.Context())
+		var err error
 		if r.Method == "DELETE" {
-			if err := store.SetProfileRelay(r.Context(), id, "", ""); err != nil {
-				utils.WriteError(w, "failed to remove relay", 500)
+			err = admin.RemoveRelay(r.Context(), store, user, p.ID, p.Slug)
+		} else {
+			body, ok := decodeProfileRelay(w, r)
+			if !ok {
 				return
 			}
-			w.WriteHeader(204)
-			return
+			err = admin.SaveRelay(r.Context(), store, user, p.ID, p.Slug, body.URL, body.Token)
 		}
-		body, ok := decodeProfileRelay(w, r)
-		if !ok {
-			return
-		}
-		if err := store.SetProfileRelay(r.Context(), id, body.URL, body.Token); err != nil {
-			utils.WriteError(w, "failed to configure relay", 500)
+		if err != nil {
+			utils.WriteError(w, adminweb.PublicError(err), adminweb.ErrorStatus(err))
 			return
 		}
 		w.WriteHeader(204)
 	}
 }
 
-// Validate the draft credentials without saving them or submitting a listen.
-func TestProfileRelayHandler() http.HandlerFunc {
+// TestProfileRelayHandler uses the same bounded network policy as actual forwarding.
+func TestProfileRelayHandler(store db.ProfileStore) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Cache-Control", "no-store")
 		body, ok := decodeProfileRelay(w, r)
 		if !ok {
 			return
 		}
-		req, err := http.NewRequestWithContext(r.Context(), "GET", body.URL+"/validate-token", nil)
+		p := middleware.ProfileFromContext(r.Context())
+		name, err := admin.TestRelay(r.Context(), store, middleware.GetUserFromContext(r.Context()), p.ID, p.Slug, body.URL, body.Token, relay.Client{})
 		if err != nil {
-			utils.WriteError(w, "invalid relay URL", 400)
+			if errors.Is(err, relay.ErrUpstream) {
+				utils.WriteError(w, "relay validation unavailable", 502)
+			} else {
+				utils.WriteError(w, adminweb.PublicError(err), adminweb.ErrorStatus(err))
+			}
 			return
 		}
-		req.Header.Set("Authorization", "Token "+body.Token)
-		req.Header.Set("Accept", "application/json")
-		req.Header.Set("User-Agent", cfg.UserAgent())
-		client := &http.Client{Timeout: 10 * time.Second, CheckRedirect: func(_ *http.Request, _ []*http.Request) error {
-			return http.ErrUseLastResponse
-		}}
-		resp, err := client.Do(req)
-		if err != nil {
-			utils.WriteError(w, "could not connect to relay (check the URL, network and TLS certificate)", 502)
-			return
-		}
-		defer resp.Body.Close()
-		var result struct {
-			Valid    bool   `json:"valid"`
-			UserName string `json:"user_name"`
-		}
-		if resp.StatusCode != 200 {
-			utils.WriteError(w, "relay rejected validation; check the base URL and token (redirects are not followed)", 502)
-			return
-		}
-		if err := json.NewDecoder(io.LimitReader(resp.Body, 64<<10)).Decode(&result); err != nil {
-			utils.WriteError(w, "relay returned an invalid validation response", 502)
-			return
-		}
-		if !result.Valid {
-			utils.WriteError(w, "relay token is invalid", 400)
-			return
-		}
-		utils.WriteJSON(w, 200, result)
+		utils.WriteJSON(w, 200, map[string]any{"valid": true, "user_name": name})
 	}
 }

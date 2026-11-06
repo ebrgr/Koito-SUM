@@ -130,6 +130,10 @@ func TestProfileAvatarLifecycle(t *testing.T) {
 	prefix := "/apis/web/v1/profiles/second"
 	require.Equal(t, 401, a.upload(t, "PUT", prefix+"/avatar", nil, "image", "photo.png", pngData.Bytes(), false).Code)
 	require.Equal(t, 400, a.upload(t, "PUT", prefix+"/avatar", nil, "image", "fake.png", []byte("not an image"), true).Code)
+	// The API reports the supported image formats for rejected animation.
+	unsupported := a.upload(t, "PUT", prefix+"/avatar", nil, "image", "animated.gif", []byte("GIF89a\x01\x00\x01\x00\x00\x00\x00"), true)
+	require.Equal(t, 400, unsupported.Code)
+	require.Contains(t, unsupported.Body.String(), "JPEG, PNG or static WebP")
 	require.Equal(t, 400, a.upload(t, "PUT", prefix+"/avatar", map[string]string{"icon": "invalid"}, "", "", nil, true).Code)
 	w := a.upload(t, "PUT", prefix+"/avatar", map[string]string{"icon": "music"}, "image", "photo.png", pngData.Bytes(), true)
 	require.Equal(t, 200, w.Code, w.Body.String())
@@ -144,6 +148,7 @@ func TestProfileAvatarLifecycle(t *testing.T) {
 	imageResponse := httptest.NewRecorder()
 	a.router.ServeHTTP(imageResponse, imageRequest)
 	require.Equal(t, 200, imageResponse.Code)
+	require.Equal(t, "image/webp", imageResponse.Header().Get("Content-Type"))
 	// Keep a reference from another profile: removal cannot delete a shared file.
 	require.NoError(t, a.store.SetProfileAvatar(context.Background(), 3, p.AvatarImageID, nil))
 	require.Equal(t, 200, a.request("DELETE", prefix+"/avatar", "", "", true).Code)
@@ -182,7 +187,9 @@ func TestProfileImportUpload(t *testing.T) {
 	w = a.upload(t, "POST", prefix, map[string]string{"format": "koito"}, "file", "bad.json", []byte(`{"version":"1","listens":[{"artists":[]}]}`), true)
 	require.Equal(t, 400, w.Code, w.Body.String())
 	pending, err := os.ReadDir(filepath.Join(cfg.ConfigDir(), "import", "2"))
-	require.NoError(t, err)
+	if !os.IsNotExist(err) {
+		require.NoError(t, err)
+	}
 	for _, entry := range pending {
 		require.False(t, strings.HasSuffix(entry.Name(), "-koito.json"))
 	}
@@ -209,7 +216,11 @@ func TestAdminAccountChangesKeepListeningProfile(t *testing.T) {
 	require.Equal(t, 401, a.request("POST", prefix+"/login", `{"username":"administrator","password":"test-password"}`, "", false).Code)
 	require.Equal(t, 204, a.request("PATCH", prefix+"/user", `{"password":"changed-password"}`, "", true).Code)
 	require.Equal(t, 401, a.request("POST", prefix+"/login", `{"username":"renamed-admin","password":"test-password"}`, "", false).Code)
-	require.Equal(t, 204, a.request("POST", prefix+"/login", `{"username":"renamed-admin","password":"changed-password"}`, "", false).Code)
+	// The old session was revoked; subsequent management uses a fresh login cookie.
+	require.Equal(t, 401, a.request("GET", prefix+"/user", "", "", true).Code)
+	fresh := a.request("POST", prefix+"/login", `{"username":"renamed-admin","password":"changed-password"}`, "", false)
+	require.Equal(t, 204, fresh.Code)
+	a.cookie = fresh.Result().Cookies()[0].Value
 	require.Equal(t, before, getJSON(t, a, prefix+"/profiles/default"))
 	require.Equal(t, 200, a.request("GET", "/apis/listenbrainz/1/validate-token", "", "first-key", false).Code)
 	// Rename the listening identity independently of the login name.

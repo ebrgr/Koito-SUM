@@ -3,14 +3,16 @@ package handlers
 import (
 	"net/http"
 
+	"github.com/gabehf/koito/engine/middleware"
+	"github.com/gabehf/koito/internal/admin"
+	"github.com/gabehf/koito/internal/adminweb"
 	"github.com/gabehf/koito/internal/db"
 	"github.com/gabehf/koito/internal/logger"
 	"github.com/gabehf/koito/internal/utils"
-	"github.com/google/uuid"
 )
 
 // SetPrimaryAlbumAliasHandler sets the primary alias for a given album.
-func SetPrimaryAlbumAliasHandler(store db.AlbumStore) http.HandlerFunc {
+func SetPrimaryAlbumAliasHandler(store db.DB) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		ctx := r.Context()
 		l := logger.FromContext(ctx)
@@ -31,9 +33,9 @@ func SetPrimaryAlbumAliasHandler(store db.AlbumStore) http.HandlerFunc {
 			return
 		}
 
-		if err = store.SetPrimaryAlbumAlias(ctx, albumID, body.Alias); err != nil {
+		if err = admin.EditAlias(ctx, store, middleware.GetUserFromContext(ctx), "album", albumID, "primary", body.Alias); err != nil {
 			l.Error().Err(err).Msg("SetPrimaryAlbumAliasHandler: Failed to set album primary alias")
-			utils.WriteError(w, "failed to set primary alias", http.StatusInternalServerError)
+			utils.WriteError(w, adminweb.PublicError(err), adminweb.ErrorStatus(err))
 			return
 		}
 
@@ -42,7 +44,7 @@ func SetPrimaryAlbumAliasHandler(store db.AlbumStore) http.HandlerFunc {
 }
 
 // SetPrimaryAlbumArtistHandler sets whether a given artist is the primary artist for an album.
-func SetPrimaryAlbumArtistHandler(store db.ArtistStore) http.HandlerFunc {
+func SetPrimaryAlbumArtistHandler(store db.DB) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		ctx := r.Context()
 		l := logger.FromContext(ctx)
@@ -70,9 +72,9 @@ func SetPrimaryAlbumArtistHandler(store db.ArtistStore) http.HandlerFunc {
 			return
 		}
 
-		if err = store.SetPrimaryAlbumArtist(ctx, albumID, artistID, *body.IsPrimary); err != nil {
+		if err = admin.SetMediaArtistPrimary(ctx, store, middleware.GetUserFromContext(ctx), "album", albumID, artistID, *body.IsPrimary); err != nil {
 			l.Error().Err(err).Msg("SetPrimaryAlbumArtistHandler: Failed to set primary album artist")
-			utils.WriteError(w, "failed to set primary album artist", http.StatusInternalServerError)
+			utils.WriteError(w, adminweb.PublicError(err), adminweb.ErrorStatus(err))
 			return
 		}
 
@@ -81,7 +83,7 @@ func SetPrimaryAlbumArtistHandler(store db.ArtistStore) http.HandlerFunc {
 }
 
 // UpdateAlbumHandler updates a given album.
-func UpdateAlbumHandler(store db.AlbumStore) http.HandlerFunc {
+func UpdateAlbumHandler(store db.DB) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		ctx := r.Context()
 		l := logger.FromContext(ctx)
@@ -109,26 +111,17 @@ func UpdateAlbumHandler(store db.AlbumStore) http.HandlerFunc {
 			return
 		}
 
-		updateOpts := db.UpdateAlbumOpts{ID: albumID}
-
+		raw := ""
 		if body.MBID != nil {
-			mbid, err := uuid.Parse(*body.MBID)
-			if err != nil {
-				l.Debug().Msg("UpdateAlbumHandler: Provided MusicBrainz ID is invalid")
-				utils.WriteError(w, "provided musicbrainz id is invalid", http.StatusBadRequest)
+			raw = *body.MBID
+			if raw == "" {
+				utils.WriteError(w, "provided musicbrainz id is invalid", 400)
 				return
 			}
-			updateOpts.MusicBrainzID = mbid
 		}
-
-		if body.IsVariousArtists != nil {
-			updateOpts.VariousArtistsUpdate = true
-			updateOpts.VariousArtistsValue = *body.IsVariousArtists
-		}
-
-		if err = store.UpdateAlbum(ctx, updateOpts); err != nil {
-			l.Error().Err(err).Msg("UpdateAlbumHandler: Failed to update album")
-			utils.WriteError(w, "failed to update album", http.StatusInternalServerError)
+		if err = admin.UpdateMediaMetadata(ctx, store, middleware.GetUserFromContext(ctx), "album", albumID, raw, body.IsVariousArtists); err != nil {
+			l.Error().Err(err).Msg("UpdateAlbumHandler: Failed to update metadata")
+			utils.WriteError(w, adminweb.PublicError(err), adminweb.ErrorStatus(err))
 			return
 		}
 

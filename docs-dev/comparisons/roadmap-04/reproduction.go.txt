@@ -1,0 +1,40 @@
+package main
+
+import (
+ "context"
+ "encoding/json"
+ "fmt"
+ "os"
+ "time"
+
+ "github.com/gabehf/koito/internal/cfg"
+ "github.com/gabehf/koito/internal/db/sqlite"
+)
+
+// fixture uses only independent, disposable SQLite v3 in-memory databases.
+func fixture() *sqlite.Sqlite {
+ s,e:=sqlite.NewInMemory(); if e!=nil {panic(e)}
+ for _,q:=range []string{
+  `INSERT INTO listening_profiles(id,slug,display_name,created_at) VALUES(1,'alpha','Alpha',1),(2,'beta','Beta',1)`,
+  `INSERT INTO artists(id) VALUES(1),(2)`,
+  `INSERT INTO artist_aliases VALUES(1,'Artist One','User',1),(2,'Artist Two','User',1)`,
+  `INSERT INTO releases(id,various_artists) VALUES(1,0),(2,0)`,
+  `INSERT INTO release_aliases VALUES(1,'Album One','User',1),(2,'Album Two','User',1)`,
+  `INSERT INTO artist_releases VALUES(1,1,1),(2,2,1)`,
+  `INSERT INTO tracks(id,release_id,duration) VALUES(1,1,180),(2,2,120)`,
+  `INSERT INTO track_aliases VALUES(1,'Track One','User',1),(2,'Track Two','User',1)`,
+  `INSERT INTO artist_tracks VALUES(1,1,1),(2,2,1)`,
+  `INSERT INTO listens(profile_id,track_id,listened_at) VALUES(1,1,100),(2,1,100),(1,2,101),(2,2,101)`,
+ } {if e:=s.Exec(q);e!=nil {panic(e)}}
+ return s
+}
+func count(s *sqlite.Sqlite, table string) int { n,e:=s.Count("SELECT COUNT(*) FROM "+table);if e!=nil {panic(e)};return n }
+func main(){
+ if e:=cfg.Load(func(string)string{return ""},"study");e!=nil {panic(e)}
+ results:=map[string]any{"date":"2026-11-05","database":"SQLite v3 in memory; no production database opened"}
+ s:=fixture(); before:=count(s,"listens");e:=s.MergeArtists(context.Background(),1,1,false)
+ results["artist_self_merge"]=map[string]any{"from":1,"to":1,"error":fmt.Sprint(e),"before_listens":before,"after_listens":count(s,"listens"),"remaining_artists":count(s,"artists")};s.Close(context.Background())
+ s=fixture();ctx,cancel:=context.WithTimeout(context.Background(),250*time.Millisecond);start:=time.Now();e=s.MergeAlbums(ctx,1,2,false);cancel()
+ results["album_merge_single_connection"]=map[string]any{"from":1,"to":2,"error":fmt.Sprint(e),"elapsed_ms":time.Since(start).Milliseconds(),"before_listens":4,"after_listens":count(s,"listens")};s.Close(context.Background())
+ enc:=json.NewEncoder(os.Stdout);enc.SetIndent("","  ");if e:=enc.Encode(results);e!=nil {panic(e)}
+}

@@ -11,6 +11,7 @@ import (
 	"github.com/gabehf/koito/internal/db"
 )
 
+// GetListenActivity counts original seconds in each requested local civil day.
 func (s *Sqlite) GetListenActivity(ctx context.Context, opts db.ListenActivityOpts) ([]db.ListenActivityItem, error) {
 	if opts.Month != 0 && opts.Year == 0 {
 		return nil, errors.New("GetListenActivity: year must be specified with month")
@@ -22,6 +23,9 @@ func (s *Sqlite) GetListenActivity(ctx context.Context, opts db.ListenActivityOp
 	t1, t2 := db.ListenActivityOptsToTimes(opts)
 
 	loc := opts.Timezone
+	if loc == nil {
+		loc = time.UTC
+	}
 
 	var rows *sql.Rows
 	var err error
@@ -29,35 +33,35 @@ func (s *Sqlite) GetListenActivity(ctx context.Context, opts db.ListenActivityOp
 	switch {
 	case opts.ArtistID > 0:
 		rows, err = s.queryContext(ctx, `
-			SELECT (l.listened_at / 3600) * 3600 AS hour_bucket, COUNT(*) AS listen_count
+			SELECT l.listened_at AS hour_bucket, COUNT(*) AS listen_count
 			FROM listens l
 			JOIN artist_tracks at2 ON l.track_id = at2.track_id
-			WHERE l.listened_at >= ? AND l.listened_at < ? AND at2.artist_id = ?
+			WHERE l.listened_at >= ? AND l.listened_at <= ? AND at2.artist_id = ?
 			GROUP BY hour_bucket`,
 			t1.Unix(), t2.Unix(), opts.ArtistID,
 		)
 	case opts.AlbumID > 0:
 		rows, err = s.queryContext(ctx, `
-			SELECT (l.listened_at / 3600) * 3600 AS hour_bucket, COUNT(*) AS listen_count
+			SELECT l.listened_at AS hour_bucket, COUNT(*) AS listen_count
 			FROM listens l
 			JOIN tracks t ON l.track_id = t.id
-			WHERE l.listened_at >= ? AND l.listened_at < ? AND t.release_id = ?
+			WHERE l.listened_at >= ? AND l.listened_at <= ? AND t.release_id = ?
 			GROUP BY hour_bucket`,
 			t1.Unix(), t2.Unix(), opts.AlbumID,
 		)
 	case opts.TrackID > 0:
 		rows, err = s.queryContext(ctx, `
-			SELECT (listened_at / 3600) * 3600 AS hour_bucket, COUNT(*) AS listen_count
+			SELECT listened_at AS hour_bucket, COUNT(*) AS listen_count
 			FROM listens
-			WHERE listened_at >= ? AND listened_at < ? AND track_id = ?
+			WHERE listened_at >= ? AND listened_at <= ? AND track_id = ?
 			GROUP BY hour_bucket`,
 			t1.Unix(), t2.Unix(), opts.TrackID,
 		)
 	default:
 		rows, err = s.queryContext(ctx, `
-			SELECT (listened_at / 3600) * 3600 AS hour_bucket, COUNT(*) AS listen_count
+			SELECT listened_at AS hour_bucket, COUNT(*) AS listen_count
 			FROM listens
-			WHERE listened_at >= ? AND listened_at < ?
+			WHERE listened_at >= ? AND listened_at <= ?
 			GROUP BY hour_bucket`,
 			t1.Unix(), t2.Unix(),
 		)
@@ -68,22 +72,23 @@ func (s *Sqlite) GetListenActivity(ctx context.Context, opts db.ListenActivityOp
 	}
 	defer rows.Close()
 
-	countsByDay := make(map[time.Time]int)
+	countsByDay := make(map[time.Time]int64)
+	dayStarts := make(map[time.Time]time.Time)
 
 	for rows.Next() {
 		var hourUnix int64
-		var count int
+		var count int64
 		if err := rows.Scan(&hourUnix, &count); err != nil {
 			return nil, err
 		}
 
-		// Convert the UTC hour block to a Go time object localized to the user's timezone
+		// Group original seconds by local civil date, including fractional offsets.
 		t := time.Unix(hourUnix, 0).In(loc)
-
-		// Strip the hours/minutes/seconds to collapse it into a pure calendar day
-		day := time.Date(t.Year(), t.Month(), t.Day(), 0, 0, 0, 0, loc)
-
+		day := db.CivilDayKey(t)
 		countsByDay[day] += count
+		if _, ok := dayStarts[day]; !ok {
+			dayStarts[day] = db.CivilDayStart(t)
+		}
 	}
 
 	if err := rows.Err(); err != nil {
@@ -94,8 +99,8 @@ func (s *Sqlite) GetListenActivity(ctx context.Context, opts db.ListenActivityOp
 	activity := make([]db.ListenActivityItem, 0, len(countsByDay))
 	for day, count := range countsByDay {
 		activity = append(activity, db.ListenActivityItem{
-			Start:   day,
-			Listens: int64(count),
+			Start:   dayStarts[day],
+			Listens: count,
 		})
 	}
 
@@ -106,14 +111,26 @@ func (s *Sqlite) GetListenActivity(ctx context.Context, opts db.ListenActivityOp
 	return activity, nil
 }
 
+// GetListenStreak calculates consecutive civil dates in the requested timezone.
 func (s *Sqlite) GetListenStreak(ctx context.Context, opts db.ListenActivityOpts) (int, error) {
+	// Honor the response's frozen clock when available.
+	now := opts.Now
+	if now.IsZero() {
+		now = time.Now()
+	}
+	return s.getListenStreakAt(ctx, opts, now)
+}
+
+// getListenStreakAt fixes the clock for a single streak calculation.
+func (s *Sqlite) getListenStreakAt(ctx context.Context, opts db.ListenActivityOpts, now time.Time) (int, error) {
 	loc := opts.Timezone
 	if loc == nil {
 		loc = time.UTC
 	}
 
-	now := time.Now().In(loc)
-	endOfToday := time.Date(now.Year(), now.Month(), now.Day(), 23, 59, 59, 999999999, loc)
+	now = now.In(loc)
+	// The next local day is an exclusive boundary, including repeated late hours.
+	endOfToday := db.CivilDayStart(time.Date(now.Year(), now.Month(), now.Day()+1, 12, 0, 0, 0, loc))
 
 	var rows *sql.Rows
 	var err error
@@ -121,38 +138,38 @@ func (s *Sqlite) GetListenStreak(ctx context.Context, opts db.ListenActivityOpts
 	switch {
 	case opts.ArtistID > 0:
 		rows, err = s.queryContext(ctx, `
-			SELECT (l.listened_at / 3600) * 3600 AS hour_bucket
+			SELECT l.listened_at AS hour_bucket
 			FROM listens l
 			JOIN artist_tracks at2 ON l.track_id = at2.track_id
-			WHERE l.listened_at <= ? AND at2.artist_id = ?
+			WHERE l.listened_at < ? AND at2.artist_id = ?
 			GROUP BY hour_bucket
 			ORDER BY hour_bucket DESC`,
 			endOfToday.Unix(), opts.ArtistID,
 		)
 	case opts.AlbumID > 0:
 		rows, err = s.queryContext(ctx, `
-			SELECT (l.listened_at / 3600) * 3600 AS hour_bucket
+			SELECT l.listened_at AS hour_bucket
 			FROM listens l
 			JOIN tracks t ON l.track_id = t.id
-			WHERE l.listened_at <= ? AND t.release_id = ?
+			WHERE l.listened_at < ? AND t.release_id = ?
 			GROUP BY hour_bucket
 			ORDER BY hour_bucket DESC`,
 			endOfToday.Unix(), opts.AlbumID,
 		)
 	case opts.TrackID > 0:
 		rows, err = s.queryContext(ctx, `
-			SELECT (listened_at / 3600) * 3600 AS hour_bucket
+			SELECT listened_at AS hour_bucket
 			FROM listens
-			WHERE listened_at <= ? AND track_id = ?
+			WHERE listened_at < ? AND track_id = ?
 			GROUP BY hour_bucket
 			ORDER BY hour_bucket DESC`,
 			endOfToday.Unix(), opts.TrackID,
 		)
 	default:
 		rows, err = s.queryContext(ctx, `
-			SELECT (listened_at / 3600) * 3600 AS hour_bucket
+			SELECT listened_at AS hour_bucket
 			FROM listens
-			WHERE listened_at <= ?
+			WHERE listened_at < ?
 			GROUP BY hour_bucket
 			ORDER BY hour_bucket DESC`,
 			endOfToday.Unix(),
@@ -170,7 +187,7 @@ func (s *Sqlite) GetListenStreak(ctx context.Context, opts db.ListenActivityOpts
 			return 0, fmt.Errorf("GetListenStreak: %w", err)
 		}
 		t := time.Unix(hourUnix, 0).In(loc)
-		day := time.Date(t.Year(), t.Month(), t.Day(), 0, 0, 0, 0, loc)
+		day := db.CivilDayKey(t)
 		daySet[day] = struct{}{}
 	}
 	if err := rows.Err(); err != nil {
@@ -189,7 +206,7 @@ func (s *Sqlite) GetListenStreak(ctx context.Context, opts db.ListenActivityOpts
 		return 0, nil
 	}
 
-	today := time.Date(now.Year(), now.Month(), now.Day(), 0, 0, 0, 0, loc)
+	today := db.CivilDayKey(now)
 	yesterday := today.AddDate(0, 0, -1)
 	if days[0].Before(yesterday) {
 		return 0, nil
@@ -208,41 +225,59 @@ func (s *Sqlite) GetListenStreak(ctx context.Context, opts db.ListenActivityOpts
 	return streak, nil
 }
 
+// GetActiveDays counts distinct local civil dates through the end of the current local day.
 func (s *Sqlite) GetActiveDays(ctx context.Context, tz *time.Location) (int, error) {
-
-	now := time.Now()
-	eodUnix := time.Date(now.Year(), now.Month(), now.Day()+1, 0, 0, 0, 0, tz).Unix()
-
-	rows, err := s.queryContext(ctx, `
-		SELECT (listened_at / 86400) * 86400 AS day_bucket,
-       	COUNT(*) AS listen_count
-		FROM listens
-		WHERE listened_at <= ?
-		GROUP BY day_bucket
-		ORDER BY day_bucket DESC`, eodUnix)
-
-	if err != nil && !errors.Is(err, sql.ErrNoRows) {
-		return 0, fmt.Errorf("GetListenStreak: %w", err)
-	}
-	defer rows.Close()
-
-	count := 0
-
-	for rows.Next() {
-		count++
-	}
-
-	return count, nil
+	return s.getActiveDaysAt(ctx, tz, time.Now())
 }
 
+// getActiveDaysAt fixes the clock for a single active-day calculation.
+func (s *Sqlite) getActiveDaysAt(ctx context.Context, tz *time.Location, now time.Time) (int, error) {
+	if tz == nil {
+		tz = time.UTC
+	}
+	now = now.In(tz)
+	// Midnight following today is an exclusive bound, including the last second.
+	end := time.Date(now.Year(), now.Month(), now.Day()+1, 12, 0, 0, 0, tz)
+	end = db.CivilDayStart(end)
+	rows, err := s.queryContext(ctx, `SELECT DISTINCT listened_at FROM listens WHERE listened_at < ?`, end.Unix())
+	if err != nil {
+		return 0, fmt.Errorf("GetActiveDays: %w", err)
+	}
+	defer rows.Close()
+	days := make(map[time.Time]struct{})
+	for rows.Next() {
+		var stamp int64
+		if err := rows.Scan(&stamp); err != nil {
+			return 0, fmt.Errorf("GetActiveDays: %w", err)
+		}
+		days[db.CivilDayKey(time.Unix(stamp, 0).In(tz))] = struct{}{}
+	}
+	if err := rows.Err(); err != nil {
+		return 0, fmt.Errorf("GetActiveDays: %w", err)
+	}
+	return len(days), nil
+}
+
+// GetLongestListenStreak compares civil dates independently of DST transitions.
 func (s *Sqlite) GetLongestListenStreak(ctx context.Context, opts db.ListenActivityOpts) (int, error) {
+	// Honor the caller's frozen clock when available.
+	now := opts.Now
+	if now.IsZero() {
+		now = time.Now()
+	}
+	return s.getLongestListenStreakAt(ctx, opts, now)
+}
+
+// getLongestListenStreakAt fixes the clock for a longest-streak calculation.
+func (s *Sqlite) getLongestListenStreakAt(ctx context.Context, opts db.ListenActivityOpts, now time.Time) (int, error) {
 	loc := opts.Timezone
 	if loc == nil {
 		loc = time.UTC
 	}
 
-	now := time.Now().In(loc)
-	endOfToday := time.Date(now.Year(), now.Month(), now.Day(), 23, 59, 59, 999999999, loc)
+	now = now.In(loc)
+	// The next local day is an exclusive boundary, including repeated late hours.
+	endOfToday := db.CivilDayStart(time.Date(now.Year(), now.Month(), now.Day()+1, 12, 0, 0, 0, loc))
 
 	var rows *sql.Rows
 	var err error
@@ -250,38 +285,38 @@ func (s *Sqlite) GetLongestListenStreak(ctx context.Context, opts db.ListenActiv
 	switch {
 	case opts.ArtistID > 0:
 		rows, err = s.queryContext(ctx, `
-			SELECT (l.listened_at / 3600) * 3600 AS hour_bucket
+			SELECT l.listened_at AS hour_bucket
 			FROM listens l
 			JOIN artist_tracks at2 ON l.track_id = at2.track_id
-			WHERE l.listened_at <= ? AND at2.artist_id = ?
+			WHERE l.listened_at < ? AND at2.artist_id = ?
 			GROUP BY hour_bucket
 			ORDER BY hour_bucket DESC`,
 			endOfToday.Unix(), opts.ArtistID,
 		)
 	case opts.AlbumID > 0:
 		rows, err = s.queryContext(ctx, `
-			SELECT (l.listened_at / 3600) * 3600 AS hour_bucket
+			SELECT l.listened_at AS hour_bucket
 			FROM listens l
 			JOIN tracks t ON l.track_id = t.id
-			WHERE l.listened_at <= ? AND t.release_id = ?
+			WHERE l.listened_at < ? AND t.release_id = ?
 			GROUP BY hour_bucket
 			ORDER BY hour_bucket DESC`,
 			endOfToday.Unix(), opts.AlbumID,
 		)
 	case opts.TrackID > 0:
 		rows, err = s.queryContext(ctx, `
-			SELECT (listened_at / 3600) * 3600 AS hour_bucket
+			SELECT listened_at AS hour_bucket
 			FROM listens
-			WHERE listened_at <= ? AND track_id = ?
+			WHERE listened_at < ? AND track_id = ?
 			GROUP BY hour_bucket
 			ORDER BY hour_bucket DESC`,
 			endOfToday.Unix(), opts.TrackID,
 		)
 	default:
 		rows, err = s.queryContext(ctx, `
-			SELECT (listened_at / 3600) * 3600 AS hour_bucket
+			SELECT listened_at AS hour_bucket
 			FROM listens
-			WHERE listened_at <= ?
+			WHERE listened_at < ?
 			GROUP BY hour_bucket
 			ORDER BY hour_bucket DESC`,
 			endOfToday.Unix(),
@@ -299,7 +334,7 @@ func (s *Sqlite) GetLongestListenStreak(ctx context.Context, opts db.ListenActiv
 			return 0, fmt.Errorf("GetLongestListenStreak: %w", err)
 		}
 		t := time.Unix(hourUnix, 0).In(loc)
-		day := time.Date(t.Year(), t.Month(), t.Day(), 0, 0, 0, 0, loc)
+		day := db.CivilDayKey(t)
 		daySet[day] = struct{}{}
 	}
 	if err := rows.Err(); err != nil {

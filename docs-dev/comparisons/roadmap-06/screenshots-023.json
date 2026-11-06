@@ -1,0 +1,3946 @@
+{
+  "date": "2026-11-05",
+  "fixture": "roadmap06 v1; alpha 7 beta 2 empty 0",
+  "browser": "Chrome 156.0.8078.80",
+  "notes": "Estado atual da árvore local; relógio do servidor real; imagens locais; fontes externas bloqueadas.",
+  "entries": [
+    {
+      "file": "go-profiles-yuu-desktop.jpg",
+      "mode": "go",
+      "case": "profiles",
+      "route": "/",
+      "theme": "yuu",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "fonts": "loaded",
+      "fontFaces": [],
+      "overflow": false,
+      "images": [],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "selecao",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "go-home-yuu-desktop.jpg",
+      "mode": "go",
+      "case": "home",
+      "route": "/alpha?period=all_time",
+      "theme": "yuu",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "fonts": "loaded",
+      "fontFaces": [],
+      "overflow": false,
+      "images": [
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        }
+      ],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "alpha",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "go-track-yuu-desktop.jpg",
+      "mode": "go",
+      "case": "track",
+      "route": "/alpha/track/1",
+      "theme": "yuu",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "fonts": "loaded",
+      "fontFaces": [],
+      "overflow": false,
+      "images": [
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        }
+      ],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "alpha",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "go-rewind-yuu-desktop.jpg",
+      "mode": "go",
+      "case": "rewind",
+      "route": "/alpha/rewind?year=2018&month=11",
+      "theme": "yuu",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "fonts": "loaded",
+      "fontFaces": [],
+      "overflow": false,
+      "images": [
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        }
+      ],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "alpha",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "go-empty-yuu-desktop.jpg",
+      "mode": "go",
+      "case": "empty",
+      "route": "/empty?period=all_time",
+      "theme": "yuu",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "fonts": "loaded",
+      "fontFaces": [],
+      "overflow": false,
+      "images": [],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "empty",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "go-artists-yuu-desktop.jpg",
+      "mode": "go",
+      "case": "artists",
+      "route": "/alpha/chart/top/artists?period=all_time",
+      "theme": "yuu",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "fonts": "loaded",
+      "fontFaces": [],
+      "overflow": false,
+      "images": [
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        }
+      ],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "alpha",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "go-albums-yuu-desktop.jpg",
+      "mode": "go",
+      "case": "albums",
+      "route": "/alpha/chart/top/albums?period=all_time",
+      "theme": "yuu",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "fonts": "loaded",
+      "fontFaces": [],
+      "overflow": false,
+      "images": [
+        {
+          "complete": true,
+          "loaded": true
+        }
+      ],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "alpha",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "go-history-yuu-desktop.jpg",
+      "mode": "go",
+      "case": "history",
+      "route": "/alpha/listens?period=all_time",
+      "theme": "yuu",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "fonts": "loaded",
+      "fontFaces": [],
+      "overflow": false,
+      "images": [
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        }
+      ],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "alpha",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "go-artist-yuu-desktop.jpg",
+      "mode": "go",
+      "case": "artist",
+      "route": "/alpha/artist/1",
+      "theme": "yuu",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "fonts": "loaded",
+      "fontFaces": [],
+      "overflow": false,
+      "images": [
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        }
+      ],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "alpha",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "go-album-yuu-desktop.jpg",
+      "mode": "go",
+      "case": "album",
+      "route": "/alpha/album/1",
+      "theme": "yuu",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "fonts": "loaded",
+      "fontFaces": [],
+      "overflow": false,
+      "images": [
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        }
+      ],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "alpha",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "react-profiles-yuu-desktop.jpg",
+      "mode": "react",
+      "case": "profiles",
+      "route": "/",
+      "theme": "yuu",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "fonts": "loaded",
+      "fontFaces": [],
+      "overflow": false,
+      "images": [],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "selecao",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "react-home-yuu-desktop.jpg",
+      "mode": "react",
+      "case": "home",
+      "route": "/alpha?period=all_time",
+      "theme": "yuu",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "fonts": "loaded",
+      "fontFaces": [],
+      "overflow": false,
+      "images": [
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        }
+      ],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "alpha",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "react-track-yuu-desktop.jpg",
+      "mode": "react",
+      "case": "track",
+      "route": "/alpha/track/1",
+      "theme": "yuu",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "fonts": "loaded",
+      "fontFaces": [],
+      "overflow": false,
+      "images": [
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        }
+      ],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "alpha",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "react-rewind-yuu-desktop.jpg",
+      "mode": "react",
+      "case": "rewind",
+      "route": "/alpha/rewind?year=2018&month=11",
+      "theme": "yuu",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "fonts": "loaded",
+      "fontFaces": [],
+      "overflow": false,
+      "images": [
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        }
+      ],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "alpha",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "react-empty-yuu-desktop.jpg",
+      "mode": "react",
+      "case": "empty",
+      "route": "/empty?period=all_time",
+      "theme": "yuu",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "fonts": "loaded",
+      "fontFaces": [],
+      "overflow": false,
+      "images": [],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "empty",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "react-artists-yuu-desktop.jpg",
+      "mode": "react",
+      "case": "artists",
+      "route": "/alpha/chart/top/artists?period=all_time",
+      "theme": "yuu",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "fonts": "loaded",
+      "fontFaces": [],
+      "overflow": false,
+      "images": [
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        }
+      ],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "alpha",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "react-albums-yuu-desktop.jpg",
+      "mode": "react",
+      "case": "albums",
+      "route": "/alpha/chart/top/albums?period=all_time",
+      "theme": "yuu",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "fonts": "loaded",
+      "fontFaces": [],
+      "overflow": false,
+      "images": [
+        {
+          "complete": true,
+          "loaded": true
+        }
+      ],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "alpha",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "react-history-yuu-desktop.jpg",
+      "mode": "react",
+      "case": "history",
+      "route": "/alpha/listens?period=all_time",
+      "theme": "yuu",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "fonts": "loaded",
+      "fontFaces": [],
+      "overflow": false,
+      "images": [
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        }
+      ],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "alpha",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "react-artist-yuu-desktop.jpg",
+      "mode": "react",
+      "case": "artist",
+      "route": "/alpha/artist/1",
+      "theme": "yuu",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "fonts": "loaded",
+      "fontFaces": [],
+      "overflow": false,
+      "images": [
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        }
+      ],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "alpha",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "react-album-yuu-desktop.jpg",
+      "mode": "react",
+      "case": "album",
+      "route": "/alpha/album/1",
+      "theme": "yuu",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "fonts": "loaded",
+      "fontFaces": [],
+      "overflow": false,
+      "images": [
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        }
+      ],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "alpha",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "go-profiles-yuu-mobile.jpg",
+      "mode": "go",
+      "case": "profiles",
+      "route": "/",
+      "theme": "yuu",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "fonts": "loaded",
+      "fontFaces": [],
+      "overflow": false,
+      "images": [],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "selecao",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "go-home-yuu-mobile.jpg",
+      "mode": "go",
+      "case": "home",
+      "route": "/alpha?period=all_time",
+      "theme": "yuu",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "fonts": "loaded",
+      "fontFaces": [],
+      "overflow": false,
+      "images": [
+        {
+          "complete": true,
+          "loaded": true
+        }
+      ],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "alpha",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "go-track-yuu-mobile.jpg",
+      "mode": "go",
+      "case": "track",
+      "route": "/alpha/track/1",
+      "theme": "yuu",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "fonts": "loaded",
+      "fontFaces": [],
+      "overflow": false,
+      "images": [
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        }
+      ],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "alpha",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "go-rewind-yuu-mobile.jpg",
+      "mode": "go",
+      "case": "rewind",
+      "route": "/alpha/rewind?year=2018&month=11",
+      "theme": "yuu",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "fonts": "loaded",
+      "fontFaces": [],
+      "overflow": false,
+      "images": [],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "alpha",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "go-empty-yuu-mobile.jpg",
+      "mode": "go",
+      "case": "empty",
+      "route": "/empty?period=all_time",
+      "theme": "yuu",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "fonts": "loaded",
+      "fontFaces": [],
+      "overflow": false,
+      "images": [],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "empty",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "go-artists-yuu-mobile.jpg",
+      "mode": "go",
+      "case": "artists",
+      "route": "/alpha/chart/top/artists?period=all_time",
+      "theme": "yuu",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "fonts": "loaded",
+      "fontFaces": [],
+      "overflow": false,
+      "images": [
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        }
+      ],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "alpha",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "go-albums-yuu-mobile.jpg",
+      "mode": "go",
+      "case": "albums",
+      "route": "/alpha/chart/top/albums?period=all_time",
+      "theme": "yuu",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "fonts": "loaded",
+      "fontFaces": [],
+      "overflow": false,
+      "images": [
+        {
+          "complete": true,
+          "loaded": true
+        }
+      ],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "alpha",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "go-history-yuu-mobile.jpg",
+      "mode": "go",
+      "case": "history",
+      "route": "/alpha/listens?period=all_time",
+      "theme": "yuu",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "fonts": "loaded",
+      "fontFaces": [],
+      "overflow": false,
+      "images": [
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        }
+      ],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "alpha",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "go-artist-yuu-mobile.jpg",
+      "mode": "go",
+      "case": "artist",
+      "route": "/alpha/artist/1",
+      "theme": "yuu",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "fonts": "loaded",
+      "fontFaces": [],
+      "overflow": false,
+      "images": [
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        }
+      ],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "alpha",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "go-album-yuu-mobile.jpg",
+      "mode": "go",
+      "case": "album",
+      "route": "/alpha/album/1",
+      "theme": "yuu",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "fonts": "loaded",
+      "fontFaces": [],
+      "overflow": false,
+      "images": [
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        }
+      ],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "alpha",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "react-profiles-yuu-mobile.jpg",
+      "mode": "react",
+      "case": "profiles",
+      "route": "/",
+      "theme": "yuu",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "fonts": "loaded",
+      "fontFaces": [],
+      "overflow": false,
+      "images": [],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "selecao",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "react-home-yuu-mobile.jpg",
+      "mode": "react",
+      "case": "home",
+      "route": "/alpha?period=all_time",
+      "theme": "yuu",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "fonts": "loaded",
+      "fontFaces": [],
+      "overflow": false,
+      "images": [
+        {
+          "complete": true,
+          "loaded": true
+        }
+      ],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "alpha",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "react-track-yuu-mobile.jpg",
+      "mode": "react",
+      "case": "track",
+      "route": "/alpha/track/1",
+      "theme": "yuu",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "fonts": "loaded",
+      "fontFaces": [],
+      "overflow": false,
+      "images": [
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        }
+      ],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "alpha",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "react-rewind-yuu-mobile.jpg",
+      "mode": "react",
+      "case": "rewind",
+      "route": "/alpha/rewind?year=2018&month=11",
+      "theme": "yuu",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "fonts": "loaded",
+      "fontFaces": [],
+      "overflow": false,
+      "images": [
+        {
+          "complete": true,
+          "loaded": true
+        }
+      ],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "alpha",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "react-empty-yuu-mobile.jpg",
+      "mode": "react",
+      "case": "empty",
+      "route": "/empty?period=all_time",
+      "theme": "yuu",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "fonts": "loaded",
+      "fontFaces": [],
+      "overflow": false,
+      "images": [],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "empty",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "react-artists-yuu-mobile.jpg",
+      "mode": "react",
+      "case": "artists",
+      "route": "/alpha/chart/top/artists?period=all_time",
+      "theme": "yuu",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "fonts": "loaded",
+      "fontFaces": [],
+      "overflow": false,
+      "images": [
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        }
+      ],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "alpha",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "react-albums-yuu-mobile.jpg",
+      "mode": "react",
+      "case": "albums",
+      "route": "/alpha/chart/top/albums?period=all_time",
+      "theme": "yuu",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "fonts": "loaded",
+      "fontFaces": [],
+      "overflow": false,
+      "images": [
+        {
+          "complete": true,
+          "loaded": true
+        }
+      ],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "alpha",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "react-history-yuu-mobile.jpg",
+      "mode": "react",
+      "case": "history",
+      "route": "/alpha/listens?period=all_time",
+      "theme": "yuu",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "fonts": "loaded",
+      "fontFaces": [],
+      "overflow": false,
+      "images": [
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        }
+      ],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "alpha",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "react-artist-yuu-mobile.jpg",
+      "mode": "react",
+      "case": "artist",
+      "route": "/alpha/artist/1",
+      "theme": "yuu",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "fonts": "loaded",
+      "fontFaces": [],
+      "overflow": false,
+      "images": [
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        }
+      ],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "alpha",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "react-album-yuu-mobile.jpg",
+      "mode": "react",
+      "case": "album",
+      "route": "/alpha/album/1",
+      "theme": "yuu",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "fonts": "loaded",
+      "fontFaces": [],
+      "overflow": false,
+      "images": [
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        }
+      ],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "alpha",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "go-profiles-pearl-desktop.jpg",
+      "mode": "go",
+      "case": "profiles",
+      "route": "/",
+      "theme": "pearl",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "fonts": "loaded",
+      "fontFaces": [],
+      "overflow": false,
+      "images": [],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "selecao",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "go-home-pearl-desktop.jpg",
+      "mode": "go",
+      "case": "home",
+      "route": "/alpha?period=all_time",
+      "theme": "pearl",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "fonts": "loaded",
+      "fontFaces": [],
+      "overflow": false,
+      "images": [
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        }
+      ],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "alpha",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "go-track-pearl-desktop.jpg",
+      "mode": "go",
+      "case": "track",
+      "route": "/alpha/track/1",
+      "theme": "pearl",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "fonts": "loaded",
+      "fontFaces": [],
+      "overflow": false,
+      "images": [
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        }
+      ],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "alpha",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "go-rewind-pearl-desktop.jpg",
+      "mode": "go",
+      "case": "rewind",
+      "route": "/alpha/rewind?year=2018&month=11",
+      "theme": "pearl",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "fonts": "loaded",
+      "fontFaces": [],
+      "overflow": false,
+      "images": [
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        }
+      ],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "alpha",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "go-empty-pearl-desktop.jpg",
+      "mode": "go",
+      "case": "empty",
+      "route": "/empty?period=all_time",
+      "theme": "pearl",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "fonts": "loaded",
+      "fontFaces": [],
+      "overflow": false,
+      "images": [],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "empty",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "react-profiles-pearl-desktop.jpg",
+      "mode": "react",
+      "case": "profiles",
+      "route": "/",
+      "theme": "pearl",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "fonts": "loaded",
+      "fontFaces": [],
+      "overflow": false,
+      "images": [],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "selecao",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "react-home-pearl-desktop.jpg",
+      "mode": "react",
+      "case": "home",
+      "route": "/alpha?period=all_time",
+      "theme": "pearl",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "fonts": "loaded",
+      "fontFaces": [],
+      "overflow": false,
+      "images": [
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        }
+      ],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "alpha",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "react-track-pearl-desktop.jpg",
+      "mode": "react",
+      "case": "track",
+      "route": "/alpha/track/1",
+      "theme": "pearl",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "fonts": "loaded",
+      "fontFaces": [],
+      "overflow": false,
+      "images": [
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        }
+      ],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "alpha",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "react-rewind-pearl-desktop.jpg",
+      "mode": "react",
+      "case": "rewind",
+      "route": "/alpha/rewind?year=2018&month=11",
+      "theme": "pearl",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "fonts": "loaded",
+      "fontFaces": [],
+      "overflow": false,
+      "images": [
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        }
+      ],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "alpha",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "react-empty-pearl-desktop.jpg",
+      "mode": "react",
+      "case": "empty",
+      "route": "/empty?period=all_time",
+      "theme": "pearl",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "fonts": "loaded",
+      "fontFaces": [],
+      "overflow": false,
+      "images": [],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "empty",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "go-profiles-pearl-mobile.jpg",
+      "mode": "go",
+      "case": "profiles",
+      "route": "/",
+      "theme": "pearl",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "fonts": "loaded",
+      "fontFaces": [],
+      "overflow": false,
+      "images": [],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "selecao",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "go-home-pearl-mobile.jpg",
+      "mode": "go",
+      "case": "home",
+      "route": "/alpha?period=all_time",
+      "theme": "pearl",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "fonts": "loaded",
+      "fontFaces": [],
+      "overflow": false,
+      "images": [
+        {
+          "complete": true,
+          "loaded": true
+        }
+      ],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "alpha",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "go-track-pearl-mobile.jpg",
+      "mode": "go",
+      "case": "track",
+      "route": "/alpha/track/1",
+      "theme": "pearl",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "fonts": "loaded",
+      "fontFaces": [],
+      "overflow": false,
+      "images": [
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        }
+      ],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "alpha",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "go-rewind-pearl-mobile.jpg",
+      "mode": "go",
+      "case": "rewind",
+      "route": "/alpha/rewind?year=2018&month=11",
+      "theme": "pearl",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "fonts": "loaded",
+      "fontFaces": [],
+      "overflow": false,
+      "images": [],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "alpha",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "go-empty-pearl-mobile.jpg",
+      "mode": "go",
+      "case": "empty",
+      "route": "/empty?period=all_time",
+      "theme": "pearl",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "fonts": "loaded",
+      "fontFaces": [],
+      "overflow": false,
+      "images": [],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "empty",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "react-profiles-pearl-mobile.jpg",
+      "mode": "react",
+      "case": "profiles",
+      "route": "/",
+      "theme": "pearl",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "fonts": "loaded",
+      "fontFaces": [],
+      "overflow": false,
+      "images": [],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "selecao",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "react-home-pearl-mobile.jpg",
+      "mode": "react",
+      "case": "home",
+      "route": "/alpha?period=all_time",
+      "theme": "pearl",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "fonts": "loaded",
+      "fontFaces": [],
+      "overflow": false,
+      "images": [
+        {
+          "complete": true,
+          "loaded": true
+        }
+      ],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "alpha",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "react-track-pearl-mobile.jpg",
+      "mode": "react",
+      "case": "track",
+      "route": "/alpha/track/1",
+      "theme": "pearl",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "fonts": "loaded",
+      "fontFaces": [],
+      "overflow": false,
+      "images": [
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        }
+      ],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "alpha",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "react-rewind-pearl-mobile.jpg",
+      "mode": "react",
+      "case": "rewind",
+      "route": "/alpha/rewind?year=2018&month=11",
+      "theme": "pearl",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "fonts": "loaded",
+      "fontFaces": [],
+      "overflow": false,
+      "images": [
+        {
+          "complete": true,
+          "loaded": true
+        }
+      ],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "alpha",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "react-empty-pearl-mobile.jpg",
+      "mode": "react",
+      "case": "empty",
+      "route": "/empty?period=all_time",
+      "theme": "pearl",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "fonts": "loaded",
+      "fontFaces": [],
+      "overflow": false,
+      "images": [],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "empty",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "go-profiles-black-desktop.jpg",
+      "mode": "go",
+      "case": "profiles",
+      "route": "/",
+      "theme": "black",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "fonts": "loaded",
+      "fontFaces": [],
+      "overflow": false,
+      "images": [],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "selecao",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "go-home-black-desktop.jpg",
+      "mode": "go",
+      "case": "home",
+      "route": "/alpha?period=all_time",
+      "theme": "black",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "fonts": "loaded",
+      "fontFaces": [],
+      "overflow": false,
+      "images": [
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        }
+      ],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "alpha",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "go-track-black-desktop.jpg",
+      "mode": "go",
+      "case": "track",
+      "route": "/alpha/track/1",
+      "theme": "black",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "fonts": "loaded",
+      "fontFaces": [],
+      "overflow": false,
+      "images": [
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        }
+      ],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "alpha",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "go-rewind-black-desktop.jpg",
+      "mode": "go",
+      "case": "rewind",
+      "route": "/alpha/rewind?year=2018&month=11",
+      "theme": "black",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "fonts": "loaded",
+      "fontFaces": [],
+      "overflow": false,
+      "images": [
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        }
+      ],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "alpha",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "go-empty-black-desktop.jpg",
+      "mode": "go",
+      "case": "empty",
+      "route": "/empty?period=all_time",
+      "theme": "black",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "fonts": "loaded",
+      "fontFaces": [],
+      "overflow": false,
+      "images": [],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "empty",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "react-profiles-black-desktop.jpg",
+      "mode": "react",
+      "case": "profiles",
+      "route": "/",
+      "theme": "black",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "fonts": "loaded",
+      "fontFaces": [],
+      "overflow": false,
+      "images": [],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "selecao",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "react-home-black-desktop.jpg",
+      "mode": "react",
+      "case": "home",
+      "route": "/alpha?period=all_time",
+      "theme": "black",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "fonts": "loaded",
+      "fontFaces": [],
+      "overflow": false,
+      "images": [
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        }
+      ],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "alpha",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "react-track-black-desktop.jpg",
+      "mode": "react",
+      "case": "track",
+      "route": "/alpha/track/1",
+      "theme": "black",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "fonts": "loaded",
+      "fontFaces": [],
+      "overflow": false,
+      "images": [
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        }
+      ],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "alpha",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "react-rewind-black-desktop.jpg",
+      "mode": "react",
+      "case": "rewind",
+      "route": "/alpha/rewind?year=2018&month=11",
+      "theme": "black",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "fonts": "loaded",
+      "fontFaces": [],
+      "overflow": false,
+      "images": [
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        }
+      ],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "alpha",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "react-empty-black-desktop.jpg",
+      "mode": "react",
+      "case": "empty",
+      "route": "/empty?period=all_time",
+      "theme": "black",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "fonts": "loaded",
+      "fontFaces": [],
+      "overflow": false,
+      "images": [],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "empty",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "go-profiles-black-mobile.jpg",
+      "mode": "go",
+      "case": "profiles",
+      "route": "/",
+      "theme": "black",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "fonts": "loaded",
+      "fontFaces": [],
+      "overflow": false,
+      "images": [],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "selecao",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "go-home-black-mobile.jpg",
+      "mode": "go",
+      "case": "home",
+      "route": "/alpha?period=all_time",
+      "theme": "black",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "fonts": "loaded",
+      "fontFaces": [],
+      "overflow": false,
+      "images": [
+        {
+          "complete": true,
+          "loaded": true
+        }
+      ],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "alpha",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "go-track-black-mobile.jpg",
+      "mode": "go",
+      "case": "track",
+      "route": "/alpha/track/1",
+      "theme": "black",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "fonts": "loaded",
+      "fontFaces": [],
+      "overflow": false,
+      "images": [
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        }
+      ],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "alpha",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "go-rewind-black-mobile.jpg",
+      "mode": "go",
+      "case": "rewind",
+      "route": "/alpha/rewind?year=2018&month=11",
+      "theme": "black",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "fonts": "loaded",
+      "fontFaces": [],
+      "overflow": false,
+      "images": [],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "alpha",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "go-empty-black-mobile.jpg",
+      "mode": "go",
+      "case": "empty",
+      "route": "/empty?period=all_time",
+      "theme": "black",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "fonts": "loaded",
+      "fontFaces": [],
+      "overflow": false,
+      "images": [],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "empty",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "react-profiles-black-mobile.jpg",
+      "mode": "react",
+      "case": "profiles",
+      "route": "/",
+      "theme": "black",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "fonts": "loaded",
+      "fontFaces": [],
+      "overflow": false,
+      "images": [],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "selecao",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "react-home-black-mobile.jpg",
+      "mode": "react",
+      "case": "home",
+      "route": "/alpha?period=all_time",
+      "theme": "black",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "fonts": "loaded",
+      "fontFaces": [],
+      "overflow": false,
+      "images": [
+        {
+          "complete": true,
+          "loaded": true
+        }
+      ],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "alpha",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "react-track-black-mobile.jpg",
+      "mode": "react",
+      "case": "track",
+      "route": "/alpha/track/1",
+      "theme": "black",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "fonts": "loaded",
+      "fontFaces": [],
+      "overflow": false,
+      "images": [
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        }
+      ],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "alpha",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "react-rewind-black-mobile.jpg",
+      "mode": "react",
+      "case": "rewind",
+      "route": "/alpha/rewind?year=2018&month=11",
+      "theme": "black",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "fonts": "loaded",
+      "fontFaces": [],
+      "overflow": false,
+      "images": [
+        {
+          "complete": true,
+          "loaded": true
+        }
+      ],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "alpha",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "react-empty-black-mobile.jpg",
+      "mode": "react",
+      "case": "empty",
+      "route": "/empty?period=all_time",
+      "theme": "black",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "fonts": "loaded",
+      "fontFaces": [],
+      "overflow": false,
+      "images": [],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "empty",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "go-track-below-yuu-desktop.jpg",
+      "mode": "go",
+      "case": "track",
+      "route": "/alpha/track/1",
+      "theme": "yuu",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "meio",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "scrollY": 509,
+      "fonts": "loaded",
+      "fontFaces": [],
+      "images": [
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        }
+      ],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "alpha",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "go-track-below-yuu-mobile.jpg",
+      "mode": "go",
+      "case": "track",
+      "route": "/alpha/track/1",
+      "theme": "yuu",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "meio",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "scrollY": 984,
+      "fonts": "loaded",
+      "fontFaces": [],
+      "images": [
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        }
+      ],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "alpha",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "go-artist-below-yuu-desktop.jpg",
+      "mode": "go",
+      "case": "artist",
+      "route": "/alpha/artist/1",
+      "theme": "yuu",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "meio",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "scrollY": 803,
+      "fonts": "loaded",
+      "fontFaces": [],
+      "images": [
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        }
+      ],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "alpha",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "go-artist-below-yuu-mobile.jpg",
+      "mode": "go",
+      "case": "artist",
+      "route": "/alpha/artist/1",
+      "theme": "yuu",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "meio",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "scrollY": 1233,
+      "fonts": "loaded",
+      "fontFaces": [],
+      "images": [
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        }
+      ],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "alpha",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "go-rewind-below-yuu-desktop.jpg",
+      "mode": "go",
+      "case": "rewind",
+      "route": "/alpha/rewind?year=2018&month=11",
+      "theme": "yuu",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "meio",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "scrollY": 468,
+      "fonts": "loaded",
+      "fontFaces": [],
+      "images": [
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        }
+      ],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "alpha",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "go-rewind-below-yuu-mobile.jpg",
+      "mode": "go",
+      "case": "rewind",
+      "route": "/alpha/rewind?year=2018&month=11",
+      "theme": "yuu",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "meio",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "scrollY": 1140,
+      "fonts": "loaded",
+      "fontFaces": [],
+      "images": [
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        }
+      ],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "alpha",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "react-track-below-yuu-desktop.jpg",
+      "mode": "react",
+      "case": "track",
+      "route": "/alpha/track/1",
+      "theme": "yuu",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "meio",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "scrollY": 404,
+      "fonts": "loaded",
+      "fontFaces": [],
+      "images": [
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        }
+      ],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "alpha",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "react-track-below-yuu-mobile.jpg",
+      "mode": "react",
+      "case": "track",
+      "route": "/alpha/track/1",
+      "theme": "yuu",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "meio",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "scrollY": 856,
+      "fonts": "loaded",
+      "fontFaces": [],
+      "images": [
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        }
+      ],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "alpha",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "react-artist-below-yuu-desktop.jpg",
+      "mode": "react",
+      "case": "artist",
+      "route": "/alpha/artist/1",
+      "theme": "yuu",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "meio",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "scrollY": 701,
+      "fonts": "loaded",
+      "fontFaces": [],
+      "images": [
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        }
+      ],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "alpha",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "react-artist-below-yuu-mobile.jpg",
+      "mode": "react",
+      "case": "artist",
+      "route": "/alpha/artist/1",
+      "theme": "yuu",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "meio",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "scrollY": 1121,
+      "fonts": "loaded",
+      "fontFaces": [],
+      "images": [
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        }
+      ],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "alpha",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "react-rewind-below-yuu-desktop.jpg",
+      "mode": "react",
+      "case": "rewind",
+      "route": "/alpha/rewind?year=2018&month=11",
+      "theme": "yuu",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "meio",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "scrollY": 349,
+      "fonts": "loaded",
+      "fontFaces": [],
+      "images": [
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        }
+      ],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "alpha",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "react-rewind-below-yuu-mobile.jpg",
+      "mode": "react",
+      "case": "rewind",
+      "route": "/alpha/rewind?year=2018&month=11",
+      "theme": "yuu",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "meio",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "scrollY": 1219,
+      "fonts": "loaded",
+      "fontFaces": [],
+      "images": [
+        {
+          "complete": true,
+          "loaded": true
+        },
+        {
+          "complete": true,
+          "loaded": true
+        }
+      ],
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "alpha",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "go-history-large-yuu-desktop.jpg",
+      "mode": "go",
+      "case": "history-large",
+      "route": "/alpha/listens?limit=100&page=2&period=all_time",
+      "theme": "yuu",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "fixture": "large 1009/2/0",
+      "rows": 100,
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "alpha",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "go-history-large-yuu-mobile.jpg",
+      "mode": "go",
+      "case": "history-large",
+      "route": "/alpha/listens?limit=100&page=2&period=all_time",
+      "theme": "yuu",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "fixture": "large 1009/2/0",
+      "rows": 100,
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "alpha",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "react-history-large-yuu-desktop.jpg",
+      "mode": "react",
+      "case": "history-large",
+      "route": "/alpha/listens?limit=100&page=2&period=all_time",
+      "theme": "yuu",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "fixture": "large 1009/2/0",
+      "rows": 100,
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "alpha",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "react-history-large-yuu-mobile.jpg",
+      "mode": "react",
+      "case": "history-large",
+      "route": "/alpha/listens?limit=100&page=2&period=all_time",
+      "theme": "yuu",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "fixture": "large 1009/2/0",
+      "rows": 100,
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "alpha",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "go-profiles-zero-yuu-desktop.jpg",
+      "mode": "go",
+      "case": "profiles-zero",
+      "route": "/",
+      "theme": "yuu",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "fixture": "zero",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "selecao",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "go-profiles-zero-yuu-mobile.jpg",
+      "mode": "go",
+      "case": "profiles-zero",
+      "route": "/",
+      "theme": "yuu",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "fixture": "zero",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "selecao",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "react-profiles-zero-yuu-desktop.jpg",
+      "mode": "react",
+      "case": "profiles-zero",
+      "route": "/",
+      "theme": "yuu",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "fixture": "zero",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "selecao",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "react-profiles-zero-yuu-mobile.jpg",
+      "mode": "react",
+      "case": "profiles-zero",
+      "route": "/",
+      "theme": "yuu",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "fixture": "zero",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "selecao",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "go-profiles-one-yuu-desktop.jpg",
+      "mode": "go",
+      "case": "profiles-one",
+      "route": "/",
+      "theme": "yuu",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "fixture": "one",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "selecao",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "go-profiles-one-yuu-mobile.jpg",
+      "mode": "go",
+      "case": "profiles-one",
+      "route": "/",
+      "theme": "yuu",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "fixture": "one",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "selecao",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "react-profiles-one-yuu-desktop.jpg",
+      "mode": "react",
+      "case": "profiles-one",
+      "route": "/",
+      "theme": "yuu",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "fixture": "one",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "selecao",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "react-profiles-one-yuu-mobile.jpg",
+      "mode": "react",
+      "case": "profiles-one",
+      "route": "/",
+      "theme": "yuu",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "fixture": "one",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "selecao",
+      "fonts_note": "fontes externas bloqueadas; fallback nao estabelece paridade",
+      "expected": "estado e rota da fixture; detalhes e limites no relatório ISSUE_023.md",
+      "observed": "capturado; ver imagem e relato; nao representa aceite visual automático"
+    },
+    {
+      "file": "go-missing-cover-yuu-desktop.jpg",
+      "mode": "go",
+      "case": "missing-cover",
+      "route": "/beta/album/2",
+      "theme": "yuu",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "beta",
+      "fonts_note": "fontes externas bloqueadas; fallback não estabelece paridade",
+      "expected": "estado e rota da fixture; consultar relatório ISSUE_023.md",
+      "observed": "capturado; diferenças visuais descritas no relatório"
+    },
+    {
+      "file": "go-missing-cover-yuu-mobile.jpg",
+      "mode": "go",
+      "case": "missing-cover",
+      "route": "/beta/album/2",
+      "theme": "yuu",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "beta",
+      "fonts_note": "fontes externas bloqueadas; fallback não estabelece paridade",
+      "expected": "estado e rota da fixture; consultar relatório ISSUE_023.md",
+      "observed": "capturado; diferenças visuais descritas no relatório"
+    },
+    {
+      "file": "go-long-title-yuu-desktop.jpg",
+      "mode": "go",
+      "case": "long-title",
+      "route": "/alpha/track/4",
+      "theme": "yuu",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "alpha",
+      "fonts_note": "fontes externas bloqueadas; fallback não estabelece paridade",
+      "expected": "estado e rota da fixture; consultar relatório ISSUE_023.md",
+      "observed": "capturado; diferenças visuais descritas no relatório"
+    },
+    {
+      "file": "go-long-title-yuu-mobile.jpg",
+      "mode": "go",
+      "case": "long-title",
+      "route": "/alpha/track/4",
+      "theme": "yuu",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "alpha",
+      "fonts_note": "fontes externas bloqueadas; fallback não estabelece paridade",
+      "expected": "estado e rota da fixture; consultar relatório ISSUE_023.md",
+      "observed": "capturado; diferenças visuais descritas no relatório"
+    },
+    {
+      "file": "go-yearly-yuu-desktop.jpg",
+      "mode": "go",
+      "case": "yearly",
+      "route": "/alpha/rewind?year=2019",
+      "theme": "yuu",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "alpha",
+      "fonts_note": "fontes externas bloqueadas; fallback não estabelece paridade",
+      "expected": "estado e rota da fixture; consultar relatório ISSUE_023.md",
+      "observed": "capturado; diferenças visuais descritas no relatório"
+    },
+    {
+      "file": "go-yearly-yuu-mobile.jpg",
+      "mode": "go",
+      "case": "yearly",
+      "route": "/alpha/rewind?year=2019",
+      "theme": "yuu",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "alpha",
+      "fonts_note": "fontes externas bloqueadas; fallback não estabelece paridade",
+      "expected": "estado e rota da fixture; consultar relatório ISSUE_023.md",
+      "observed": "capturado; diferenças visuais descritas no relatório"
+    },
+    {
+      "file": "go-missing-profile-yuu-desktop.jpg",
+      "mode": "go",
+      "case": "missing-profile",
+      "route": "/missing-profile-023",
+      "theme": "yuu",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "inexistente",
+      "fonts_note": "fontes externas bloqueadas; fallback não estabelece paridade",
+      "expected": "estado e rota da fixture; consultar relatório ISSUE_023.md",
+      "observed": "capturado; diferenças visuais descritas no relatório"
+    },
+    {
+      "file": "go-missing-profile-yuu-mobile.jpg",
+      "mode": "go",
+      "case": "missing-profile",
+      "route": "/missing-profile-023",
+      "theme": "yuu",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "inexistente",
+      "fonts_note": "fontes externas bloqueadas; fallback não estabelece paridade",
+      "expected": "estado e rota da fixture; consultar relatório ISSUE_023.md",
+      "observed": "capturado; diferenças visuais descritas no relatório"
+    },
+    {
+      "file": "react-missing-cover-yuu-desktop.jpg",
+      "mode": "react",
+      "case": "missing-cover",
+      "route": "/beta/album/2",
+      "theme": "yuu",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "beta",
+      "fonts_note": "fontes externas bloqueadas; fallback não estabelece paridade",
+      "expected": "estado e rota da fixture; consultar relatório ISSUE_023.md",
+      "observed": "capturado; diferenças visuais descritas no relatório"
+    },
+    {
+      "file": "react-missing-cover-yuu-mobile.jpg",
+      "mode": "react",
+      "case": "missing-cover",
+      "route": "/beta/album/2",
+      "theme": "yuu",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "beta",
+      "fonts_note": "fontes externas bloqueadas; fallback não estabelece paridade",
+      "expected": "estado e rota da fixture; consultar relatório ISSUE_023.md",
+      "observed": "capturado; diferenças visuais descritas no relatório"
+    },
+    {
+      "file": "react-long-title-yuu-desktop.jpg",
+      "mode": "react",
+      "case": "long-title",
+      "route": "/alpha/track/4",
+      "theme": "yuu",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "alpha",
+      "fonts_note": "fontes externas bloqueadas; fallback não estabelece paridade",
+      "expected": "estado e rota da fixture; consultar relatório ISSUE_023.md",
+      "observed": "capturado; diferenças visuais descritas no relatório"
+    },
+    {
+      "file": "react-long-title-yuu-mobile.jpg",
+      "mode": "react",
+      "case": "long-title",
+      "route": "/alpha/track/4",
+      "theme": "yuu",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "alpha",
+      "fonts_note": "fontes externas bloqueadas; fallback não estabelece paridade",
+      "expected": "estado e rota da fixture; consultar relatório ISSUE_023.md",
+      "observed": "capturado; diferenças visuais descritas no relatório"
+    },
+    {
+      "file": "react-yearly-yuu-desktop.jpg",
+      "mode": "react",
+      "case": "yearly",
+      "route": "/alpha/rewind?year=2019",
+      "theme": "yuu",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "alpha",
+      "fonts_note": "fontes externas bloqueadas; fallback não estabelece paridade",
+      "expected": "estado e rota da fixture; consultar relatório ISSUE_023.md",
+      "observed": "capturado; diferenças visuais descritas no relatório"
+    },
+    {
+      "file": "react-yearly-yuu-mobile.jpg",
+      "mode": "react",
+      "case": "yearly",
+      "route": "/alpha/rewind?year=2019",
+      "theme": "yuu",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "alpha",
+      "fonts_note": "fontes externas bloqueadas; fallback não estabelece paridade",
+      "expected": "estado e rota da fixture; consultar relatório ISSUE_023.md",
+      "observed": "capturado; diferenças visuais descritas no relatório"
+    },
+    {
+      "file": "react-missing-profile-yuu-desktop.jpg",
+      "mode": "react",
+      "case": "missing-profile",
+      "route": "/missing-profile-023",
+      "theme": "yuu",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "inexistente",
+      "fonts_note": "fontes externas bloqueadas; fallback não estabelece paridade",
+      "expected": "estado e rota da fixture; consultar relatório ISSUE_023.md",
+      "observed": "capturado; diferenças visuais descritas no relatório"
+    },
+    {
+      "file": "react-missing-profile-yuu-mobile.jpg",
+      "mode": "react",
+      "case": "missing-profile",
+      "route": "/missing-profile-023",
+      "theme": "yuu",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scale": 1,
+      "timezone": "America/Sao_Paulo",
+      "region": "topo",
+      "network": "somente loopback; fontes remotas bloqueadas",
+      "actor": "visitante",
+      "javascript": "habilitado",
+      "profile": "inexistente",
+      "fonts_note": "fontes externas bloqueadas; fallback não estabelece paridade",
+      "expected": "estado e rota da fixture; consultar relatório ISSUE_023.md",
+      "observed": "capturado; diferenças visuais descritas no relatório"
+    }
+  ],
+  "commit_base": "72e4be2e582a67d83c37a339be30c94fe8ee8a5d",
+  "arvore": "contém alterações locais não commitadas, incluindo fallback sem JS",
+  "fixture_sha256": "00584ba2b4e1fd9141485ed02f7ebadb9397a11517a083e10ca6dcaaaa2367cb",
+  "fontes": "Google Fonts bloqueado; fallback diferente; paridade de fonte inconclusiva",
+  "javascript": "habilitado em todas as capturas; navegação sem JS validada separadamente"
+}

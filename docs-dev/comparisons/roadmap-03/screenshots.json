@@ -1,0 +1,360 @@
+{
+  "date": "2026-11-05",
+  "database": "SQLite v3 descartável, cópias equivalentes",
+  "timezone": "America/Sao_Paulo",
+  "theme": "yuu (padrão)",
+  "region": "página inteira",
+  "captures": [
+    {
+      "mode": "go",
+      "name": "artist",
+      "path": "/mara/artist/1",
+      "size": "desktop",
+      "viewport": {
+        "width": 1365,
+        "height": 900
+      },
+      "file": "screenshots/go-artist-desktop.jpg"
+    },
+    {
+      "mode": "go",
+      "name": "album",
+      "path": "/mara/album/1",
+      "size": "desktop",
+      "viewport": {
+        "width": 1365,
+        "height": 900
+      },
+      "file": "screenshots/go-album-desktop.jpg"
+    },
+    {
+      "mode": "go",
+      "name": "track",
+      "path": "/mara/track/1",
+      "size": "desktop",
+      "viewport": {
+        "width": 1365,
+        "height": 900
+      },
+      "file": "screenshots/go-track-desktop.jpg"
+    },
+    {
+      "mode": "go",
+      "name": "rewind-month",
+      "path": "/mara/rewind?year=2026&month=9",
+      "size": "desktop",
+      "viewport": {
+        "width": 1365,
+        "height": 900
+      },
+      "file": "screenshots/go-rewind-month-desktop.jpg"
+    },
+    {
+      "mode": "go",
+      "name": "rewind-year",
+      "path": "/mara/rewind?year=2026",
+      "size": "desktop",
+      "viewport": {
+        "width": 1365,
+        "height": 900
+      },
+      "file": "screenshots/go-rewind-year-desktop.jpg"
+    },
+    {
+      "mode": "go",
+      "name": "empty",
+      "path": "/iara/rewind?year=2026&month=9",
+      "size": "desktop",
+      "viewport": {
+        "width": 1365,
+        "height": 900
+      },
+      "file": "screenshots/go-empty-desktop.jpg"
+    },
+    {
+      "mode": "react",
+      "name": "artist",
+      "path": "/mara/artist/1",
+      "size": "desktop",
+      "viewport": {
+        "width": 1365,
+        "height": 900
+      },
+      "file": "screenshots/react-artist-desktop.jpg"
+    },
+    {
+      "mode": "react",
+      "name": "album",
+      "path": "/mara/album/1",
+      "size": "desktop",
+      "viewport": {
+        "width": 1365,
+        "height": 900
+      },
+      "file": "screenshots/react-album-desktop.jpg"
+    },
+    {
+      "mode": "react",
+      "name": "track",
+      "path": "/mara/track/1",
+      "size": "desktop",
+      "viewport": {
+        "width": 1365,
+        "height": 900
+      },
+      "file": "screenshots/react-track-desktop.jpg"
+    },
+    {
+      "mode": "react",
+      "name": "rewind-month",
+      "path": "/mara/rewind?year=2026&month=9",
+      "size": "desktop",
+      "viewport": {
+        "width": 1365,
+        "height": 900
+      },
+      "file": "screenshots/react-rewind-month-desktop.jpg"
+    },
+    {
+      "mode": "react",
+      "name": "rewind-year",
+      "path": "/mara/rewind?year=2026",
+      "size": "desktop",
+      "viewport": {
+        "width": 1365,
+        "height": 900
+      },
+      "file": "screenshots/react-rewind-year-desktop.jpg"
+    },
+    {
+      "mode": "react",
+      "name": "empty",
+      "path": "/iara/rewind?year=2026&month=9",
+      "size": "desktop",
+      "viewport": {
+        "width": 1365,
+        "height": 900
+      },
+      "file": "screenshots/react-empty-desktop.jpg"
+    },
+    {
+      "mode": "go",
+      "name": "artist",
+      "path": "/mara/artist/1",
+      "size": "mobile",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "screenshots/go-artist-mobile.jpg"
+    },
+    {
+      "mode": "go",
+      "name": "album",
+      "path": "/mara/album/1",
+      "size": "mobile",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "screenshots/go-album-mobile.jpg"
+    },
+    {
+      "mode": "go",
+      "name": "track",
+      "path": "/mara/track/1",
+      "size": "mobile",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "screenshots/go-track-mobile.jpg"
+    },
+    {
+      "mode": "go",
+      "name": "rewind-month",
+      "path": "/mara/rewind?year=2026&month=9",
+      "size": "mobile",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "screenshots/go-rewind-month-mobile.jpg"
+    },
+    {
+      "mode": "go",
+      "name": "rewind-year",
+      "path": "/mara/rewind?year=2026",
+      "size": "mobile",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "screenshots/go-rewind-year-mobile.jpg"
+    },
+    {
+      "mode": "go",
+      "name": "empty",
+      "path": "/iara/rewind?year=2026&month=9",
+      "size": "mobile",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "screenshots/go-empty-mobile.jpg"
+    },
+    {
+      "mode": "react",
+      "name": "artist",
+      "path": "/mara/artist/1",
+      "size": "mobile",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "screenshots/react-artist-mobile.jpg"
+    },
+    {
+      "mode": "react",
+      "name": "album",
+      "path": "/mara/album/1",
+      "size": "mobile",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "screenshots/react-album-mobile.jpg"
+    },
+    {
+      "mode": "react",
+      "name": "track",
+      "path": "/mara/track/1",
+      "size": "mobile",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "screenshots/react-track-mobile.jpg"
+    },
+    {
+      "mode": "react",
+      "name": "rewind-month",
+      "path": "/mara/rewind?year=2026&month=9",
+      "size": "mobile",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "screenshots/react-rewind-month-mobile.jpg"
+    },
+    {
+      "mode": "react",
+      "name": "rewind-year",
+      "path": "/mara/rewind?year=2026",
+      "size": "mobile",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "screenshots/react-rewind-year-mobile.jpg"
+    },
+    {
+      "mode": "react",
+      "name": "empty",
+      "path": "/iara/rewind?year=2026&month=9",
+      "size": "mobile",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "screenshots/react-empty-mobile.jpg"
+    },
+    {
+      "mode": "go",
+      "name": "artist-pearl",
+      "path": "/mara/artist/1",
+      "size": "desktop",
+      "viewport": {
+        "width": 1365,
+        "height": 900
+      },
+      "theme": "pearl",
+      "file": "screenshots/go-artist-pearl-desktop.jpg"
+    },
+    {
+      "mode": "react",
+      "name": "artist-pearl",
+      "path": "/mara/artist/1",
+      "size": "desktop",
+      "viewport": {
+        "width": 1365,
+        "height": 900
+      },
+      "theme": "pearl",
+      "file": "screenshots/react-artist-pearl-desktop.jpg"
+    },
+    {
+      "mode": "go",
+      "name": "artist-pearl",
+      "path": "/mara/artist/1",
+      "size": "mobile",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "theme": "pearl",
+      "file": "screenshots/go-artist-pearl-mobile.jpg"
+    },
+    {
+      "mode": "react",
+      "name": "artist-pearl",
+      "path": "/mara/artist/1",
+      "size": "mobile",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "theme": "pearl",
+      "file": "screenshots/react-artist-pearl-mobile.jpg"
+    },
+    {
+      "mode": "go",
+      "name": "rewind-time",
+      "path": "/mara/rewind?year=2026&month=9&show_time=1",
+      "size": "desktop",
+      "viewport": {
+        "width": 1365,
+        "height": 900
+      },
+      "theme": "yuu",
+      "state": "mostrar tempo ativado",
+      "file": "screenshots/go-rewind-time-desktop.jpg"
+    },
+    {
+      "mode": "react",
+      "name": "rewind-time",
+      "path": "/mara/rewind?year=2026&month=9",
+      "size": "desktop",
+      "viewport": {
+        "width": 1365,
+        "height": 900
+      },
+      "theme": "yuu",
+      "state": "mostrar tempo ativado",
+      "file": "screenshots/react-rewind-time-desktop.jpg"
+    },
+    {
+      "mode": "go/react",
+      "name": "management",
+      "path": "/mara/manage/track/1",
+      "size": "desktop",
+      "viewport": {
+        "width": 1365,
+        "height": 900
+      },
+      "theme": "yuu",
+      "state": "sessão de teste; após mesclagem",
+      "file": "screenshots/go-react-management-desktop.jpg"
+    }
+  ]
+}

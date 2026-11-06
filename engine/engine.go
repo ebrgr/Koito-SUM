@@ -142,7 +142,8 @@ func Run(
 		if err != nil {
 			l.Fatal().Err(err).Msg("Engine: Failed to save default API key in database")
 		}
-		l.Info().Msgf("Engine: Default user created. Login: %s : %s", cfg.DefaultUsername(), cfg.DefaultPassword())
+		// The configured password must not be disclosed in startup logs.
+		l.Info().Msg("Engine: Default administrator created")
 	}
 
 	if cfg.LbzRelayEnabled() && cfg.LbzRelayUrl() != "" && cfg.LbzRelayToken() != "" {
@@ -272,6 +273,8 @@ func Run(
 		l.Fatal().Err(err).Msg("Engine: Error during server shutdown")
 		return err
 	}
+	// Stop provider queues after active HTTP requests have drained.
+	images.Shutdown()
 	l.Info().Msg("Engine: Shutdown successful")
 	return nil
 }

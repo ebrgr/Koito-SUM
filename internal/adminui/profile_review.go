@@ -1,0 +1,68 @@
+package adminui
+
+import (
+	"io"
+	"net/http"
+	"strings"
+
+	"github.com/gabehf/koito/internal/adminweb"
+	"github.com/gabehf/koito/internal/db"
+	"github.com/gabehf/koito/internal/models"
+)
+
+type profileReviewView struct {
+	Submission string
+	Profile    *models.ListeningProfile
+	Count      int64
+	CSRF       string
+}
+
+// reviewProfile shows the exact profile and listen count without modifying data.
+func (h *Handler) reviewProfile(w http.ResponseWriter, r *http.Request) {
+	identity, err := adminweb.SessionIdentity(r, h.store)
+	if err != nil {
+		h.fail(w, err)
+		return
+	}
+	parts := strings.Split(strings.Trim(r.URL.Path, "/"), "/")
+	if len(parts) != 4 || parts[0] != "admin" || parts[1] != "profile" {
+		http.NotFound(w, r)
+		return
+	}
+	id, err := parseID(parts[2])
+	if err != nil {
+		h.fail(w, err)
+		return
+	}
+	if r.URL.RawQuery != "" {
+		h.fail(w, db.ErrInvalidInput)
+		return
+	}
+	p, err := h.store.GetListeningProfileByID(r.Context(), id)
+	if err != nil {
+		h.fail(w, err)
+		return
+	}
+	count, err := h.store.ProfileListenCount(r.Context(), id)
+	if err != nil {
+		h.fail(w, err)
+		return
+	}
+	token, err := h.csrf.SessionToken(identity)
+	if err != nil {
+		h.fail(w, err)
+		return
+	}
+	ticket, err := h.newSubmission(identity.SessionID)
+	if err != nil {
+		h.fail(w, err)
+		return
+	}
+	var out strings.Builder
+	if err = h.tmpl.ExecuteTemplate(&out, "profile-review.html", profileReviewView{Profile: p, Count: count, CSRF: token, Submission: ticket}); err != nil {
+		h.fail(w, err)
+		return
+	}
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
+	_, _ = io.WriteString(w, out.String())
+}

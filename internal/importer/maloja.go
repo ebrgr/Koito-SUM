@@ -2,10 +2,8 @@ package importer
 
 import (
 	"context"
-	"encoding/json"
 	"fmt"
 	"os"
-	"path"
 	"strings"
 	"time"
 
@@ -38,24 +36,26 @@ func ImportMalojaFile(ctx context.Context, store importStore, mbzc mbz.MusicBrai
 	}
 	l := logger.FromContext(ctx)
 	l.Info().Msgf("Beginning maloja import on file: %s", filename)
-	file, err := os.Open(path.Join(cfg.ConfigDir(), "import", filename))
+	file, err := os.Open(importPath(ctx, filename))
 	if err != nil {
 		l.Err(err).Msgf("Failed to read import file: %s", filename)
 		return fmt.Errorf("ImportMalojaFile: %w", err)
 	}
 	defer file.Close()
-	var throttleFunc = func() {}
-	if ms := cfg.ThrottleImportMs(); ms > 0 {
-		throttleFunc = func() {
-			time.Sleep(time.Duration(ms) * time.Millisecond)
-		}
-	}
+
 	export := new(MalojaExport)
-	err = json.NewDecoder(file).Decode(&export)
+	err = decodeJSON(ctx, file, &export)
 	if err != nil {
 		return fmt.Errorf("ImportMalojaFile: %w", err)
 	}
+	if len(export.Scrobbles) > MaxImportItems {
+		return invalidFile(fmt.Errorf("too many import items"))
+	}
 	for _, item := range export.Scrobbles {
+		seen(ctx)
+		if err := ctx.Err(); err != nil {
+			return err
+		}
 		martists := make([]string, 0)
 		// Maloja has a tendency to have the the artist order ['feature', 'main \u2022 feature'], so
 		// here we try to turn that artist array into ['main', 'feature']
@@ -67,11 +67,13 @@ func ImportMalojaFile(ctx context.Context, store importStore, mbzc mbz.MusicBrai
 		artists := utils.UniqueIgnoringCase(martists)
 		if len(item.Track.Artists) < 1 || item.Track.Title == "" {
 			l.Debug().Msg("Skipping invalid maloja import item")
+			ignored(ctx)
 			continue
 		}
 		ts := time.Unix(item.Time, 0)
 		if !inImportTimeWindow(ts) {
 			l.Debug().Msgf("Skipping import due to import time rules")
+			ignored(ctx)
 			continue
 		}
 		opts := catalog.SubmitListenOpts{
@@ -90,7 +92,9 @@ func ImportMalojaFile(ctx context.Context, store importStore, mbzc mbz.MusicBrai
 			l.Err(err).Msg("Failed to import maloja playback item")
 			return fmt.Errorf("ImportMalojaFile: %w", err)
 		}
-		throttleFunc()
+		if err := throttle(ctx); err != nil {
+			return err
+		}
 	}
 	return finishImport(ctx, filename, len(export.Scrobbles))
 }

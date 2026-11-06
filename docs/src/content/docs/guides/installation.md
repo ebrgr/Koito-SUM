@@ -31,14 +31,10 @@ If you don't want to use docker, you can also build the application from source.
 
 **Note that no support is provided when running Koito built from source.**
 
-First, you need to install dependencies. Koito relies on `make`, `yarn` for building the client, and `libvips-dev` to process images.
-
-```sh
-sudo apt install libvips-dev make npm
-sudo npm install --global yarn
-```
-
-If you aren't installing on an Ubuntu or Debian based system, you can easily find ways to install make, npm, and yarn by googling, and you can find other ways to install `libvips-dev` on the [libvips wiki](https://github.com/libvips/libvips/wiki/).
+Install Go at the version declared in `go.mod` and `make`. The Go application
+builds with `CGO_ENABLED=0` and does not require libvips or a C compiler. Node.js
+is only needed for interface script tests and documentation; the optional Go race
+detector needs a C compiler.
 
 Then, clone the repository and execute the build command using the included Makefile:
 

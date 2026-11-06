@@ -69,17 +69,21 @@ func (s *Sqlite) GetArtist(ctx context.Context, opts db.GetArtistOpts) (*models.
 	}
 
 	var listenCount int64
-	s.queryRowContext(ctx,
+	if err := s.queryRowContext(ctx,
 		`SELECT COUNT(*) FROM listens l JOIN artist_tracks at2 ON l.track_id = at2.track_id WHERE at2.artist_id = ?`,
-		opts.ID).Scan(&listenCount)
+		opts.ID).Scan(&listenCount); err != nil {
+		return nil, fmt.Errorf("GetArtist: count listens: %w", err)
+	}
 
 	var timeListened int64
-	s.queryRowContext(ctx, `
+	if err := s.queryRowContext(ctx, `
 		SELECT COALESCE(SUM(t.duration), 0)
 		FROM listens l JOIN tracks t ON l.track_id = t.id
 		JOIN artist_tracks at2 ON t.id = at2.track_id
 		WHERE at2.artist_id = ?`,
-		opts.ID).Scan(&timeListened)
+		opts.ID).Scan(&timeListened); err != nil {
+		return nil, fmt.Errorf("GetArtist: time listened: %w", err)
+	}
 
 	var firstListenUnix int64
 	err = s.queryRowContext(ctx, `
@@ -92,14 +96,16 @@ func (s *Sqlite) GetArtist(ctx context.Context, opts db.GetArtistOpts) (*models.
 	}
 
 	var rank int64
-	s.queryRowContext(ctx, `
+	if err := s.queryRowContext(ctx, `
 		SELECT rank FROM (
 			SELECT at2.artist_id,
 			       RANK() OVER (ORDER BY COUNT(*) DESC) AS rank
 			FROM listens l JOIN artist_tracks at2 ON l.track_id = at2.track_id
 			GROUP BY at2.artist_id
 		) WHERE artist_id = ?`,
-		opts.ID).Scan(&rank)
+		opts.ID).Scan(&rank); err != nil && !errors.Is(err, sql.ErrNoRows) {
+		return nil, fmt.Errorf("GetArtist: rank: %w", err)
+	}
 
 	return &models.Artist{
 		ID:           opts.ID,
@@ -210,6 +216,14 @@ func (s *Sqlite) UpdateArtist(ctx context.Context, opts db.UpdateArtistOpts) err
 		return fmt.Errorf("UpdateArtist: BeginTx: %w", err)
 	}
 	defer tx.Rollback()
+	var present int
+	err = tx.QueryRowContext(ctx, `SELECT 1 FROM artists WHERE id=?`, opts.ID).Scan(&present)
+	if errors.Is(err, sql.ErrNoRows) {
+		return db.ErrNotFound
+	}
+	if err != nil {
+		return err
+	}
 
 	if opts.MusicBrainzID != uuid.Nil {
 		if _, err := tx.ExecContext(ctx,
@@ -232,15 +246,48 @@ func (s *Sqlite) UpdateArtist(ctx context.Context, opts db.UpdateArtistOpts) err
 }
 
 func (s *Sqlite) DeleteArtist(ctx context.Context, id int32) error {
-	_, err := s.db.ExecContext(ctx, `DELETE FROM artists WHERE id = ?`, id)
-	return err
+	if id <= 0 {
+		return db.ErrInvalidInput
+	}
+	result, err := s.db.ExecContext(ctx, `DELETE FROM artists WHERE id=?`, id)
+	if err != nil {
+		return err
+	}
+	n, err := result.RowsAffected()
+	if err != nil {
+		return err
+	}
+	if n == 0 {
+		return db.ErrNotFound
+	}
+	return nil
 }
 
+// DeleteArtistAlias never removes a primary alias or reports success for a missing alias.
 func (s *Sqlite) DeleteArtistAlias(ctx context.Context, id int32, alias string) error {
-	_, err := s.db.ExecContext(ctx,
-		`DELETE FROM artist_aliases WHERE artist_id = ? AND alias = ? AND is_primary = 0`,
-		id, alias)
-	return err
+	if id <= 0 || strings.TrimSpace(alias) == "" {
+		return db.ErrInvalidInput
+	}
+	result, err := s.db.ExecContext(ctx, `DELETE FROM artist_aliases WHERE artist_id=? AND alias=? AND is_primary=0`, id, alias)
+	if err != nil {
+		return err
+	}
+	n, err := result.RowsAffected()
+	if err != nil {
+		return err
+	}
+	if n > 0 {
+		return nil
+	}
+	var primary int
+	err = s.db.QueryRowContext(ctx, `SELECT is_primary FROM artist_aliases WHERE artist_id=? AND alias=?`, id, alias).Scan(&primary)
+	if errors.Is(err, sql.ErrNoRows) {
+		return db.ErrNotFound
+	}
+	if err != nil {
+		return err
+	}
+	return db.ErrConflict
 }
 
 func (s *Sqlite) GetAllArtistAliases(ctx context.Context, id int32) ([]models.Alias, error) {
@@ -287,7 +334,10 @@ func (s *Sqlite) SetPrimaryArtistAlias(ctx context.Context, id int32, alias stri
 	for rows.Next() {
 		var a string
 		var isPrimary int
-		rows.Scan(&a, &isPrimary)
+		if err := rows.Scan(&a, &isPrimary); err != nil {
+			rows.Close()
+			return err
+		}
 		if isPrimary == 1 {
 			primary = a
 		}
@@ -295,13 +345,17 @@ func (s *Sqlite) SetPrimaryArtistAlias(ctx context.Context, id int32, alias stri
 			exists = a
 		}
 	}
+	if err := rows.Err(); err != nil {
+		rows.Close()
+		return err
+	}
 	rows.Close()
 
 	if primary == alias {
 		return nil
 	}
 	if exists == "" {
-		return errors.New("SetPrimaryArtistAlias: alias does not exist")
+		return db.ErrNotFound
 	}
 
 	if _, err := tx.ExecContext(ctx,
@@ -478,72 +532,47 @@ func (s *Sqlite) ArtistsWithoutImages(ctx context.Context, from int32) ([]*model
 	return artists, rows.Err()
 }
 
-func (s *Sqlite) SetPrimaryAlbumArtist(ctx context.Context, id int32, artistId int32, value bool) error {
+// setPrimaryRelation changes only an existing artist relation in one transaction.
+func (s *Sqlite) setPrimaryRelation(ctx context.Context, table, target string, id, artistID int32, value bool) error {
+	if id <= 0 || artistID <= 0 {
+		return db.ErrInvalidInput
+	}
 	tx, err := s.db.BeginTx(ctx, nil)
 	if err != nil {
-		return fmt.Errorf("SetPrimaryAlbumArtist: BeginTx: %w", err)
+		return err
 	}
 	defer tx.Rollback()
-
-	var primary int32
-	tx.QueryRowContext(ctx,
-		`SELECT artist_id FROM artist_releases WHERE release_id = ? AND is_primary = 1 LIMIT 1`, id).
-		Scan(&primary)
-
-	isPrimaryInt := 0
-	if value {
-		isPrimaryInt = 1
+	var current int
+	err = tx.QueryRowContext(ctx, `SELECT is_primary FROM `+table+` WHERE `+target+`=? AND artist_id=?`, id, artistID).Scan(&current)
+	if errors.Is(err, sql.ErrNoRows) {
+		return db.ErrNotFound
 	}
-	if value && primary == artistId {
-		return nil
+	if err != nil {
+		return err
 	}
-	if _, err := tx.ExecContext(ctx,
-		`UPDATE artist_releases SET is_primary = ? WHERE artist_id = ? AND release_id = ?`,
-		isPrimaryInt, artistId, id); err != nil {
-		return fmt.Errorf("SetPrimaryAlbumArtist: update: %w", err)
-	}
-	if value && primary != 0 && primary != artistId {
-		if _, err := tx.ExecContext(ctx,
-			`UPDATE artist_releases SET is_primary = 0 WHERE artist_id = ? AND release_id = ?`,
-			primary, id); err != nil {
-			return fmt.Errorf("SetPrimaryAlbumArtist: clear old: %w", err)
+	if value && current != 1 {
+		if _, err = tx.ExecContext(ctx, `UPDATE `+table+` SET is_primary=0 WHERE `+target+`=? AND is_primary=1`, id); err != nil {
+			return err
 		}
+	}
+	primary := 0
+	if value {
+		primary = 1
+	}
+	if _, err = tx.ExecContext(ctx, `UPDATE `+table+` SET is_primary=? WHERE `+target+`=? AND artist_id=?`, primary, id, artistID); err != nil {
+		return err
 	}
 	return tx.Commit()
 }
 
-func (s *Sqlite) SetPrimaryTrackArtist(ctx context.Context, id int32, artistId int32, value bool) error {
-	tx, err := s.db.BeginTx(ctx, nil)
-	if err != nil {
-		return fmt.Errorf("SetPrimaryTrackArtist: BeginTx: %w", err)
-	}
-	defer tx.Rollback()
+// SetPrimaryAlbumArtist modifies only an artist already associated with the album.
+func (s *Sqlite) SetPrimaryAlbumArtist(ctx context.Context, id, artistID int32, value bool) error {
+	return s.setPrimaryRelation(ctx, "artist_releases", "release_id", id, artistID, value)
+}
 
-	var primary int32
-	tx.QueryRowContext(ctx,
-		`SELECT artist_id FROM artist_tracks WHERE track_id = ? AND is_primary = 1 LIMIT 1`, id).
-		Scan(&primary)
-
-	isPrimaryInt := 0
-	if value {
-		isPrimaryInt = 1
-	}
-	if value && primary == artistId {
-		return nil
-	}
-	if _, err := tx.ExecContext(ctx,
-		`UPDATE artist_tracks SET is_primary = ? WHERE artist_id = ? AND track_id = ?`,
-		isPrimaryInt, artistId, id); err != nil {
-		return fmt.Errorf("SetPrimaryTrackArtist: update: %w", err)
-	}
-	if value && primary != 0 && primary != artistId {
-		if _, err := tx.ExecContext(ctx,
-			`UPDATE artist_tracks SET is_primary = 0 WHERE artist_id = ? AND track_id = ?`,
-			primary, id); err != nil {
-			return fmt.Errorf("SetPrimaryTrackArtist: clear old: %w", err)
-		}
-	}
-	return tx.Commit()
+// SetPrimaryTrackArtist modifies only an artist already associated with the track.
+func (s *Sqlite) SetPrimaryTrackArtist(ctx context.Context, id, artistID int32, value bool) error {
+	return s.setPrimaryRelation(ctx, "artist_tracks", "track_id", id, artistID, value)
 }
 
 func (s *Sqlite) CountArtists(ctx context.Context, timeframe db.Timeframe) (int64, error) {
@@ -573,17 +602,30 @@ func (s *Sqlite) CountNewArtists(ctx context.Context, timeframe db.Timeframe) (i
 	return count, err
 }
 
+// MergeArtists validates catalog identities before changing any relationships.
 func (s *Sqlite) MergeArtists(ctx context.Context, fromId, toId int32, replaceImage bool) error {
 	tx, err := s.db.BeginTx(ctx, nil)
 	if err != nil {
 		return fmt.Errorf("MergeArtists: BeginTx: %w", err)
 	}
 	defer tx.Rollback()
+	if err := mergeArtistsIn(ctx, tx, fromId, toId, replaceImage); err != nil {
+		return err
+	}
+	return tx.Commit()
+}
+
+func mergeArtistsIn(ctx context.Context, tx *sql.Tx, fromId, toId int32, replaceImage bool) error {
+	if err := requireMergeRows(ctx, tx, "artists", fromId, toId); err != nil {
+		return err
+	}
 
 	if replaceImage {
 		var image, imageSrc sql.NullString
-		tx.QueryRowContext(ctx, `SELECT image, image_source FROM artists WHERE id = ?`, fromId).
-			Scan(&image, &imageSrc)
+		if err := tx.QueryRowContext(ctx, `SELECT image, image_source FROM artists WHERE id = ?`, fromId).
+			Scan(&image, &imageSrc); err != nil {
+			return fmt.Errorf("merge image: %w", err)
+		}
 		if image.Valid {
 			if _, err := tx.ExecContext(ctx,
 				`UPDATE artists SET image = ?, image_source = ? WHERE id = ?`,
@@ -616,8 +658,5 @@ func (s *Sqlite) MergeArtists(ctx context.Context, fromId, toId int32, replaceIm
 	if _, err := tx.ExecContext(ctx, `DELETE FROM artists WHERE id = ?`, fromId); err != nil {
 		return fmt.Errorf("MergeArtists: delete from: %w", err)
 	}
-	if err := cleanOrphanedEntries(ctx, tx); err != nil {
-		return fmt.Errorf("MergeArtists: clean: %w", err)
-	}
-	return tx.Commit()
+	return nil
 }

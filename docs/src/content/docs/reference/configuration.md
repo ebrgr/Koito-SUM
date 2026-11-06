@@ -5,6 +5,19 @@ description: The available configuration options when setting up Koito.
 
 Koito is configured using **environment variables**. This is the full list of configuration options supported by Koito.
 
+##### KOITO_WEB_UI
+
+- Default: `go`
+- Values: `go`; other values prevent startup.
+- Description: The Go interface provides server-rendered profile selection, home,
+  rankings, listening history, search, artist/album/track details and rewind.
+  Administration, profile management, import/export, media editing and reviewed
+  deletion/merging also use Go forms. Use “Manage this item” to sign in and edit;
+  history rows include a management link that works without JavaScript. Go mode
+  returns 404 for unsupported routes. The former `react` value is no longer
+  supported and must be removed from existing configurations. SQLite schema v3
+  and its existing data remain unchanged.
+
 The suffix `_FILE` is also supported for every environment variable. This allows the use of Docker secrets, for example: `KOITO_SUBSONIC_PARAMS_FILE=/run/secrets/subsonic-params` will load the content of the file at `/run/secrets/subsonic-params` for the environment variable `KOITO_SUBSONIC_PARAMS`.
 
 :::caution
@@ -85,9 +98,19 @@ If the environment variable is defined without **and** with the suffix at the sa
 - Default: `/etc/koito`
 - Description: The location where import folders and image caches are stored.
 
+Automatic image downloads are limited to 10 MiB per image and 10 seconds per
+request, with at most three redirects. Image-provider and MusicBrainz JSON
+responses are limited to 8 MiB. A failed image download can fall back to the
+default artwork; self-hosted HTTP(S) sources are supported. Images must be JPEG,
+PNG or static WebP; animated images and other formats are not supported.
+
 ##### KOITO_FORCE_TZ
 
 - Description: A canonical IANA database time zone name (https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) that Koito will use to serve all clients. Overrides any timezones requested via a `tz` cookie or `tz` query parameter. Koito will fail to start if this value is invalid.
+
+When this option is unset, a valid `tz` query parameter takes precedence over
+a valid `tz` cookie; otherwise Koito uses the process timezone. Activity and
+streaks use local calendar days. Weekly activity begins on Monday.
 
 ##### KOITO_DISABLE_DEEZER
 

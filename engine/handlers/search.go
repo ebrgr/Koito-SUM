@@ -23,13 +23,14 @@ type searchStore interface {
 	db.TrackStore
 }
 
+// SearchHandler keeps untrusted search parameters out of request logs.
 func SearchHandler(store searchStore) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		ctx := r.Context()
 		l := logger.FromContext(ctx)
 		q := r.URL.Query().Get("q")
 
-		l.Debug().Msgf("SearchHandler: Received search with query: %s", r.URL.Query().Encode())
+		l.Debug().Msg("SearchHandler: received search")
 
 		var artists []*models.Artist
 		var albums []*models.Album

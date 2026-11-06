@@ -1,0 +1,26 @@
+{
+  "profiles": 3,
+  "mara_listens": 152,
+  "history_page_2": 52,
+  "schema": 3,
+  "http_pages": [
+    "/",
+    "/mara?period=all_time",
+    "/mara/chart/top/artists",
+    "/mara/chart/top/albums",
+    "/mara/chart/top/tracks",
+    "/mara/listens?limit=100&page=2",
+    "/iara"
+  ],
+  "checks": [
+    "scoping",
+    "API/HTML parity",
+    "invalid filters",
+    "retained SPA",
+    "admin authentication",
+    "same-origin mutations",
+    "SQLite integrity"
+  ],
+  "go_url": "http://127.0.0.1:62701",
+  "react_url": "http://127.0.0.1:62704"
+}

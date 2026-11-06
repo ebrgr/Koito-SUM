@@ -11,6 +11,7 @@ import (
 
 	"github.com/gabehf/koito/internal/db"
 	"github.com/gabehf/koito/internal/models"
+	sqlite3 "modernc.org/sqlite"
 )
 
 const profileColumns = "id, slug, display_name, avatar_image_id, avatar_icon, created_at"
@@ -51,13 +52,14 @@ func (s *Sqlite) GetProfileByAPIKey(ctx context.Context, key string) (*models.Li
 
 var profileSlugPattern = regexp.MustCompile(`^[a-z0-9]+(-[a-z0-9]+)*$`)
 
+// UpdateListeningProfile distinguishes duplicate identity from infrastructure failures.
 func (s *Sqlite) UpdateListeningProfile(ctx context.Context, id int32, displayName, slug string) error {
 	if !validProfileIdentity(displayName, slug) {
-		return fmt.Errorf("invalid profile slug")
+		return db.ErrInvalidInput
 	}
 	result, err := s.db.ExecContext(ctx, `UPDATE listening_profiles SET display_name=?,slug=? WHERE id=?`, displayName, slug, id)
 	if err != nil {
-		return err
+		return profileConstraint(err)
 	}
 	n, err := result.RowsAffected()
 	if err == nil && n == 0 {
@@ -158,9 +160,11 @@ func (s *Sqlite) SetProfileRelay(ctx context.Context, id int32, url, token strin
 func validProfileIdentity(name, slug string) bool {
 	return strings.TrimSpace(name) != "" && len(name) <= 200 && slug != "assets" && len(slug) <= 64 && profileSlugPattern.MatchString(slug)
 }
+
+// CreateListeningProfile inserts the initial key atomically and reports duplicate slugs.
 func (s *Sqlite) CreateListeningProfile(ctx context.Context, name, slug, icon, token string) (*models.ListeningProfile, error) {
 	if !validProfileIdentity(name, slug) {
-		return nil, fmt.Errorf("invalid profile name/slug")
+		return nil, db.ErrInvalidInput
 	}
 	tx, err := s.db.BeginTx(ctx, nil)
 	if err != nil {
@@ -169,7 +173,7 @@ func (s *Sqlite) CreateListeningProfile(ctx context.Context, name, slug, icon, t
 	defer tx.Rollback()
 	result, err := tx.ExecContext(ctx, `INSERT INTO listening_profiles(slug,display_name,avatar_icon,created_at) VALUES (?,?,NULLIF(?,''),unixepoch())`, slug, strings.TrimSpace(name), icon)
 	if err != nil {
-		return nil, err
+		return nil, profileConstraint(err)
 	}
 	id, err := result.LastInsertId()
 	if err != nil {
@@ -179,10 +183,14 @@ func (s *Sqlite) CreateListeningProfile(ctx context.Context, name, slug, icon, t
 	if err != nil {
 		return nil, err
 	}
+	profile, err := scanProfile(tx.QueryRowContext(ctx, `SELECT `+profileColumns+` FROM listening_profiles WHERE id=?`, id))
+	if err != nil {
+		return nil, err
+	}
 	if err = tx.Commit(); err != nil {
 		return nil, err
 	}
-	return s.GetListeningProfileByID(ctx, int32(id))
+	return profile, nil
 }
 func (s *Sqlite) SetProfileAvatar(ctx context.Context, id int32, image, icon *string) error {
 	result, err := s.db.ExecContext(ctx, `UPDATE listening_profiles SET avatar_image_id=?,avatar_icon=? WHERE id=?`, image, icon, id)
@@ -197,4 +205,13 @@ func (s *Sqlite) DeleteListeningProfile(ctx context.Context, id int32, name stri
 	// Confirm both fields in the DELETE itself: a new scrobble or rename requires reconfirmation.
 	result, err := s.db.ExecContext(ctx, `DELETE FROM listening_profiles WHERE id=? AND display_name=? AND (SELECT COUNT(*) FROM listens WHERE profile_id=?)=?`, id, name, id, count)
 	return affectedProfileRow(result, err)
+}
+
+// profileConstraint maps SQLite uniqueness failures without hiding operational errors.
+func profileConstraint(err error) error {
+	var e *sqlite3.Error
+	if errors.As(err, &e) && (e.Code() == 2067 || e.Code() == 1555) {
+		return fmt.Errorf("profile identity: %w", db.ErrConflict)
+	}
+	return err
 }

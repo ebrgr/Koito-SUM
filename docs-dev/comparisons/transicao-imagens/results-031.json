@@ -1,0 +1,7131 @@
+{
+  "created": "2026-11-06",
+  "platform": "macOS-15.7.3-arm64-arm-64bit-Mach-O",
+  "gomaxprocs": 2,
+  "vips_concurrency": 2,
+  "versions": {
+    "go": "go version go1.26.3 darwin/arm64",
+    "vips": "vips-8.18.7",
+    "magick": "Version: ImageMagick 7.1.2-34 Q16-HDRI aarch64 c5d4ca8a0:20261014 https://imagemagick.org\nCopyright: (C) 1999 ImageMagick Studio LLC\nLicense: https://imagemagick.org/license/\nFeatures: Cipher DPC HDRI Modules \nDelegates (built-in): bzlib freetype heic jng jpeg lcms ltdl lzma png tiff webp xml zlib zstd\nCompiler: clang (17.0.0)"
+  },
+  "native_capabilities": {
+    "avif": {
+      "Load": true,
+      "Save": true
+    },
+    "gif": {
+      "Load": true,
+      "Save": true
+    },
+    "heif": {
+      "Load": true,
+      "Save": true
+    },
+    "jpeg": {
+      "Load": true,
+      "Save": true
+    },
+    "magick": {
+      "Load": true,
+      "Save": false
+    },
+    "pdf": {
+      "Load": true,
+      "Save": false
+    },
+    "png": {
+      "Load": true,
+      "Save": true
+    },
+    "svg": {
+      "Load": true,
+      "Save": false
+    },
+    "tiff": {
+      "Load": true,
+      "Save": true
+    },
+    "webp": {
+      "Load": true,
+      "Save": true
+    }
+  },
+  "rows": [
+    {
+      "width": 480,
+      "height": 480,
+      "bytes": 84240,
+      "times_ms": [
+        17.935,
+        18.635,
+        20.482
+      ],
+      "peak_rss_bytes": 35127296,
+      "wall_ms": 57.076,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "vips",
+      "input": "natural.jpg",
+      "operation": "source",
+      "size": 0,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 240.916,
+      "p50_ms": 18.635,
+      "p95_ms": 20.482,
+      "operations_per_second": 52.56149695143318,
+      "output_sha256": "ebb2fe8328d3f74c886e9d48eb491df15f6be2457dd0f912ff09ae59ab928f42",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 46.331640314367974,
+        "psnr_white_db": 46.331640314367974,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 480,
+      "height": 480,
+      "bytes": 100068,
+      "times_ms": [
+        20.445,
+        22.734,
+        27.467
+      ],
+      "peak_rss_bytes": 11321344,
+      "wall_ms": 70.685,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "natural.jpg",
+      "operation": "source",
+      "size": 0,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 188.995,
+      "p50_ms": 22.734,
+      "p95_ms": 27.467,
+      "operations_per_second": 42.44181933932235,
+      "output_sha256": "9c3ea681d6fad44e7721e57bfcf88584172a211346746ed89d6c7614e7288a31",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 45.05811877573653,
+        "psnr_white_db": 45.05811877573653,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 300,
+      "height": 300,
+      "bytes": 10720,
+      "times_ms": [
+        10.439,
+        10.614,
+        10.875
+      ],
+      "peak_rss_bytes": 35094528,
+      "wall_ms": 31.968,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "vips",
+      "input": "000-vips-natural-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "size": 300,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 69.407,
+      "p50_ms": 10.614,
+      "p95_ms": 10.875,
+      "operations_per_second": 93.84384384384383,
+      "output_sha256": "ace503f9befd51f9bae8bef1479c6cadcb3a8ebacf8449b08667d4c010081456",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 39.14702201056923,
+        "psnr_white_db": 39.14702201056923,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 300,
+      "height": 300,
+      "bytes": 13062,
+      "times_ms": [
+        14.882,
+        15.148,
+        15.509
+      ],
+      "peak_rss_bytes": 11108352,
+      "wall_ms": 45.55,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "000-vips-natural-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "size": 300,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 49.98,
+      "p50_ms": 15.148,
+      "p95_ms": 15.509,
+      "operations_per_second": 65.86169045005488,
+      "output_sha256": "4e0d7e518de2bc0b483ec04cd511ceb0acb0f2fa238dc1144d2158196d376f1f",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 38.92637579101312,
+        "psnr_white_db": 38.92637579101312,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 300,
+      "height": 300,
+      "bytes": 11546,
+      "times_ms": [
+        11.066,
+        11.164,
+        11.753
+      ],
+      "peak_rss_bytes": 35438592,
+      "wall_ms": 33.997,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "vips",
+      "input": "001-pure-natural-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "size": 300,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 71.226,
+      "p50_ms": 11.164,
+      "p95_ms": 11.753,
+      "operations_per_second": 88.24308027178868,
+      "output_sha256": "ad1d15efa0bb8000fa59383aa1886815b1cecef708e6009ffd9fa648da3c87be",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 39.29929950675839,
+        "psnr_white_db": 39.29929950675839,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 300,
+      "height": 300,
+      "bytes": 14050,
+      "times_ms": [
+        16.144,
+        16.15,
+        16.642
+      ],
+      "peak_rss_bytes": 11173888,
+      "wall_ms": 48.946,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "001-pure-natural-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "size": 300,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 53.031,
+      "p50_ms": 16.15,
+      "p95_ms": 16.642,
+      "operations_per_second": 61.292036121439956,
+      "output_sha256": "7edc1b0302464f9a2da9476d0f853faf14c74402e1e13a7f0a971fa1f693ae6c",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 38.86642825062606,
+        "psnr_white_db": 38.86642825062606,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 480,
+      "height": 480,
+      "bytes": 79706,
+      "times_ms": [
+        18.334,
+        18.412,
+        18.846
+      ],
+      "peak_rss_bytes": 36667392,
+      "wall_ms": 55.6,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "vips",
+      "input": "natural.png",
+      "operation": "source",
+      "size": 0,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 92.551,
+      "p50_ms": 18.412,
+      "p95_ms": 18.846,
+      "operations_per_second": 53.956834532374096,
+      "output_sha256": "d357bf06443139b6b1efe5f348635d5dfde43843ca4595a6af6c4c26e79cda8b",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 46.72686175892724,
+        "psnr_white_db": 46.72686175892724,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 480,
+      "height": 480,
+      "bytes": 94374,
+      "times_ms": [
+        19.591,
+        19.624,
+        20.068
+      ],
+      "peak_rss_bytes": 11960320,
+      "wall_ms": 59.294,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "natural.png",
+      "operation": "source",
+      "size": 0,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 63.231,
+      "p50_ms": 19.624,
+      "p95_ms": 20.068,
+      "operations_per_second": 50.59533848281445,
+      "output_sha256": "8dde97dc9494c50b5bf2b45692fe7f9206f1027869dea3e7a84c7e066a896745",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 45.55501078782221,
+        "psnr_white_db": 45.55501078782221,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 300,
+      "height": 300,
+      "bytes": 10638,
+      "times_ms": [
+        10.151,
+        10.19,
+        10.333
+      ],
+      "peak_rss_bytes": 34390016,
+      "wall_ms": 30.707,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "vips",
+      "input": "006-vips-natural-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "size": 300,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 66.528,
+      "p50_ms": 10.19,
+      "p95_ms": 10.333,
+      "operations_per_second": 97.69759338261633,
+      "output_sha256": "59ec1166ea87dd404668f24629ea285b3efe2c5b5cdfe5b3dce9446d419798b1",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 39.38171824412058,
+        "psnr_white_db": 39.38171824412058,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 300,
+      "height": 300,
+      "bytes": 12538,
+      "times_ms": [
+        14.198,
+        14.574,
+        14.927
+      ],
+      "peak_rss_bytes": 11730944,
+      "wall_ms": 43.71,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "006-vips-natural-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "size": 300,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 49.144,
+      "p50_ms": 14.574,
+      "p95_ms": 14.927,
+      "operations_per_second": 68.63417982155113,
+      "output_sha256": "c8c45128c0f3627db9866ef3494ea3a03f1a09b1d46f66c9f21db49b150c20c8",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 39.08537317695217,
+        "psnr_white_db": 39.08537317695217,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 300,
+      "height": 300,
+      "bytes": 11196,
+      "times_ms": [
+        10.724,
+        10.951,
+        11.015
+      ],
+      "peak_rss_bytes": 35962880,
+      "wall_ms": 32.705,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "vips",
+      "input": "007-pure-natural-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "size": 300,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 70.183,
+      "p50_ms": 10.951,
+      "p95_ms": 11.015,
+      "operations_per_second": 91.72909341079347,
+      "output_sha256": "ab28d20fb6985a2c35784c8ced3c4c650538aeddd2fdde96c5a9b4ba50c483e0",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 39.53408672461033,
+        "psnr_white_db": 39.53408672461033,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 300,
+      "height": 300,
+      "bytes": 13260,
+      "times_ms": [
+        15.675,
+        15.926,
+        16.002
+      ],
+      "peak_rss_bytes": 10977280,
+      "wall_ms": 47.615,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "007-pure-natural-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "size": 300,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 51.817,
+      "p50_ms": 15.926,
+      "p95_ms": 16.002,
+      "operations_per_second": 63.00535545521369,
+      "output_sha256": "43fb4054ed053977cac8159e7340c99fbf5c8206cd1463554625ab8578bb823b",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 39.18263162769607,
+        "psnr_white_db": 39.18263162769607,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 480,
+      "height": 480,
+      "bytes": 156374,
+      "times_ms": [
+        23.955,
+        24.137,
+        24.25
+      ],
+      "peak_rss_bytes": 39075840,
+      "wall_ms": 72.359,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "vips",
+      "input": "texture.jpg",
+      "operation": "source",
+      "size": 0,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 110.303,
+      "p50_ms": 24.137,
+      "p95_ms": 24.25,
+      "operations_per_second": 41.45994278527896,
+      "output_sha256": "ddc3e742ca56339378841565aa38ac365de80099b0756e618f14283d6309c2df",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.929891901195056,
+        "psnr_white_db": 21.929891901195056,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 480,
+      "height": 480,
+      "bytes": 187742,
+      "times_ms": [
+        34.745,
+        40.562,
+        42.424
+      ],
+      "peak_rss_bytes": 12271616,
+      "wall_ms": 117.743,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "texture.jpg",
+      "operation": "source",
+      "size": 0,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 122.106,
+      "p50_ms": 40.562,
+      "p95_ms": 42.424,
+      "operations_per_second": 25.479221694707967,
+      "output_sha256": "e00977748e5d9762e364c4540020ff40ecbe2e66bb3230cf623be4b4d3fb865c",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.999502572971217,
+        "psnr_white_db": 21.999502572971217,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 300,
+      "height": 300,
+      "bytes": 44832,
+      "times_ms": [
+        15.09,
+        15.107,
+        15.455
+      ],
+      "peak_rss_bytes": 36880384,
+      "wall_ms": 45.662,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "vips",
+      "input": "012-vips-texture-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "size": 300,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 82.798,
+      "p50_ms": 15.107,
+      "p95_ms": 15.455,
+      "operations_per_second": 65.70014454031799,
+      "output_sha256": "7c3efff51538cc1e7295906aa1e925ee3fe56470e6e4b8f65df49f86ebd52c72",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 20.82787556617776,
+        "psnr_white_db": 20.82787556617776,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 300,
+      "height": 300,
+      "bytes": 50404,
+      "times_ms": [
+        26.31,
+        26.811,
+        28.736
+      ],
+      "peak_rss_bytes": 10846208,
+      "wall_ms": 81.868,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "012-vips-texture-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "size": 300,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 86.088,
+      "p50_ms": 26.811,
+      "p95_ms": 28.736,
+      "operations_per_second": 36.64435432647677,
+      "output_sha256": "c5a7e36ad8df99c90b8947cede870ea4fee7dcd720b30af3b882b568233a9bcf",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.195621077243644,
+        "psnr_white_db": 21.195621077243644,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 300,
+      "height": 300,
+      "bytes": 44210,
+      "times_ms": [
+        15.891,
+        16.17,
+        16.513
+      ],
+      "peak_rss_bytes": 34734080,
+      "wall_ms": 48.593,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "vips",
+      "input": "013-pure-texture-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "size": 300,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 85.942,
+      "p50_ms": 16.17,
+      "p95_ms": 16.513,
+      "operations_per_second": 61.73728726359763,
+      "output_sha256": "a1e5f4fa9f7d7fcc72a89fbce206975a30f3ecc9caf41516a9d604c41b34d2ad",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 20.821694722371547,
+        "psnr_white_db": 20.821694722371547,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 300,
+      "height": 300,
+      "bytes": 50632,
+      "times_ms": [
+        28.408,
+        28.598,
+        29.504
+      ],
+      "peak_rss_bytes": 10715136,
+      "wall_ms": 86.521,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "013-pure-texture-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "size": 300,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 90.714,
+      "p50_ms": 28.598,
+      "p95_ms": 29.504,
+      "operations_per_second": 34.673663041342564,
+      "output_sha256": "cf3217bdae72d3720bc43608f34c83651317c3e5e945c95f28c05fe74d94748a",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.22223264687459,
+        "psnr_white_db": 21.22223264687459,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 480,
+      "height": 480,
+      "bytes": 128294,
+      "times_ms": [
+        20.157,
+        20.309,
+        20.672
+      ],
+      "peak_rss_bytes": 38944768,
+      "wall_ms": 61.156,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "vips",
+      "input": "texture.png",
+      "operation": "source",
+      "size": 0,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 98.107,
+      "p50_ms": 20.309,
+      "p95_ms": 20.672,
+      "operations_per_second": 49.05487605467983,
+      "output_sha256": "87141df5249fa7ddc15869088866e778d6bbab5cde3a2e67f4b88af61676900e",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.966861015418697,
+        "psnr_white_db": 21.966861015418697,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 480,
+      "height": 480,
+      "bytes": 161812,
+      "times_ms": [
+        24.646,
+        24.956,
+        25.51
+      ],
+      "peak_rss_bytes": 12959744,
+      "wall_ms": 75.122,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "texture.png",
+      "operation": "source",
+      "size": 0,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 78.885,
+      "p50_ms": 24.956,
+      "p95_ms": 25.51,
+      "operations_per_second": 39.935039003221426,
+      "output_sha256": "92da43dd8b9daf3589d560374fbdbce4d05f3a861a8402a47061145f3fa19ce6",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 22.05554099814769,
+        "psnr_white_db": 22.05554099814769,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 300,
+      "height": 300,
+      "bytes": 44118,
+      "times_ms": [
+        13.778,
+        13.885,
+        14.371
+      ],
+      "peak_rss_bytes": 36323328,
+      "wall_ms": 42.05,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "vips",
+      "input": "018-vips-texture-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "size": 300,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 78.842,
+      "p50_ms": 13.885,
+      "p95_ms": 14.371,
+      "operations_per_second": 71.34363852556481,
+      "output_sha256": "aceed6ca3192b3875c0f2825d3c8468a51399654166eddf2618d537f662bbc81",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 20.806467538224112,
+        "psnr_white_db": 20.806467538224112,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 300,
+      "height": 300,
+      "bytes": 50420,
+      "times_ms": [
+        24.11,
+        24.183,
+        24.357
+      ],
+      "peak_rss_bytes": 11108352,
+      "wall_ms": 72.66,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "018-vips-texture-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "size": 300,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 77.077,
+      "p50_ms": 24.183,
+      "p95_ms": 24.357,
+      "operations_per_second": 41.28819157720892,
+      "output_sha256": "f3444b0c52b378af7382d88f1cd3aee4ec5db225ad0bb1e5b909976a9c44edea",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.197152826247883,
+        "psnr_white_db": 21.197152826247883,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 300,
+      "height": 300,
+      "bytes": 44170,
+      "times_ms": [
+        15.446,
+        15.493,
+        15.753
+      ],
+      "peak_rss_bytes": 35045376,
+      "wall_ms": 46.709,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "vips",
+      "input": "019-pure-texture-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "size": 300,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 85.756,
+      "p50_ms": 15.493,
+      "p95_ms": 15.753,
+      "operations_per_second": 64.22745081247726,
+      "output_sha256": "4c1316f9ba25dae900c933e2b8c380878b8f6d89ef4de4fbc8a03a469a0c1776",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 20.827195756452245,
+        "psnr_white_db": 20.827195756452245,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 300,
+      "height": 300,
+      "bytes": 50546,
+      "times_ms": [
+        26.949,
+        26.984,
+        27.14
+      ],
+      "peak_rss_bytes": 11272192,
+      "wall_ms": 81.084,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "019-pure-texture-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "size": 300,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 84.995,
+      "p50_ms": 26.984,
+      "p95_ms": 27.14,
+      "operations_per_second": 36.998668047950275,
+      "output_sha256": "561634d02f8ede7c7981d7ed942e059a31fcc2f9bfd755d763e6e07eadbef8d7",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.228488460875017,
+        "psnr_white_db": 21.228488460875017,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 240,
+      "height": 240,
+      "bytes": 33386,
+      "times_ms": [
+        9.553,
+        9.599,
+        9.993
+      ],
+      "peak_rss_bytes": 30982144,
+      "wall_ms": 29.161,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "vips",
+      "input": "alpha.png",
+      "operation": "source",
+      "size": 0,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 66.172,
+      "p50_ms": 9.599,
+      "p95_ms": 9.993,
+      "operations_per_second": 102.87713041390897,
+      "output_sha256": "d898ba9590ded0a799b2197e2c60baee876c53035b8121045029de41ef5348d9",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 27.51622358402703,
+        "psnr_white_db": 27.516223584027028,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 240,
+      "height": 240,
+      "bytes": 40960,
+      "times_ms": [
+        14.719,
+        14.816,
+        15.018
+      ],
+      "peak_rss_bytes": 11501568,
+      "wall_ms": 44.564,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "alpha.png",
+      "operation": "source",
+      "size": 0,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 48.267,
+      "p50_ms": 14.816,
+      "p95_ms": 15.018,
+      "operations_per_second": 67.31891212638004,
+      "output_sha256": "7581a2c7bbd68ab59bc770b49a1a9c47e89541fa556adc6884c29c0bd09fd5e5",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 27.61028641204304,
+        "psnr_white_db": 27.61028641204304,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 240,
+      "height": 240,
+      "bytes": 20636,
+      "times_ms": [
+        9.581,
+        9.608,
+        9.785
+      ],
+      "peak_rss_bytes": 31588352,
+      "wall_ms": 28.984,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "vips",
+      "input": "024-vips-alpha-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "size": 300,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 65.196,
+      "p50_ms": 9.608,
+      "p95_ms": 9.785,
+      "operations_per_second": 103.50538227987855,
+      "output_sha256": "99153640c9bb6b4b8acb3cf7d8cd3be56d023368185fb8266a51660792d9ec76",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 26.282448588217537,
+        "psnr_white_db": 26.282448588217537,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 240,
+      "height": 240,
+      "bytes": 24982,
+      "times_ms": [
+        13.81,
+        13.877,
+        14.022
+      ],
+      "peak_rss_bytes": 11616256,
+      "wall_ms": 41.719,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "024-vips-alpha-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "size": 300,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 45.889,
+      "p50_ms": 13.877,
+      "p95_ms": 14.022,
+      "operations_per_second": 71.90968144011123,
+      "output_sha256": "75f9f85eba0e88bb675186e176051840fa14ec9a38fbc8bbce0572118014b543",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 27.325679191159644,
+        "psnr_white_db": 27.325679191159644,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 240,
+      "height": 240,
+      "bytes": 20772,
+      "times_ms": [
+        9.715,
+        9.773,
+        10.086
+      ],
+      "peak_rss_bytes": 31424512,
+      "wall_ms": 29.584,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "vips",
+      "input": "025-pure-alpha-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "size": 300,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 66.364,
+      "p50_ms": 9.773,
+      "p95_ms": 10.086,
+      "operations_per_second": 101.4061654948621,
+      "output_sha256": "06b5cea1cc0496460aa5ee6c96389b6efeb492bea0b1d0d61a7f3ce717512f9a",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 26.327401009743113,
+        "psnr_white_db": 26.327401009743113,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 240,
+      "height": 240,
+      "bytes": 24594,
+      "times_ms": [
+        14.094,
+        14.142,
+        14.648
+      ],
+      "peak_rss_bytes": 11206656,
+      "wall_ms": 42.894,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "025-pure-alpha-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "size": 300,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 47.008,
+      "p50_ms": 14.142,
+      "p95_ms": 14.648,
+      "operations_per_second": 69.93985172751434,
+      "output_sha256": "c2bf9612502c5963c4582dbbc7f0e8b78ddeb2cd2684c1e1f56147c802ee0aa3",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 27.41600420293352,
+        "psnr_white_db": 27.416004202933518,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 48,
+      "height": 48,
+      "bytes": 778,
+      "times_ms": [
+        0.511,
+        0.558,
+        0.688
+      ],
+      "peak_rss_bytes": 20611072,
+      "wall_ms": 1.765,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "vips",
+      "input": "small.png",
+      "operation": "source",
+      "size": 0,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 38.323,
+      "p50_ms": 0.558,
+      "p95_ms": 0.688,
+      "operations_per_second": 1699.71671388102,
+      "output_sha256": "d3ad976fa61999fc0718f380dd47b364c59f2edbcb3fbc1f60bf490359c32425",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 26.757044512022617,
+        "psnr_white_db": 26.757044512022617,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 48,
+      "height": 48,
+      "bytes": 896,
+      "times_ms": [
+        0.324,
+        0.358,
+        0.479
+      ],
+      "peak_rss_bytes": 5816320,
+      "wall_ms": 1.173,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "small.png",
+      "operation": "source",
+      "size": 0,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 4.272,
+      "p50_ms": 0.358,
+      "p95_ms": 0.479,
+      "operations_per_second": 2557.544757033248,
+      "output_sha256": "bf3c733b3c251d431b555bae3843b6952fc73acac477582d5b6af9ff4c8cc220",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 26.98906041718384,
+        "psnr_white_db": 26.98906041718384,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 48,
+      "height": 48,
+      "bytes": 530,
+      "times_ms": [
+        0.568,
+        0.592,
+        0.747
+      ],
+      "peak_rss_bytes": 20545536,
+      "wall_ms": 1.922,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "vips",
+      "input": "030-vips-small-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "size": 300,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 37.952,
+      "p50_ms": 0.592,
+      "p95_ms": 0.747,
+      "operations_per_second": 1560.8740894901146,
+      "output_sha256": "2ef6ef6fc1d07a36ae964e4f998575c5843cee6b0627d5720d4cdd07ce29fa76",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 24.127722748613458,
+        "psnr_white_db": 24.127722748613458,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 48,
+      "height": 48,
+      "bytes": 640,
+      "times_ms": [
+        0.353,
+        0.384,
+        0.524
+      ],
+      "peak_rss_bytes": 5505024,
+      "wall_ms": 1.273,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "030-vips-small-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "size": 300,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 5.513,
+      "p50_ms": 0.384,
+      "p95_ms": 0.524,
+      "operations_per_second": 2356.6378633150043,
+      "output_sha256": "8fa9e1fc1d979841d2426e9473a308c921a7027b90839ec14c00793df0340502",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 26.58402140269592,
+        "psnr_white_db": 26.58402140269592,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 48,
+      "height": 48,
+      "bytes": 540,
+      "times_ms": [
+        0.549,
+        0.569,
+        0.693
+      ],
+      "peak_rss_bytes": 20430848,
+      "wall_ms": 1.816,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "vips",
+      "input": "031-pure-small-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "size": 300,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 37.687,
+      "p50_ms": 0.569,
+      "p95_ms": 0.693,
+      "operations_per_second": 1651.9823788546255,
+      "output_sha256": "27301291bd55524c17c9e546a6b4e702705de272673790a2f6e70e6071fcfc45",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 24.281329001361964,
+        "psnr_white_db": 24.281329001361964,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 48,
+      "height": 48,
+      "bytes": 636,
+      "times_ms": [
+        0.351,
+        0.384,
+        0.522
+      ],
+      "peak_rss_bytes": 5242880,
+      "wall_ms": 1.267,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "031-pure-small-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "size": 300,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 5.006,
+      "p50_ms": 0.384,
+      "p95_ms": 0.522,
+      "operations_per_second": 2367.797947908445,
+      "output_sha256": "eb08f322b2eb7657d3832cb985fc45aaff8377f6c4297930cd762035b151a392",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 26.81709475447265,
+        "psnr_white_db": 26.81709475447265,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 100,
+      "height": 100,
+      "bytes": 6700,
+      "times_ms": [
+        1.981,
+        2.075,
+        2.149
+      ],
+      "peak_rss_bytes": 21921792,
+      "wall_ms": 6.213,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "vips",
+      "input": "thin.png",
+      "operation": "source",
+      "size": 0,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 41.902,
+      "p50_ms": 2.075,
+      "p95_ms": 2.149,
+      "operations_per_second": 482.8585224529213,
+      "output_sha256": "a29b69666ede2c2d0521554c66eb036e42dac85bd829c5d6ef7830127902a9fa",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.94765699632582,
+        "psnr_white_db": 21.94765699632582,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 100,
+      "height": 100,
+      "bytes": 8634,
+      "times_ms": [
+        2.476,
+        2.499,
+        2.699
+      ],
+      "peak_rss_bytes": 7340032,
+      "wall_ms": 7.684,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "thin.png",
+      "operation": "source",
+      "size": 0,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 10.848,
+      "p50_ms": 2.499,
+      "p95_ms": 2.699,
+      "operations_per_second": 390.4216553878189,
+      "output_sha256": "c05e3c18d970075cbaffcf307135c11c5027a2aab40ae62f26cc15792246e972",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 22.0709251148875,
+        "psnr_white_db": 22.0709251148875,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 100,
+      "height": 100,
+      "bytes": 4052,
+      "times_ms": [
+        1.609,
+        1.624,
+        1.798
+      ],
+      "peak_rss_bytes": 21610496,
+      "wall_ms": 5.042,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "vips",
+      "input": "036-vips-thin-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "size": 300,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 40.256,
+      "p50_ms": 1.624,
+      "p95_ms": 1.798,
+      "operations_per_second": 595.0019833399446,
+      "output_sha256": "bb4660fd7f7a344b29bfdc5a281a9b792d695476f2c91567f0b70a499eff0ec0",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 20.734600014491043,
+        "psnr_white_db": 20.734600014491043,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 100,
+      "height": 100,
+      "bytes": 5418,
+      "times_ms": [
+        2.049,
+        2.088,
+        2.36
+      ],
+      "peak_rss_bytes": 6258688,
+      "wall_ms": 6.508,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "036-vips-thin-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "size": 300,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 10.57,
+      "p50_ms": 2.088,
+      "p95_ms": 2.36,
+      "operations_per_second": 460.9711124769515,
+      "output_sha256": "d9b0ece33f036756dd44de34860108fa5f760bae3e3d74a119e6e3e0701abb82",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.755353307096442,
+        "psnr_white_db": 21.755353307096442,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 100,
+      "height": 100,
+      "bytes": 4084,
+      "times_ms": [
+        1.653,
+        1.723,
+        1.842
+      ],
+      "peak_rss_bytes": 21430272,
+      "wall_ms": 5.227,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "vips",
+      "input": "037-pure-thin-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "size": 300,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 40.935,
+      "p50_ms": 1.723,
+      "p95_ms": 1.842,
+      "operations_per_second": 573.9429883298258,
+      "output_sha256": "55c2d3542ddafd7a513e223ae48e77c249788a9a86c7a7db641012616f19e4b2",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 20.776861227600882,
+        "psnr_white_db": 20.776861227600882,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 100,
+      "height": 100,
+      "bytes": 5318,
+      "times_ms": [
+        2.099,
+        2.251,
+        2.416
+      ],
+      "peak_rss_bytes": 6078464,
+      "wall_ms": 6.777,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "037-pure-thin-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "size": 300,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 10.672,
+      "p50_ms": 2.251,
+      "p95_ms": 2.416,
+      "operations_per_second": 442.67374944665784,
+      "output_sha256": "f5fb4d182afc5651f9062ea6df9557eeb334074a1754a9c19611889a0fed276a",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.873010028245705,
+        "psnr_white_db": 21.873010028245705,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 1200,
+      "height": 1200,
+      "bytes": 1077268,
+      "times_ms": [
+        139.702,
+        139.844,
+        140.167
+      ],
+      "peak_rss_bytes": 114147328,
+      "wall_ms": 419.724,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "vips",
+      "input": "large.png",
+      "operation": "source",
+      "size": 0,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 459.158,
+      "p50_ms": 139.844,
+      "p95_ms": 140.167,
+      "operations_per_second": 7.1475541069845905,
+      "output_sha256": "02fd02689663aeac1dc5ae1e4c7959137b9c2ce3725c13d25c41c68b6551a4e5",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 22.3780663983125,
+        "psnr_white_db": 22.3780663983125,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 1200,
+      "height": 1200,
+      "bytes": 1299892,
+      "times_ms": [
+        193.536,
+        193.823,
+        197.82
+      ],
+      "peak_rss_bytes": 67878912,
+      "wall_ms": 585.191,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "large.png",
+      "operation": "source",
+      "size": 0,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 590.444,
+      "p50_ms": 193.823,
+      "p95_ms": 197.82,
+      "operations_per_second": 5.126531337631645,
+      "output_sha256": "e47158cf347db7f42fbef5016b96be78b30ac2d0d65075d7226941378c5e75b0",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 22.435886894464204,
+        "psnr_white_db": 22.435886894464204,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 300,
+      "height": 300,
+      "bytes": 57004,
+      "times_ms": [
+        44.288,
+        44.545,
+        44.55
+      ],
+      "peak_rss_bytes": 57294848,
+      "wall_ms": 133.402,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "vips",
+      "input": "042-vips-large-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "size": 300,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 171.001,
+      "p50_ms": 44.545,
+      "p95_ms": 44.55,
+      "operations_per_second": 22.48841846449079,
+      "output_sha256": "7f72fbd893139c45bff04b5519d882587db17e4c00ebfe16b1a9a6ab28f8e618",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 17.40559251124793,
+        "psnr_white_db": 17.40559251124793,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 300,
+      "height": 300,
+      "bytes": 59900,
+      "times_ms": [
+        100.92,
+        101.563,
+        101.988
+      ],
+      "peak_rss_bytes": 26542080,
+      "wall_ms": 304.482,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "042-vips-large-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "size": 300,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 309.211,
+      "p50_ms": 101.563,
+      "p95_ms": 101.988,
+      "operations_per_second": 9.852799180247107,
+      "output_sha256": "d83e4f9339481a3096fe61a3e5138d2be2b46c28bdc82b74d639980ecd2e212c",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 17.5031146064951,
+        "psnr_white_db": 17.5031146064951,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 300,
+      "height": 300,
+      "bytes": 56776,
+      "times_ms": [
+        53.654,
+        54.192,
+        54.649
+      ],
+      "peak_rss_bytes": 61358080,
+      "wall_ms": 162.506,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "vips",
+      "input": "043-pure-large-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "size": 300,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 199.335,
+      "p50_ms": 54.192,
+      "p95_ms": 54.649,
+      "operations_per_second": 18.460856829901665,
+      "output_sha256": "4e81bfa6964328ec9f0b22afdfdfbf670c4b3055b4c299a0011cb79e7518fa63",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 17.40401862301596,
+        "psnr_white_db": 17.40401862301596,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 300,
+      "height": 300,
+      "bytes": 59706,
+      "times_ms": [
+        122.101,
+        122.106,
+        122.362
+      ],
+      "peak_rss_bytes": 27787264,
+      "wall_ms": 366.579,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "043-pure-large-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "size": 300,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 371.079,
+      "p50_ms": 122.106,
+      "p95_ms": 122.362,
+      "operations_per_second": 8.183774847986383,
+      "output_sha256": "c32a6886b0abfe3af1abce7fd6e0283d0f42dafcc1b153c01818450f1613c12c",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 17.499237126779395,
+        "psnr_white_db": 17.499237126779395,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 240,
+      "height": 240,
+      "bytes": 33338,
+      "times_ms": [
+        5.901,
+        6.153,
+        6.263
+      ],
+      "peak_rss_bytes": 25591808,
+      "wall_ms": 18.33,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "vips",
+      "input": "icc.png",
+      "operation": "source",
+      "size": 0,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 56.419,
+      "p50_ms": 6.153,
+      "p95_ms": 6.263,
+      "operations_per_second": 163.66612111292963,
+      "output_sha256": "66fbb21d0f22da05e7ab10903bbc897db5ce56274f340df040c8bc6a77f1545d",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.962843171798404,
+        "psnr_white_db": 21.962843171798404,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 240,
+      "height": 240,
+      "bytes": 41104,
+      "times_ms": [
+        9.953,
+        10.035,
+        10.172
+      ],
+      "peak_rss_bytes": 9420800,
+      "wall_ms": 30.171,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "icc.png",
+      "operation": "source",
+      "size": 0,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 34.255,
+      "p50_ms": 10.035,
+      "p95_ms": 10.172,
+      "operations_per_second": 99.43323058566173,
+      "output_sha256": "62f240b8afae7d4db620ff84261411732df1d4f4d5a5e3b42eab13389f96aff6",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 22.051374648879758,
+        "psnr_white_db": 22.051374648879758,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 240,
+      "height": 240,
+      "bytes": 20414,
+      "times_ms": [
+        5.875,
+        6.216,
+        6.261
+      ],
+      "peak_rss_bytes": 25526272,
+      "wall_ms": 18.362,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "vips",
+      "input": "048-vips-icc-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "size": 300,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 54.932,
+      "p50_ms": 6.216,
+      "p95_ms": 6.261,
+      "operations_per_second": 163.3808953273064,
+      "output_sha256": "63fdacd88affb80822a5616799199051d6b4c5272c9da88f6952511a5ffecee7",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 20.726591205070406,
+        "psnr_white_db": 20.726591205070406,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 240,
+      "height": 240,
+      "bytes": 25176,
+      "times_ms": [
+        9.64,
+        9.829,
+        9.971
+      ],
+      "peak_rss_bytes": 9175040,
+      "wall_ms": 29.45,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "048-vips-icc-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "size": 300,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 33.6,
+      "p50_ms": 9.829,
+      "p95_ms": 9.971,
+      "operations_per_second": 101.86757215619694,
+      "output_sha256": "cf1fa2cda636adbd2554ce8fb6038fabfab9a96a95e458c65dcff1fd3ef4b0e3",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.77257535341438,
+        "psnr_white_db": 21.77257535341438,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 240,
+      "height": 240,
+      "bytes": 20560,
+      "times_ms": [
+        6.296,
+        6.454,
+        6.828
+      ],
+      "peak_rss_bytes": 26017792,
+      "wall_ms": 19.593,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "vips",
+      "input": "049-pure-icc-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "size": 300,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 55.722,
+      "p50_ms": 6.454,
+      "p95_ms": 6.828,
+      "operations_per_second": 153.1159087429184,
+      "output_sha256": "a7f0bf4bd39fab8d7812a6d1811d80038484161565b8f2a8e5d00169bd68f2a9",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 20.766349331229076,
+        "psnr_white_db": 20.766349331229076,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 240,
+      "height": 240,
+      "bytes": 24808,
+      "times_ms": [
+        10.404,
+        10.445,
+        10.921
+      ],
+      "peak_rss_bytes": 9289728,
+      "wall_ms": 31.782,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "049-pure-icc-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "size": 300,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 35.767,
+      "p50_ms": 10.445,
+      "p95_ms": 10.921,
+      "operations_per_second": 94.3930526713234,
+      "output_sha256": "b31565da6bfb611110072fecfb95dece9d492a7e38da97563a444e5035b3b4a0",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.846558974736,
+        "psnr_white_db": 21.846558974736,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 480,
+      "height": 480,
+      "bytes": 158064,
+      "times_ms": [
+        36.82,
+        39.194,
+        45.137
+      ],
+      "peak_rss_bytes": 45940736,
+      "wall_ms": 121.17,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "vips",
+      "input": "cmyk.jpg",
+      "operation": "source",
+      "size": 0,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 189.988,
+      "p50_ms": 39.194,
+      "p95_ms": 45.137,
+      "operations_per_second": 24.75860361475613,
+      "output_sha256": "f9c840839832554062052d4072d7ea506ac7f64a90017c0c69a0076b9b664007",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 16.806870877907343,
+        "psnr_white_db": 16.806870877907343,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 480,
+      "height": 480,
+      "bytes": 194548,
+      "times_ms": [
+        40.356,
+        40.424,
+        41.366
+      ],
+      "peak_rss_bytes": 13041664,
+      "wall_ms": 122.157,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "cmyk.jpg",
+      "operation": "source",
+      "size": 0,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 126.384,
+      "p50_ms": 40.424,
+      "p95_ms": 41.366,
+      "operations_per_second": 24.558559886048283,
+      "output_sha256": "727f9c479f018d5ed59a9d89852beb20c2f6d7f3405b94f19b88ffc47e0034ec",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 22.057781377170738,
+        "psnr_white_db": 22.057781377170738,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 300,
+      "height": 300,
+      "bytes": 41736,
+      "times_ms": [
+        14.858,
+        15.056,
+        15.409
+      ],
+      "peak_rss_bytes": 35438592,
+      "wall_ms": 45.331,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "vips",
+      "input": "054-vips-cmyk-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "size": 300,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 82.476,
+      "p50_ms": 15.056,
+      "p95_ms": 15.409,
+      "operations_per_second": 66.17987690542896,
+      "output_sha256": "dbe9fb535bf9f3c40547413c8e81f386dab5a035e6e49cbb5264b3c4260ec35d",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 16.664647530062933,
+        "psnr_white_db": 16.664647530062933,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 300,
+      "height": 300,
+      "bytes": 47566,
+      "times_ms": [
+        26.481,
+        26.488,
+        26.533
+      ],
+      "peak_rss_bytes": 11059200,
+      "wall_ms": 79.513,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "054-vips-cmyk-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "size": 300,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 83.736,
+      "p50_ms": 26.488,
+      "p95_ms": 26.533,
+      "operations_per_second": 37.729679423490495,
+      "output_sha256": "33b1c499a09c79c099424e797ec4de4519a3e83db3a56aad3a6cb273ded012b1",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 16.84401914799327,
+        "psnr_white_db": 16.84401914799327,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 300,
+      "height": 300,
+      "bytes": 45054,
+      "times_ms": [
+        16.544,
+        16.821,
+        17.613
+      ],
+      "peak_rss_bytes": 38731776,
+      "wall_ms": 50.988,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "vips",
+      "input": "055-pure-cmyk-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "size": 300,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 87.783,
+      "p50_ms": 16.821,
+      "p95_ms": 17.613,
+      "operations_per_second": 58.83737349964698,
+      "output_sha256": "43f0d8ae547fbf74602d26ba1792392c6f9dfab8de556d8188b9dce018f76025",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 20.91662381359268,
+        "psnr_white_db": 20.91662381359268,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 300,
+      "height": 300,
+      "bytes": 50696,
+      "times_ms": [
+        29.374,
+        29.853,
+        30.241
+      ],
+      "peak_rss_bytes": 10764288,
+      "wall_ms": 89.479,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "055-pure-cmyk-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "size": 300,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 93.638,
+      "p50_ms": 29.853,
+      "p95_ms": 30.241,
+      "operations_per_second": 33.52741984152706,
+      "output_sha256": "2729bc78e1c0e4075f643bc89d72cd686e6368c0e612dad57b236b83cb9ecb0b",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.278464914521855,
+        "psnr_white_db": 21.278464914521855,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 480,
+      "height": 480,
+      "bytes": 156374,
+      "times_ms": [
+        24.115,
+        24.244,
+        25.074
+      ],
+      "peak_rss_bytes": 38813696,
+      "wall_ms": 73.44,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "vips",
+      "input": "exif-1.jpg",
+      "operation": "source",
+      "size": 0,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 111.283,
+      "p50_ms": 24.244,
+      "p95_ms": 25.074,
+      "operations_per_second": 40.84967320261438,
+      "output_sha256": "ddc3e742ca56339378841565aa38ac365de80099b0756e618f14283d6309c2df",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.929891901195056,
+        "psnr_white_db": 21.929891901195056,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 480,
+      "height": 480,
+      "bytes": 187742,
+      "times_ms": [
+        34.503,
+        34.846,
+        35.177
+      ],
+      "peak_rss_bytes": 12238848,
+      "wall_ms": 104.536,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "exif-1.jpg",
+      "operation": "source",
+      "size": 0,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 108.564,
+      "p50_ms": 34.846,
+      "p95_ms": 35.177,
+      "operations_per_second": 28.698247493686385,
+      "output_sha256": "e00977748e5d9762e364c4540020ff40ecbe2e66bb3230cf623be4b4d3fb865c",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.999502572971217,
+        "psnr_white_db": 21.999502572971217,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 300,
+      "height": 300,
+      "bytes": 44832,
+      "times_ms": [
+        14.993,
+        15.109,
+        15.136
+      ],
+      "peak_rss_bytes": 38010880,
+      "wall_ms": 45.244,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "vips",
+      "input": "060-vips-exif-1-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "size": 300,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 81.299,
+      "p50_ms": 15.109,
+      "p95_ms": 15.136,
+      "operations_per_second": 66.30713464768809,
+      "output_sha256": "7c3efff51538cc1e7295906aa1e925ee3fe56470e6e4b8f65df49f86ebd52c72",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 20.82787556617776,
+        "psnr_white_db": 20.82787556617776,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 300,
+      "height": 300,
+      "bytes": 50404,
+      "times_ms": [
+        26.496,
+        26.61,
+        27.187
+      ],
+      "peak_rss_bytes": 10420224,
+      "wall_ms": 80.303,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "060-vips-exif-1-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "size": 300,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 84.818,
+      "p50_ms": 26.61,
+      "p95_ms": 27.187,
+      "operations_per_second": 37.358504663586665,
+      "output_sha256": "c5a7e36ad8df99c90b8947cede870ea4fee7dcd720b30af3b882b568233a9bcf",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.195621077243644,
+        "psnr_white_db": 21.195621077243644,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 300,
+      "height": 300,
+      "bytes": 44210,
+      "times_ms": [
+        16.128,
+        16.254,
+        16.88
+      ],
+      "peak_rss_bytes": 36896768,
+      "wall_ms": 49.282,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "vips",
+      "input": "061-pure-exif-1-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "size": 300,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 86.263,
+      "p50_ms": 16.254,
+      "p95_ms": 16.88,
+      "operations_per_second": 60.874152834706386,
+      "output_sha256": "a1e5f4fa9f7d7fcc72a89fbce206975a30f3ecc9caf41516a9d604c41b34d2ad",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 20.821694722371547,
+        "psnr_white_db": 20.821694722371547,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 300,
+      "height": 300,
+      "bytes": 50632,
+      "times_ms": [
+        28.987,
+        28.997,
+        29.618
+      ],
+      "peak_rss_bytes": 10747904,
+      "wall_ms": 87.613,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "061-pure-exif-1-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "size": 300,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 91.839,
+      "p50_ms": 28.997,
+      "p95_ms": 29.618,
+      "operations_per_second": 34.24149384223803,
+      "output_sha256": "cf3217bdae72d3720bc43608f34c83651317c3e5e945c95f28c05fe74d94748a",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.22223264687459,
+        "psnr_white_db": 21.22223264687459,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 480,
+      "height": 480,
+      "bytes": 156676,
+      "times_ms": [
+        29.121,
+        29.286,
+        30.631
+      ],
+      "peak_rss_bytes": 46514176,
+      "wall_ms": 89.051,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "vips",
+      "input": "exif-2.jpg",
+      "operation": "source",
+      "size": 0,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 126.952,
+      "p50_ms": 29.286,
+      "p95_ms": 30.631,
+      "operations_per_second": 33.688560487810356,
+      "output_sha256": "35c71ade4c2f3f5bcdc8ce8cf91bd8b457449d8e27c1a2960d39dd2d4b1f83e6",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.92585504375627,
+        "psnr_white_db": 21.92585504375627,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 480,
+      "height": 480,
+      "bytes": 188564,
+      "times_ms": [
+        35.416,
+        35.451,
+        35.613
+      ],
+      "peak_rss_bytes": 13189120,
+      "wall_ms": 106.491,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "exif-2.jpg",
+      "operation": "source",
+      "size": 0,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 110.299,
+      "p50_ms": 35.451,
+      "p95_ms": 35.613,
+      "operations_per_second": 28.17139476575485,
+      "output_sha256": "7e1fe1bfddf994ec8da94f58428ec81345b6fe78f0b4df262db0dfc40bf620a2",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 22.001081487421168,
+        "psnr_white_db": 22.001081487421168,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 300,
+      "height": 300,
+      "bytes": 43464,
+      "times_ms": [
+        15.05,
+        15.177,
+        15.186
+      ],
+      "peak_rss_bytes": 34717696,
+      "wall_ms": 45.424,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "vips",
+      "input": "066-vips-exif-2-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "size": 300,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 81.893,
+      "p50_ms": 15.177,
+      "p95_ms": 15.186,
+      "operations_per_second": 66.04438182458613,
+      "output_sha256": "b0c72107723cf0e2d2b8ad472e9ec809e50534161842910703c1ef16d4480e8a",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 20.76955608590358,
+        "psnr_white_db": 20.76955608590358,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 300,
+      "height": 300,
+      "bytes": 50276,
+      "times_ms": [
+        26.49,
+        26.668,
+        26.898
+      ],
+      "peak_rss_bytes": 11173888,
+      "wall_ms": 80.068,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "066-vips-exif-2-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "size": 300,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 84.142,
+      "p50_ms": 26.668,
+      "p95_ms": 26.898,
+      "operations_per_second": 37.46815207073987,
+      "output_sha256": "6c4035b0da0e8515277852d27c07fddad83b8b3cb124ae210dc76864441d0ae1",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.19789843466904,
+        "psnr_white_db": 21.19789843466904,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 300,
+      "height": 300,
+      "bytes": 43696,
+      "times_ms": [
+        16.067,
+        16.332,
+        16.765
+      ],
+      "peak_rss_bytes": 35356672,
+      "wall_ms": 49.171,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "vips",
+      "input": "067-pure-exif-2-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "size": 300,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 86.133,
+      "p50_ms": 16.332,
+      "p95_ms": 16.765,
+      "operations_per_second": 61.01157186146306,
+      "output_sha256": "b6280ed88fd883d2929dc03cd9bd62ed8b30b106691ed61c05a6b0d7eb2eb12d",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 20.800656168794465,
+        "psnr_white_db": 20.800656168794465,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 300,
+      "height": 300,
+      "bytes": 50438,
+      "times_ms": [
+        28.781,
+        29.12,
+        29.267
+      ],
+      "peak_rss_bytes": 10698752,
+      "wall_ms": 87.178,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "067-pure-exif-2-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "size": 300,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 91.447,
+      "p50_ms": 29.12,
+      "p95_ms": 29.267,
+      "operations_per_second": 34.41235174011792,
+      "output_sha256": "0fb5235af3fd517a79eda403e0f3c329fd9927f467412fbaa371662464d60a19",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.22711135920469,
+        "psnr_white_db": 21.22711135920469,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 480,
+      "height": 480,
+      "bytes": 157060,
+      "times_ms": [
+        29.047,
+        29.661,
+        29.938
+      ],
+      "peak_rss_bytes": 49627136,
+      "wall_ms": 88.658,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "vips",
+      "input": "exif-3.jpg",
+      "operation": "source",
+      "size": 0,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 126.134,
+      "p50_ms": 29.661,
+      "p95_ms": 29.938,
+      "operations_per_second": 33.83789392948183,
+      "output_sha256": "92418357378d7ee9f7d6dd9154c79daf0cea7029f29d0b1f92f6e3b857070b0c",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.922153200102542,
+        "psnr_white_db": 21.922153200102542,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 480,
+      "height": 480,
+      "bytes": 187780,
+      "times_ms": [
+        35.24,
+        35.307,
+        35.717
+      ],
+      "peak_rss_bytes": 13303808,
+      "wall_ms": 106.274,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "exif-3.jpg",
+      "operation": "source",
+      "size": 0,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 110.424,
+      "p50_ms": 35.307,
+      "p95_ms": 35.717,
+      "operations_per_second": 28.228917703295252,
+      "output_sha256": "73ef4634709d846294051bcd9ca4514e4b332bae5b5ed9bc3af761cb731bd4ac",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.99874065150665,
+        "psnr_white_db": 21.99874065150665,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 300,
+      "height": 300,
+      "bytes": 44414,
+      "times_ms": [
+        15.095,
+        15.113,
+        15.56
+      ],
+      "peak_rss_bytes": 37896192,
+      "wall_ms": 45.779,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "vips",
+      "input": "072-vips-exif-3-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "size": 300,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 86.34,
+      "p50_ms": 15.113,
+      "p95_ms": 15.56,
+      "operations_per_second": 65.53223093558182,
+      "output_sha256": "73f117003cd0e4a7886927cae614d47b160f4620738b7aadaf7e742337f47550",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 20.787275089683202,
+        "psnr_white_db": 20.787275089683202,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 300,
+      "height": 300,
+      "bytes": 50324,
+      "times_ms": [
+        26.413,
+        26.997,
+        27.03
+      ],
+      "peak_rss_bytes": 11026432,
+      "wall_ms": 80.452,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "072-vips-exif-3-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "size": 300,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 84.617,
+      "p50_ms": 26.997,
+      "p95_ms": 27.03,
+      "operations_per_second": 37.289315368169845,
+      "output_sha256": "57f4459b43dff3ffd000efa74d3b9ffa73eedfe79c49c528e190c7b5c88106ff",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.18760443947253,
+        "psnr_white_db": 21.18760443947253,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 300,
+      "height": 300,
+      "bytes": 45032,
+      "times_ms": [
+        16.3,
+        16.302,
+        16.916
+      ],
+      "peak_rss_bytes": 36798464,
+      "wall_ms": 49.527,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "vips",
+      "input": "073-pure-exif-3-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "size": 300,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 86.537,
+      "p50_ms": 16.302,
+      "p95_ms": 16.916,
+      "operations_per_second": 60.57302077654612,
+      "output_sha256": "2baa314c15028d49f21eb2d219936ed047d00789cb54fcfe4037903f1c63b592",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 20.84424923380886,
+        "psnr_white_db": 20.84424923380886,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 300,
+      "height": 300,
+      "bytes": 50560,
+      "times_ms": [
+        28.801,
+        29.383,
+        29.684
+      ],
+      "peak_rss_bytes": 11862016,
+      "wall_ms": 87.88,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "073-pure-exif-3-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "size": 300,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 91.925,
+      "p50_ms": 29.383,
+      "p95_ms": 29.684,
+      "operations_per_second": 34.13746017296313,
+      "output_sha256": "505c0ea595ed9944b56b8a4221fa22295c9f97007d9ad3e9c4151f8981481fd6",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.20515131019868,
+        "psnr_white_db": 21.20515131019868,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 480,
+      "height": 480,
+      "bytes": 157202,
+      "times_ms": [
+        29.252,
+        29.578,
+        30.601
+      ],
+      "peak_rss_bytes": 47628288,
+      "wall_ms": 89.438,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "vips",
+      "input": "exif-4.jpg",
+      "operation": "source",
+      "size": 0,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 126.615,
+      "p50_ms": 29.578,
+      "p95_ms": 30.601,
+      "operations_per_second": 33.54278941836803,
+      "output_sha256": "69c64d704d2897ac7c20350ed015f14f45eaea00daf83c5c4ec4107eaffddd81",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.923762141501285,
+        "psnr_white_db": 21.923762141501285,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 480,
+      "height": 480,
+      "bytes": 189132,
+      "times_ms": [
+        34.96,
+        34.966,
+        35.59
+      ],
+      "peak_rss_bytes": 13074432,
+      "wall_ms": 105.528,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "exif-4.jpg",
+      "operation": "source",
+      "size": 0,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 109.179,
+      "p50_ms": 34.966,
+      "p95_ms": 35.59,
+      "operations_per_second": 28.42847395951785,
+      "output_sha256": "a68a95fc388919f9443f44bf120f428f24ec410b5c563dac0fe4c73ff6a9580a",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 22.000943993233687,
+        "psnr_white_db": 22.000943993233687,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 300,
+      "height": 300,
+      "bytes": 43466,
+      "times_ms": [
+        15.049,
+        15.143,
+        15.189
+      ],
+      "peak_rss_bytes": 35962880,
+      "wall_ms": 45.393,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "vips",
+      "input": "078-vips-exif-4-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "size": 300,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 82.374,
+      "p50_ms": 15.143,
+      "p95_ms": 15.189,
+      "operations_per_second": 66.08948516291058,
+      "output_sha256": "372abe7e50b93af4836351eb9a6c4cb6738eafa6a6f88784fd7cdc0e76b4a1e7",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 20.78551003123173,
+        "psnr_white_db": 20.78551003123173,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 300,
+      "height": 300,
+      "bytes": 50192,
+      "times_ms": [
+        26.532,
+        26.668,
+        26.782
+      ],
+      "peak_rss_bytes": 11255808,
+      "wall_ms": 79.991,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "078-vips-exif-4-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "size": 300,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 84.058,
+      "p50_ms": 26.668,
+      "p95_ms": 26.782,
+      "operations_per_second": 37.50421922466277,
+      "output_sha256": "f40e253ecb9941f7f4715c617dfdd4e45465d55eeedd95877aed95ee30fc3217",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.190845829384774,
+        "psnr_white_db": 21.190845829384774,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 300,
+      "height": 300,
+      "bytes": 43696,
+      "times_ms": [
+        16.348,
+        16.417,
+        16.503
+      ],
+      "peak_rss_bytes": 37847040,
+      "wall_ms": 49.277,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "vips",
+      "input": "079-pure-exif-4-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "size": 300,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 86.327,
+      "p50_ms": 16.417,
+      "p95_ms": 16.503,
+      "operations_per_second": 60.88032956551738,
+      "output_sha256": "3a3c935cb5ccbeac0f2e39b3f4492dc51b4dce788379459dc35e0f1adb9f0132",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 20.82226067532237,
+        "psnr_white_db": 20.82226067532237,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 300,
+      "height": 300,
+      "bytes": 50426,
+      "times_ms": [
+        29.094,
+        29.391,
+        29.48
+      ],
+      "peak_rss_bytes": 10878976,
+      "wall_ms": 87.98,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "079-pure-exif-4-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "size": 300,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 92.211,
+      "p50_ms": 29.391,
+      "p95_ms": 29.48,
+      "operations_per_second": 34.098658786087746,
+      "output_sha256": "094b7dd888fd46d99ec29a7953ac813caf6ad23fbf5b8d4495c1355f9a1ff9ab",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.218711675324172,
+        "psnr_white_db": 21.218711675324172,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 480,
+      "height": 480,
+      "bytes": 156778,
+      "times_ms": [
+        28.731,
+        29.333,
+        29.453
+      ],
+      "peak_rss_bytes": 45432832,
+      "wall_ms": 87.529,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "vips",
+      "input": "exif-5.jpg",
+      "operation": "source",
+      "size": 0,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 124.64,
+      "p50_ms": 29.333,
+      "p95_ms": 29.453,
+      "operations_per_second": 34.27435478527117,
+      "output_sha256": "5aedbb2e24862bc21836ec3aff555264adffea54716e71c75417ca625b681d52",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.92814204470086,
+        "psnr_white_db": 21.92814204470086,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 480,
+      "height": 480,
+      "bytes": 187372,
+      "times_ms": [
+        35.442,
+        35.683,
+        35.765
+      ],
+      "peak_rss_bytes": 13139968,
+      "wall_ms": 106.899,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "exif-5.jpg",
+      "operation": "source",
+      "size": 0,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 111.098,
+      "p50_ms": 35.683,
+      "p95_ms": 35.765,
+      "operations_per_second": 28.06387337580333,
+      "output_sha256": "20b5e81ba559987495423fab6f00db1706921ffee4e5a3f81bd4105e5d58beb0",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.99963126242468,
+        "psnr_white_db": 21.99963126242468,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 300,
+      "height": 300,
+      "bytes": 45030,
+      "times_ms": [
+        15.115,
+        15.212,
+        15.403
+      ],
+      "peak_rss_bytes": 35831808,
+      "wall_ms": 45.737,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "vips",
+      "input": "084-vips-exif-5-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "size": 300,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 82.692,
+      "p50_ms": 15.212,
+      "p95_ms": 15.403,
+      "operations_per_second": 65.59240877189147,
+      "output_sha256": "f3262de02df5b924dc0f28b4c0a704befb947206ca3ac0eafc5f1d4fdf1415b2",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 20.819496025265366,
+        "psnr_white_db": 20.819496025265366,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 300,
+      "height": 300,
+      "bytes": 50042,
+      "times_ms": [
+        26.629,
+        26.988,
+        27.228
+      ],
+      "peak_rss_bytes": 10534912,
+      "wall_ms": 80.857,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "084-vips-exif-5-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "size": 300,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 85.072,
+      "p50_ms": 26.988,
+      "p95_ms": 27.228,
+      "operations_per_second": 37.10253905042235,
+      "output_sha256": "093865fd14f3c92a19390120a744085c09707a02eb2c493c0673acce520a917f",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.207610099509054,
+        "psnr_white_db": 21.207610099509054,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 300,
+      "height": 300,
+      "bytes": 45118,
+      "times_ms": [
+        16.372,
+        16.81,
+        17.591
+      ],
+      "peak_rss_bytes": 36143104,
+      "wall_ms": 50.785,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "vips",
+      "input": "085-pure-exif-5-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "size": 300,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 88.556,
+      "p50_ms": 16.81,
+      "p95_ms": 17.591,
+      "operations_per_second": 59.07256079551049,
+      "output_sha256": "541e7d01a2fe97408e0fbd869f4c1522d219e92c46f2fe878e0ef2e73571127a",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 20.834841138957035,
+        "psnr_white_db": 20.834841138957035,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 300,
+      "height": 300,
+      "bytes": 50180,
+      "times_ms": [
+        28.924,
+        29.541,
+        30.021
+      ],
+      "peak_rss_bytes": 10977280,
+      "wall_ms": 88.5,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "085-pure-exif-5-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "size": 300,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 92.906,
+      "p50_ms": 29.541,
+      "p95_ms": 30.021,
+      "operations_per_second": 33.898305084745765,
+      "output_sha256": "77f515fef8e7dadbd36289f6e9bdf3309bd13ecc4b27907ec4ce65ff585f11b4",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.234111799323898,
+        "psnr_white_db": 21.234111799323898,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 480,
+      "height": 480,
+      "bytes": 156896,
+      "times_ms": [
+        29.732,
+        29.771,
+        31.357
+      ],
+      "peak_rss_bytes": 44122112,
+      "wall_ms": 90.874,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "vips",
+      "input": "exif-6.jpg",
+      "operation": "source",
+      "size": 0,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 129.097,
+      "p50_ms": 29.771,
+      "p95_ms": 31.357,
+      "operations_per_second": 33.01274291876665,
+      "output_sha256": "a211cd02ae1d0b0116db2db40a993e1ee571c4aab3ff5f7b8d772e05427617b8",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.925531685752308,
+        "psnr_white_db": 21.925531685752308,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 480,
+      "height": 480,
+      "bytes": 189374,
+      "times_ms": [
+        35.459,
+        35.588,
+        38.629
+      ],
+      "peak_rss_bytes": 13205504,
+      "wall_ms": 109.687,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "exif-6.jpg",
+      "operation": "source",
+      "size": 0,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 114.157,
+      "p50_ms": 35.588,
+      "p95_ms": 38.629,
+      "operations_per_second": 27.350552025308378,
+      "output_sha256": "0064757feeb7e5ce762316df35b04316f7b2056a79d7cb8b231f443bb396ab02",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 22.00109519725182,
+        "psnr_white_db": 22.00109519725182,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 300,
+      "height": 300,
+      "bytes": 43562,
+      "times_ms": [
+        15.349,
+        15.594,
+        15.95
+      ],
+      "peak_rss_bytes": 36175872,
+      "wall_ms": 46.912,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "vips",
+      "input": "090-vips-exif-6-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "size": 300,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 84.672,
+      "p50_ms": 15.594,
+      "p95_ms": 15.95,
+      "operations_per_second": 63.94952251023192,
+      "output_sha256": "ff833b486a226166912d030b6aec59f03f27a908aac82572fe164628abcdc467",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 20.78303338188634,
+        "psnr_white_db": 20.78303338188634,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 300,
+      "height": 300,
+      "bytes": 49876,
+      "times_ms": [
+        26.861,
+        27.394,
+        27.542
+      ],
+      "peak_rss_bytes": 10338304,
+      "wall_ms": 81.812,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "090-vips-exif-6-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "size": 300,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 86.392,
+      "p50_ms": 27.394,
+      "p95_ms": 27.542,
+      "operations_per_second": 36.669437246369725,
+      "output_sha256": "e30b015eba65dc13b5e990a9e870eb9d08c056997c25a38da8f19098b1f87095",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.195002952599257,
+        "psnr_white_db": 21.195002952599257,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 300,
+      "height": 300,
+      "bytes": 43598,
+      "times_ms": [
+        16.578,
+        16.899,
+        17.038
+      ],
+      "peak_rss_bytes": 36208640,
+      "wall_ms": 50.535,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "vips",
+      "input": "091-pure-exif-6-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "size": 300,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 89.736,
+      "p50_ms": 16.899,
+      "p95_ms": 17.038,
+      "operations_per_second": 59.36479667557139,
+      "output_sha256": "4c5a6f31252686db124e8f36574f7704b2b3d1c767e116d9f19c59849c2e072b",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 20.80798578861041,
+        "psnr_white_db": 20.80798578861041,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 300,
+      "height": 300,
+      "bytes": 50022,
+      "times_ms": [
+        29.163,
+        30.291,
+        30.483
+      ],
+      "peak_rss_bytes": 10665984,
+      "wall_ms": 89.951,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "091-pure-exif-6-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "size": 300,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 94.793,
+      "p50_ms": 30.291,
+      "p95_ms": 30.483,
+      "operations_per_second": 33.35149136752232,
+      "output_sha256": "c7efd60e04c8a85994d5c602bd49ebe83ff7b2857f7c2322a10390ddb5bacf30",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.222354610189313,
+        "psnr_white_db": 21.222354610189313,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 480,
+      "height": 480,
+      "bytes": 156654,
+      "times_ms": [
+        30.018,
+        30.054,
+        30.679
+      ],
+      "peak_rss_bytes": 46268416,
+      "wall_ms": 90.766,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "vips",
+      "input": "exif-7.jpg",
+      "operation": "source",
+      "size": 0,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 132.217,
+      "p50_ms": 30.054,
+      "p95_ms": 30.679,
+      "operations_per_second": 33.05202388559593,
+      "output_sha256": "5cbfb79ee3ec11ce2b5d640db6e1c74f3f7af3172c107fd748de6bba541af8e4",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.92259137562735,
+        "psnr_white_db": 21.92259137562735,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 480,
+      "height": 480,
+      "bytes": 187720,
+      "times_ms": [
+        35.881,
+        35.899,
+        36.613
+      ],
+      "peak_rss_bytes": 12861440,
+      "wall_ms": 108.403,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "exif-7.jpg",
+      "operation": "source",
+      "size": 0,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 112.594,
+      "p50_ms": 35.899,
+      "p95_ms": 36.613,
+      "operations_per_second": 27.674510853020674,
+      "output_sha256": "3c04b5ee20ae2acc3be809afcd4b93bb9b9b09bcc5f1a12d37732c3c3eccf2a1",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.99903931332376,
+        "psnr_white_db": 21.99903931332376,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 300,
+      "height": 300,
+      "bytes": 44734,
+      "times_ms": [
+        15.103,
+        15.387,
+        15.635
+      ],
+      "peak_rss_bytes": 37289984,
+      "wall_ms": 46.138,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "vips",
+      "input": "096-vips-exif-7-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "size": 300,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 83.293,
+      "p50_ms": 15.387,
+      "p95_ms": 15.635,
+      "operations_per_second": 65.02232433135377,
+      "output_sha256": "0bcfa03682404f654ddf1f4328cad7957fa804b87c409564d27939271d6aff2e",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 20.780759802794137,
+        "psnr_white_db": 20.780759802794137,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 300,
+      "height": 300,
+      "bytes": 50164,
+      "times_ms": [
+        26.889,
+        26.984,
+        27.123
+      ],
+      "peak_rss_bytes": 11337728,
+      "wall_ms": 81.007,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "096-vips-exif-7-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "size": 300,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 85.318,
+      "p50_ms": 26.984,
+      "p95_ms": 27.123,
+      "operations_per_second": 37.033836582023774,
+      "output_sha256": "1841a3c066a12eb5b40b41d8e55bb04b78f69b3c370b8bc13d0909bf87ce9161",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.194196226418846,
+        "psnr_white_db": 21.194196226418846,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 300,
+      "height": 300,
+      "bytes": 45210,
+      "times_ms": [
+        16.547,
+        16.688,
+        16.761
+      ],
+      "peak_rss_bytes": 34668544,
+      "wall_ms": 50.016,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "vips",
+      "input": "097-pure-exif-7-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "size": 300,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 88.342,
+      "p50_ms": 16.688,
+      "p95_ms": 16.761,
+      "operations_per_second": 59.98080614203455,
+      "output_sha256": "4c3bcfb1b4bfaf21517fbed1e92033c63864f93fd376f524869af90b355c4f7f",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 20.829848886025005,
+        "psnr_white_db": 20.829848886025005,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 300,
+      "height": 300,
+      "bytes": 50300,
+      "times_ms": [
+        29.468,
+        29.774,
+        30.21
+      ],
+      "peak_rss_bytes": 10731520,
+      "wall_ms": 89.462,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "097-pure-exif-7-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "size": 300,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 93.752,
+      "p50_ms": 29.774,
+      "p95_ms": 30.21,
+      "operations_per_second": 33.533790883280055,
+      "output_sha256": "aad5c687ac25b117c92e688a62d31ab58bb2e40497c1be93bbb85b8ca3e29a15",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.222257557136203,
+        "psnr_white_db": 21.222257557136203,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 480,
+      "height": 480,
+      "bytes": 156360,
+      "times_ms": [
+        29.334,
+        29.887,
+        30.876
+      ],
+      "peak_rss_bytes": 45318144,
+      "wall_ms": 90.115,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "vips",
+      "input": "exif-8.jpg",
+      "operation": "source",
+      "size": 0,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 130.806,
+      "p50_ms": 29.887,
+      "p95_ms": 30.876,
+      "operations_per_second": 33.29079509515619,
+      "output_sha256": "18e57e795e0450f66f3cb6c1e3f002aaa1130b2c3d2085910b241035274c93d5",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.92388142799072,
+        "psnr_white_db": 21.92388142799072,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 480,
+      "height": 480,
+      "bytes": 188462,
+      "times_ms": [
+        35.57,
+        35.797,
+        37.077
+      ],
+      "peak_rss_bytes": 13271040,
+      "wall_ms": 108.455,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "exif-8.jpg",
+      "operation": "source",
+      "size": 0,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 112.518,
+      "p50_ms": 35.797,
+      "p95_ms": 37.077,
+      "operations_per_second": 27.66124198976534,
+      "output_sha256": "cad3b0e074e3d3cfd35986be4214eb164ffa0029ed9da8d2356621a3ae7d319c",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.999961287755653,
+        "psnr_white_db": 21.999961287755653,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 300,
+      "height": 300,
+      "bytes": 43314,
+      "times_ms": [
+        15.3,
+        15.519,
+        15.687
+      ],
+      "peak_rss_bytes": 36093952,
+      "wall_ms": 46.522,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "vips",
+      "input": "102-vips-exif-8-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "size": 300,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 84.142,
+      "p50_ms": 15.519,
+      "p95_ms": 15.687,
+      "operations_per_second": 64.48561970680538,
+      "output_sha256": "38172c95d86a49e83acb9b6e5d381de3d77e1993c121d226c1e6b7e39763a891",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 20.759718484042466,
+        "psnr_white_db": 20.759718484042466,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 300,
+      "height": 300,
+      "bytes": 49976,
+      "times_ms": [
+        27.247,
+        27.503,
+        27.863
+      ],
+      "peak_rss_bytes": 11468800,
+      "wall_ms": 82.623,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "102-vips-exif-8-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "size": 300,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 86.97,
+      "p50_ms": 27.503,
+      "p95_ms": 27.863,
+      "operations_per_second": 36.309502196724885,
+      "output_sha256": "5a56cd7fa3092175782503ff1c070b8fe82ca79e666c04adefa4797bc444c68f",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.207150475001214,
+        "psnr_white_db": 21.207150475001214,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 300,
+      "height": 300,
+      "bytes": 43472,
+      "times_ms": [
+        16.549,
+        16.7,
+        17.066
+      ],
+      "peak_rss_bytes": 36143104,
+      "wall_ms": 50.331,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "vips",
+      "input": "103-pure-exif-8-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "size": 300,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 87.549,
+      "p50_ms": 16.7,
+      "p95_ms": 17.066,
+      "operations_per_second": 59.605412171425165,
+      "output_sha256": "abc0222eecd192d5399b420c223db944efb1ac239a65037c3fd9ca6f85822bf5",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 20.790444365441488,
+        "psnr_white_db": 20.790444365441488,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 300,
+      "height": 300,
+      "bytes": 50314,
+      "times_ms": [
+        29.622,
+        29.794,
+        29.997
+      ],
+      "peak_rss_bytes": 10682368,
+      "wall_ms": 89.425,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "103-pure-exif-8-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "size": 300,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 93.907,
+      "p50_ms": 29.794,
+      "p95_ms": 29.997,
+      "operations_per_second": 33.54766564159911,
+      "output_sha256": "789051cc6e5694c682dff2951cd6b24de53c7b80bee2085b280dcf296d46d4cc",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.22776508427961,
+        "psnr_white_db": 21.22776508427961,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 80,
+      "height": 48,
+      "bytes": 504,
+      "times_ms": [
+        0.482,
+        0.503,
+        0.648
+      ],
+      "peak_rss_bytes": 20791296,
+      "wall_ms": 1.645,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "vips",
+      "input": "small.png",
+      "operation": "direct-small",
+      "size": 300,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 39.475,
+      "p50_ms": 0.503,
+      "p95_ms": 0.648,
+      "operations_per_second": 1823.7082066869302,
+      "output_sha256": "a3ce6c21a4569583ab7e66f1a568af8d5823ee6090d0a6bec3c9abd62c54f308",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 28.640513997181532,
+        "psnr_white_db": 28.640513997181532,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 80,
+      "height": 48,
+      "bytes": 634,
+      "times_ms": [
+        0.382,
+        0.404,
+        0.528
+      ],
+      "peak_rss_bytes": 5783552,
+      "wall_ms": 1.324,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "small.png",
+      "operation": "direct-small",
+      "size": 300,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 6.798,
+      "p50_ms": 0.404,
+      "p95_ms": 0.528,
+      "operations_per_second": 2265.861027190332,
+      "output_sha256": "721909884107ab709c5f4cc1690f12e45c92006ba27c6b260f435069277c7ebb",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 28.97530304628196,
+        "psnr_white_db": 28.97530304628196,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 300,
+      "height": 300,
+      "bytes": 13334,
+      "times_ms": [
+        6.365,
+        6.62,
+        6.679
+      ],
+      "peak_rss_bytes": 23543808,
+      "wall_ms": 19.677,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "vips",
+      "input": "thin.png",
+      "operation": "direct-small",
+      "size": 300,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 60.421,
+      "p50_ms": 6.62,
+      "p95_ms": 6.679,
+      "operations_per_second": 152.46226558926665,
+      "output_sha256": "428f09dc00779795cefe59c7bced71d6d32e1823196060db101b21e07a8ff37a",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.301316824116906,
+        "psnr_white_db": 21.301316824116906,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 300,
+      "height": 300,
+      "bytes": 19402,
+      "times_ms": [
+        8.98,
+        9.038,
+        9.14
+      ],
+      "peak_rss_bytes": 9879552,
+      "wall_ms": 27.175,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "thin.png",
+      "operation": "direct-small",
+      "size": 300,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 31.357,
+      "p50_ms": 9.038,
+      "p95_ms": 9.14,
+      "operations_per_second": 110.39558417663292,
+      "output_sha256": "b63a2ae7a269e04ffb79ceeaeccfd3bb8d87709320a861dc589d31653231013d",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 29.813765375909913,
+        "psnr_white_db": 29.813765375909913,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 64,
+      "height": 64,
+      "bytes": 2758,
+      "times_ms": [
+        6.762,
+        7.085,
+        7.338
+      ],
+      "peak_rss_bytes": 25182208,
+      "wall_ms": 21.206,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "vips",
+      "input": "012-vips-texture-source-e-1.webp",
+      "operation": "all-sizes",
+      "size": 64,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 58.637,
+      "p50_ms": 7.085,
+      "p95_ms": 7.338,
+      "operations_per_second": 141.46939545411678,
+      "output_sha256": "239f6ab981b8d692cf03b1cc21b2d9b6010fd644106553d1ca86beed2123eb18",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 17.12984568050688,
+        "psnr_white_db": 17.12984568050688,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 64,
+      "height": 64,
+      "bytes": 2956,
+      "times_ms": [
+        14.54,
+        14.798,
+        15.093
+      ],
+      "peak_rss_bytes": 10141696,
+      "wall_ms": 44.441,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "012-vips-texture-source-e-1.webp",
+      "operation": "all-sizes",
+      "size": 64,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 48.652,
+      "p50_ms": 14.798,
+      "p95_ms": 15.093,
+      "operations_per_second": 67.5052316554533,
+      "output_sha256": "2ecd3e18593ff5a4b6b1e84c1dbb6c6c45f79304478f92ae76b76056cd2dc29e",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 17.096821602320304,
+        "psnr_white_db": 17.096821602320304,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 128,
+      "height": 128,
+      "bytes": 10836,
+      "times_ms": [
+        8.457,
+        8.811,
+        8.986
+      ],
+      "peak_rss_bytes": 27049984,
+      "wall_ms": 26.274,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "vips",
+      "input": "012-vips-texture-source-e-1.webp",
+      "operation": "all-sizes",
+      "size": 128,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 64.115,
+      "p50_ms": 8.811,
+      "p95_ms": 8.986,
+      "operations_per_second": 114.18131993605846,
+      "output_sha256": "f2a9d1c571dbe94cd5e9d7a217f6b1f0561d791e3da461d64b6ead68348177ad",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 17.917439253076548,
+        "psnr_white_db": 17.917439253076548,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 128,
+      "height": 128,
+      "bytes": 11490,
+      "times_ms": [
+        16.855,
+        17.086,
+        17.116
+      ],
+      "peak_rss_bytes": 9814016,
+      "wall_ms": 51.067,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "012-vips-texture-source-e-1.webp",
+      "operation": "all-sizes",
+      "size": 128,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 55.368,
+      "p50_ms": 17.086,
+      "p95_ms": 17.116,
+      "operations_per_second": 58.7463528305951,
+      "output_sha256": "1cacce70447ec56f66882b8cb2bb1be0ccf9c8327ce63a1b4ed16dbe16a421a6",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 17.917322578211014,
+        "psnr_white_db": 17.917322578211014,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 300,
+      "height": 300,
+      "bytes": 44832,
+      "times_ms": [
+        15.58,
+        15.724,
+        15.96
+      ],
+      "peak_rss_bytes": 37060608,
+      "wall_ms": 47.271,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "vips",
+      "input": "012-vips-texture-source-e-1.webp",
+      "operation": "all-sizes",
+      "size": 300,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 84.913,
+      "p50_ms": 15.724,
+      "p95_ms": 15.96,
+      "operations_per_second": 63.46385733324871,
+      "output_sha256": "7c3efff51538cc1e7295906aa1e925ee3fe56470e6e4b8f65df49f86ebd52c72",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 20.82787556617776,
+        "psnr_white_db": 20.82787556617776,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 300,
+      "height": 300,
+      "bytes": 50404,
+      "times_ms": [
+        27.059,
+        27.604,
+        27.609
+      ],
+      "peak_rss_bytes": 10895360,
+      "wall_ms": 82.282,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "012-vips-texture-source-e-1.webp",
+      "operation": "all-sizes",
+      "size": 300,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 86.515,
+      "p50_ms": 27.604,
+      "p95_ms": 27.609,
+      "operations_per_second": 36.45997909627865,
+      "output_sha256": "c5a7e36ad8df99c90b8947cede870ea4fee7dcd720b30af3b882b568233a9bcf",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.195621077243644,
+        "psnr_white_db": 21.195621077243644,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 480,
+      "height": 480,
+      "bytes": 84512,
+      "times_ms": [
+        23.375,
+        23.379,
+        23.833
+      ],
+      "peak_rss_bytes": 41828352,
+      "wall_ms": 70.603,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "vips",
+      "input": "012-vips-texture-source-e-1.webp",
+      "operation": "all-sizes",
+      "size": 640,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 108.677,
+      "p50_ms": 23.379,
+      "p95_ms": 23.833,
+      "operations_per_second": 42.49111227568234,
+      "output_sha256": "31045e0a0d070fd278b8beee2880a436f2f24504b8bdbee84bf5434570cda807",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 20.672577255996906,
+        "psnr_white_db": 20.672577255996906,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 480,
+      "height": 480,
+      "bytes": 103256,
+      "times_ms": [
+        32.175,
+        32.333,
+        32.482
+      ],
+      "peak_rss_bytes": 10780672,
+      "wall_ms": 97.001,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "012-vips-texture-source-e-1.webp",
+      "operation": "all-sizes",
+      "size": 640,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 101.245,
+      "p50_ms": 32.333,
+      "p95_ms": 32.482,
+      "operations_per_second": 30.927516211173078,
+      "output_sha256": "63ea5d2a53a8a2a4088c9711601dc66de5143fa129cfe031586608ba81a8e905",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.729396138848195,
+        "psnr_white_db": 21.729396138848195,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 480,
+      "height": 480,
+      "bytes": 84512,
+      "times_ms": [
+        23.434,
+        23.672,
+        23.728
+      ],
+      "peak_rss_bytes": 41861120,
+      "wall_ms": 70.845,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "vips",
+      "input": "012-vips-texture-source-e-1.webp",
+      "operation": "all-sizes",
+      "size": 1000,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 109.801,
+      "p50_ms": 23.672,
+      "p95_ms": 23.728,
+      "operations_per_second": 42.34596654668643,
+      "output_sha256": "31045e0a0d070fd278b8beee2880a436f2f24504b8bdbee84bf5434570cda807",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 20.672577255996906,
+        "psnr_white_db": 20.672577255996906,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 480,
+      "height": 480,
+      "bytes": 103256,
+      "times_ms": [
+        31.586,
+        31.684,
+        32.599
+      ],
+      "peak_rss_bytes": 10829824,
+      "wall_ms": 95.881,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "012-vips-texture-source-e-1.webp",
+      "operation": "all-sizes",
+      "size": 1000,
+      "effort": -1,
+      "reps": 3,
+      "process_wall_ms": 100.243,
+      "p50_ms": 31.684,
+      "p95_ms": 32.599,
+      "operations_per_second": 31.288785056476257,
+      "output_sha256": "63ea5d2a53a8a2a4088c9711601dc66de5143fa129cfe031586608ba81a8e905",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.729396138848195,
+        "psnr_white_db": 21.729396138848195,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 480,
+      "height": 480,
+      "bytes": 63850,
+      "times_ms": [
+        33.02,
+        33.847,
+        34.17
+      ],
+      "peak_rss_bytes": 11370496,
+      "wall_ms": 101.048,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "natural.jpg",
+      "operation": "effort-source",
+      "size": 0,
+      "effort": 2,
+      "reps": 3,
+      "process_wall_ms": 105.632,
+      "p50_ms": 33.847,
+      "p95_ms": 34.17,
+      "operations_per_second": 29.688860739450558,
+      "output_sha256": "deb34de5d8238f68dc467f936ceb7672b32a65fe34886cef4a184c21faf6fefc",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 41.26559169486755,
+        "psnr_white_db": 41.26559169486755,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 300,
+      "height": 300,
+      "bytes": 10410,
+      "times_ms": [
+        21.907,
+        22.567,
+        23.438
+      ],
+      "peak_rss_bytes": 11419648,
+      "wall_ms": 67.924,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "000-vips-natural-source-e-1.webp",
+      "operation": "effort-derived",
+      "size": 300,
+      "effort": 2,
+      "reps": 3,
+      "process_wall_ms": 72.679,
+      "p50_ms": 22.567,
+      "p95_ms": 23.438,
+      "operations_per_second": 44.16701018785701,
+      "output_sha256": "88285687aa02cd53041f5a789b0d27fa4f91a405fea9fccda577ce42abffee74",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 37.68025402871291,
+        "psnr_white_db": 37.68025402871291,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 480,
+      "height": 480,
+      "bytes": 141400,
+      "times_ms": [
+        60.205,
+        61.275,
+        61.508
+      ],
+      "peak_rss_bytes": 14057472,
+      "wall_ms": 183,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "texture.jpg",
+      "operation": "effort-source",
+      "size": 0,
+      "effort": 2,
+      "reps": 3,
+      "process_wall_ms": 187.593,
+      "p50_ms": 61.275,
+      "p95_ms": 61.508,
+      "operations_per_second": 16.39344262295082,
+      "output_sha256": "1cad4331057af4a031b14cc0e9bb151d80c3d1f271f72e597ed15f7d595c8601",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.922024334246053,
+        "psnr_white_db": 21.922024334246053,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 300,
+      "height": 300,
+      "bytes": 44924,
+      "times_ms": [
+        42.025,
+        42.208,
+        43.184
+      ],
+      "peak_rss_bytes": 11255808,
+      "wall_ms": 127.425,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "012-vips-texture-source-e-1.webp",
+      "operation": "effort-derived",
+      "size": 300,
+      "effort": 2,
+      "reps": 3,
+      "process_wall_ms": 131.807,
+      "p50_ms": 42.208,
+      "p95_ms": 43.184,
+      "operations_per_second": 23.543260741612713,
+      "output_sha256": "fdf6ce55c7e3857ef0b78db0c75f16b5d36d8fac8e1cd6b04cdf2571a6d3dd24",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.02333325674654,
+        "psnr_white_db": 21.02333325674654,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 240,
+      "height": 240,
+      "bytes": 32668,
+      "times_ms": [
+        29.774,
+        30.7,
+        30.815
+      ],
+      "peak_rss_bytes": 13975552,
+      "wall_ms": 91.298,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "alpha.png",
+      "operation": "effort-source",
+      "size": 0,
+      "effort": 2,
+      "reps": 3,
+      "process_wall_ms": 95.974,
+      "p50_ms": 30.7,
+      "p95_ms": 30.815,
+      "operations_per_second": 32.85942736971237,
+      "output_sha256": "a55b60313e688c2f95371eb43453d6888c0b1804183632ffb7c44c46825fbc9b",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 27.548615387495627,
+        "psnr_white_db": 27.548615387495627,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 240,
+      "height": 240,
+      "bytes": 22288,
+      "times_ms": [
+        27.38,
+        27.506,
+        27.66
+      ],
+      "peak_rss_bytes": 13139968,
+      "wall_ms": 82.556,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "024-vips-alpha-source-e-1.webp",
+      "operation": "effort-derived",
+      "size": 300,
+      "effort": 2,
+      "reps": 3,
+      "process_wall_ms": 87.241,
+      "p50_ms": 27.506,
+      "p95_ms": 27.66,
+      "operations_per_second": 36.33896991133292,
+      "output_sha256": "9cdc5ee1fe01d563accbf3094cb8432425ad7c215966ce35a6c0a67cdf273eeb",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 27.264620098629834,
+        "psnr_white_db": 27.264620098629834,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 1200,
+      "height": 1200,
+      "bytes": 1280746,
+      "times_ms": [
+        230.271,
+        231.823,
+        235.078
+      ],
+      "peak_rss_bytes": 67731456,
+      "wall_ms": 697.183,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "large.png",
+      "operation": "effort-source",
+      "size": 0,
+      "effort": 2,
+      "reps": 3,
+      "process_wall_ms": 703.563,
+      "p50_ms": 231.823,
+      "p95_ms": 235.078,
+      "operations_per_second": 4.303030911539725,
+      "output_sha256": "431e3162db87ced19d7f23ea1414031f2bb189f04aebf5bdc5240ed62b08ca01",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 22.435278598765578,
+        "psnr_white_db": 22.435278598765578,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 300,
+      "height": 300,
+      "bytes": 54782,
+      "times_ms": [
+        119.071,
+        120.098,
+        120.619
+      ],
+      "peak_rss_bytes": 26574848,
+      "wall_ms": 359.801,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "042-vips-large-source-e-1.webp",
+      "operation": "effort-derived",
+      "size": 300,
+      "effort": 2,
+      "reps": 3,
+      "process_wall_ms": 365.358,
+      "p50_ms": 120.098,
+      "p95_ms": 120.619,
+      "operations_per_second": 8.337942362583762,
+      "output_sha256": "20cf2720ebc5d930e0f1a97fcf636eddb2bb1d7ac235439be93fb67d5a038502",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 17.425738843526457,
+        "psnr_white_db": 17.425738843526457,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 480,
+      "height": 480,
+      "bytes": 70002,
+      "times_ms": [
+        97.855,
+        97.915,
+        98.207
+      ],
+      "peak_rss_bytes": 11927552,
+      "wall_ms": 293.991,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "natural.jpg",
+      "operation": "effort-source",
+      "size": 0,
+      "effort": 4,
+      "reps": 3,
+      "process_wall_ms": 298.446,
+      "p50_ms": 97.915,
+      "p95_ms": 98.207,
+      "operations_per_second": 10.204394012061593,
+      "output_sha256": "ed936cfe2816b9548fbd9f4e91ad5e43617284dfad52c71b17d8bdd842ec3b81",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 42.37988779817825,
+        "psnr_white_db": 42.37988779817825,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 300,
+      "height": 300,
+      "bytes": 10738,
+      "times_ms": [
+        52.916,
+        53.689,
+        56.163
+      ],
+      "peak_rss_bytes": 11386880,
+      "wall_ms": 162.778,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "000-vips-natural-source-e-1.webp",
+      "operation": "effort-derived",
+      "size": 300,
+      "effort": 4,
+      "reps": 3,
+      "process_wall_ms": 167.195,
+      "p50_ms": 53.689,
+      "p95_ms": 56.163,
+      "operations_per_second": 18.430008969271036,
+      "output_sha256": "92f73775387d33f42a1ded34f86efae624fb79717db4593fec1b08647fccc5d3",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 38.42463877976509,
+        "psnr_white_db": 38.42463877976509,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 480,
+      "height": 480,
+      "bytes": 148694,
+      "times_ms": [
+        147.135,
+        148.35,
+        150.191
+      ],
+      "peak_rss_bytes": 12075008,
+      "wall_ms": 445.689,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "texture.jpg",
+      "operation": "effort-source",
+      "size": 0,
+      "effort": 4,
+      "reps": 3,
+      "process_wall_ms": 450.14,
+      "p50_ms": 148.35,
+      "p95_ms": 150.191,
+      "operations_per_second": 6.73115109414861,
+      "output_sha256": "d645a67c2240faafc33d9487cb465aaba47468bb48ca5913823bd0f482e70451",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.949524052690155,
+        "psnr_white_db": 21.949524052690155,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 300,
+      "height": 300,
+      "bytes": 45886,
+      "times_ms": [
+        92.951,
+        93.362,
+        95.02
+      ],
+      "peak_rss_bytes": 10960896,
+      "wall_ms": 281.343,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "012-vips-texture-source-e-1.webp",
+      "operation": "effort-derived",
+      "size": 300,
+      "effort": 4,
+      "reps": 3,
+      "process_wall_ms": 285.68,
+      "p50_ms": 93.362,
+      "p95_ms": 95.02,
+      "operations_per_second": 10.663140721468102,
+      "output_sha256": "ebac3b0546db8ec6f7a8b7b1592791eba18a7fcab5b56ee55c2cb2f63a73ab4c",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.126840204638903,
+        "psnr_white_db": 21.126840204638903,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 240,
+      "height": 240,
+      "bytes": 34078,
+      "times_ms": [
+        81.912,
+        82.421,
+        82.462
+      ],
+      "peak_rss_bytes": 14516224,
+      "wall_ms": 246.804,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "alpha.png",
+      "operation": "effort-source",
+      "size": 0,
+      "effort": 4,
+      "reps": 3,
+      "process_wall_ms": 251.304,
+      "p50_ms": 82.421,
+      "p95_ms": 82.462,
+      "operations_per_second": 12.155394564107551,
+      "output_sha256": "7b8878246dda0be212ca8243649a4d41c17274de020f22d6e91b6c15d54a2e4a",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 27.563438047982704,
+        "psnr_white_db": 27.563438047982704,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 240,
+      "height": 240,
+      "bytes": 22306,
+      "times_ms": [
+        71.536,
+        72.23,
+        72.66
+      ],
+      "peak_rss_bytes": 14401536,
+      "wall_ms": 216.435,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "024-vips-alpha-source-e-1.webp",
+      "operation": "effort-derived",
+      "size": 300,
+      "effort": 4,
+      "reps": 3,
+      "process_wall_ms": 220.641,
+      "p50_ms": 72.23,
+      "p95_ms": 72.66,
+      "operations_per_second": 13.860974426502183,
+      "output_sha256": "996abe63aea1a5d9da8a064ef530f958addc4b3ddaa62913317a1f9ba172fa7b",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 27.27914218527483,
+        "psnr_white_db": 27.27914218527483,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 1200,
+      "height": 1200,
+      "bytes": 1245532,
+      "times_ms": [
+        267.994,
+        268.666,
+        270.617
+      ],
+      "peak_rss_bytes": 62865408,
+      "wall_ms": 807.289,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "large.png",
+      "operation": "effort-source",
+      "size": 0,
+      "effort": 4,
+      "reps": 3,
+      "process_wall_ms": 812.583,
+      "p50_ms": 268.666,
+      "p95_ms": 270.617,
+      "operations_per_second": 3.716141307511932,
+      "output_sha256": "e2120f45e6b05cde250653a6366705aa93e334eab49f76a601f37c86c9b22ab1",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 22.43908651786228,
+        "psnr_white_db": 22.43908651786228,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 300,
+      "height": 300,
+      "bytes": 56656,
+      "times_ms": [
+        177.773,
+        180.275,
+        182.031
+      ],
+      "peak_rss_bytes": 26476544,
+      "wall_ms": 540.091,
+      "workers": 1,
+      "completed": 3,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "042-vips-large-source-e-1.webp",
+      "operation": "effort-derived",
+      "size": 300,
+      "effort": 4,
+      "reps": 3,
+      "process_wall_ms": 544.85,
+      "p50_ms": 180.275,
+      "p95_ms": 182.031,
+      "operations_per_second": 5.5546194993065985,
+      "output_sha256": "ac37ab8466ac5cceb4843b7045c437a59c881efdf2b4300379050aa8c2e5c4b7",
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 17.441911064222133,
+        "psnr_white_db": 17.441911064222133,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "width": 1200,
+      "height": 1200,
+      "bytes": 1430128,
+      "times_ms": [
+        255.108
+      ],
+      "peak_rss_bytes": 176406528,
+      "wall_ms": 255.121,
+      "workers": 1,
+      "completed": 1,
+      "worker_exit_code": 0,
+      "mode": "vips",
+      "input": "limit40mp.png",
+      "operation": "max-pixels",
+      "size": 0,
+      "effort": -1,
+      "reps": 1,
+      "process_wall_ms": 313.107,
+      "p50_ms": 255.108,
+      "p95_ms": 255.108,
+      "operations_per_second": 3.9197086872503637,
+      "output_sha256": "c7e8549de43eaddc5cdb68c1d8bce9e689e6fa51585da6ec9b7bcee6c1b71f55"
+    },
+    {
+      "width": 1200,
+      "height": 1200,
+      "bytes": 1077268,
+      "times_ms": [
+        144.08,
+        146.037
+      ],
+      "peak_rss_bytes": 110411776,
+      "wall_ms": 290.122,
+      "workers": 1,
+      "completed": 2,
+      "worker_exit_code": 0,
+      "mode": "vips",
+      "input": "large.png",
+      "operation": "parallel",
+      "size": 0,
+      "effort": -1,
+      "reps": 2,
+      "process_wall_ms": 332.51,
+      "p50_ms": 145.0585,
+      "p95_ms": 146.037,
+      "operations_per_second": 6.893651636208216,
+      "output_sha256": "02fd02689663aeac1dc5ae1e4c7959137b9c2ce3725c13d25c41c68b6551a4e5"
+    },
+    {
+      "width": 1200,
+      "height": 1200,
+      "bytes": 1077268,
+      "times_ms": [
+        145.961,
+        146.085,
+        147.965,
+        147.965
+      ],
+      "peak_rss_bytes": 147718144,
+      "wall_ms": 294.067,
+      "workers": 2,
+      "completed": 4,
+      "worker_exit_code": 0,
+      "mode": "vips",
+      "input": "large.png",
+      "operation": "parallel",
+      "size": 0,
+      "effort": -1,
+      "reps": 2,
+      "process_wall_ms": 333.348,
+      "p50_ms": 147.025,
+      "p95_ms": 147.965,
+      "operations_per_second": 13.60234232334808,
+      "output_sha256": "02fd02689663aeac1dc5ae1e4c7959137b9c2ce3725c13d25c41c68b6551a4e5"
+    },
+    {
+      "width": 1200,
+      "height": 1200,
+      "bytes": 1077268,
+      "times_ms": [
+        155.584,
+        156.934,
+        158.728,
+        158.768,
+        159.2,
+        160.919,
+        161.571,
+        162.333
+      ],
+      "peak_rss_bytes": 284917760,
+      "wall_ms": 323.87,
+      "workers": 4,
+      "completed": 8,
+      "worker_exit_code": 0,
+      "mode": "vips",
+      "input": "large.png",
+      "operation": "parallel",
+      "size": 0,
+      "effort": -1,
+      "reps": 2,
+      "process_wall_ms": 365.845,
+      "p50_ms": 158.98399999999998,
+      "p95_ms": 162.333,
+      "operations_per_second": 24.7012690276963,
+      "output_sha256": "02fd02689663aeac1dc5ae1e4c7959137b9c2ce3725c13d25c41c68b6551a4e5"
+    },
+    {
+      "width": 1200,
+      "height": 1200,
+      "bytes": 1542566,
+      "times_ms": [
+        445.482
+      ],
+      "peak_rss_bytes": 321437696,
+      "wall_ms": 445.495,
+      "workers": 1,
+      "completed": 1,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "limit40mp.png",
+      "operation": "max-pixels",
+      "size": 0,
+      "effort": -1,
+      "reps": 1,
+      "process_wall_ms": 453.853,
+      "p50_ms": 445.482,
+      "p95_ms": 445.482,
+      "operations_per_second": 2.244694104310935,
+      "output_sha256": "e9cbdddd16165f677da4218c8168e75850746488f7953abc7229b88b05a4f8dd"
+    },
+    {
+      "width": 1200,
+      "height": 1200,
+      "bytes": 1299892,
+      "times_ms": [
+        204.088,
+        205.923
+      ],
+      "peak_rss_bytes": 57556992,
+      "wall_ms": 410.024,
+      "workers": 1,
+      "completed": 2,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "large.png",
+      "operation": "parallel",
+      "size": 0,
+      "effort": -1,
+      "reps": 2,
+      "process_wall_ms": 415.613,
+      "p50_ms": 205.00549999999998,
+      "p95_ms": 205.923,
+      "operations_per_second": 4.877763252882758,
+      "output_sha256": "e47158cf347db7f42fbef5016b96be78b30ac2d0d65075d7226941378c5e75b0"
+    },
+    {
+      "width": 1200,
+      "height": 1200,
+      "bytes": 1299892,
+      "times_ms": [
+        213.581,
+        220.833,
+        222.795,
+        233.573
+      ],
+      "peak_rss_bytes": 112640000,
+      "wall_ms": 454.418,
+      "workers": 2,
+      "completed": 4,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "large.png",
+      "operation": "parallel",
+      "size": 0,
+      "effort": -1,
+      "reps": 2,
+      "process_wall_ms": 460.149,
+      "p50_ms": 221.814,
+      "p95_ms": 233.573,
+      "operations_per_second": 8.80246821208667,
+      "output_sha256": "e47158cf347db7f42fbef5016b96be78b30ac2d0d65075d7226941378c5e75b0"
+    },
+    {
+      "width": 1200,
+      "height": 1200,
+      "bytes": 1299892,
+      "times_ms": [
+        368.087,
+        396.445,
+        398.766,
+        410.87,
+        426.849,
+        448.441,
+        467.645,
+        545.52
+      ],
+      "peak_rss_bytes": 213975040,
+      "wall_ms": 913.681,
+      "workers": 4,
+      "completed": 8,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "large.png",
+      "operation": "parallel",
+      "size": 0,
+      "effort": -1,
+      "reps": 2,
+      "process_wall_ms": 921.178,
+      "p50_ms": 418.8595,
+      "p95_ms": 545.52,
+      "operations_per_second": 8.75579113498037,
+      "output_sha256": "e47158cf347db7f42fbef5016b96be78b30ac2d0d65075d7226941378c5e75b0"
+    },
+    {
+      "width": 48,
+      "height": 48,
+      "bytes": 970,
+      "times_ms": [
+        0.686
+      ],
+      "peak_rss_bytes": 20430848,
+      "wall_ms": 0.696,
+      "workers": 1,
+      "completed": 1,
+      "worker_exit_code": 0,
+      "mode": "vips",
+      "input": "animated.gif",
+      "operation": "extra-format",
+      "size": 0,
+      "effort": -1,
+      "reps": 1,
+      "process_wall_ms": 37.93,
+      "p50_ms": 0.686,
+      "p95_ms": 0.686,
+      "operations_per_second": 1436.7816091954023,
+      "output_sha256": "0dc63480d9c65187516d87626080c4a713f27cdabcbe4a38f721faaabb1bb0a4"
+    },
+    {
+      "error": "operation: format-rejected:gif",
+      "width": 0,
+      "height": 0,
+      "bytes": 0,
+      "times_ms": null,
+      "peak_rss_bytes": 4489216,
+      "wall_ms": 0,
+      "workers": 1,
+      "completed": 0,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "animated.gif",
+      "operation": "extra-format",
+      "size": 0,
+      "effort": -1,
+      "reps": 1,
+      "process_wall_ms": 3.591
+    },
+    {
+      "width": 48,
+      "height": 48,
+      "bytes": 852,
+      "times_ms": [
+        0.795
+      ],
+      "peak_rss_bytes": 20578304,
+      "wall_ms": 0.805,
+      "workers": 1,
+      "completed": 1,
+      "worker_exit_code": 0,
+      "mode": "vips",
+      "input": "animated.webp",
+      "operation": "extra-format",
+      "size": 0,
+      "effort": -1,
+      "reps": 1,
+      "process_wall_ms": 36.602,
+      "p50_ms": 0.795,
+      "p95_ms": 0.795,
+      "operations_per_second": 1242.2360248447203,
+      "output_sha256": "4c02814a87556f57ba53727edeab2fab4ad4502e58ea4a53b25bffb3754608db"
+    },
+    {
+      "error": "operation: animation-rejected",
+      "width": 0,
+      "height": 0,
+      "bytes": 0,
+      "times_ms": null,
+      "peak_rss_bytes": 4341760,
+      "wall_ms": 0,
+      "workers": 1,
+      "completed": 0,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "animated.webp",
+      "operation": "extra-format",
+      "size": 0,
+      "effort": -1,
+      "reps": 1,
+      "process_wall_ms": 3.577
+    },
+    {
+      "width": 10000,
+      "height": 1,
+      "bytes": 0,
+      "times_ms": null,
+      "peak_rss_bytes": 19349504,
+      "wall_ms": 0,
+      "workers": 1,
+      "completed": 0,
+      "worker_exit_code": 0,
+      "mode": "vips",
+      "input": "axis10000.png",
+      "operation": "admission-only",
+      "size": 0,
+      "effort": -1,
+      "reps": 1,
+      "process_wall_ms": 35.661
+    },
+    {
+      "width": 10000,
+      "height": 1,
+      "bytes": 0,
+      "times_ms": null,
+      "peak_rss_bytes": 4390912,
+      "wall_ms": 0,
+      "workers": 1,
+      "completed": 0,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "axis10000.png",
+      "operation": "admission-only",
+      "size": 0,
+      "effort": -1,
+      "reps": 1,
+      "process_wall_ms": 3.712
+    },
+    {
+      "error": "dimension-limit",
+      "width": 10001,
+      "height": 1,
+      "bytes": 0,
+      "times_ms": null,
+      "peak_rss_bytes": 19382272,
+      "wall_ms": 0,
+      "workers": 1,
+      "completed": 0,
+      "worker_exit_code": 0,
+      "mode": "vips",
+      "input": "axis10001.png",
+      "operation": "admission-only",
+      "size": 0,
+      "effort": -1,
+      "reps": 1,
+      "process_wall_ms": 36.243
+    },
+    {
+      "error": "dimension-limit",
+      "width": 10001,
+      "height": 1,
+      "bytes": 0,
+      "times_ms": null,
+      "peak_rss_bytes": 4472832,
+      "wall_ms": 0,
+      "workers": 1,
+      "completed": 0,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "axis10001.png",
+      "operation": "admission-only",
+      "size": 0,
+      "effort": -1,
+      "reps": 1,
+      "process_wall_ms": 3.731
+    },
+    {
+      "width": 640,
+      "height": 480,
+      "bytes": 0,
+      "times_ms": null,
+      "peak_rss_bytes": 30572544,
+      "wall_ms": 0,
+      "workers": 1,
+      "completed": 0,
+      "worker_exit_code": 0,
+      "mode": "vips",
+      "input": "bytes+0.jpg",
+      "operation": "admission-only",
+      "size": 0,
+      "effort": -1,
+      "reps": 1,
+      "process_wall_ms": 39.193
+    },
+    {
+      "width": 640,
+      "height": 480,
+      "bytes": 0,
+      "times_ms": null,
+      "peak_rss_bytes": 15581184,
+      "wall_ms": 0,
+      "workers": 1,
+      "completed": 0,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "bytes+0.jpg",
+      "operation": "admission-only",
+      "size": 0,
+      "effort": -1,
+      "reps": 1,
+      "process_wall_ms": 4.614
+    },
+    {
+      "error": "byte-limit",
+      "width": 0,
+      "height": 0,
+      "bytes": 0,
+      "times_ms": null,
+      "peak_rss_bytes": 29573120,
+      "wall_ms": 0,
+      "workers": 1,
+      "completed": 0,
+      "worker_exit_code": 0,
+      "mode": "vips",
+      "input": "bytes+1.jpg",
+      "operation": "admission-only",
+      "size": 0,
+      "effort": -1,
+      "reps": 1,
+      "process_wall_ms": 40.14
+    },
+    {
+      "error": "byte-limit",
+      "width": 0,
+      "height": 0,
+      "bytes": 0,
+      "times_ms": null,
+      "peak_rss_bytes": 15515648,
+      "wall_ms": 0,
+      "workers": 1,
+      "completed": 0,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "bytes+1.jpg",
+      "operation": "admission-only",
+      "size": 0,
+      "effort": -1,
+      "reps": 1,
+      "process_wall_ms": 4.786
+    },
+    {
+      "width": 640,
+      "height": 480,
+      "bytes": 0,
+      "times_ms": null,
+      "peak_rss_bytes": 30556160,
+      "wall_ms": 0,
+      "workers": 1,
+      "completed": 0,
+      "worker_exit_code": 0,
+      "mode": "vips",
+      "input": "bytes-1.jpg",
+      "operation": "admission-only",
+      "size": 0,
+      "effort": -1,
+      "reps": 1,
+      "process_wall_ms": 39.137
+    },
+    {
+      "width": 640,
+      "height": 480,
+      "bytes": 0,
+      "times_ms": null,
+      "peak_rss_bytes": 15597568,
+      "wall_ms": 0,
+      "workers": 1,
+      "completed": 0,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "bytes-1.jpg",
+      "operation": "admission-only",
+      "size": 0,
+      "effort": -1,
+      "reps": 1,
+      "process_wall_ms": 4.638
+    },
+    {
+      "width": 48,
+      "height": 48,
+      "bytes": 852,
+      "times_ms": [
+        1.517
+      ],
+      "peak_rss_bytes": 22986752,
+      "wall_ms": 1.523,
+      "workers": 1,
+      "completed": 1,
+      "worker_exit_code": 0,
+      "mode": "vips",
+      "input": "extra.avif",
+      "operation": "extra-format",
+      "size": 0,
+      "effort": -1,
+      "reps": 1,
+      "process_wall_ms": 38.663,
+      "p50_ms": 1.517,
+      "p95_ms": 1.517,
+      "operations_per_second": 656.5988181221275,
+      "output_sha256": "a4632024e2698a01163e83c85e7f00d736ce083797bdfc0d0181776969dce684"
+    },
+    {
+      "error": "operation: image: unknown format",
+      "width": 0,
+      "height": 0,
+      "bytes": 0,
+      "times_ms": null,
+      "peak_rss_bytes": 4472832,
+      "wall_ms": 0,
+      "workers": 1,
+      "completed": 0,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "extra.avif",
+      "operation": "extra-format",
+      "size": 0,
+      "effort": -1,
+      "reps": 1,
+      "process_wall_ms": 3.763
+    },
+    {
+      "error": "operation: Unsupported image format",
+      "width": 0,
+      "height": 0,
+      "bytes": 0,
+      "times_ms": null,
+      "peak_rss_bytes": 35913728,
+      "wall_ms": 0,
+      "workers": 1,
+      "completed": 0,
+      "worker_exit_code": 0,
+      "mode": "vips",
+      "input": "extra.bmp",
+      "operation": "extra-format",
+      "size": 0,
+      "effort": -1,
+      "reps": 1,
+      "process_wall_ms": 263.658
+    },
+    {
+      "error": "operation: format-rejected:bmp",
+      "width": 0,
+      "height": 0,
+      "bytes": 0,
+      "times_ms": null,
+      "peak_rss_bytes": 4456448,
+      "wall_ms": 0,
+      "workers": 1,
+      "completed": 0,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "extra.bmp",
+      "operation": "extra-format",
+      "size": 0,
+      "effort": -1,
+      "reps": 1,
+      "process_wall_ms": 3.862
+    },
+    {
+      "width": 48,
+      "height": 48,
+      "bytes": 970,
+      "times_ms": [
+        0.676
+      ],
+      "peak_rss_bytes": 20086784,
+      "wall_ms": 0.687,
+      "workers": 1,
+      "completed": 1,
+      "worker_exit_code": 0,
+      "mode": "vips",
+      "input": "extra.gif",
+      "operation": "extra-format",
+      "size": 0,
+      "effort": -1,
+      "reps": 1,
+      "process_wall_ms": 36.701,
+      "p50_ms": 0.676,
+      "p95_ms": 0.676,
+      "operations_per_second": 1455.604075691412,
+      "output_sha256": "0dc63480d9c65187516d87626080c4a713f27cdabcbe4a38f721faaabb1bb0a4"
+    },
+    {
+      "error": "operation: format-rejected:gif",
+      "width": 0,
+      "height": 0,
+      "bytes": 0,
+      "times_ms": null,
+      "peak_rss_bytes": 4472832,
+      "wall_ms": 0,
+      "workers": 1,
+      "completed": 0,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "extra.gif",
+      "operation": "extra-format",
+      "size": 0,
+      "effort": -1,
+      "reps": 1,
+      "process_wall_ms": 3.733
+    },
+    {
+      "width": 48,
+      "height": 48,
+      "bytes": 812,
+      "times_ms": [
+        1.58
+      ],
+      "peak_rss_bytes": 20971520,
+      "wall_ms": 1.585,
+      "workers": 1,
+      "completed": 1,
+      "worker_exit_code": 0,
+      "mode": "vips",
+      "input": "extra.heic",
+      "operation": "extra-format",
+      "size": 0,
+      "effort": -1,
+      "reps": 1,
+      "process_wall_ms": 37.756,
+      "p50_ms": 1.58,
+      "p95_ms": 1.58,
+      "operations_per_second": 630.9148264984227,
+      "output_sha256": "d1e1b9a27473d3bf1642191a695b60ae379a39b21c1dc292ec7d3749b8be50cb"
+    },
+    {
+      "error": "operation: image: unknown format",
+      "width": 0,
+      "height": 0,
+      "bytes": 0,
+      "times_ms": null,
+      "peak_rss_bytes": 4358144,
+      "wall_ms": 0,
+      "workers": 1,
+      "completed": 0,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "extra.heic",
+      "operation": "extra-format",
+      "size": 0,
+      "effort": -1,
+      "reps": 1,
+      "process_wall_ms": 3.734
+    },
+    {
+      "width": 80,
+      "height": 80,
+      "bytes": 84,
+      "times_ms": [
+        2.921
+      ],
+      "peak_rss_bytes": 22577152,
+      "wall_ms": 2.928,
+      "workers": 1,
+      "completed": 1,
+      "worker_exit_code": 0,
+      "mode": "vips",
+      "input": "extra.svg",
+      "operation": "extra-format",
+      "size": 0,
+      "effort": -1,
+      "reps": 1,
+      "process_wall_ms": 45.23,
+      "p50_ms": 2.921,
+      "p95_ms": 2.921,
+      "operations_per_second": 341.53005464480873,
+      "output_sha256": "4fd99750e294dc52facb9404a28c25686e2f54c8abe2e8b47c8d7bfeeadd9a93"
+    },
+    {
+      "error": "operation: image: unknown format",
+      "width": 0,
+      "height": 0,
+      "bytes": 0,
+      "times_ms": null,
+      "peak_rss_bytes": 4472832,
+      "wall_ms": 0,
+      "workers": 1,
+      "completed": 0,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "extra.svg",
+      "operation": "extra-format",
+      "size": 0,
+      "effort": -1,
+      "reps": 1,
+      "process_wall_ms": 3.663
+    },
+    {
+      "width": 48,
+      "height": 48,
+      "bytes": 778,
+      "times_ms": [
+        0.867
+      ],
+      "peak_rss_bytes": 20283392,
+      "wall_ms": 0.874,
+      "workers": 1,
+      "completed": 1,
+      "worker_exit_code": 0,
+      "mode": "vips",
+      "input": "extra.tiff",
+      "operation": "extra-format",
+      "size": 0,
+      "effort": -1,
+      "reps": 1,
+      "process_wall_ms": 37.029,
+      "p50_ms": 0.867,
+      "p95_ms": 0.867,
+      "operations_per_second": 1144.1647597254005,
+      "output_sha256": "d3ad976fa61999fc0718f380dd47b364c59f2edbcb3fbc1f60bf490359c32425"
+    },
+    {
+      "error": "operation: format-rejected:tiff",
+      "width": 0,
+      "height": 0,
+      "bytes": 0,
+      "times_ms": null,
+      "peak_rss_bytes": 4489216,
+      "wall_ms": 0,
+      "workers": 1,
+      "completed": 0,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "extra.tiff",
+      "operation": "extra-format",
+      "size": 0,
+      "effort": -1,
+      "reps": 1,
+      "process_wall_ms": 3.631
+    },
+    {
+      "error": "operation: Unsupported image format",
+      "width": 0,
+      "height": 0,
+      "bytes": 0,
+      "times_ms": null,
+      "peak_rss_bytes": 35799040,
+      "wall_ms": 0,
+      "workers": 1,
+      "completed": 0,
+      "worker_exit_code": 0,
+      "mode": "vips",
+      "input": "invalid.bin",
+      "operation": "extra-format",
+      "size": 0,
+      "effort": -1,
+      "reps": 1,
+      "process_wall_ms": 246.049
+    },
+    {
+      "error": "operation: image: unknown format",
+      "width": 0,
+      "height": 0,
+      "bytes": 0,
+      "times_ms": null,
+      "peak_rss_bytes": 4538368,
+      "wall_ms": 0,
+      "workers": 1,
+      "completed": 0,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "invalid.bin",
+      "operation": "extra-format",
+      "size": 0,
+      "effort": -1,
+      "reps": 1,
+      "process_wall_ms": 3.901
+    },
+    {
+      "width": 8000,
+      "height": 4999,
+      "bytes": 0,
+      "times_ms": null,
+      "peak_rss_bytes": 24641536,
+      "wall_ms": 0,
+      "workers": 1,
+      "completed": 0,
+      "worker_exit_code": 0,
+      "mode": "vips",
+      "input": "pixels39992000.png",
+      "operation": "admission-only",
+      "size": 0,
+      "effort": -1,
+      "reps": 1,
+      "process_wall_ms": 38.284
+    },
+    {
+      "width": 8000,
+      "height": 4999,
+      "bytes": 0,
+      "times_ms": null,
+      "peak_rss_bytes": 9715712,
+      "wall_ms": 0,
+      "workers": 1,
+      "completed": 0,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "pixels39992000.png",
+      "operation": "admission-only",
+      "size": 0,
+      "effort": -1,
+      "reps": 1,
+      "process_wall_ms": 4.39
+    },
+    {
+      "error": "dimension-limit",
+      "width": 8000,
+      "height": 5001,
+      "bytes": 0,
+      "times_ms": null,
+      "peak_rss_bytes": 24739840,
+      "wall_ms": 0,
+      "workers": 1,
+      "completed": 0,
+      "worker_exit_code": 0,
+      "mode": "vips",
+      "input": "pixels40008000.png",
+      "operation": "admission-only",
+      "size": 0,
+      "effort": -1,
+      "reps": 1,
+      "process_wall_ms": 39.113
+    },
+    {
+      "error": "dimension-limit",
+      "width": 8000,
+      "height": 5001,
+      "bytes": 0,
+      "times_ms": null,
+      "peak_rss_bytes": 9732096,
+      "wall_ms": 0,
+      "workers": 1,
+      "completed": 0,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "pixels40008000.png",
+      "operation": "admission-only",
+      "size": 0,
+      "effort": -1,
+      "reps": 1,
+      "process_wall_ms": 4.419
+    },
+    {
+      "error": "operation: VipsJpeg: premature end of JPEG image\nVipsJpeg: JPEG datastream contains no image\n",
+      "width": 0,
+      "height": 0,
+      "bytes": 0,
+      "times_ms": null,
+      "peak_rss_bytes": 19562496,
+      "wall_ms": 0,
+      "workers": 1,
+      "completed": 0,
+      "worker_exit_code": 0,
+      "mode": "vips",
+      "input": "truncated.jpg",
+      "operation": "extra-format",
+      "size": 0,
+      "effort": -1,
+      "reps": 1,
+      "process_wall_ms": 37.625
+    },
+    {
+      "error": "operation: unexpected EOF",
+      "width": 0,
+      "height": 0,
+      "bytes": 0,
+      "times_ms": null,
+      "peak_rss_bytes": 4390912,
+      "wall_ms": 0,
+      "workers": 1,
+      "completed": 0,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "truncated.jpg",
+      "operation": "extra-format",
+      "size": 0,
+      "effort": -1,
+      "reps": 1,
+      "process_wall_ms": 3.785
+    },
+    {
+      "error": "operation: ",
+      "width": 0,
+      "height": 0,
+      "bytes": 0,
+      "times_ms": null,
+      "peak_rss_bytes": 19890176,
+      "wall_ms": 0,
+      "workers": 1,
+      "completed": 0,
+      "worker_exit_code": 0,
+      "mode": "vips",
+      "input": "zero.png",
+      "operation": "admission-only",
+      "size": 0,
+      "effort": -1,
+      "reps": 1,
+      "process_wall_ms": 37.347
+    },
+    {
+      "error": "operation: png: invalid format: non-positive dimension",
+      "width": 0,
+      "height": 0,
+      "bytes": 0,
+      "times_ms": null,
+      "peak_rss_bytes": 4538368,
+      "wall_ms": 0,
+      "workers": 1,
+      "completed": 0,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "zero.png",
+      "operation": "admission-only",
+      "size": 0,
+      "effort": -1,
+      "reps": 1,
+      "process_wall_ms": 3.836
+    },
+    {
+      "width": 9999,
+      "height": 1,
+      "bytes": 0,
+      "times_ms": null,
+      "peak_rss_bytes": 19824640,
+      "wall_ms": 0,
+      "workers": 1,
+      "completed": 0,
+      "mode": "vips",
+      "input": "axis9999.png",
+      "operation": "admission-only",
+      "size": 0,
+      "effort": -1,
+      "reps": 3,
+      "worker_exit_code": 0,
+      "process_wall_ms": null
+    },
+    {
+      "width": 9999,
+      "height": 1,
+      "bytes": 0,
+      "times_ms": null,
+      "peak_rss_bytes": 4685824,
+      "wall_ms": 0,
+      "workers": 1,
+      "completed": 0,
+      "mode": "pure",
+      "input": "axis9999.png",
+      "operation": "admission-only",
+      "size": 0,
+      "effort": -1,
+      "reps": 3,
+      "worker_exit_code": 0,
+      "process_wall_ms": null
+    }
+  ],
+  "metadata": [
+    {
+      "row": 0,
+      "mode": "vips",
+      "input": "natural.jpg",
+      "operation": "source",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 1,
+      "mode": "pure",
+      "input": "natural.jpg",
+      "operation": "source",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 2,
+      "mode": "vips",
+      "input": "000-vips-natural-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 3,
+      "mode": "pure",
+      "input": "000-vips-natural-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 4,
+      "mode": "vips",
+      "input": "001-pure-natural-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 5,
+      "mode": "pure",
+      "input": "001-pure-natural-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 6,
+      "mode": "vips",
+      "input": "natural.png",
+      "operation": "source",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 7,
+      "mode": "pure",
+      "input": "natural.png",
+      "operation": "source",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 8,
+      "mode": "vips",
+      "input": "006-vips-natural-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 9,
+      "mode": "pure",
+      "input": "006-vips-natural-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 10,
+      "mode": "vips",
+      "input": "007-pure-natural-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 11,
+      "mode": "pure",
+      "input": "007-pure-natural-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 12,
+      "mode": "vips",
+      "input": "texture.jpg",
+      "operation": "source",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 13,
+      "mode": "pure",
+      "input": "texture.jpg",
+      "operation": "source",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 14,
+      "mode": "vips",
+      "input": "012-vips-texture-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 15,
+      "mode": "pure",
+      "input": "012-vips-texture-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 16,
+      "mode": "vips",
+      "input": "013-pure-texture-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 17,
+      "mode": "pure",
+      "input": "013-pure-texture-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 18,
+      "mode": "vips",
+      "input": "texture.png",
+      "operation": "source",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 19,
+      "mode": "pure",
+      "input": "texture.png",
+      "operation": "source",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 20,
+      "mode": "vips",
+      "input": "018-vips-texture-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 21,
+      "mode": "pure",
+      "input": "018-vips-texture-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 22,
+      "mode": "vips",
+      "input": "019-pure-texture-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 23,
+      "mode": "pure",
+      "input": "019-pure-texture-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 24,
+      "mode": "vips",
+      "input": "alpha.png",
+      "operation": "source",
+      "chunks": [
+        "VP8X",
+        "ALPH",
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 25,
+      "mode": "pure",
+      "input": "alpha.png",
+      "operation": "source",
+      "chunks": [
+        "VP8X",
+        "ALPH",
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 26,
+      "mode": "vips",
+      "input": "024-vips-alpha-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "chunks": [
+        "VP8X",
+        "ALPH",
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 27,
+      "mode": "pure",
+      "input": "024-vips-alpha-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "chunks": [
+        "VP8X",
+        "ALPH",
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 28,
+      "mode": "vips",
+      "input": "025-pure-alpha-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "chunks": [
+        "VP8X",
+        "ALPH",
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 29,
+      "mode": "pure",
+      "input": "025-pure-alpha-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "chunks": [
+        "VP8X",
+        "ALPH",
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 30,
+      "mode": "vips",
+      "input": "small.png",
+      "operation": "source",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 31,
+      "mode": "pure",
+      "input": "small.png",
+      "operation": "source",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 32,
+      "mode": "vips",
+      "input": "030-vips-small-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 33,
+      "mode": "pure",
+      "input": "030-vips-small-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 34,
+      "mode": "vips",
+      "input": "031-pure-small-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 35,
+      "mode": "pure",
+      "input": "031-pure-small-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 36,
+      "mode": "vips",
+      "input": "thin.png",
+      "operation": "source",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 37,
+      "mode": "pure",
+      "input": "thin.png",
+      "operation": "source",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 38,
+      "mode": "vips",
+      "input": "036-vips-thin-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 39,
+      "mode": "pure",
+      "input": "036-vips-thin-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 40,
+      "mode": "vips",
+      "input": "037-pure-thin-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 41,
+      "mode": "pure",
+      "input": "037-pure-thin-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 42,
+      "mode": "vips",
+      "input": "large.png",
+      "operation": "source",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 43,
+      "mode": "pure",
+      "input": "large.png",
+      "operation": "source",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 44,
+      "mode": "vips",
+      "input": "042-vips-large-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 45,
+      "mode": "pure",
+      "input": "042-vips-large-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 46,
+      "mode": "vips",
+      "input": "043-pure-large-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 47,
+      "mode": "pure",
+      "input": "043-pure-large-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 48,
+      "mode": "vips",
+      "input": "icc.png",
+      "operation": "source",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 49,
+      "mode": "pure",
+      "input": "icc.png",
+      "operation": "source",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 50,
+      "mode": "vips",
+      "input": "048-vips-icc-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 51,
+      "mode": "pure",
+      "input": "048-vips-icc-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 52,
+      "mode": "vips",
+      "input": "049-pure-icc-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 53,
+      "mode": "pure",
+      "input": "049-pure-icc-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 54,
+      "mode": "vips",
+      "input": "cmyk.jpg",
+      "operation": "source",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 55,
+      "mode": "pure",
+      "input": "cmyk.jpg",
+      "operation": "source",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 56,
+      "mode": "vips",
+      "input": "054-vips-cmyk-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 57,
+      "mode": "pure",
+      "input": "054-vips-cmyk-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 58,
+      "mode": "vips",
+      "input": "055-pure-cmyk-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 59,
+      "mode": "pure",
+      "input": "055-pure-cmyk-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 60,
+      "mode": "vips",
+      "input": "exif-1.jpg",
+      "operation": "source",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 61,
+      "mode": "pure",
+      "input": "exif-1.jpg",
+      "operation": "source",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 62,
+      "mode": "vips",
+      "input": "060-vips-exif-1-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 63,
+      "mode": "pure",
+      "input": "060-vips-exif-1-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 64,
+      "mode": "vips",
+      "input": "061-pure-exif-1-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 65,
+      "mode": "pure",
+      "input": "061-pure-exif-1-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 66,
+      "mode": "vips",
+      "input": "exif-2.jpg",
+      "operation": "source",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 67,
+      "mode": "pure",
+      "input": "exif-2.jpg",
+      "operation": "source",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 68,
+      "mode": "vips",
+      "input": "066-vips-exif-2-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 69,
+      "mode": "pure",
+      "input": "066-vips-exif-2-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 70,
+      "mode": "vips",
+      "input": "067-pure-exif-2-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 71,
+      "mode": "pure",
+      "input": "067-pure-exif-2-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 72,
+      "mode": "vips",
+      "input": "exif-3.jpg",
+      "operation": "source",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 73,
+      "mode": "pure",
+      "input": "exif-3.jpg",
+      "operation": "source",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 74,
+      "mode": "vips",
+      "input": "072-vips-exif-3-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 75,
+      "mode": "pure",
+      "input": "072-vips-exif-3-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 76,
+      "mode": "vips",
+      "input": "073-pure-exif-3-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 77,
+      "mode": "pure",
+      "input": "073-pure-exif-3-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 78,
+      "mode": "vips",
+      "input": "exif-4.jpg",
+      "operation": "source",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 79,
+      "mode": "pure",
+      "input": "exif-4.jpg",
+      "operation": "source",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 80,
+      "mode": "vips",
+      "input": "078-vips-exif-4-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 81,
+      "mode": "pure",
+      "input": "078-vips-exif-4-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 82,
+      "mode": "vips",
+      "input": "079-pure-exif-4-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 83,
+      "mode": "pure",
+      "input": "079-pure-exif-4-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 84,
+      "mode": "vips",
+      "input": "exif-5.jpg",
+      "operation": "source",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 85,
+      "mode": "pure",
+      "input": "exif-5.jpg",
+      "operation": "source",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 86,
+      "mode": "vips",
+      "input": "084-vips-exif-5-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 87,
+      "mode": "pure",
+      "input": "084-vips-exif-5-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 88,
+      "mode": "vips",
+      "input": "085-pure-exif-5-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 89,
+      "mode": "pure",
+      "input": "085-pure-exif-5-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 90,
+      "mode": "vips",
+      "input": "exif-6.jpg",
+      "operation": "source",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 91,
+      "mode": "pure",
+      "input": "exif-6.jpg",
+      "operation": "source",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 92,
+      "mode": "vips",
+      "input": "090-vips-exif-6-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 93,
+      "mode": "pure",
+      "input": "090-vips-exif-6-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 94,
+      "mode": "vips",
+      "input": "091-pure-exif-6-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 95,
+      "mode": "pure",
+      "input": "091-pure-exif-6-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 96,
+      "mode": "vips",
+      "input": "exif-7.jpg",
+      "operation": "source",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 97,
+      "mode": "pure",
+      "input": "exif-7.jpg",
+      "operation": "source",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 98,
+      "mode": "vips",
+      "input": "096-vips-exif-7-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 99,
+      "mode": "pure",
+      "input": "096-vips-exif-7-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 100,
+      "mode": "vips",
+      "input": "097-pure-exif-7-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 101,
+      "mode": "pure",
+      "input": "097-pure-exif-7-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 102,
+      "mode": "vips",
+      "input": "exif-8.jpg",
+      "operation": "source",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 103,
+      "mode": "pure",
+      "input": "exif-8.jpg",
+      "operation": "source",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 104,
+      "mode": "vips",
+      "input": "102-vips-exif-8-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 105,
+      "mode": "pure",
+      "input": "102-vips-exif-8-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 106,
+      "mode": "vips",
+      "input": "103-pure-exif-8-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 107,
+      "mode": "pure",
+      "input": "103-pure-exif-8-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 108,
+      "mode": "vips",
+      "input": "small.png",
+      "operation": "direct-small",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 109,
+      "mode": "pure",
+      "input": "small.png",
+      "operation": "direct-small",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 110,
+      "mode": "vips",
+      "input": "thin.png",
+      "operation": "direct-small",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 111,
+      "mode": "pure",
+      "input": "thin.png",
+      "operation": "direct-small",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 112,
+      "mode": "vips",
+      "input": "012-vips-texture-source-e-1.webp",
+      "operation": "all-sizes",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 113,
+      "mode": "pure",
+      "input": "012-vips-texture-source-e-1.webp",
+      "operation": "all-sizes",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 114,
+      "mode": "vips",
+      "input": "012-vips-texture-source-e-1.webp",
+      "operation": "all-sizes",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 115,
+      "mode": "pure",
+      "input": "012-vips-texture-source-e-1.webp",
+      "operation": "all-sizes",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 116,
+      "mode": "vips",
+      "input": "012-vips-texture-source-e-1.webp",
+      "operation": "all-sizes",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 117,
+      "mode": "pure",
+      "input": "012-vips-texture-source-e-1.webp",
+      "operation": "all-sizes",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 118,
+      "mode": "vips",
+      "input": "012-vips-texture-source-e-1.webp",
+      "operation": "all-sizes",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 119,
+      "mode": "pure",
+      "input": "012-vips-texture-source-e-1.webp",
+      "operation": "all-sizes",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 120,
+      "mode": "vips",
+      "input": "012-vips-texture-source-e-1.webp",
+      "operation": "all-sizes",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 121,
+      "mode": "pure",
+      "input": "012-vips-texture-source-e-1.webp",
+      "operation": "all-sizes",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 122,
+      "mode": "pure",
+      "input": "natural.jpg",
+      "operation": "effort-source",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 123,
+      "mode": "pure",
+      "input": "000-vips-natural-source-e-1.webp",
+      "operation": "effort-derived",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 124,
+      "mode": "pure",
+      "input": "texture.jpg",
+      "operation": "effort-source",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 125,
+      "mode": "pure",
+      "input": "012-vips-texture-source-e-1.webp",
+      "operation": "effort-derived",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 126,
+      "mode": "pure",
+      "input": "alpha.png",
+      "operation": "effort-source",
+      "chunks": [
+        "VP8X",
+        "ALPH",
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 127,
+      "mode": "pure",
+      "input": "024-vips-alpha-source-e-1.webp",
+      "operation": "effort-derived",
+      "chunks": [
+        "VP8X",
+        "ALPH",
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 128,
+      "mode": "pure",
+      "input": "large.png",
+      "operation": "effort-source",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 129,
+      "mode": "pure",
+      "input": "042-vips-large-source-e-1.webp",
+      "operation": "effort-derived",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 130,
+      "mode": "pure",
+      "input": "natural.jpg",
+      "operation": "effort-source",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 131,
+      "mode": "pure",
+      "input": "000-vips-natural-source-e-1.webp",
+      "operation": "effort-derived",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 132,
+      "mode": "pure",
+      "input": "texture.jpg",
+      "operation": "effort-source",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 133,
+      "mode": "pure",
+      "input": "012-vips-texture-source-e-1.webp",
+      "operation": "effort-derived",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 134,
+      "mode": "pure",
+      "input": "alpha.png",
+      "operation": "effort-source",
+      "chunks": [
+        "VP8X",
+        "ALPH",
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 135,
+      "mode": "pure",
+      "input": "024-vips-alpha-source-e-1.webp",
+      "operation": "effort-derived",
+      "chunks": [
+        "VP8X",
+        "ALPH",
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 136,
+      "mode": "pure",
+      "input": "large.png",
+      "operation": "effort-source",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 137,
+      "mode": "pure",
+      "input": "042-vips-large-source-e-1.webp",
+      "operation": "effort-derived",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 138,
+      "mode": "vips",
+      "input": "limit40mp.png",
+      "operation": "max-pixels",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 139,
+      "mode": "vips",
+      "input": "large.png",
+      "operation": "parallel",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 140,
+      "mode": "vips",
+      "input": "large.png",
+      "operation": "parallel",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 141,
+      "mode": "vips",
+      "input": "large.png",
+      "operation": "parallel",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 142,
+      "mode": "pure",
+      "input": "limit40mp.png",
+      "operation": "max-pixels",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 143,
+      "mode": "pure",
+      "input": "large.png",
+      "operation": "parallel",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 144,
+      "mode": "pure",
+      "input": "large.png",
+      "operation": "parallel",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 145,
+      "mode": "pure",
+      "input": "large.png",
+      "operation": "parallel",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 146,
+      "mode": "vips",
+      "input": "animated.gif",
+      "operation": "extra-format",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 148,
+      "mode": "vips",
+      "input": "animated.webp",
+      "operation": "extra-format",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 160,
+      "mode": "vips",
+      "input": "extra.avif",
+      "operation": "extra-format",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 164,
+      "mode": "vips",
+      "input": "extra.gif",
+      "operation": "extra-format",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 166,
+      "mode": "vips",
+      "input": "extra.heic",
+      "operation": "extra-format",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 168,
+      "mode": "vips",
+      "input": "extra.svg",
+      "operation": "extra-format",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    },
+    {
+      "row": 170,
+      "mode": "vips",
+      "input": "extra.tiff",
+      "operation": "extra-format",
+      "chunks": [
+        "VP8 "
+      ],
+      "metadata_present": false
+    }
+  ],
+  "scope": "synthetic corpus only; independent subprocess per sample, same-process worker concurrency; source and legacy/new-derived paths; no database",
+  "independent_alpha": {
+    "alpha_max_error": 0,
+    "dimension_match": true,
+    "psnr_black_db": 46.4362331986242,
+    "psnr_white_db": 46.436233198624194
+  },
+  "timing_scope": "transform only: decode/config within transform, orientation, geometry, encode; excludes ReadFile and outer inspect/admission. RSS includes all worker stages.",
+  "concurrency_scope": "same input buffer shared in process; excludes independent upload/download buffers and HTTP queue"
+}

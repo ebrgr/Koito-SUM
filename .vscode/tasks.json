@@ -1,0 +1,29 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Koito: setup",
+      "type": "shell",
+      "command": "make setup",
+      "problemMatcher": []
+    },
+    {
+      "label": "Koito: check",
+      "type": "shell",
+      "command": "make check",
+      "group": "test",
+      "problemMatcher": [
+        "$go"
+      ]
+    },
+    {
+      "label": "Koito: build",
+      "type": "shell",
+      "command": "make build",
+      "group": "build",
+      "problemMatcher": [
+        "$go"
+      ]
+    }
+  ]
+}

@@ -44,7 +44,19 @@ type KoitoArtist struct {
 	Aliases   []models.Alias `json:"aliases"`
 }
 
+// checkedWriter converts malformed short writes into an observable stream error.
+type checkedWriter struct{ io.Writer }
+
+func (w checkedWriter) Write(p []byte) (int, error) {
+	n, err := w.Writer.Write(p)
+	if err == nil && n != len(p) {
+		err = io.ErrShortWrite
+	}
+	return n, err
+}
+
 func ExportData(ctx context.Context, profile *models.ListeningProfile, store db.ExportStore, out io.Writer) error {
+	out = checkedWriter{out}
 	lastTime := time.Unix(0, 0)
 	lastTrackId := int32(0)
 	pageSize := int32(1000)
@@ -71,9 +83,14 @@ func ExportData(ctx context.Context, profile *models.ListeningProfile, store db.
 	}
 
 	first := true
+	firstPage := true
 	for {
+		if err := ctx.Err(); err != nil {
+			return err
+		}
 		rows, err := store.GetExportPage(ctx, db.GetExportPageOpts{
 			ProfileID:  profile.ID,
+			FirstPage:  firstPage,
 			ListenedAt: lastTime,
 			TrackID:    lastTrackId,
 			Limit:      pageSize,
@@ -81,14 +98,20 @@ func ExportData(ctx context.Context, profile *models.ListeningProfile, store db.
 		if err != nil {
 			return fmt.Errorf("ExportData: %w", err)
 		}
+		firstPage = false
 		if len(rows) == 0 {
 			break
 		}
 
 		for _, r := range rows {
+			if err := ctx.Err(); err != nil {
+				return err
+			}
 			// Adds a comma after each listen item
 			if !first {
-				_, _ = out.Write([]byte(",\n"))
+				if _, err := io.WriteString(out, ",\n"); err != nil {
+					return fmt.Errorf("ExportData: %w", err)
+				}
 			}
 			first = false
 
@@ -97,12 +120,16 @@ func ExportData(ctx context.Context, profile *models.ListeningProfile, store db.
 			raw, err := json.MarshalIndent(exported, "    ", "  ")
 
 			// needed to make the listen item start at the right indent level
-			out.Write([]byte("    "))
+			if _, err := io.WriteString(out, "    "); err != nil {
+				return fmt.Errorf("ExportData: %w", err)
+			}
 
 			if err != nil {
 				return fmt.Errorf("ExportData: marshal: %w", err)
 			}
-			_, _ = out.Write(raw)
+			if _, err := out.Write(raw); err != nil {
+				return fmt.Errorf("ExportData: %w", err)
+			}
 
 			lastTrackId = r.TrackID
 			lastTime = r.ListenedAt

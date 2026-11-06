@@ -5,11 +5,14 @@ import (
 	"net/http"
 
 	"github.com/gabehf/koito/engine/middleware"
+	"github.com/gabehf/koito/internal/admin"
+	"github.com/gabehf/koito/internal/adminweb"
 	"github.com/gabehf/koito/internal/db"
 	"github.com/gabehf/koito/internal/logger"
 	"github.com/gabehf/koito/internal/utils"
 )
 
+// GenerateApiKeyHandler uses the shared profile-scoped key service.
 func GenerateApiKeyHandler(store interface {
 	db.UserStore
 	db.ProfileStore
@@ -34,21 +37,10 @@ func GenerateApiKeyHandler(store interface {
 			return
 		}
 
-		apiKey, err := utils.GenerateRandomString(48)
+		p := middleware.ProfileFromContext(ctx)
+		key, err := admin.CreateKey(ctx, store, user, p.ID, p.Slug, body.Label)
 		if err != nil {
-			l.Error().Err(err).Msg("GenerateApiKeyHandler: Failed to generate API key")
-			utils.WriteError(w, "failed to generate api key", http.StatusInternalServerError)
-			return
-		}
-
-		key, err := store.SaveApiKey(ctx, db.SaveApiKeyOpts{
-			ProfileID: db.ProfileID(ctx),
-			Key:       apiKey,
-			Label:     body.Label,
-		})
-		if err != nil {
-			l.Error().Err(err).Msg("GenerateApiKeyHandler: Failed to save API key")
-			utils.WriteError(w, "failed to save api key", http.StatusInternalServerError)
+			utils.WriteError(w, adminweb.PublicError(err), adminweb.ErrorStatus(err))
 			return
 		}
 
@@ -57,6 +49,7 @@ func GenerateApiKeyHandler(store interface {
 	}
 }
 
+// DeleteApiKeyHandler keeps key revocation scoped to the resolved profile.
 func DeleteApiKeyHandler(store interface {
 	db.UserStore
 	db.ProfileStore
@@ -79,7 +72,7 @@ func DeleteApiKeyHandler(store interface {
 			return
 		}
 
-		if err := store.DeleteProfileApiKey(ctx, apiKeyID, db.ProfileID(ctx)); err != nil {
+		if err := admin.RevokeKey(ctx, store, user, db.ProfileID(ctx), middleware.ProfileFromContext(ctx).Slug, apiKeyID); err != nil {
 			if errors.Is(err, db.ErrNotFound) {
 				utils.WriteError(w, "key not found in profile", 404)
 				return
@@ -94,6 +87,7 @@ func DeleteApiKeyHandler(store interface {
 	}
 }
 
+// GetApiKeysHandler reads keys through the shared authorized service.
 func GetApiKeysHandler(store interface {
 	db.UserStore
 	db.ProfileStore
@@ -109,7 +103,7 @@ func GetApiKeysHandler(store interface {
 			return
 		}
 
-		apiKeys, err := store.GetApiKeysByProfileID(ctx, db.ProfileID(ctx))
+		apiKeys, err := admin.Keys(ctx, store, user, db.ProfileID(ctx), middleware.ProfileFromContext(ctx).Slug)
 		if err != nil {
 			l.Error().Err(err).Msg("GetApiKeysHandler: Failed to retrieve API keys")
 			utils.WriteError(w, "failed to retrieve api keys", http.StatusInternalServerError)
@@ -121,6 +115,7 @@ func GetApiKeysHandler(store interface {
 	}
 }
 
+// UpdateApiKeyLabelHandler keeps key updates scoped to the resolved profile.
 func UpdateApiKeyLabelHandler(store interface {
 	db.UserStore
 	db.ProfileStore
@@ -152,9 +147,13 @@ func UpdateApiKeyLabelHandler(store interface {
 			return
 		}
 
-		if err := store.UpdateProfileApiKeyLabel(ctx, apiKeyID, db.ProfileID(ctx), body.Label); err != nil {
+		if err := admin.RenameKey(ctx, store, user, db.ProfileID(ctx), middleware.ProfileFromContext(ctx).Slug, apiKeyID, body.Label); err != nil {
 			if errors.Is(err, db.ErrNotFound) {
 				utils.WriteError(w, "key not found in profile", 404)
+				return
+			}
+			if errors.Is(err, db.ErrInvalidInput) {
+				utils.WriteError(w, "invalid label", http.StatusBadRequest)
 				return
 			}
 			l.Error().Err(err).Msg("UpdateApiKeyLabelHandler: Failed to update API key label")

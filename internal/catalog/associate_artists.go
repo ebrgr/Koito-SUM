@@ -7,7 +7,6 @@ import (
 	"slices"
 	"strings"
 
-	"github.com/gabehf/koito/imagecache"
 	"github.com/gabehf/koito/internal/cfg"
 	"github.com/gabehf/koito/internal/db"
 	"github.com/gabehf/koito/internal/images"
@@ -132,22 +131,17 @@ func matchArtistsByMBIDMappings(ctx context.Context, d db.ArtistStore, opts Asso
 			})
 			if imgErr == nil && imgUrl != "" {
 				imgid = uuid.New()
-				if !opts.SkipCacheImage {
-					l.Debug().Msg("Downloading artist image from source...")
-					err = imagecache.DownloadImage(imgid, imgUrl)
-					if err != nil {
-						l.Err(err).Msg("Failed to cache image")
-					}
-				}
 			} else {
 				l.Err(imgErr).Msgf("matchArtistsByMBIDMappings: Failed to get artist image for artist '%s'", a.Artist)
 			}
 
-			artist, err = d.SaveArtist(ctx, db.SaveArtistOpts{
-				Name:          a.Artist,
-				MusicBrainzID: a.Mbid,
-				Image:         imgid,
-				ImageSrc:      imgUrl,
+			artist, err = saveWithAutomaticImage(ctx, imgid, imgUrl, opts.SkipCacheImage, func() (*models.Artist, error) {
+				return d.SaveArtist(ctx, db.SaveArtistOpts{
+					Name:          a.Artist,
+					MusicBrainzID: a.Mbid,
+					Image:         imgid,
+					ImageSrc:      imgUrl,
+				})
 			})
 			if err != nil {
 				l.Err(err).Msgf("matchArtistsByMBIDMappings: Failed to create artist '%s' in database", a.Artist)
@@ -245,23 +239,18 @@ func resolveAliasOrCreateArtist(ctx context.Context, mbzID uuid.UUID, names []st
 	})
 	if err == nil && imgUrl != "" {
 		imgid = uuid.New()
-		if !opts.SkipCacheImage {
-			l.Debug().Msg("Downloading artist image from source...")
-			err = imagecache.DownloadImage(imgid, imgUrl)
-			if err != nil {
-				l.Err(err).Msg("Failed to cache image")
-			}
-		}
 	} else if err != nil {
 		l.Warn().AnErr("error", err).Msg("Failed to get artist image from ImageSrc")
 	}
 
-	u, err := d.SaveArtist(ctx, db.SaveArtistOpts{
-		MusicBrainzID: mbzID,
-		Name:          canonical,
-		Aliases:       aliases,
-		Image:         imgid,
-		ImageSrc:      imgUrl,
+	u, err := saveWithAutomaticImage(ctx, imgid, imgUrl, opts.SkipCacheImage, func() (*models.Artist, error) {
+		return d.SaveArtist(ctx, db.SaveArtistOpts{
+			MusicBrainzID: mbzID,
+			Name:          canonical,
+			Aliases:       aliases,
+			Image:         imgid,
+			ImageSrc:      imgUrl,
+		})
 	})
 	if err != nil {
 		return nil, fmt.Errorf("resolveAliasOrCreateArtist: %w", err)
@@ -294,17 +283,12 @@ func matchArtistsByNames(ctx context.Context, names []string, existing []*models
 			})
 			if err == nil && imgUrl != "" {
 				imgid = uuid.New()
-				if !opts.SkipCacheImage {
-					l.Debug().Msg("Downloading artist image from source...")
-					err = imagecache.DownloadImage(imgid, imgUrl)
-					if err != nil {
-						l.Err(err).Msg("Failed to cache image")
-					}
-				}
 			} else if err != nil {
 				l.Debug().AnErr("error", err).Msgf("Failed to get artist images for %s", name)
 			}
-			a, err = d.SaveArtist(ctx, db.SaveArtistOpts{Name: name, Image: imgid, ImageSrc: imgUrl})
+			a, err = saveWithAutomaticImage(ctx, imgid, imgUrl, opts.SkipCacheImage, func() (*models.Artist, error) {
+				return d.SaveArtist(ctx, db.SaveArtistOpts{Name: name, Image: imgid, ImageSrc: imgUrl})
+			})
 			if err != nil {
 				return nil, fmt.Errorf("matchArtistsByNames: %w", err)
 			}

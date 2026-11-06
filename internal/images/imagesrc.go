@@ -4,10 +4,9 @@ package images
 import (
 	"context"
 	"fmt"
-	"net/http"
-	"strings"
 	"sync"
 
+	"github.com/gabehf/koito/internal/imagefetch"
 	"github.com/gabehf/koito/internal/logger"
 	"github.com/google/uuid"
 )
@@ -67,8 +66,17 @@ func Initialize(opts ImageSourceOpts) {
 	})
 }
 
+// Shutdown cancels enabled provider queues and is safe when providers are disabled.
 func Shutdown() {
-	imgsrc.deezerC.Shutdown()
+	if imgsrc.deezerC != nil {
+		imgsrc.deezerC.Shutdown()
+	}
+	if imgsrc.subsonicC != nil {
+		imgsrc.subsonicC.Shutdown()
+	}
+	if imgsrc.lastfmC != nil {
+		imgsrc.lastfmC.Shutdown()
+	}
 }
 
 func GetArtistImage(ctx context.Context, opts ArtistImageOpts) (string, error) {
@@ -126,24 +134,13 @@ func GetAlbumImage(ctx context.Context, opts AlbumImageOpts) (string, error) {
 		l.Debug().Msg("Attempting to find album image from CoverArtArchive")
 		if opts.ReleaseMbzID != nil && *opts.ReleaseMbzID != uuid.Nil {
 			url := fmt.Sprintf(caaBaseUrl+"/release/%s/front", opts.ReleaseMbzID.String())
-			resp, err := http.DefaultClient.Head(url)
-			if err != nil {
-				l.Debug().Err(err).Msg("GetAlbumImage: Could not find artist image from CoverArtArchive with Release MBID")
-			} else {
-				if resp.StatusCode == 200 {
-					return url, nil
-				} else {
-					l.Debug().Int("status", resp.StatusCode).Msg("GetAlbumImage: Got non-OK response from CoverArtArchive")
-				}
+			if err := imagefetch.Validate(ctx, url, false); err == nil {
+				return url, nil
 			}
 		}
 		if opts.ReleaseGroupMbzID != nil && *opts.ReleaseGroupMbzID != uuid.Nil {
 			url := fmt.Sprintf(caaBaseUrl+"/release-group/%s/front", opts.ReleaseGroupMbzID.String())
-			resp, err := http.DefaultClient.Head(url)
-			if err != nil {
-				l.Debug().Err(err).Msg("GetAlbumImage: Could not find artist image from CoverArtArchive with Release Group MBID")
-			}
-			if resp.StatusCode == 200 {
+			if err := imagefetch.Validate(ctx, url, false); err == nil {
 				return url, nil
 			}
 		}
@@ -171,22 +168,10 @@ func GetAlbumImage(ctx context.Context, opts AlbumImageOpts) (string, error) {
 	return "", nil
 }
 
-// ValidateImageURL checks if the URL points to a valid image by performing a HEAD request.
-func ValidateImageURL(url string) error {
-	resp, err := http.Head(url)
-	if err != nil {
-		return fmt.Errorf("ValidateImageURL: http.Head: %w", err)
-	}
-	defer resp.Body.Close()
+// ValidateImageURL keeps the legacy call signature with a bounded timeout.
+func ValidateImageURL(raw string) error { return ValidateImageURLContext(context.Background(), raw) }
 
-	if resp.StatusCode != http.StatusOK {
-		return fmt.Errorf("ValidateImageURL: HEAD request failed, status code: %d", resp.StatusCode)
-	}
-
-	contentType := resp.Header.Get("Content-Type")
-	if !strings.HasPrefix(contentType, "image/") {
-		return fmt.Errorf("ValidateImageURL: URL does not point to an image, content type: %s", contentType)
-	}
-
-	return nil
+// ValidateImageURLContext validates an image source with cancellation and redirect limits.
+func ValidateImageURLContext(ctx context.Context, raw string) error {
+	return imagefetch.Validate(ctx, raw, true)
 }

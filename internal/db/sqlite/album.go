@@ -84,16 +84,20 @@ func (s *Sqlite) getAlbumByID(ctx context.Context, id int32) (*models.Album, err
 	ret.Artists = artists
 
 	var listenCount int64
-	s.queryRowContext(ctx, `
+	if err := s.queryRowContext(ctx, `
 		SELECT COUNT(*) FROM listens l JOIN tracks t ON l.track_id = t.id WHERE t.release_id = ?`,
-		id).Scan(&listenCount)
+		id).Scan(&listenCount); err != nil {
+		return nil, fmt.Errorf("getAlbumByID: count listens: %w", err)
+	}
 	ret.ListenCount = listenCount
 
 	var timeListened int64
-	s.queryRowContext(ctx, `
+	if err := s.queryRowContext(ctx, `
 		SELECT COALESCE(SUM(t.duration), 0)
 		FROM listens l JOIN tracks t ON l.track_id = t.id WHERE t.release_id = ?`,
-		id).Scan(&timeListened)
+		id).Scan(&timeListened); err != nil {
+		return nil, fmt.Errorf("getAlbumByID: time listened: %w", err)
+	}
 	ret.TimeListened = timeListened
 
 	var firstListenUnix int64
@@ -106,13 +110,15 @@ func (s *Sqlite) getAlbumByID(ctx context.Context, id int32) (*models.Album, err
 	ret.FirstListen = firstListenUnix
 
 	var rank int64
-	s.queryRowContext(ctx, `
+	if err := s.queryRowContext(ctx, `
 		SELECT rank FROM (
 			SELECT t.release_id,
 			       RANK() OVER (ORDER BY COUNT(*) DESC) AS rank
 			FROM listens l JOIN tracks t ON l.track_id = t.id
 			GROUP BY t.release_id
-		) WHERE release_id = ?`, id).Scan(&rank)
+		) WHERE release_id = ?`, id).Scan(&rank); err != nil && !errors.Is(err, sql.ErrNoRows) {
+		return nil, fmt.Errorf("getAlbumByID: rank: %w", err)
+	}
 	ret.AllTimeRank = rank
 
 	return &ret, nil
@@ -275,6 +281,14 @@ func (s *Sqlite) UpdateAlbum(ctx context.Context, opts db.UpdateAlbumOpts) error
 		return fmt.Errorf("UpdateAlbum: BeginTx: %w", err)
 	}
 	defer tx.Rollback()
+	var present int
+	err = tx.QueryRowContext(ctx, `SELECT 1 FROM releases WHERE id=?`, opts.ID).Scan(&present)
+	if errors.Is(err, sql.ErrNoRows) {
+		return db.ErrNotFound
+	}
+	if err != nil {
+		return err
+	}
 
 	if opts.MusicBrainzID != uuid.Nil {
 		if _, err := tx.ExecContext(ctx,
@@ -307,15 +321,48 @@ func (s *Sqlite) UpdateAlbum(ctx context.Context, opts db.UpdateAlbumOpts) error
 }
 
 func (s *Sqlite) DeleteAlbum(ctx context.Context, id int32) error {
-	_, err := s.db.ExecContext(ctx, `DELETE FROM releases WHERE id = ?`, id)
-	return err
+	if id <= 0 {
+		return db.ErrInvalidInput
+	}
+	result, err := s.db.ExecContext(ctx, `DELETE FROM releases WHERE id=?`, id)
+	if err != nil {
+		return err
+	}
+	n, err := result.RowsAffected()
+	if err != nil {
+		return err
+	}
+	if n == 0 {
+		return db.ErrNotFound
+	}
+	return nil
 }
 
+// DeleteAlbumAlias never removes a primary alias or reports success for a missing alias.
 func (s *Sqlite) DeleteAlbumAlias(ctx context.Context, id int32, alias string) error {
-	_, err := s.db.ExecContext(ctx,
-		`DELETE FROM release_aliases WHERE release_id = ? AND alias = ? AND is_primary = 0`,
-		id, alias)
-	return err
+	if id <= 0 || strings.TrimSpace(alias) == "" {
+		return db.ErrInvalidInput
+	}
+	result, err := s.db.ExecContext(ctx, `DELETE FROM release_aliases WHERE release_id=? AND alias=? AND is_primary=0`, id, alias)
+	if err != nil {
+		return err
+	}
+	n, err := result.RowsAffected()
+	if err != nil {
+		return err
+	}
+	if n > 0 {
+		return nil
+	}
+	var primary int
+	err = s.db.QueryRowContext(ctx, `SELECT is_primary FROM release_aliases WHERE release_id=? AND alias=?`, id, alias).Scan(&primary)
+	if errors.Is(err, sql.ErrNoRows) {
+		return db.ErrNotFound
+	}
+	if err != nil {
+		return err
+	}
+	return db.ErrConflict
 }
 
 func (s *Sqlite) GetAllAlbumAliases(ctx context.Context, id int32) ([]models.Alias, error) {
@@ -362,7 +409,10 @@ func (s *Sqlite) SetPrimaryAlbumAlias(ctx context.Context, id int32, alias strin
 	for rows.Next() {
 		var a string
 		var isPrimary int
-		rows.Scan(&a, &isPrimary)
+		if err := rows.Scan(&a, &isPrimary); err != nil {
+			rows.Close()
+			return err
+		}
 		if isPrimary == 1 {
 			primary = a
 		}
@@ -370,13 +420,17 @@ func (s *Sqlite) SetPrimaryAlbumAlias(ctx context.Context, id int32, alias strin
 			exists = a
 		}
 	}
+	if err := rows.Err(); err != nil {
+		rows.Close()
+		return err
+	}
 	rows.Close()
 
 	if primary == alias {
 		return nil
 	}
 	if exists == "" {
-		return errors.New("SetPrimaryAlbumAlias: alias does not exist")
+		return db.ErrNotFound
 	}
 
 	if _, err := tx.ExecContext(ctx,
@@ -562,23 +616,36 @@ func (s *Sqlite) AlbumsWithoutImages(ctx context.Context, from int32) ([]*models
 	return albums, rows.Err()
 }
 
+// MergeAlbums validates catalog identities before changing any relationships.
 func (s *Sqlite) MergeAlbums(ctx context.Context, fromId, toId int32, replaceImage bool) error {
 	tx, err := s.db.BeginTx(ctx, nil)
 	if err != nil {
 		return fmt.Errorf("MergeAlbums: BeginTx: %w", err)
 	}
 	defer tx.Rollback()
+	if err := mergeAlbumsIn(ctx, tx, fromId, toId, replaceImage); err != nil {
+		return err
+	}
+	return tx.Commit()
+}
+
+func mergeAlbumsIn(ctx context.Context, tx *sql.Tx, fromId, toId int32, replaceImage bool) error {
+	if err := requireMergeRows(ctx, tx, "releases", fromId, toId); err != nil {
+		return err
+	}
 
 	// fetch artists from fromId before moving tracks (for re-association)
-	fromArtists, err := s.artistsForRelease(ctx, fromId)
+	fromArtists, err := artistsForReleaseIn(ctx, tx, fromId)
 	if err != nil {
 		return fmt.Errorf("MergeAlbums: fetch from artists: %w", err)
 	}
 
 	if replaceImage {
 		var image, imageSrc sql.NullString
-		tx.QueryRowContext(ctx, `SELECT image, image_source FROM releases WHERE id = ?`, fromId).
-			Scan(&image, &imageSrc)
+		if err := tx.QueryRowContext(ctx, `SELECT image, image_source FROM releases WHERE id = ?`, fromId).
+			Scan(&image, &imageSrc); err != nil {
+			return fmt.Errorf("merge image: %w", err)
+		}
 		if image.Valid {
 			if _, err := tx.ExecContext(ctx,
 				`UPDATE releases SET image = ?, image_source = ? WHERE id = ?`,
@@ -601,10 +668,11 @@ func (s *Sqlite) MergeAlbums(ctx context.Context, fromId, toId int32, replaceIma
 		}
 	}
 
-	if err := cleanOrphanedEntries(ctx, tx); err != nil {
-		return fmt.Errorf("MergeAlbums: clean: %w", err)
+	// Only the explicit source is removed; unrelated unplayed media is preserved.
+	if _, err := tx.ExecContext(ctx, `DELETE FROM releases WHERE id=?`, fromId); err != nil {
+		return fmt.Errorf("MergeAlbums: delete source: %w", err)
 	}
-	return tx.Commit()
+	return nil
 }
 
 func (s *Sqlite) CountAlbums(ctx context.Context, timeframe db.Timeframe) (int64, error) {
@@ -629,4 +697,23 @@ func (s *Sqlite) CountNewAlbums(ctx context.Context, timeframe db.Timeframe) (in
 		)`,
 		t1.Unix(), t2.Unix()).Scan(&count)
 	return count, err
+}
+
+// UpdateTrackAlbumArtwork applies only if the track still belongs to the album reviewed by the caller.
+func (s *Sqlite) UpdateTrackAlbumArtwork(ctx context.Context, trackID, albumID int32, image uuid.UUID, source string) error {
+	if trackID <= 0 || albumID <= 0 || image == uuid.Nil || source == "" {
+		return db.ErrInvalidInput
+	}
+	result, err := s.db.ExecContext(ctx, `UPDATE releases SET image=?,image_source=? WHERE id=? AND EXISTS (SELECT 1 FROM tracks WHERE id=? AND release_id=?)`, image.String(), source, albumID, trackID, albumID)
+	if err != nil {
+		return err
+	}
+	n, err := result.RowsAffected()
+	if err != nil {
+		return err
+	}
+	if n == 0 {
+		return db.ErrConflict
+	}
+	return nil
 }

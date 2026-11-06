@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Exercise the real API with disposable fresh and migrated SQLite databases.
 
-Build first: CGO_ENABLED=1 go build -o /tmp/koito-validation ./cmd/api
+Build first: CGO_ENABLED=0 go build -o /tmp/koito-validation ./cmd/api
 Run: python3 scripts/validate_multiuser.py --binary /tmp/koito-validation
 An optional --example-db is opened read-only and copied before any mutations.
 No player or external music service is contacted. Credentials are never printed.
@@ -49,8 +49,10 @@ def snapshot(database):
 
 
 class Server:
-    def __init__(self, binary, directory):
+    def __init__(self, binary, directory, *, environment=None, port=None):
         self.binary, self.directory = binary, directory
+        self.extra_environment = environment or {}
+        self.fixed_port = port
         self.process = None
         self.cookies = http.cookiejar.CookieJar()
         self.admin = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(self.cookies))
@@ -61,6 +63,7 @@ class Server:
         with socket.socket() as sock:
             sock.bind(("127.0.0.1", 0))
             port = sock.getsockname()[1]
+        port = self.fixed_port or port
         self.origin = f"http://127.0.0.1:{port}"
         self.env = {k: v for k, v in os.environ.items() if not k.startswith("KOITO_")}
         self.env.update(KOITO_CONFIG_DIR=str(self.directory), KOITO_BIND_ADDR="127.0.0.1",
@@ -68,6 +71,7 @@ class Server:
                         KOITO_DEFAULT_PASSWORD=PASSWORD, KOITO_DISABLE_MUSICBRAINZ="true",
                         KOITO_DISABLE_DEEZER="true", KOITO_DISABLE_COVER_ART_ARCHIVE="true",
                         KOITO_SKIP_IMPORT="true", KOITO_DISABLE_RATE_LIMIT="true", KOITO_LOG_LEVEL="warn")
+        self.env.update(self.extra_environment)
         self.log = open(self.directory / "server.log", "ab")
         os.chmod(self.directory / "server.log", 0o600)
         self.process = subprocess.Popen([str(self.binary)], cwd=ROOT, env=self.env,
@@ -175,15 +179,15 @@ def validate_journey(server):
         assert sum(day["listens"] for day in activity["activity"]) == count
         assert len(server.request("GET", prefix + "/search?q=Shared%20validation")["tracks"]) == 1
     server.request("GET", WEB + "/stats", expected=409)
-    # The built client also serves direct links and refreshes, without a Go route per page.
+    # Check direct navigation in the selected UI instead of assuming an SPA.
     page = server.request("GET", "/")
-    assert b"<!doctype html" in page.lower(), "Build the frontend before this validation"
-    for path in ["/validation-alpha", "/validation-beta/chart/top/artists?period=all_time", "/admin"]:
-        assert server.request("GET", path) == page
-    assets = set(re.findall(rb'"(/assets/[^" ]+\.js)"', page))
-    assert assets, "Production JS assets missing from client HTML"
-    for asset in assets:
-        server.request("GET", asset.decode())
+    assert b"<!doctype html" in page.lower()
+    assert server.request("GET", WEB + "/config")["web_ui"] == "go"
+    assert b'data-assets="/web-assets"' in page
+    for path in ["/validation-alpha", "/validation-beta/chart/top/artists?period=all_time"]:
+        assert b'data-assets="/web-assets"' in server.request("GET", path)
+    assert b'data-admin-ui="go"' in server.request("GET", "/admin")
+    server.request("GET", "/theme-helper", expected=404)
     assert server.request("GET", alpha + "/summary?period=all_time")["plays"] == 2
     assert server.request("GET", beta + "/summary?period=all_time")["plays"] == 1
     server.request("POST", LBZ + "/submit-listens", scrobble(0, "playing_now"), token=keys[1]["key"])

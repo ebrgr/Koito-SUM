@@ -2,7 +2,6 @@ package handlers
 
 import (
 	"net/http"
-	"strconv"
 
 	"github.com/gabehf/koito/internal/db"
 	"github.com/gabehf/koito/internal/logger"
@@ -17,9 +16,9 @@ func GetArtistHandler(store db.ArtistStore) func(w http.ResponseWriter, r *http.
 		l.Debug().Msg("GetArtistHandler: Received request to retrieve artist")
 
 		id, err := utils.ParseIDParam(r, "id")
-		if err != nil {
-			l.Debug().AnErr("error", err).Msg("GetArtistHandler: Invalid album id")
-			utils.WriteError(w, "invalid album id", http.StatusBadRequest)
+		if err != nil || id <= 0 {
+			l.Debug().AnErr("error", err).Msg("GetArtistHandler: Invalid artist id")
+			utils.WriteError(w, "invalid artist id", http.StatusBadRequest)
 			return
 		}
 
@@ -28,7 +27,7 @@ func GetArtistHandler(store db.ArtistStore) func(w http.ResponseWriter, r *http.
 		artist, err := store.GetArtist(ctx, db.GetArtistOpts{ID: id})
 		if err != nil {
 			l.Err(err).Msgf("GetArtistHandler: Failed to retrieve artist with ID %d", id)
-			utils.WriteError(w, "artist with specified id could not be found", http.StatusNotFound)
+			writeMediaReadError(w, err, "artist")
 			return
 		}
 
@@ -37,7 +36,7 @@ func GetArtistHandler(store db.ArtistStore) func(w http.ResponseWriter, r *http.
 	}
 }
 
-// GetArtistAliasesHandler retrieves all aliases for a given artist.
+// GetArtistAliasesHandler reports missing or unrelated artists as not found.
 func GetArtistAliasesHandler(store db.ArtistStore) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		ctx := r.Context()
@@ -53,7 +52,7 @@ func GetArtistAliasesHandler(store db.ArtistStore) http.HandlerFunc {
 		aliases, err := store.GetAllArtistAliases(ctx, artistID)
 		if err != nil {
 			l.Err(err).Msg("GetArtistAliasesHandler: Failed to get artist aliases")
-			utils.WriteError(w, "failed to retrieve aliases", http.StatusInternalServerError)
+			writeMediaReadError(w, err, "artist")
 			return
 		}
 
@@ -63,34 +62,5 @@ func GetArtistAliasesHandler(store db.ArtistStore) http.HandlerFunc {
 
 // GetArtistInterestHandler retrieves interest data for a given artist.
 func GetArtistInterestHandler(store db.ListenStore) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
-		ctx := r.Context()
-		l := logger.FromContext(ctx)
-
-		artistID, err := utils.ParseIDParam(r, "id")
-		if err != nil {
-			l.Debug().AnErr("error", err).Msg("GetArtistInterestHandler: Invalid artist id")
-			utils.WriteError(w, "invalid artist id", http.StatusBadRequest)
-			return
-		}
-
-		buckets, err := strconv.Atoi(r.URL.Query().Get("buckets"))
-		if err != nil {
-			l.Debug().Msg("GetArtistInterestHandler: Buckets is not an integer")
-			utils.WriteError(w, "parameter 'buckets' must be an integer", http.StatusBadRequest)
-			return
-		}
-
-		interest, err := store.GetInterest(ctx, db.GetInterestOpts{
-			ArtistID: artistID,
-			Buckets:  buckets,
-		})
-		if err != nil {
-			l.Err(err).Msg("GetArtistInterestHandler: Failed to query interest")
-			utils.WriteError(w, "failed to retrieve interest: "+err.Error(), http.StatusInternalServerError)
-			return
-		}
-
-		utils.WriteJSON(w, http.StatusOK, interest)
-	}
+	return interestHandler(store, "artist")
 }

@@ -1,0 +1,46 @@
+{
+  "profiles": 3,
+  "mara_listens": 152,
+  "history_page_2": 52,
+  "schema": 3,
+  "http_pages": [
+    "/",
+    "/mara?period=all_time",
+    "/mara/chart/top/artists",
+    "/mara/chart/top/albums",
+    "/mara/chart/top/tracks",
+    "/mara/listens?limit=100&page=2",
+    "/iara"
+  ],
+  "checks": [
+    "scoping",
+    "API/HTML parity",
+    "invalid filters",
+    "retained SPA",
+    "admin authentication",
+    "same-origin mutations",
+    "SQLite integrity"
+  ],
+  "date": "2026-11-04",
+  "issue": "006",
+  "functional_status": "core implemented and tested; visual acceptance deferred until end of issue 009",
+  "checks_passed": [
+    "make check ui.check",
+    "focused Go race tests",
+    "real binary webui validation",
+    "multiuser fresh database",
+    "multiuser migrated-v2 database"
+  ],
+  "webui_regression": [
+    "scoping",
+    "API/HTML parity",
+    "invalid filters",
+    "retained SPA",
+    "admin authentication",
+    "same-origin mutations",
+    "SQLite integrity"
+  ],
+  "production_media_routes": "React, unchanged; activation in issue 009",
+  "new_screenshots": false,
+  "visual_schedule_updated": "2026-11-04: user deferred visual review to end of issue 009"
+}

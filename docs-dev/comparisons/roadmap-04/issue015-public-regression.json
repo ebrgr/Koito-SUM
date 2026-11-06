@@ -1,0 +1,31 @@
+{
+  "profiles": 3,
+  "mara_listens": 152,
+  "history_page_2": 52,
+  "schema": 3,
+  "interest_totals": {
+    "artist": 31,
+    "album": 31,
+    "track": 3
+  },
+  "http_pages": [
+    "/",
+    "/mara?period=all_time",
+    "/mara/chart/top/artists",
+    "/mara/chart/top/albums",
+    "/mara/chart/top/tracks",
+    "/mara/listens?limit=100&page=2",
+    "/iara"
+  ],
+  "checks": [
+    "scoping",
+    "API/HTML parity",
+    "invalid filters",
+    "interest intervals and bounds",
+    "React management aliases and Go media",
+    "admin authentication",
+    "same-origin mutations",
+    "SQLite integrity",
+    "React mode retains SPA"
+  ]
+}

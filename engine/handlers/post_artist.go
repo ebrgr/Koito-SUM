@@ -3,13 +3,16 @@ package handlers
 import (
 	"net/http"
 
+	"github.com/gabehf/koito/engine/middleware"
+	"github.com/gabehf/koito/internal/admin"
+	"github.com/gabehf/koito/internal/adminweb"
 	"github.com/gabehf/koito/internal/db"
 	"github.com/gabehf/koito/internal/logger"
 	"github.com/gabehf/koito/internal/utils"
 )
 
 // CreateArtistAliasHandler creates a new alias for a given artist.
-func CreateArtistAliasHandler(store db.ArtistStore) http.HandlerFunc {
+func CreateArtistAliasHandler(store db.DB) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		ctx := r.Context()
 		l := logger.FromContext(ctx)
@@ -33,9 +36,9 @@ func CreateArtistAliasHandler(store db.ArtistStore) http.HandlerFunc {
 			return
 		}
 
-		if err = store.SaveArtistAliases(ctx, artistID, []string{body.Alias}, "Manual"); err != nil {
+		if err = admin.EditAlias(ctx, store, middleware.GetUserFromContext(ctx), "artist", artistID, "add", body.Alias); err != nil {
 			l.Error().Err(err).Msg("CreateArtistAliasHandler: Failed to save artist alias")
-			utils.WriteError(w, "failed to save alias", http.StatusInternalServerError)
+			utils.WriteError(w, adminweb.PublicError(err), adminweb.ErrorStatus(err))
 			return
 		}
 

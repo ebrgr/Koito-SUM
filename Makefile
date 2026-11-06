@@ -7,28 +7,27 @@ endif
 YARN ?= corepack yarn
 DLV_VERSION ?= v1.27.2
 
-.PHONY: help setup doctor api.deps api.dev api.debug api.vet api.test api.build debugger.deps client.dev docs.dev client.deps client.build client.typecheck client.test check multiuser.check test build
+.PHONY: help setup doctor api.deps api.dev api.debug api.vet api.test api.race api.build debugger.deps docs.dev check multiuser.check test build
 
 help:
 	@echo "make setup           Install project dependencies and create .env"
 	@echo "make doctor          Check local prerequisites"
 	@echo "make api.dev         Run Go API on 127.0.0.1:4110"
-	@echo "make client.dev      Run frontend on http://localhost:5173 (second terminal)"
 	@echo "make api.debug       Run API under Delve in the terminal"
-	@echo "make check           Run Go tests and frontend type checking"
-	@echo "make build           Build API and frontend"
+	@echo "make check           Run Go and interface checks"
+	@echo "make api.race        Run Go race tests (requires a C compiler)"
+	@echo "make build           Build the Go application"
 	@echo "make multiuser.check Validate multiuser journeys on disposable databases"
+	@echo "make ui.preview      Run the isolated Go visual preview (no database)"
+	@echo "make ui.check        Check Go pages, preview and their JavaScript"
 
 setup: doctor
 	@test -f .env || cp .env.example .env
-	$(MAKE) api.deps client.deps debugger.deps
+	$(MAKE) api.deps debugger.deps
 
 doctor:
 	go version
 	node --version
-	corepack --version
-	@command -v cc >/dev/null || { echo "Install a C compiler (Xcode Command Line Tools on macOS)"; exit 1; }
-	@pkg-config --modversion vips || { echo "Install libvips and pkg-config: brew install vips pkg-config (macOS)"; exit 1; }
 
 api.deps:
 	go mod download
@@ -37,47 +36,47 @@ debugger.deps:
 	GOBIN="$(CURDIR)/.bin" go install github.com/go-delve/delve/cmd/dlv@$(DLV_VERSION)
 
 api.dev:
-	CGO_ENABLED=1 go run ./cmd/api
+	CGO_ENABLED=0 go run ./cmd/api
 
 api.debug:
-	CGO_ENABLED=1 ./.bin/dlv debug ./cmd/api
+	CGO_ENABLED=0 ./.bin/dlv debug ./cmd/api
 
 api.vet:
-	CGO_ENABLED=1 go vet ./...
+	CGO_ENABLED=0 go vet ./...
 
 api.test:
-	CGO_ENABLED=1 go test ./... -timeout 60s
+	CGO_ENABLED=0 go test ./... -timeout 60s
+
+api.race:
+	CGO_ENABLED=1 go test -race ./... -timeout 120s
 
 api.build:
-	CGO_ENABLED=1 go build -ldflags='-s -w' -o koito ./cmd/api/main.go
-
-client.dev:
-	cd client && $(YARN) run dev
+	CGO_ENABLED=0 go build -ldflags='-s -w' -o koito ./cmd/api/main.go
 
 docs.dev:
 	cd docs && $(YARN) dev
 
-client.deps:
-	cd client && $(YARN) install --immutable
+check: api.vet api.test ui.check
 
-client.typecheck:
-	cd client && $(YARN) run typecheck
+.PHONY: ui.preview ui.check
+ui.preview:
+	CGO_ENABLED=0 go run ./cmd/ui-preview
 
-client.build: client.deps
-	cd client && $(YARN) run build
-	find client/build/client -type f \( -name "*.js" -o -name "*.css" -o -name "*.html" -o -name "*.svg" \) -exec gzip -kf -9 {} \;
-
-client.test:
-	cd client && $(YARN) run test
-
-check: api.vet api.test client.typecheck client.test
+ui.check:
+	CGO_ENABLED=0 go vet ./internal/webui ./internal/webquery ./internal/listening ./cmd/ui-preview
+	CGO_ENABLED=0 go test ./internal/webui ./internal/webquery ./internal/listening ./cmd/ui-preview
+	node --check internal/webui/static/theme.js
+	node --check internal/webui/static/ui.js
+	node --check internal/webui/static/live.js
+	node --check internal/webui/static/admin.js
+	node --test internal/webui/theme.test.mjs
 
 test: api.test
 
-build: api.build client.build
+build: api.build
 
 # Starts isolated loopback APIs; never uses the database configured in .env.
-multiuser.check: api.build client.build
+multiuser.check: api.build
 	python3 scripts/validate_multiuser.py --binary ./koito
 
 # Increment once per new commit, then include the synchronized version files.

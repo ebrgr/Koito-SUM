@@ -1,7 +1,10 @@
 package handlers
 
 import (
+	"errors"
 	"github.com/gabehf/koito/engine/middleware"
+	"github.com/gabehf/koito/internal/admin"
+	"github.com/gabehf/koito/internal/adminweb"
 	"github.com/gabehf/koito/internal/db"
 	"github.com/gabehf/koito/internal/utils"
 	"net/http"
@@ -22,6 +25,8 @@ func GetProfileHandler() http.HandlerFunc {
 		utils.WriteJSON(w, 200, middleware.ProfileFromContext(r.Context()))
 	}
 }
+
+// UpdateProfileHandler preserves profile identity while using the shared update service.
 func UpdateProfileHandler(store db.ProfileStore) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		p := middleware.ProfileFromContext(r.Context())
@@ -40,13 +45,13 @@ func UpdateProfileHandler(store db.ProfileStore) http.HandlerFunc {
 		if body.Slug != nil {
 			slug = *body.Slug
 		}
-		if err := store.UpdateListeningProfile(r.Context(), p.ID, name, slug); err != nil {
-			utils.WriteError(w, "invalid, reserved or duplicate profile name/slug", 400)
-			return
-		}
-		updated, err := store.GetListeningProfileByID(r.Context(), p.ID)
+		updated, err := admin.UpdateProfile(r.Context(), store, middleware.GetUserFromContext(r.Context()), p.ID, p.Slug, name, slug)
 		if err != nil {
-			utils.WriteError(w, "profile not found", 404)
+			status := adminweb.ErrorStatus(err)
+			if errors.Is(err, db.ErrConflict) {
+				status = 400
+			}
+			utils.WriteError(w, adminweb.PublicError(err), status)
 			return
 		}
 		utils.WriteJSON(w, 200, updated)

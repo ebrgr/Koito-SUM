@@ -1,84 +1,36 @@
 package summary_test
 
 import (
+	"context"
 	"testing"
+	"time"
 
 	"github.com/gabehf/koito/internal/cfg"
+	"github.com/gabehf/koito/internal/db"
+	"github.com/gabehf/koito/internal/db/sqlite"
+	"github.com/gabehf/koito/internal/summary"
 )
 
-func TestMain(t *testing.M) {
-	// dir, err := utils.GenerateRandomString(8)
-	// if err != nil {
-	// 	panic(err)
-	// }
-	cfg.Load(func(env string) string {
-		switch env {
-		case cfg.ENABLE_STRUCTURED_LOGGING_ENV:
-			return "true"
-		case cfg.LOG_LEVEL_ENV:
-			return "debug"
-		case cfg.DATABASE_URL_ENV:
-			return "postgres://postgres:secret@localhost"
-		case cfg.CONFIG_DIR_ENV:
-			return "."
-		case cfg.DISABLE_DEEZER_ENV, cfg.DISABLE_COVER_ART_ARCHIVE_ENV, cfg.DISABLE_MUSICBRAINZ_ENV, cfg.ENABLE_FULL_IMAGE_CACHE_ENV:
-			return "true"
-		default:
-			return ""
-		}
-	}, "test")
-	t.Run()
-}
-
-func TestGenerateSummary(t *testing.T) {
-	// s := summary.Summary{
-	// 	Title: "20XX Rewind",
-	// TopArtistImage: path.Join("..", "..", "test_assets", "yuu.jpg"),
-	// TopArtists: []struct {
-	// 	Name            string
-	// 	Plays           int
-	// 	MinutesListened int
-	// }{
-	// 	{"CHUU", 738, 7321},
-	// 	{"Paramore", 738, 7321},
-	// 	{"ano", 738, 7321},
-	// 	{"NELKE", 738, 7321},
-	// 	{"ILLIT", 738, 7321},
-	// },
-	// TopAlbumImage: "",
-	// TopAlbums: []struct {
-	// 	Title           string
-	// 	Plays           int
-	// 	MinutesListened int
-	// }{
-	// 	{"Only cry in the rain", 738, 7321},
-	// 	{"Paramore", 738, 7321},
-	// 	{"ano", 738, 7321},
-	// 	{"NELKE", 738, 7321},
-	// 	{"ILLIT", 738, 7321},
-	// },
-	// TopTrackImage: "",
-	// TopTracks: []struct {
-	// 	Title           string
-	// 	Plays           int
-	// 	MinutesListened int
-	// }{
-	// 	{"虹の色よ鮮やかであれ (NELKE ver.)", 321, 12351},
-	// 	{"Paramore", 738, 7321},
-	// 	{"ano", 738, 7321},
-	// 	{"NELKE", 738, 7321},
-	// 	{"ILLIT", 738, 7321},
-	// },
-	// 	MinutesListened: 0,
-	// 	Plays:           0,
-	// 	AvgPlaysPerDay:  0,
-	// 	UniqueTracks:    0,
-	// 	UniqueAlbums:    0,
-	// 	UniqueArtists:   0,
-	// 	NewTracks:       0,
-	// 	NewAlbums:       0,
-	// 	NewArtists:      0,
-	// }
-
-	// assert.NoError(t, summary.GenerateImage(&s))
+func TestGenerateSummaryEmptySQLite(t *testing.T) {
+	if err := cfg.Load(func(string) string { return "" }, "test"); err != nil {
+		t.Fatal(err)
+	}
+	store, err := sqlite.NewInMemory()
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer store.Close(context.Background())
+	if err := store.Exec(`INSERT INTO listening_profiles(id,slug,display_name,created_at) VALUES(1,'empty','Empty',1)`); err != nil {
+		t.Fatal(err)
+	}
+	result, err := summary.GenerateSummary(context.Background(), store, 1, db.Timeframe{Year: 2024, Month: 2, Timezone: time.UTC}, "February")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if result.Title != "February" || result.Plays != 0 || result.AvgPlaysPerDay != 0 || len(result.TopTracks) != 0 {
+		t.Fatalf("unexpected summary: %+v", result)
+	}
+	if result.IntervalFrom != time.Date(2024, 2, 1, 0, 0, 0, 0, time.UTC) || result.IntervalTo != time.Date(2024, 2, 29, 23, 59, 59, 0, time.UTC) {
+		t.Fatalf("unexpected interval: %v – %v", result.IntervalFrom, result.IntervalTo)
+	}
 }

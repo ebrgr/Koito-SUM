@@ -20,17 +20,30 @@ import (
 // Finds any images in all image_cache folders and deletes them if they are not associated with
 // an album or artist.
 func PruneOrphanedImages(ctx context.Context, store db.ImageStore) error {
+	// A canceled collection must not remain blocked behind publication.
+	unlockPublication, err := imagecache.LockPublicationContext(ctx)
+	if err != nil {
+		return fmt.Errorf("acquire image collection gate: %w", err)
+	}
+	defer unlockPublication()
 	l := logger.FromContext(ctx)
+	var collectionErr error
 	count := 0
 	memo := make(map[uuid.UUID]bool)
 
-	imagecache.ForEachCachedImageID(func(imageID uuid.UUID) {
+	iterationErr := imagecache.ForEachCachedImageID(func(imageID uuid.UUID) {
+		// Reserved IDs can be published before their database association commits.
+		if imagecache.PublicationReservedLocked(imageID) {
+			return
+		}
 		var err error
 		exists, seen := memo[imageID]
 		if !seen {
 			exists, err = store.ImageHasAssociation(ctx, imageID)
 			if err != nil {
 				l.Err(err).Msgf("PruneOrphanedImages: Failed to query image association for image with ID %s", imageID.String())
+				collectionErr = err
+				return
 			}
 			memo[imageID] = exists
 		}
@@ -46,6 +59,12 @@ func PruneOrphanedImages(ctx context.Context, store db.ImageStore) error {
 	})
 
 	l.Info().Msgf("PruneOrphanedImages: Purged %d images", count)
+	if iterationErr != nil {
+		return iterationErr
+	}
+	if collectionErr != nil {
+		return fmt.Errorf("check image association: %w", collectionErr)
+	}
 	return nil
 }
 

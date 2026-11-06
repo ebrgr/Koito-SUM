@@ -3,14 +3,16 @@ package handlers
 import (
 	"net/http"
 
+	"github.com/gabehf/koito/engine/middleware"
+	"github.com/gabehf/koito/internal/admin"
+	"github.com/gabehf/koito/internal/adminweb"
 	"github.com/gabehf/koito/internal/db"
 	"github.com/gabehf/koito/internal/logger"
 	"github.com/gabehf/koito/internal/utils"
-	"github.com/google/uuid"
 )
 
 // SetPrimaryTrackAliasHandler sets the primary alias for a given track.
-func SetPrimaryTrackAliasHandler(store db.TrackStore) http.HandlerFunc {
+func SetPrimaryTrackAliasHandler(store db.DB) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		ctx := r.Context()
 		l := logger.FromContext(ctx)
@@ -31,9 +33,9 @@ func SetPrimaryTrackAliasHandler(store db.TrackStore) http.HandlerFunc {
 			return
 		}
 
-		if err = store.SetPrimaryTrackAlias(ctx, trackID, body.Alias); err != nil {
+		if err = admin.EditAlias(ctx, store, middleware.GetUserFromContext(ctx), "track", trackID, "primary", body.Alias); err != nil {
 			l.Error().Err(err).Msg("SetPrimaryTrackAliasHandler: Failed to set track primary alias")
-			utils.WriteError(w, "failed to set primary alias", http.StatusInternalServerError)
+			utils.WriteError(w, adminweb.PublicError(err), adminweb.ErrorStatus(err))
 			return
 		}
 
@@ -42,7 +44,7 @@ func SetPrimaryTrackAliasHandler(store db.TrackStore) http.HandlerFunc {
 }
 
 // SetPrimaryTrackArtistHandler sets whether a given artist is the primary artist for a track.
-func SetPrimaryTrackArtistHandler(store db.ArtistStore) http.HandlerFunc {
+func SetPrimaryTrackArtistHandler(store db.DB) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		ctx := r.Context()
 		l := logger.FromContext(ctx)
@@ -70,9 +72,9 @@ func SetPrimaryTrackArtistHandler(store db.ArtistStore) http.HandlerFunc {
 			return
 		}
 
-		if err = store.SetPrimaryTrackArtist(ctx, trackID, artistID, *body.IsPrimary); err != nil {
+		if err = admin.SetMediaArtistPrimary(ctx, store, middleware.GetUserFromContext(ctx), "track", trackID, artistID, *body.IsPrimary); err != nil {
 			l.Error().Err(err).Msg("SetPrimaryTrackArtistHandler: Failed to set primary track artist")
-			utils.WriteError(w, "failed to set primary track artist", http.StatusInternalServerError)
+			utils.WriteError(w, adminweb.PublicError(err), adminweb.ErrorStatus(err))
 			return
 		}
 
@@ -81,7 +83,7 @@ func SetPrimaryTrackArtistHandler(store db.ArtistStore) http.HandlerFunc {
 }
 
 // UpdateTrackHandler updates a given track.
-func UpdateTrackHandler(store db.TrackStore) http.HandlerFunc {
+func UpdateTrackHandler(store db.DB) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		ctx := r.Context()
 		l := logger.FromContext(ctx)
@@ -108,21 +110,17 @@ func UpdateTrackHandler(store db.TrackStore) http.HandlerFunc {
 			return
 		}
 
-		updateOpts := db.UpdateTrackOpts{ID: trackID}
-
+		raw := ""
 		if body.MBID != nil {
-			mbid, err := uuid.Parse(*body.MBID)
-			if err != nil {
-				l.Debug().Msg("UpdateTrackHandler: Provided MusicBrainz ID is invalid")
-				utils.WriteError(w, "provided musicbrainz id is invalid", http.StatusBadRequest)
+			raw = *body.MBID
+			if raw == "" {
+				utils.WriteError(w, "provided musicbrainz id is invalid", 400)
 				return
 			}
-			updateOpts.MusicBrainzID = mbid
 		}
-
-		if err = store.UpdateTrack(ctx, updateOpts); err != nil {
-			l.Error().Err(err).Msg("UpdateTrackHandler: Failed to update track")
-			utils.WriteError(w, "failed to update track", http.StatusInternalServerError)
+		if err = admin.UpdateMediaMetadata(ctx, store, middleware.GetUserFromContext(ctx), "track", trackID, raw, nil); err != nil {
+			l.Error().Err(err).Msg("UpdateTrackHandler: Failed to update metadata")
+			utils.WriteError(w, adminweb.PublicError(err), adminweb.ErrorStatus(err))
 			return
 		}
 

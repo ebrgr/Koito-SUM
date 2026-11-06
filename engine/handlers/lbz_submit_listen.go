@@ -2,17 +2,23 @@ package handlers
 
 import (
 	"bytes"
+	"context"
+	"crypto/sha256"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io"
 	"net/http"
+	"strings"
 	"time"
 
 	"github.com/gabehf/koito/engine/middleware"
 	"github.com/gabehf/koito/internal/catalog"
 	"github.com/gabehf/koito/internal/db"
+	"github.com/gabehf/koito/internal/listenbrainz"
 	"github.com/gabehf/koito/internal/logger"
 	"github.com/gabehf/koito/internal/mbz"
+	"github.com/gabehf/koito/internal/relay"
 	"github.com/gabehf/koito/internal/utils"
 	"github.com/google/uuid"
 	"github.com/rs/zerolog"
@@ -32,49 +38,83 @@ type LbzSubmitListenRequest struct {
 	Payload    []LbzSubmitListenPayload `json:"payload,omitempty"`
 }
 
-type LbzSubmitListenPayload struct {
-	ListenedAt int64        `json:"listened_at,omitempty"`
-	TrackMeta  LbzTrackMeta `json:"track_metadata"`
-}
-
-type LbzTrackMeta struct {
-	ArtistName     string            `json:"artist_name"` // required
-	TrackName      string            `json:"track_name"`  // required
-	ReleaseName    string            `json:"release_name,omitempty"`
-	MBIDMapping    LbzMBIDMapping    `json:"mbid_mapping"`
-	AdditionalInfo LbzAdditionalInfo `json:"additional_info,omitempty"`
-}
-type LbzArtist struct {
-	ArtistMBID string `json:"artist_mbid"`
-	ArtistName string `json:"artist_credit_name"`
-}
-type LbzMBIDMapping struct {
-	ReleaseMBID   string      `json:"release_mbid"`
-	RecordingMBID string      `json:"recording_mbid"`
-	ArtistMBIDs   []string    `json:"artist_mbids"`
-	Artists       []LbzArtist `json:"artists"`
-}
-
-type LbzAdditionalInfo struct {
-	MediaPlayer             string   `json:"media_player,omitempty"`
-	SubmissionClient        string   `json:"submission_client,omitempty"`
-	SubmissionClientVersion string   `json:"submission_client_version,omitempty"`
-	ReleaseMBID             string   `json:"release_mbid,omitempty"`
-	ReleaseGroupMBID        string   `json:"release_group_mbid,omitempty"`
-	ArtistMBIDs             []string `json:"artist_mbids,omitempty"`
-	ArtistNames             []string `json:"artist_names,omitempty"`
-	RecordingMBID           string   `json:"recording_mbid,omitempty"`
-	DurationMs              int32    `json:"duration_ms,omitempty"`
-	Duration                int32    `json:"duration,omitempty"`
-	Tags                    []string `json:"tags,omitempty"`
-	AlbumArtist             string   `json:"albumartist,omitempty"`
-}
+type LbzSubmitListenPayload = listenbrainz.LbzSubmitListenPayload
+type LbzTrackMeta = listenbrainz.LbzTrackMeta
+type LbzArtist = listenbrainz.LbzArtist
+type LbzMBIDMapping = listenbrainz.LbzMBIDMapping
+type LbzAdditionalInfo = listenbrainz.LbzAdditionalInfo
 
 const (
 	maxListensPerRequest = 1000
+	maxListenBodyBytes   = 16 << 20
 )
 
 var sfGroup singleflight.Group
+var errTooManyListens = errors.New("payload exceeds maximum listen count")
+
+// decodeListenRequest caps the array before allocating another typed payload.
+func decodeListenRequest(reader io.Reader) (LbzSubmitListenRequest, error) {
+	var result LbzSubmitListenRequest
+	dec := json.NewDecoder(reader)
+	token, err := dec.Token()
+	if err != nil {
+		return result, err
+	}
+	if token == nil {
+		return result, nil
+	}
+	if token != json.Delim('{') {
+		return result, errors.New("expected request object")
+	}
+	for dec.More() {
+		key, err := dec.Token()
+		if err != nil {
+			return result, err
+		}
+		name, ok := key.(string)
+		if !ok {
+			return result, errors.New("expected field name")
+		}
+		switch {
+		case strings.EqualFold(name, "listen_type"):
+			if err := dec.Decode(&result.ListenType); err != nil {
+				return result, err
+			}
+		case strings.EqualFold(name, "payload"):
+			t, err := dec.Token()
+			if err != nil {
+				return result, err
+			}
+			result.Payload = nil
+			if t == nil {
+				continue
+			}
+			if t != json.Delim('[') {
+				return result, errors.New("expected payload array")
+			}
+			for dec.More() {
+				if len(result.Payload) >= maxListensPerRequest {
+					return result, errTooManyListens
+				}
+				var item LbzSubmitListenPayload
+				if err := dec.Decode(&item); err != nil {
+					return result, err
+				}
+				result.Payload = append(result.Payload, item)
+			}
+			if _, err := dec.Token(); err != nil {
+				return result, err
+			}
+		default:
+			var ignored json.RawMessage
+			if err := dec.Decode(&ignored); err != nil {
+				return result, err
+			}
+		}
+	}
+	_, err = dec.Token()
+	return result, err
+}
 
 type submitListenHandlerStore interface {
 	db.ArtistStore
@@ -83,21 +123,32 @@ type submitListenHandlerStore interface {
 	db.ListenStore
 }
 
+// LbzSubmitListenHandler bounds raw bodies before buffering, decoding or relaying them.
 func LbzSubmitListenHandler(store submitListenHandlerStore, mbzc mbz.MusicBrainzCaller) func(w http.ResponseWriter, r *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
 		l := logger.FromContext(r.Context())
 
 		l.Debug().Msg("LbzSubmitListenHandler: Received request to submit listens")
 
-		var req LbzSubmitListenRequest
+		r.Body = http.MaxBytesReader(w, r.Body, maxListenBodyBytes)
 		requestBytes, err := io.ReadAll(r.Body)
 		if err != nil {
+			var limit *http.MaxBytesError
+			if errors.As(err, &limit) {
+				utils.WriteError(w, "listen request exceeds 16 MiB", http.StatusRequestEntityTooLarge)
+				return
+			}
 			l.Err(err).Msg("LbzSubmitListenHandler: Failed to read request body")
 			utils.WriteError(w, "failed to read request body", http.StatusBadRequest)
 			return
 		}
 
-		if err := json.NewDecoder(bytes.NewBuffer(requestBytes)).Decode(&req); err != nil {
+		req, err := decodeListenRequest(bytes.NewReader(requestBytes))
+		if errors.Is(err, errTooManyListens) {
+			utils.WriteError(w, "payload exceeds max listens per request", http.StatusBadRequest)
+			return
+		}
+		if err != nil {
 			l.Err(err).Msg("LbzSubmitListenHandler: Failed to decode request")
 			utils.WriteError(w, "failed to decode request", http.StatusBadRequest)
 			return
@@ -110,7 +161,8 @@ func LbzSubmitListenHandler(store submitListenHandlerStore, mbzc mbz.MusicBrainz
 			return
 		}
 
-		l.Info().Any("request_body", req).Msg("LbzSubmitListenHandler: Parsed request body")
+		// Log only bounded counts; the payload may contain personal or sensitive metadata.
+		l.Info().Int("listen_count", len(req.Payload)).Msg("LbzSubmitListenHandler: Parsed request")
 
 		if len(req.Payload) < 1 {
 			l.Debug().Msg("LbzSubmitListenHandler: Payload is empty")
@@ -230,8 +282,9 @@ func LbzSubmitListenHandler(store submitListenHandlerStore, mbzc mbz.MusicBrainz
 			}
 			if err != nil {
 				l.Err(err).Msg("LbzSubmitListenHandler: Failed to submit listen")
-				w.WriteHeader(http.StatusInternalServerError)
+				// Set the content type before committing the response status.
 				w.Header().Set("Content-Type", "application/json")
+				w.WriteHeader(http.StatusInternalServerError)
 				w.Write([]byte("{\"status\": \"internal server error\"}"))
 				return
 			}
@@ -246,85 +299,23 @@ func LbzSubmitListenHandler(store submitListenHandlerStore, mbzc mbz.MusicBrainz
 			}
 		}
 		l.Debug().Msg("LbzSubmitListenHandler: Successfully processed listens")
-		w.WriteHeader(http.StatusOK)
+		// Set the content type before committing the response status.
 		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusOK)
 		w.Write([]byte("{\"status\": \"ok\"}"))
 	}
 }
 
+// doLbzRelay uses the same bounded transport policy as the administrator's relay test.
 func doLbzRelay(requestBytes []byte, l *zerolog.Logger, relayURL, relayToken string) {
-	defer func() {
-		if r := recover(); r != nil {
-			l.Error().Interface("recover", r).Msg("doLbzRelay: Panic occurred")
-		}
-	}()
-	const (
-		maxRetryDuration = 3 * time.Minute
-		initialBackoff   = 5 * time.Second
-		maxBackoff       = 40 * time.Second
-	)
-	l.Debug().Msg("doLbzRelay: Building ListenBrainz relay request")
-	req, err := http.NewRequest("POST", relayURL+"/submit-listens", bytes.NewBuffer(requestBytes))
-	if err != nil {
-		l.Err(err).Msg("doLbzRelay: Failed to build ListenBrainz relay request")
-		return
-	}
-	req.Header.Add("Authorization", "Token "+relayToken)
-	req.Header.Add("Content-Type", "application/json")
-
-	client := &http.Client{
-		Timeout: 30 * time.Second,
-	}
-
-	var resp *http.Response
-	var body []byte
-	start := time.Now()
-	backoff := initialBackoff
-
-	for {
-		l.Debug().Msg("doLbzRelay: Sending ListenBrainz relay request")
-		resp, err = client.Do(req)
-		if err != nil {
-			l.Err(err).Msg("doLbzRelay: Failed to send ListenBrainz relay request")
-			return
-		}
-		defer resp.Body.Close()
-
-		if resp.StatusCode >= 200 && resp.StatusCode < 300 {
-			l.Info().Msg("doLbzRelay: Successfully relayed ListenBrainz submission")
-			return
-		}
-
-		body, _ = io.ReadAll(resp.Body)
-
-		if resp.StatusCode >= 500 && time.Since(start)+backoff <= maxRetryDuration {
-			l.Warn().
-				Int("status", resp.StatusCode).
-				Str("response", string(body)).
-				Msg("doLbzRelay: Retryable server error from ListenBrainz relay, retrying...")
-			time.Sleep(backoff)
-			backoff *= 2
-			if backoff > maxBackoff {
-				backoff = maxBackoff
-			}
-			continue
-		}
-
-		l.Warn().
-			Int("status", resp.StatusCode).
-			Str("response", string(body)).
-			Msg("doLbzRelay: Non-2XX response from ListenBrainz relay")
-		return
+	if err := (relay.Sender{}).Send(context.Background(), relayURL, relayToken, requestBytes); err != nil {
+		l.Warn().Msg("ListenBrainz relay submission failed")
 	}
 }
 
+// buildCaolescingKey separates metadata fields and includes all typed payload data.
 func buildCaolescingKey(p LbzSubmitListenPayload) string {
-	// the key not including the listen_type introduces the very rare possibility of a playing_now
-	// request taking precedence over a single, meaning that a listen will not be logged when it
-	// should, however that would require a playing_now request to fire a few seconds before a 'single'
-	// of the same track, which should never happen outside of misbehaving clients
-	//
-	// this could be fixed by restructuring the database inserts for idempotency, which would
-	// eliminate the need to coalesce responses, however i'm not gonna do that right now
-	return fmt.Sprintf("%s:%s:%s", p.TrackMeta.ArtistName, p.TrackMeta.TrackName, p.TrackMeta.ReleaseName)
+	// The payload contains only JSON-supported strings, integers and slices.
+	data, _ := json.Marshal(p)
+	return fmt.Sprintf("%x", sha256.Sum256(data))
 }

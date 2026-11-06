@@ -3,13 +3,16 @@ package handlers
 import (
 	"net/http"
 
+	"github.com/gabehf/koito/engine/middleware"
+	"github.com/gabehf/koito/internal/admin"
+	"github.com/gabehf/koito/internal/adminweb"
 	"github.com/gabehf/koito/internal/db"
 	"github.com/gabehf/koito/internal/logger"
 	"github.com/gabehf/koito/internal/utils"
 )
 
 // CreateTrackAliasHandler creates a new alias for a given track.
-func CreateTrackAliasHandler(store db.TrackStore) http.HandlerFunc {
+func CreateTrackAliasHandler(store db.DB) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		ctx := r.Context()
 		l := logger.FromContext(ctx)
@@ -30,9 +33,9 @@ func CreateTrackAliasHandler(store db.TrackStore) http.HandlerFunc {
 			return
 		}
 
-		if err = store.SaveTrackAliases(ctx, trackID, []string{body.Alias}, "Manual"); err != nil {
+		if err = admin.EditAlias(ctx, store, middleware.GetUserFromContext(ctx), "track", trackID, "add", body.Alias); err != nil {
 			l.Error().Err(err).Msg("CreateTrackAliasHandler: Failed to save track alias")
-			utils.WriteError(w, "failed to save alias", http.StatusInternalServerError)
+			utils.WriteError(w, adminweb.PublicError(err), adminweb.ErrorStatus(err))
 			return
 		}
 
@@ -62,12 +65,9 @@ func AddTrackArtistsHandler(store db.DB) http.HandlerFunc {
 			return
 		}
 
-		if err = store.UpdateTrack(ctx, db.UpdateTrackOpts{
-			ID:         trackID,
-			AddArtists: body.Artists,
-		}); err != nil {
+		if err = store.UpdateTrack(ctx, db.UpdateTrackOpts{ID: trackID, AddArtists: body.Artists}); err != nil {
 			l.Error().Err(err).Msg("AddTrackArtistsHandler: Failed to add artists to track")
-			utils.WriteError(w, "failed to add artists to track", http.StatusInternalServerError)
+			utils.WriteError(w, adminweb.PublicError(err), adminweb.ErrorStatus(err))
 			return
 		}
 

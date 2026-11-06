@@ -2,10 +2,8 @@ package importer
 
 import (
 	"context"
-	"encoding/json"
 	"fmt"
 	"os"
-	"path"
 	"time"
 
 	"github.com/gabehf/koito/internal/catalog"
@@ -30,35 +28,40 @@ func ImportSpotifyFile(ctx context.Context, store importStore, mbzc mbz.MusicBra
 	}
 	l := logger.FromContext(ctx)
 	l.Info().Msgf("Beginning spotify import on file: %s", filename)
-	file, err := os.Open(path.Join(cfg.ConfigDir(), "import", filename))
+	file, err := os.Open(importPath(ctx, filename))
 	if err != nil {
 		l.Err(err).Msgf("Failed to read import file: %s", filename)
 		return fmt.Errorf("ImportSpotifyFile: %w", err)
 	}
 	defer file.Close()
-	var throttleFunc = func() {}
-	if ms := cfg.ThrottleImportMs(); ms > 0 {
-		throttleFunc = func() {
-			time.Sleep(time.Duration(ms) * time.Millisecond)
-		}
-	}
+
 	export := make([]SpotifyExportItem, 0)
-	err = json.NewDecoder(file).Decode(&export)
+	err = decodeJSON(ctx, file, &export)
 	if err != nil {
 		return fmt.Errorf("ImportSpotifyFile: %w", err)
 	}
 
+	if len(export) > MaxImportItems {
+		return invalidFile(fmt.Errorf("too many import items"))
+	}
 	for _, item := range export {
+		seen(ctx)
+		if err := ctx.Err(); err != nil {
+			return err
+		}
 		if item.ReasonEnd != "trackdone" {
+			ignored(ctx)
 			continue
 		}
 		if !inImportTimeWindow(item.Timestamp) {
 			l.Debug().Msgf("Skipping import due to import time rules")
+			ignored(ctx)
 			continue
 		}
 		dur := item.MsPlayed
 		if item.TrackName == "" || item.ArtistName == "" {
 			l.Debug().Msg("Skipping non-track item")
+			ignored(ctx)
 			continue
 		}
 		opts := catalog.SubmitListenOpts{
@@ -77,7 +80,9 @@ func ImportSpotifyFile(ctx context.Context, store importStore, mbzc mbz.MusicBra
 			l.Err(err).Msg("Failed to import spotify playback item")
 			return fmt.Errorf("ImportSpotifyFile: %w", err)
 		}
-		throttleFunc()
+		if err := throttle(ctx); err != nil {
+			return err
+		}
 	}
 	return finishImport(ctx, filename, len(export))
 }

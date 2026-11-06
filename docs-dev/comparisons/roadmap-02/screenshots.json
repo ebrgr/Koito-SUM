@@ -1,0 +1,200 @@
+[
+  {
+    "scenario": "home",
+    "path": "/mara?period=all_time",
+    "viewport": {
+      "width": 960,
+      "height": 800
+    },
+    "visible_capture_height": 800,
+    "theme": "Yuu",
+    "timezone": "America/Sao_Paulo",
+    "react": "screenshots/react-home.jpg",
+    "go": "screenshots/go-home.jpg",
+    "comparison": "screenshots/comparison-home.jpg",
+    "comparison_order": [
+      "React",
+      "Go"
+    ]
+  },
+  {
+    "scenario": "selection",
+    "path": "/",
+    "viewport": {
+      "width": 960,
+      "height": 800
+    },
+    "visible_capture_height": 800,
+    "theme": "Yuu",
+    "timezone": "America/Sao_Paulo",
+    "react": "screenshots/react-selection.jpg",
+    "go": "screenshots/go-selection.jpg",
+    "comparison": "screenshots/comparison-selection.jpg",
+    "comparison_order": [
+      "React",
+      "Go"
+    ]
+  },
+  {
+    "scenario": "artists",
+    "path": "/mara/chart/top/artists",
+    "viewport": {
+      "width": 960,
+      "height": 800
+    },
+    "visible_capture_height": 800,
+    "theme": "Yuu",
+    "timezone": "America/Sao_Paulo",
+    "react": "screenshots/react-artists.jpg",
+    "go": "screenshots/go-artists.jpg",
+    "comparison": "screenshots/comparison-artists.jpg",
+    "comparison_order": [
+      "React",
+      "Go"
+    ]
+  },
+  {
+    "scenario": "albums",
+    "path": "/mara/chart/top/albums",
+    "viewport": {
+      "width": 960,
+      "height": 800
+    },
+    "visible_capture_height": 800,
+    "theme": "Yuu",
+    "timezone": "America/Sao_Paulo",
+    "react": "screenshots/react-albums.jpg",
+    "go": "screenshots/go-albums.jpg",
+    "comparison": "screenshots/comparison-albums.jpg",
+    "comparison_order": [
+      "React",
+      "Go"
+    ]
+  },
+  {
+    "scenario": "tracks",
+    "path": "/mara/chart/top/tracks",
+    "viewport": {
+      "width": 960,
+      "height": 800
+    },
+    "visible_capture_height": 800,
+    "theme": "Yuu",
+    "timezone": "America/Sao_Paulo",
+    "react": "screenshots/react-tracks.jpg",
+    "go": "screenshots/go-tracks.jpg",
+    "comparison": "screenshots/comparison-tracks.jpg",
+    "comparison_order": [
+      "React",
+      "Go"
+    ]
+  },
+  {
+    "scenario": "history-page-2",
+    "path": "/mara/listens?limit=100&page=2",
+    "viewport": {
+      "width": 960,
+      "height": 800
+    },
+    "visible_capture_height": 800,
+    "theme": "Yuu",
+    "timezone": "America/Sao_Paulo",
+    "react": "screenshots/react-history-page-2.jpg",
+    "go": "screenshots/go-history-page-2.jpg",
+    "comparison": "screenshots/comparison-history-page-2.jpg",
+    "comparison_order": [
+      "React",
+      "Go"
+    ]
+  },
+  {
+    "scenario": "history-filter",
+    "path": "/mara/listens?period=month&artist_id=1",
+    "viewport": {
+      "width": 960,
+      "height": 800
+    },
+    "visible_capture_height": 800,
+    "theme": "Yuu",
+    "timezone": "America/Sao_Paulo",
+    "react": "screenshots/react-history-filter.jpg",
+    "go": "screenshots/go-history-filter.jpg",
+    "comparison": "screenshots/comparison-history-filter.jpg",
+    "comparison_order": [
+      "React",
+      "Go"
+    ]
+  },
+  {
+    "scenario": "empty",
+    "path": "/iara",
+    "viewport": {
+      "width": 960,
+      "height": 800
+    },
+    "visible_capture_height": 800,
+    "theme": "Yuu",
+    "timezone": "America/Sao_Paulo",
+    "react": "screenshots/react-empty.jpg",
+    "go": "screenshots/go-empty.jpg",
+    "comparison": "screenshots/comparison-empty.jpg",
+    "comparison_order": [
+      "React",
+      "Go"
+    ]
+  },
+  {
+    "scenario": "mobile-home",
+    "path": "/mara?period=all_time",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "visible_capture_height": 800,
+    "theme": "Yuu",
+    "timezone": "America/Sao_Paulo",
+    "react": "screenshots/react-mobile-home.jpg",
+    "go": "screenshots/go-mobile-home.jpg",
+    "comparison": "screenshots/comparison-mobile-home.jpg",
+    "comparison_order": [
+      "React",
+      "Go"
+    ]
+  },
+  {
+    "scenario": "mobile-history",
+    "path": "/mara/listens?limit=100&page=2",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "visible_capture_height": 800,
+    "theme": "Yuu",
+    "timezone": "America/Sao_Paulo",
+    "react": "screenshots/react-mobile-history.jpg",
+    "go": "screenshots/go-mobile-history.jpg",
+    "comparison": "screenshots/comparison-mobile-history.jpg",
+    "comparison_order": [
+      "React",
+      "Go"
+    ]
+  },
+  {
+    "scenario": "mobile-selection",
+    "path": "/",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "visible_capture_height": 800,
+    "theme": "Yuu",
+    "timezone": "America/Sao_Paulo",
+    "react": "screenshots/react-mobile-selection.jpg",
+    "go": "screenshots/go-mobile-selection.jpg",
+    "comparison": "screenshots/comparison-mobile-selection.jpg",
+    "comparison_order": [
+      "React",
+      "Go"
+    ]
+  }
+]

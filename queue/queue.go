@@ -2,7 +2,6 @@ package queue
 
 import (
 	"context"
-	"log"
 	"net/http"
 	"sync"
 	"time"
@@ -10,50 +9,91 @@ import (
 	"golang.org/x/time/rate"
 )
 
-// RequestResult holds the result of a queued request.
 type RequestResult struct {
 	Body []byte
 	Err  error
 }
-
-// RequestFunc is a function that performs an HTTP request using the provided client,
-// and sends its result to the given result channel.
 type RequestFunc func(client *http.Client, done chan<- RequestResult)
+
+type request struct {
+	ctx    context.Context
+	run    func(context.Context, *http.Client) RequestResult
+	result chan RequestResult
+	once   sync.Once
+	stop   func() bool
+}
 
 type RequestQueue struct {
 	client  *http.Client
 	limiter *rate.Limiter
-	queue   chan func(*http.Client) // now this is a wrapped closure
+	queue   chan *request
 	wg      sync.WaitGroup
 	ctx     context.Context
 	cancel  context.CancelFunc
+	mu      sync.Mutex
+	stopped bool
+	pending map[*request]struct{}
 }
 
-// NewRequestQueue creates a new rate-limited request queue.
-// `rps` = requests per second, `burst` = burst capacity
+// NewRequestQueue creates a rate-limited queue whose pending requests can be cancelled.
 func NewRequestQueue(rps int, burst int) *RequestQueue {
 	ctx, cancel := context.WithCancel(context.Background())
-	q := &RequestQueue{
-		client:  &http.Client{Timeout: 10 * time.Second},
-		limiter: rate.NewLimiter(rate.Every(time.Second/time.Duration(rps)), burst),
-		queue:   make(chan func(*http.Client), 100), // accepts wrapped closures
-		ctx:     ctx,
-		cancel:  cancel,
-	}
+	q := &RequestQueue{client: &http.Client{Timeout: 10 * time.Second}, limiter: rate.NewLimiter(rate.Every(time.Second/time.Duration(rps)), burst), queue: make(chan *request, 100), ctx: ctx, cancel: cancel, pending: make(map[*request]struct{})}
 	q.start()
 	return q
 }
 
-// Enqueue adds a new request to the queue and returns a result channel.
-func (q *RequestQueue) Enqueue(job RequestFunc) <-chan RequestResult {
-	resultChan := make(chan RequestResult, 1)
-	q.queue <- func(client *http.Client) {
-		job(client, resultChan)
-	}
-	return resultChan
+// finish publishes one result and removes its pending registration exactly once.
+func (q *RequestQueue) finish(r *request, result RequestResult) {
+	r.once.Do(func() {
+		q.mu.Lock()
+		delete(q.pending, r)
+		stop := r.stop
+		q.mu.Unlock()
+		if stop != nil {
+			stop()
+		}
+		r.result <- result
+	})
 }
 
-// start begins the worker loop.
+// EnqueueContext returns one result for success, caller cancellation or shutdown.
+func (q *RequestQueue) EnqueueContext(ctx context.Context, job func(context.Context, *http.Client) RequestResult) <-chan RequestResult {
+	r := &request{ctx: ctx, run: job, result: make(chan RequestResult, 1)}
+	q.mu.Lock()
+	if q.stopped {
+		q.mu.Unlock()
+		r.result <- RequestResult{Err: context.Canceled}
+		return r.result
+	}
+	q.pending[r] = struct{}{}
+	r.stop = context.AfterFunc(ctx, func() { q.finish(r, RequestResult{Err: ctx.Err()}) })
+	q.mu.Unlock()
+	select {
+	case q.queue <- r:
+	case <-ctx.Done():
+		q.finish(r, RequestResult{Err: ctx.Err()})
+	case <-q.ctx.Done():
+		q.finish(r, RequestResult{Err: context.Canceled})
+	}
+	return r.result
+}
+
+// Enqueue retains the legacy callback API while ensuring its waiter can be cancelled on shutdown.
+func (q *RequestQueue) Enqueue(job RequestFunc) <-chan RequestResult {
+	return q.EnqueueContext(context.Background(), func(ctx context.Context, client *http.Client) RequestResult {
+		done := make(chan RequestResult, 1)
+		go job(client, done)
+		select {
+		case result := <-done:
+			return result
+		case <-ctx.Done():
+			return RequestResult{Err: ctx.Err()}
+		}
+	})
+}
+
+// start dispatches only live work and uses cancellation for queued and running jobs.
 func (q *RequestQueue) start() {
 	q.wg.Add(1)
 	go func() {
@@ -62,20 +102,52 @@ func (q *RequestQueue) start() {
 			select {
 			case <-q.ctx.Done():
 				return
-			case job := <-q.queue:
-				if err := q.limiter.Wait(q.ctx); err != nil {
-					log.Println("[queue] limiter wait failed:", err)
+			case r := <-q.queue:
+				if err := q.ctx.Err(); err != nil {
+					q.finish(r, RequestResult{Err: err})
 					continue
 				}
-				go job(q.client)
+				if err := r.ctx.Err(); err != nil {
+					q.finish(r, RequestResult{Err: err})
+					continue
+				}
+				jobCtx, cancel := context.WithCancel(r.ctx)
+				stop := context.AfterFunc(q.ctx, cancel)
+				if err := q.limiter.Wait(jobCtx); err != nil {
+					stop()
+					cancel()
+					q.finish(r, RequestResult{Err: err})
+					continue
+				}
+				if err := jobCtx.Err(); err != nil {
+					stop()
+					cancel()
+					q.finish(r, RequestResult{Err: err})
+					continue
+				}
+				go func() { defer cancel(); defer stop(); q.finish(r, r.run(jobCtx, q.client)) }()
 			}
 		}
 	}()
 }
 
-// Shutdown stops the queue and waits for the worker to finish.
+// Shutdown refuses new work and resolves every pending waiter without closing a live channel.
 func (q *RequestQueue) Shutdown() {
+	q.mu.Lock()
+	if q.stopped {
+		q.mu.Unlock()
+		q.wg.Wait()
+		return
+	}
+	q.stopped = true
+	pending := make([]*request, 0, len(q.pending))
+	for r := range q.pending {
+		pending = append(pending, r)
+	}
 	q.cancel()
+	q.mu.Unlock()
+	for _, r := range pending {
+		q.finish(r, RequestResult{Err: context.Canceled})
+	}
 	q.wg.Wait()
-	close(q.queue)
 }

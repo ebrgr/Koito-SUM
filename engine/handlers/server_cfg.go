@@ -8,11 +8,12 @@ import (
 )
 
 type ServerConfig struct {
+	WebUI        string `json:"web_ui"`
 	DefaultTheme string `json:"default_theme"`
 }
 
 func GetCfgHandler() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		utils.WriteJSON(w, http.StatusOK, ServerConfig{DefaultTheme: cfg.DefaultTheme()})
+		utils.WriteJSON(w, http.StatusOK, ServerConfig{DefaultTheme: cfg.DefaultTheme(), WebUI: cfg.WebUI()})
 	}
 }

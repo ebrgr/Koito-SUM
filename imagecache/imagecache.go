@@ -3,22 +3,82 @@ package imagecache
 
 import (
 	"bytes"
+	"context"
 	"errors"
 	"fmt"
 	"io"
 	"io/fs"
-	"net/http"
 	"os"
 	"path"
 	"path/filepath"
 	"strings"
+	"sync"
+	"time"
 
 	"github.com/gabehf/koito/internal/cfg"
-	"github.com/gabehf/koito/internal/images"
+	"github.com/gabehf/koito/internal/imagefetch"
+	"github.com/gabehf/koito/internal/imagepipeline"
+	"github.com/gabehf/koito/internal/imagework"
 	"github.com/google/uuid"
-	"github.com/h2non/bimg"
-	"golang.org/x/sync/singleflight"
 )
+
+// publicationGate coordinates cache publication with orphan collection.
+var publicationGate = make(chan struct{}, 1)
+
+// reservations is accessed only while publicationGate is held.
+var reservations = make(map[uuid.UUID]int)
+var resizeGroup = imagework.New(5, 30*time.Second)
+
+// LockPublication coordinates cache publication with orphan collection.
+func LockPublication() func() {
+	unlock, _ := LockPublicationContext(context.Background())
+	return unlock
+}
+
+// LockPublicationContext allows a canceled publication or collection to leave the queue.
+func LockPublicationContext(ctx context.Context) (func(), error) {
+	if err := ctx.Err(); err != nil {
+		return nil, err
+	}
+	select {
+	case publicationGate <- struct{}{}:
+		if err := ctx.Err(); err != nil {
+			<-publicationGate
+			return nil, err
+		}
+		return func() { <-publicationGate }, nil
+	case <-ctx.Done():
+		return nil, ctx.Err()
+	}
+}
+
+// ReservePublication protects an in-flight automatic image without holding the
+// publication gate during download or database work. Release is idempotent.
+func ReservePublication(ctx context.Context, id uuid.UUID) (func(), error) {
+	if id == uuid.Nil {
+		return nil, errors.New("cannot reserve a nil image ID")
+	}
+	unlock, err := LockPublicationContext(ctx)
+	if err != nil {
+		return nil, err
+	}
+	reservations[id]++
+	unlock()
+	var once sync.Once
+	return func() {
+		once.Do(func() {
+			unlock := LockPublication()
+			defer unlock()
+			reservations[id]--
+			if reservations[id] == 0 {
+				delete(reservations, id)
+			}
+		})
+	}, nil
+}
+
+// PublicationReservedLocked must be called while holding LockPublication.
+func PublicationReservedLocked(id uuid.UUID) bool { return reservations[id] > 0 }
 
 type ImageSize string
 
@@ -58,22 +118,17 @@ func (s ImageSize) String() string {
 
 // DownloadImage downloads an image from the given URL, then saves it to the cache at source quality.
 func DownloadImage(imgid uuid.UUID, url string) error {
-	err := images.ValidateImageURL(url)
+	return DownloadImageContext(context.Background(), imgid, url)
+}
+
+// DownloadImageContext bounds network I/O and observes request cancellation.
+func DownloadImageContext(ctx context.Context, imgid uuid.UUID, url string) error {
+	data, err := imagefetch.Download(ctx, url)
 	if err != nil {
 		return fmt.Errorf("DownloadImage: %w", err)
 	}
-	resp, err := http.Get(url)
-	if err != nil {
-		return fmt.Errorf("DownloadImage: http.Get: %w", err)
-	}
-	defer resp.Body.Close()
-
-	if resp.StatusCode != http.StatusOK {
-		return fmt.Errorf("DownloadImage: failed to download image, status: %s", resp.Status)
-	}
-
-	err = compressAndSaveImage(imgid, ImageSizeSource, resp.Body)
-	if err != nil {
+	// The pipeline validates format and dimensions before decoding.
+	if err := compressAndSaveImageContext(ctx, imgid, ImageSizeSource, bytes.NewReader(data)); err != nil {
 		return fmt.Errorf("DownloadImage: %w", err)
 	}
 	return nil
@@ -81,7 +136,12 @@ func DownloadImage(imgid uuid.UUID, url string) error {
 
 // SaveImage saves the image at source quality to the cache.
 func SaveImage(imgid uuid.UUID, image io.Reader) error {
-	return compressAndSaveImage(imgid, ImageSizeSource, image)
+	return SaveImageContext(context.Background(), imgid, image)
+}
+
+// SaveImageContext observes cancellation while waiting for processing capacity.
+func SaveImageContext(ctx context.Context, imgid uuid.UUID, image io.Reader) error {
+	return compressAndSaveImageContext(ctx, imgid, ImageSizeSource, image)
 }
 
 type ImageInfo struct {
@@ -93,43 +153,39 @@ type ImageInfo struct {
 // image in the cache. If the image does not exist in the cache in either the desired or source sizes,
 // returns a fs.ErrNotExist error.
 func GetImage(imgid uuid.UUID, image string) (*ImageInfo, error) {
+	return GetImageContext(context.Background(), imgid, image)
+}
 
-	var resizeGroup singleflight.Group
-
+// GetImageContext shares regeneration and opens the source only inside singleflight.
+func GetImageContext(ctx context.Context, imgid uuid.UUID, image string) (*ImageInfo, error) {
 	imageSize, err := ParseImageSize(strings.Split(image, ".")[0])
 	if err != nil {
 		return nil, errors.New("GetImage: failed to parse image size")
 	}
-
-	desiredImgPath := BuildImagePath(imgid, imageSize)
-	if _, err := os.Stat(desiredImgPath); errors.Is(err, fs.ErrNotExist) {
-		sourcePath := BuildImagePath(imgid, ImageSizeSource)
-
-		if _, err = os.Stat(sourcePath); errors.Is(err, fs.ErrNotExist) {
-			return nil, fmt.Errorf("GetImage: image does not exist in cache: %w", err)
-		}
-
-		imageBuf, err := os.ReadFile(sourcePath)
-		if err != nil {
-			return nil, fmt.Errorf("GetImage: failed to read source file: %w", err)
-		}
-
-		resizeKey := imgid.String() + "/" + imageSize.String()
-		_, err, _ = resizeGroup.Do(resizeKey, func() (any, error) {
-			return nil, compressAndSaveImage(imgid, imageSize, bytes.NewReader(imageBuf))
+	desired := BuildImagePath(imgid, imageSize)
+	if _, err = os.Stat(desired); errors.Is(err, fs.ErrNotExist) {
+		key := imgid.String() + "/" + imageSize.String()
+		err = resizeGroup.Do(ctx, key, func(workCtx context.Context) error {
+			// Another request may have published the derivative while we waited.
+			if _, err := os.Stat(desired); err == nil {
+				return nil
+			} else if !errors.Is(err, fs.ErrNotExist) {
+				return err
+			}
+			source, err := os.Open(BuildImagePath(imgid, ImageSizeSource))
+			if err != nil {
+				return fmt.Errorf("GetImage: failed to open source: %w", err)
+			}
+			defer source.Close()
+			return compressAndSaveImageContext(workCtx, imgid, imageSize, source)
 		})
 		if err != nil {
-			return nil, fmt.Errorf("GetImage: failed to cache source file in desired size: %w", err)
+			return nil, fmt.Errorf("GetImage: failed to cache image: %w", err)
 		}
-
 	} else if err != nil {
-		return nil, fmt.Errorf("GetImage: failed to access desired image in cache: %w", err)
+		return nil, fmt.Errorf("GetImage: failed to access image: %w", err)
 	}
-
-	return &ImageInfo{
-		Path: desiredImgPath,
-		Mime: "image/webp",
-	}, nil
+	return &ImageInfo{Path: desired, Mime: "image/webp"}, nil
 }
 
 // Returns the ImageSize from a filename such as "1000x1000.webp", or an error if the size cannot be parsed.
@@ -143,21 +199,38 @@ func ParseImageSize(s string) (ImageSize, error) {
 	}
 }
 
-func compressAndSaveImage(imgid uuid.UUID, size ImageSize, image io.Reader) error {
-	compressed, err := compressImage(size, image)
-	if err != nil {
-		return fmt.Errorf("CompressAndSaveImage: %w", err)
+// compressAndSaveImageContext transforms before publishing any cache entry.
+func compressAndSaveImageContext(ctx context.Context, imgid uuid.UUID, size ImageSize, input io.Reader) error {
+	px := size.Width()
+	if px == 0 {
+		return imagepipeline.ErrSize
 	}
-
-	err = saveImage(imgid, size, compressed)
+	if size == ImageSizeSource {
+		px = 0
+	}
+	encoded, err := imagepipeline.Transform(ctx, input, px)
 	if err != nil {
-		return fmt.Errorf("CompressAndSaveImage: %w", err)
+		return fmt.Errorf("compress image: %w", err)
+	}
+	if err := ctx.Err(); err != nil {
+		return err
+	}
+	if err := saveImageContext(ctx, imgid, size, bytes.NewReader(encoded)); err != nil {
+		return fmt.Errorf("save image: %w", err)
 	}
 	return nil
 }
 
-// saveImage saves an image to the imgid[:2]/imgid/{size}.ext path
+// saveImage atomically publishes a complete image without exposing partial writes.
 func saveImage(imgid uuid.UUID, size ImageSize, data io.Reader) error {
+	return saveImageContext(context.Background(), imgid, size, data)
+}
+
+// saveImageContext checks cancellation again before the atomic rename.
+func saveImageContext(ctx context.Context, imgid uuid.UUID, size ImageSize, data io.Reader) error {
+	if err := ctx.Err(); err != nil {
+		return err
+	}
 	imagePath := BuildImagePath(imgid, size)
 
 	// Ensure the cache directory exists
@@ -167,10 +240,12 @@ func saveImage(imgid uuid.UUID, size ImageSize, data io.Reader) error {
 	}
 
 	// Create a file in the cache directory
-	file, err := os.Create(imagePath)
+	file, err := os.CreateTemp(path.Dir(imagePath), ".image-*")
 	if err != nil {
 		return fmt.Errorf("saveImage: failed to create image file: %w", err)
 	}
+	temporary := file.Name()
+	defer os.Remove(temporary)
 	defer file.Close()
 
 	// Save the image to the file
@@ -178,47 +253,17 @@ func saveImage(imgid uuid.UUID, size ImageSize, data io.Reader) error {
 	if err != nil {
 		return fmt.Errorf("saveImage: failed to save image: %w", err)
 	}
+	if err := file.Close(); err != nil {
+		return fmt.Errorf("saveImage: close image: %w", err)
+	}
+	if err := ctx.Err(); err != nil {
+		return err
+	}
+	if err := os.Rename(temporary, imagePath); err != nil {
+		return fmt.Errorf("saveImage: publish image: %w", err)
+	}
 
 	return nil
-}
-
-func compressImage(size ImageSize, data io.Reader) (io.Reader, error) {
-	imgBytes, err := io.ReadAll(data)
-	if err != nil {
-		return nil, fmt.Errorf("compressImage: io.ReadAll: %w", err)
-	}
-	px := size.Width()
-
-	if size == ImageSizeSource {
-		ogsize, err := bimg.Size(imgBytes)
-		if err != nil {
-			return nil, fmt.Errorf("compressImage: bimg.Size: %w", err)
-		}
-		tmpx := min(ogsize.Width, ogsize.Height)
-		px = min(tmpx, ImageSizeSource.Width())
-	}
-
-	quality := 85
-	if size == ImageSizeSource {
-		quality = 100
-	}
-
-	// Resize with bimg
-	imgBytes, err = bimg.NewImage(imgBytes).Process(bimg.Options{
-		Width:         px,
-		Height:        px,
-		Crop:          true,
-		Quality:       quality,
-		StripMetadata: true,
-		Type:          bimg.WEBP,
-	})
-	if err != nil {
-		return nil, fmt.Errorf("compressImage: bimg.NewImage: %w", err)
-	}
-	if len(imgBytes) == 0 {
-		return nil, fmt.Errorf("compressImage: failed to compress image: %w", err)
-	}
-	return bytes.NewReader(imgBytes), nil
 }
 
 func DeleteImage(filename uuid.UUID) error {

@@ -3,13 +3,15 @@ package handlers
 import (
 	"net/http"
 
+	"github.com/gabehf/koito/engine/middleware"
+	"github.com/gabehf/koito/internal/admin"
+	"github.com/gabehf/koito/internal/adminweb"
 	"github.com/gabehf/koito/internal/db"
 	"github.com/gabehf/koito/internal/logger"
 	"github.com/gabehf/koito/internal/utils"
-	"github.com/google/uuid"
 )
 
-func SetPrimaryArtistAliasHandler(store db.ArtistStore) http.HandlerFunc {
+func SetPrimaryArtistAliasHandler(store db.DB) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		ctx := r.Context()
 		l := logger.FromContext(ctx)
@@ -30,9 +32,9 @@ func SetPrimaryArtistAliasHandler(store db.ArtistStore) http.HandlerFunc {
 			return
 		}
 
-		if err = store.SetPrimaryArtistAlias(ctx, artistID, body.Alias); err != nil {
+		if err = admin.EditAlias(ctx, store, middleware.GetUserFromContext(ctx), "artist", artistID, "primary", body.Alias); err != nil {
 			l.Error().Err(err).Msg("SetPrimaryArtistAliasHandler: Failed to set artist primary alias")
-			utils.WriteError(w, "failed to set primary alias", http.StatusInternalServerError)
+			utils.WriteError(w, adminweb.PublicError(err), adminweb.ErrorStatus(err))
 			return
 		}
 
@@ -41,7 +43,7 @@ func SetPrimaryArtistAliasHandler(store db.ArtistStore) http.HandlerFunc {
 }
 
 // UpdateArtistHandler updates a given artist.
-func UpdateArtistHandler(store db.ArtistStore) http.HandlerFunc {
+func UpdateArtistHandler(store db.DB) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		ctx := r.Context()
 		l := logger.FromContext(ctx)
@@ -68,21 +70,17 @@ func UpdateArtistHandler(store db.ArtistStore) http.HandlerFunc {
 			return
 		}
 
-		updateOpts := db.UpdateArtistOpts{ID: artistID}
-
+		raw := ""
 		if body.MBID != nil {
-			mbid, err := uuid.Parse(*body.MBID)
-			if err != nil {
-				l.Debug().Msg("UpdateArtistHandler: Provided MusicBrainz ID is invalid")
-				utils.WriteError(w, "provided musicbrainz id is invalid", http.StatusBadRequest)
+			raw = *body.MBID
+			if raw == "" {
+				utils.WriteError(w, "provided musicbrainz id is invalid", 400)
 				return
 			}
-			updateOpts.MusicBrainzID = mbid
 		}
-
-		if err = store.UpdateArtist(ctx, updateOpts); err != nil {
-			l.Error().Err(err).Msg("UpdateArtistHandler: Failed to update artist")
-			utils.WriteError(w, "failed to update artist", http.StatusInternalServerError)
+		if err = admin.UpdateMediaMetadata(ctx, store, middleware.GetUserFromContext(ctx), "artist", artistID, raw, nil); err != nil {
+			l.Error().Err(err).Msg("UpdateArtistHandler: Failed to update metadata")
+			utils.WriteError(w, adminweb.PublicError(err), adminweb.ErrorStatus(err))
 			return
 		}
 

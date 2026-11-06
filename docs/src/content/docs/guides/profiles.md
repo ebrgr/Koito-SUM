@@ -18,13 +18,17 @@ and separate listener passwords are not provided.
 ## Manage profiles
 
 Open **Settings → Administration**, sign in with the administrator account, and
-select a profile in **Manage profile**. Administration stays inside Settings;
-`/admin` is also available as a direct entry point.
+select a profile. These links open the server-rendered administration;
+`/admin?profile=<id>` preserves the selection.
+Account settings are under `/admin?section=account`. Forms bind their destination
+to the profile ID and slug, independently of other open tabs.
 
 Create or edit a display name, URL name and optional photo or fallback icon.
 Renaming a URL keeps the profile's ID, history, keys and forwarding configuration;
 the previous URL returns 404. Administrator login credentials are independent of
-the profile name. Images may be up to 5 MiB.
+the profile name. Photos accept JPEG, PNG and static WebP; animated images and
+other formats are not supported. The complete upload, including multipart data,
+is limited to 5 MiB.
 
 Each profile starts with an API key. Create additional labelled keys for players,
 copy them into the appropriate player's settings, or revoke them to stop future
@@ -64,3 +68,17 @@ Web reads use `/apis/web/v1/profiles/<slug>/...`. Legacy unscoped read routes
 resolve only when exactly one profile exists; otherwise they return `409` asking
 for explicit profile selection. Administrative actions require an administrator
 session, not a player API key.
+
+In the Go interface, profile selection and personal search also work without
+JavaScript. Appearance settings require JavaScript.
+
+## Go administration forms
+
+Forms work without JavaScript. Copy buttons and image drag-and-drop are optional
+enhancements; a file input and manual key selection remain available. A submitted
+form cannot be reused: refresh the page after a conflict or after restarting the
+server. Sessions expire after 24 hours or 30 days with Remember me. Changing the
+password revokes all sessions; changing the username does not rename a profile.
+
+The HTML and JSON login endpoints share the existing global limit of ten attempts
+per minute. Administrative pages and downloads are marked `no-store`.

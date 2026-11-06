@@ -9,15 +9,17 @@ import (
 
 	"github.com/gabehf/koito/imagecache"
 	"github.com/gabehf/koito/internal/db"
+	"github.com/gabehf/koito/internal/imagepipeline"
+	"github.com/gabehf/koito/internal/imagework"
 	"github.com/gabehf/koito/internal/logger"
 	"github.com/go-chi/chi/v5"
 	"github.com/google/uuid"
 	"github.com/rs/zerolog"
-	"golang.org/x/sync/singleflight"
+	"time"
 )
 
 func ImageHandler(store db.ImageStore) http.HandlerFunc {
-	var downloadGroup singleflight.Group
+	downloadGroup := imagework.New(5, 30*time.Second)
 	return func(w http.ResponseWriter, r *http.Request) {
 		ctx := r.Context()
 		l := logger.FromContext(ctx)
@@ -33,15 +35,19 @@ func ImageHandler(store db.ImageStore) http.HandlerFunc {
 			return
 		}
 
-		image, err := imagecache.GetImage(imgid, filename)
+		image, err := imagecache.GetImageContext(r.Context(), imgid, filename)
 		if errors.Is(err, fs.ErrNotExist) {
 			l.Debug().Err(err).Msgf("ImageHandler: Could not find requested image %s. Attempting to download from source", imgid.String())
-			image, err = imageHandlerRedownload(w, r, l, store, &downloadGroup, imgid, filename)
+			image, err = imageHandlerRedownload(w, r, l, store, downloadGroup, imgid, filename)
 			if err != nil {
 				return
 			}
 		} else if err != nil {
-			w.WriteHeader(http.StatusInternalServerError)
+			if errors.Is(err, imagepipeline.ErrBusy) {
+				http.Error(w, "image processing is busy; try again", http.StatusServiceUnavailable)
+			} else {
+				w.WriteHeader(http.StatusInternalServerError)
+			}
 			return
 		}
 
@@ -52,7 +58,8 @@ func ImageHandler(store db.ImageStore) http.HandlerFunc {
 	}
 }
 
-func imageHandlerRedownload(w http.ResponseWriter, r *http.Request, l *zerolog.Logger, store db.ImageStore, downloadGroup *singleflight.Group, imgid uuid.UUID, filename string) (*imagecache.ImageInfo, error) {
+// imageHandlerRedownload shares downloads but renders a separate fallback for each requester.
+func imageHandlerRedownload(w http.ResponseWriter, r *http.Request, l *zerolog.Logger, store db.ImageStore, downloadGroup *imagework.Group, imgid uuid.UUID, filename string) (*imagecache.ImageInfo, error) {
 	ctx := r.Context()
 
 	src, err := store.GetImageSource(ctx, imgid)
@@ -65,28 +72,32 @@ func imageHandlerRedownload(w http.ResponseWriter, r *http.Request, l *zerolog.L
 		w.WriteHeader(http.StatusInternalServerError)
 		return nil, err
 	} else {
-		_, err, _ = downloadGroup.Do(imgid.String(), func() (any, error) {
-			if err := imagecache.DownloadImage(imgid, src); err != nil {
-				l.Err(err).Msg("ImageHandler: Failed to redownload missing image")
-				imageSize, err := imagecache.ParseImageSize(filename)
-				if err != nil {
-					http.NotFound(w, r)
-					return nil, err
-				}
-				serveDefaultImage(w, imageSize)
-				return nil, err
-			}
-			return nil, nil
+		err = downloadGroup.Do(ctx, imgid.String(), func(workCtx context.Context) error {
+			return imagecache.DownloadImageContext(workCtx, imgid, src)
 		})
 		if err != nil {
-			// errors are already handled in the func
+			if errors.Is(err, imagepipeline.ErrBusy) {
+				http.Error(w, "image processing is busy; try again", http.StatusServiceUnavailable)
+				return nil, err
+			}
+			l.Err(err).Msg("ImageHandler: Failed to redownload missing image")
+			imageSize, parseErr := imagecache.ParseImageSize(filename)
+			if parseErr != nil {
+				http.NotFound(w, r)
+				return nil, parseErr
+			}
+			serveDefaultImage(w, imageSize)
 			return nil, err
 		}
 	}
 
-	image, err := imagecache.GetImage(imgid, filename)
+	image, err := imagecache.GetImageContext(r.Context(), imgid, filename)
 	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
+		if errors.Is(err, imagepipeline.ErrBusy) {
+			http.Error(w, "image processing is busy; try again", http.StatusServiceUnavailable)
+		} else {
+			w.WriteHeader(http.StatusInternalServerError)
+		}
 		return nil, err
 	}
 	return image, nil

@@ -70,27 +70,27 @@ func (c *MusicBrainzClient) getEntity(ctx context.Context, fmtStr string, id uui
 	return nil
 }
 
+// queue propagates caller and shutdown cancellation through the HTTP request.
 func (c *MusicBrainzClient) queue(ctx context.Context, req *http.Request) ([]byte, error) {
-	l := logger.FromContext(ctx)
 	req.Header.Set("User-Agent", c.userAgent)
 	req.Header.Set("Accept", "application/json")
-
-	resultChan := c.requestQueue.Enqueue(func(client *http.Client, done chan<- queue.RequestResult) {
-		resp, err := client.Do(req)
+	result := <-c.requestQueue.EnqueueContext(ctx, func(jobCtx context.Context, client *http.Client) queue.RequestResult {
+		resp, err := client.Do(req.WithContext(jobCtx))
 		if err != nil {
-			l.Err(err).Str("url", req.RequestURI).Msg("Failed to contact MusicBrainz")
-			done <- queue.RequestResult{Err: err}
-			return
-		} else if resp.StatusCode >= 300 || resp.StatusCode < 200 {
-			err = fmt.Errorf("received non-ok status from MusicBrainz: %s", resp.Status)
-			done <- queue.RequestResult{Body: nil, Err: err}
+			if jobCtx.Err() != nil {
+				return queue.RequestResult{Err: jobCtx.Err()}
+			}
+			return queue.RequestResult{Err: fmt.Errorf("upstream request failed")}
 		}
 		defer resp.Body.Close()
-
-		body, err := io.ReadAll(resp.Body)
-		done <- queue.RequestResult{Body: body, Err: err}
+		if resp.StatusCode < 200 || resp.StatusCode >= 300 {
+			return queue.RequestResult{Err: fmt.Errorf("MusicBrainz returned HTTP %d", resp.StatusCode)}
+		}
+		body, err := io.ReadAll(io.LimitReader(resp.Body, (8<<20)+1))
+		if err == nil && len(body) > 8<<20 {
+			err = fmt.Errorf("MusicBrainz response exceeds 8 MiB")
+		}
+		return queue.RequestResult{Body: body, Err: err}
 	})
-
-	result := <-resultChan
 	return result.Body, result.Err
 }

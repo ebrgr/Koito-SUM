@@ -2,7 +2,9 @@ test_config_dir
 .env
 .local/
 .bin/
-.vscode/
+.vscode/*
+!.vscode/launch.json
+!.vscode/tasks.json
 /koito
 __debug_bin*
 .DS_Store

@@ -72,13 +72,17 @@ func (s *Sqlite) getTrackByID(ctx context.Context, id int32, allowUnplayed bool)
 	track.Artists = artists
 
 	var listenCount int64
-	s.queryRowContext(ctx, `SELECT COUNT(*) FROM listens WHERE track_id = ?`, id).Scan(&listenCount)
+	if err := s.queryRowContext(ctx, `SELECT COUNT(*) FROM listens WHERE track_id = ?`, id).Scan(&listenCount); err != nil {
+		return nil, fmt.Errorf("getTrackByID: count listens: %w", err)
+	}
 	track.ListenCount = listenCount
 
 	var timeListened int64
-	s.queryRowContext(ctx, `
+	if err := s.queryRowContext(ctx, `
 		SELECT COALESCE(SUM(t.duration), 0) FROM listens l JOIN tracks t ON l.track_id = t.id WHERE t.id = ?`,
-		id).Scan(&timeListened)
+		id).Scan(&timeListened); err != nil {
+		return nil, fmt.Errorf("getTrackByID: time listened: %w", err)
+	}
 	track.TimeListened = timeListened
 
 	var firstListenUnix int64
@@ -91,11 +95,13 @@ func (s *Sqlite) getTrackByID(ctx context.Context, id int32, allowUnplayed bool)
 	track.FirstListen = firstListenUnix
 
 	var rank int64
-	s.queryRowContext(ctx, `
+	if err := s.queryRowContext(ctx, `
 		SELECT rank FROM (
 			SELECT track_id, RANK() OVER (ORDER BY COUNT(*) DESC) AS rank
 			FROM listens GROUP BY track_id
-		) WHERE track_id = ?`, id).Scan(&rank)
+		) WHERE track_id = ?`, id).Scan(&rank); err != nil && !errors.Is(err, sql.ErrNoRows) {
+		return nil, fmt.Errorf("getTrackByID: rank: %w", err)
+	}
 	track.AllTimeRank = rank
 
 	return &track, nil
@@ -255,6 +261,14 @@ func (s *Sqlite) UpdateTrack(ctx context.Context, opts db.UpdateTrackOpts) error
 		return fmt.Errorf("UpdateTrack: BeginTx: %w", err)
 	}
 	defer tx.Rollback()
+	var present int
+	err = tx.QueryRowContext(ctx, `SELECT 1 FROM tracks WHERE id=?`, opts.ID).Scan(&present)
+	if errors.Is(err, sql.ErrNoRows) {
+		return db.ErrNotFound
+	}
+	if err != nil {
+		return err
+	}
 
 	if opts.MusicBrainzID != uuid.Nil {
 		if _, err := tx.ExecContext(ctx,
@@ -272,65 +286,114 @@ func (s *Sqlite) UpdateTrack(ctx context.Context, opts db.UpdateTrackOpts) error
 	}
 	if len(opts.AddArtists) > 0 {
 		var releaseID int32
-		if t, err := s.GetTrack(ctx, db.GetTrackOpts{ID: opts.ID}); err != nil {
-			return fmt.Errorf("UpdateTrack: GetTrack By ID: %w", err)
-		} else {
-			releaseID = t.AlbumID
+		err := tx.QueryRowContext(ctx, `SELECT release_id FROM tracks WHERE id=?`, opts.ID).Scan(&releaseID)
+		if errors.Is(err, sql.ErrNoRows) {
+			return db.ErrNotFound
 		}
-
-		if err = s.AddArtistsToTrack(ctx, db.AddArtistsToTrackOpts{
-			TrackID:   opts.ID,
-			ArtistIDs: opts.AddArtists,
-		}); err != nil {
-			return fmt.Errorf("UpdateTrack: AssociateArtistToTrack: %w", err)
+		if err != nil {
+			return fmt.Errorf("UpdateTrack: album: %w", err)
 		}
-		if err = s.AddArtistsToAlbum(ctx, db.AddArtistsToAlbumOpts{
-			ArtistIDs: opts.AddArtists,
-			AlbumID:   releaseID,
-		}); err != nil {
-			return fmt.Errorf("UpdateTrack: AssociateArtistToRelease: %w", err)
+		for _, artistID := range opts.AddArtists {
+			if artistID <= 0 {
+				return db.ErrInvalidInput
+			}
+			var exists int
+			err = tx.QueryRowContext(ctx, `SELECT 1 FROM artists WHERE id=?`, artistID).Scan(&exists)
+			if errors.Is(err, sql.ErrNoRows) {
+				return db.ErrNotFound
+			}
+			if err != nil {
+				return fmt.Errorf("UpdateTrack: artist: %w", err)
+			}
+			if _, err = tx.ExecContext(ctx, `INSERT OR IGNORE INTO artist_tracks(artist_id,track_id,is_primary) VALUES(?,?,0)`, artistID, opts.ID); err != nil {
+				return fmt.Errorf("UpdateTrack: add artist: %w", err)
+			}
+			if _, err = tx.ExecContext(ctx, `INSERT OR IGNORE INTO artist_releases(artist_id,release_id,is_primary) VALUES(?,?,0)`, artistID, releaseID); err != nil {
+				return fmt.Errorf("UpdateTrack: add album artist: %w", err)
+			}
 		}
 	}
 
 	if len(opts.RemoveArtists) > 0 {
 		for _, aid := range opts.RemoveArtists {
-			if _, err = tx.ExecContext(ctx, `DELETE FROM artist_tracks
-					WHERE artist_id = ?
-					  AND track_id = ?
-					  AND is_primary = false;`,
-				aid, opts.ID,
-			); err != nil {
-				return fmt.Errorf("UpdateTrack: RemoveArtists: %w", err)
+			if aid <= 0 {
+				return db.ErrInvalidInput
+			}
+			result, e := tx.ExecContext(ctx, `DELETE FROM artist_tracks WHERE artist_id=? AND track_id=? AND is_primary=0`, aid, opts.ID)
+			if e != nil {
+				return fmt.Errorf("UpdateTrack: remove artist: %w", e)
+			}
+			n, e := result.RowsAffected()
+			if e != nil {
+				return e
+			}
+			if n == 0 {
+				var primary int
+				e = tx.QueryRowContext(ctx, `SELECT is_primary FROM artist_tracks WHERE artist_id=? AND track_id=?`, aid, opts.ID).Scan(&primary)
+				if errors.Is(e, sql.ErrNoRows) {
+					return db.ErrNotFound
+				}
+				if e != nil {
+					return e
+				}
+				return db.ErrConflict
 			}
 		}
-		if err = cleanOrphanedEntries(ctx, tx); err != nil {
-			return fmt.Errorf("UpdateTrack: CleanOrphanedEntries: %w", err)
-		}
+		// A relationship edit must not run the global orphan sweep: it can delete unrelated unplayed media.
 	}
+
 	return tx.Commit()
 }
 
 func (s *Sqlite) DeleteTrack(ctx context.Context, id int32) error {
+	if id <= 0 {
+		return db.ErrInvalidInput
+	}
 	tx, err := s.db.BeginTx(ctx, nil)
 	if err != nil {
 		return fmt.Errorf("DeleteTrack: BeginTx: %w", err)
 	}
 	defer tx.Rollback()
 
-	if _, err := tx.ExecContext(ctx, `DELETE FROM tracks WHERE id = ?`, id); err != nil {
+	result, err := tx.ExecContext(ctx, `DELETE FROM tracks WHERE id = ?`, id)
+	if err != nil {
 		return fmt.Errorf("DeleteTrack: delete: %w", err)
 	}
-	if err := cleanOrphanedEntries(ctx, tx); err != nil {
-		return fmt.Errorf("DeleteTrack: clean: %w", err)
+	n, err := result.RowsAffected()
+	if err != nil {
+		return err
+	}
+	if n == 0 {
+		return db.ErrNotFound
 	}
 	return tx.Commit()
 }
 
+// DeleteTrackAlias never removes a primary alias or reports success for a missing alias.
 func (s *Sqlite) DeleteTrackAlias(ctx context.Context, id int32, alias string) error {
-	_, err := s.db.ExecContext(ctx,
-		`DELETE FROM track_aliases WHERE track_id = ? AND alias = ? AND is_primary = 0`,
-		id, alias)
-	return err
+	if id <= 0 || strings.TrimSpace(alias) == "" {
+		return db.ErrInvalidInput
+	}
+	result, err := s.db.ExecContext(ctx, `DELETE FROM track_aliases WHERE track_id=? AND alias=? AND is_primary=0`, id, alias)
+	if err != nil {
+		return err
+	}
+	n, err := result.RowsAffected()
+	if err != nil {
+		return err
+	}
+	if n > 0 {
+		return nil
+	}
+	var primary int
+	err = s.db.QueryRowContext(ctx, `SELECT is_primary FROM track_aliases WHERE track_id=? AND alias=?`, id, alias).Scan(&primary)
+	if errors.Is(err, sql.ErrNoRows) {
+		return db.ErrNotFound
+	}
+	if err != nil {
+		return err
+	}
+	return db.ErrConflict
 }
 
 func (s *Sqlite) GetAllTrackAliases(ctx context.Context, id int32) ([]models.Alias, error) {
@@ -377,7 +440,10 @@ func (s *Sqlite) SetPrimaryTrackAlias(ctx context.Context, id int32, alias strin
 	for rows.Next() {
 		var a string
 		var isPrimary int
-		rows.Scan(&a, &isPrimary)
+		if err := rows.Scan(&a, &isPrimary); err != nil {
+			rows.Close()
+			return err
+		}
 		if isPrimary == 1 {
 			primary = a
 		}
@@ -385,13 +451,17 @@ func (s *Sqlite) SetPrimaryTrackAlias(ctx context.Context, id int32, alias strin
 			exists = a
 		}
 	}
+	if err := rows.Err(); err != nil {
+		rows.Close()
+		return err
+	}
 	rows.Close()
 
 	if primary == alias {
 		return nil
 	}
 	if exists == "" {
-		return errors.New("SetPrimaryTrackAlias: alias does not exist")
+		return db.ErrNotFound
 	}
 
 	if _, err := tx.ExecContext(ctx,
@@ -567,20 +637,35 @@ func (s *Sqlite) GetTopTracksPaginated(ctx context.Context, opts db.GetItemsOpts
 	}, nil
 }
 
+// MergeTracks validates catalog identities before changing any relationships.
 func (s *Sqlite) MergeTracks(ctx context.Context, fromId, toId int32) error {
 	if fromId <= 0 || toId <= 0 || fromId == toId {
-		return fmt.Errorf("different valid track IDs required")
+		return db.ErrInvalidInput
 	}
 	tx, err := s.db.BeginTx(ctx, nil)
 	if err != nil {
 		return fmt.Errorf("MergeTracks: BeginTx: %w", err)
 	}
 	defer tx.Rollback()
+	if err := mergeTracksIn(ctx, tx, fromId, toId); err != nil {
+		return err
+	}
+	return tx.Commit()
+}
+
+func mergeTracksIn(ctx context.Context, tx *sql.Tx, fromId, toId int32) error {
+	if err := requireMergeRows(ctx, tx, "tracks", fromId, toId); err != nil {
+		return err
+	}
 
 	// check if tracks are in different releases
 	var fromRelease, toRelease int32
-	tx.QueryRowContext(ctx, `SELECT release_id FROM tracks WHERE id = ?`, fromId).Scan(&fromRelease)
-	tx.QueryRowContext(ctx, `SELECT release_id FROM tracks WHERE id = ?`, toId).Scan(&toRelease)
+	if err := tx.QueryRowContext(ctx, `SELECT release_id FROM tracks WHERE id = ?`, fromId).Scan(&fromRelease); err != nil {
+		return fmt.Errorf("merge release: %w", err)
+	}
+	if err := tx.QueryRowContext(ctx, `SELECT release_id FROM tracks WHERE id = ?`, toId).Scan(&toRelease); err != nil {
+		return fmt.Errorf("merge release: %w", err)
+	}
 
 	// redirect all listens (ignore conflicts — same timestamp already exists for toId)
 	if _, err := tx.ExecContext(ctx,
@@ -604,8 +689,15 @@ func (s *Sqlite) MergeTracks(ctx context.Context, fromId, toId int32) error {
 		var artistIDs []int32
 		for rows.Next() {
 			var aid int32
-			rows.Scan(&aid)
+			if err := rows.Scan(&aid); err != nil {
+				rows.Close()
+				return err
+			}
 			artistIDs = append(artistIDs, aid)
+		}
+		if err := rows.Err(); err != nil {
+			rows.Close()
+			return err
 		}
 		rows.Close()
 		for _, aid := range artistIDs {
@@ -617,10 +709,11 @@ func (s *Sqlite) MergeTracks(ctx context.Context, fromId, toId int32) error {
 		}
 	}
 
-	if err := cleanOrphanedEntries(ctx, tx); err != nil {
-		return fmt.Errorf("MergeTracks: clean: %w", err)
+	// Only the source is deleted after its listens were moved or deduplicated.
+	if _, err := tx.ExecContext(ctx, `DELETE FROM tracks WHERE id=?`, fromId); err != nil {
+		return fmt.Errorf("MergeTracks: delete source: %w", err)
 	}
-	return tx.Commit()
+	return nil
 }
 
 func (s *Sqlite) CountTracks(ctx context.Context, timeframe db.Timeframe) (int64, error) {

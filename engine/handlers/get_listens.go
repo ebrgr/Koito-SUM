@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"github.com/gabehf/koito/internal/webquery"
 	"net/http"
 
 	"github.com/gabehf/koito/internal/db"
@@ -16,6 +17,7 @@ func GetListensHandler(store db.ListenStore) func(w http.ResponseWriter, r *http
 		l.Debug().Msg("GetListensHandler: Received request to retrieve listens")
 
 		opts := OptsFromRequest(r)
+		opts.Timeframe = webquery.ResolveTimeframe(opts.Timeframe)
 		l.Debug().Msgf("GetListensHandler: Retrieving listens with options: %+v", opts)
 
 		listens, err := store.GetListensPaginated(ctx, opts)
@@ -26,6 +28,6 @@ func GetListensHandler(store db.ListenStore) func(w http.ResponseWriter, r *http
 		}
 
 		l.Debug().Msg("GetListensHandler: Successfully retrieved listens")
-		utils.WriteJSON(w, http.StatusOK, listens)
+		writePage(w, opts.Timeframe, listens)
 	}
 }

@@ -2,6 +2,7 @@ package engine
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"io"
 	"mime"
@@ -13,6 +14,7 @@ import (
 	"github.com/gabehf/koito/internal/cfg"
 	"github.com/gabehf/koito/internal/db"
 	"github.com/gabehf/koito/internal/importer"
+	"github.com/gabehf/koito/internal/logger"
 	"github.com/gabehf/koito/internal/mbz"
 	"github.com/gabehf/koito/internal/utils"
 	"github.com/google/uuid"
@@ -31,7 +33,7 @@ func importProfileFile(ctx context.Context, store db.DB, mbzc mbz.MusicBrainzCal
 	case strings.Contains(filename, "koito"):
 		return importer.ImportKoitoFile(ctx, store, filename)
 	default:
-		return fmt.Errorf("unrecognized import format")
+		return fmt.Errorf("%w: unrecognized import format", importer.ErrInvalidFile)
 	}
 }
 func profileImportHandler(store db.DB, mbzc mbz.MusicBrainzCaller) http.HandlerFunc {
@@ -61,8 +63,66 @@ func profileImportHandler(store db.DB, mbzc mbz.MusicBrainzCaller) http.HandlerF
 			utils.WriteError(w, "import file not found", 404)
 			return
 		}
-		if err := importProfileFile(r.Context(), store, mbzc, filename); err != nil {
-			utils.WriteError(w, "import failed", 400)
+		// Move a manually selected file out of the boot queue before processing.
+		stageDir := path.Join(cfg.ConfigDir(), "import_staging")
+		if err := os.MkdirAll(stageDir, 0700); err != nil {
+			utils.WriteError(w, "could not prepare import", 500)
+			return
+		}
+		stageInfo, err := os.Lstat(stageDir)
+		if err != nil || !stageInfo.IsDir() {
+			utils.WriteError(w, "could not prepare import", 500)
+			return
+		}
+		stagePath := path.Join(stageDir, uuid.NewString()+"-manual")
+		if err := os.Rename(path.Join(cfg.ConfigDir(), "import", filename), stagePath); err != nil {
+			utils.WriteError(w, "could not prepare import", 500)
+			return
+		}
+		if err := os.Chmod(stagePath, 0600); err != nil {
+			logger.FromContext(r.Context()).Error().Err(err).Msg("Manual import remains in staging")
+			utils.WriteError(w, "could not prepare import; file retained in staging", 500)
+			return
+		}
+		ctx := importer.WithUploadSource(r.Context(), stagePath)
+		if err := importProfileFile(ctx, store, mbzc, filename); err != nil {
+			// Preserve manual input for recovery outside the boot queue.
+			root := path.Join(cfg.ConfigDir(), "import_failed")
+			failedDir := path.Join(root, fmt.Sprint(db.ProfileID(ctx)))
+			quarantineErr := os.MkdirAll(root, 0700)
+			if quarantineErr == nil {
+				var info os.FileInfo
+				info, quarantineErr = os.Lstat(root)
+				if quarantineErr == nil && !info.IsDir() {
+					quarantineErr = fmt.Errorf("invalid failed import directory")
+				}
+			}
+			if quarantineErr == nil {
+				quarantineErr = os.Mkdir(failedDir, 0700)
+				if errors.Is(quarantineErr, os.ErrExist) {
+					quarantineErr = nil
+				}
+			}
+			if quarantineErr == nil {
+				var info os.FileInfo
+				info, quarantineErr = os.Lstat(failedDir)
+				if quarantineErr == nil && !info.IsDir() {
+					quarantineErr = fmt.Errorf("invalid profile failed import directory")
+				}
+			}
+			if quarantineErr == nil {
+				quarantineErr = os.Rename(stagePath, path.Join(failedDir, uuid.NewString()+"-"+body.Filename))
+			}
+			message := "import failed; some records may have been saved"
+			if quarantineErr != nil {
+				logger.FromContext(ctx).Error().Err(quarantineErr).Msg("Manual import remains in staging")
+				message += "; file retained in staging"
+			}
+			status := http.StatusInternalServerError
+			if errors.Is(err, importer.ErrInvalidFile) || errors.Is(err, db.ErrInvalidInput) {
+				status = http.StatusBadRequest
+			}
+			utils.WriteError(w, message, status)
 			return
 		}
 		w.WriteHeader(http.StatusNoContent)
@@ -72,6 +132,7 @@ func profileImportHandler(store db.DB, mbzc mbz.MusicBrainzCaller) http.HandlerF
 // Uploads have server-generated filenames; the selected format selects the
 // existing parser, while the URL selects the destination independently of file content.
 func uploadProfileImport(w http.ResponseWriter, r *http.Request, store db.DB, mbzc mbz.MusicBrainzCaller) {
+	// Preserve the distinction between invalid uploads and infrastructure failures.
 	r.Body = http.MaxBytesReader(w, r.Body, 100<<20)
 	if err := r.ParseMultipartForm(1 << 20); err != nil {
 		utils.WriteError(w, "import upload exceeds 100 MiB or is invalid", 400)
@@ -90,35 +151,38 @@ func uploadProfileImport(w http.ResponseWriter, r *http.Request, store db.DB, mb
 		return
 	}
 	defer file.Close()
-	dir := path.Join(cfg.ConfigDir(), "import", fmt.Sprint(db.ProfileID(r.Context())))
+	// HTTP staging is outside import/, which the boot importer scans after a crash.
+	dir := path.Join(cfg.ConfigDir(), "import_staging")
 	if err = os.MkdirAll(dir, 0700); err != nil {
 		utils.WriteError(w, "could not prepare import", 500)
 		return
 	}
 	info, err := os.Lstat(dir)
 	if err != nil || !info.IsDir() {
-		utils.WriteError(w, "invalid profile import directory", 400)
+		utils.WriteError(w, "invalid import staging directory", 500)
 		return
 	}
-	name := uuid.NewString() + "-" + suffix
-	destination := path.Join(dir, name)
-	out, err := os.OpenFile(destination, os.O_CREATE|os.O_EXCL|os.O_WRONLY, 0600)
+	out, err := os.CreateTemp(dir, "upload-*")
 	if err != nil {
 		utils.WriteError(w, "could not save import", 500)
 		return
 	}
+	destination := out.Name()
+	defer os.Remove(destination)
 	_, err = io.Copy(out, file)
 	closeErr := out.Close()
 	if err != nil || closeErr != nil {
-		_ = os.Remove(destination)
 		utils.WriteError(w, "could not save import", 500)
 		return
 	}
-	// Failed parsers can have saved a prefix of the input. Remove the pending
-	// upload so a later startup cannot retry it without an explicit admin action.
-	defer os.Remove(destination)
-	if err = importProfileFile(r.Context(), store, mbzc, path.Join(fmt.Sprint(db.ProfileID(r.Context())), name)); err != nil {
-		utils.WriteError(w, "import failed; some records may have been saved. Check the file before retrying", 400)
+	name := uuid.NewString() + "-" + suffix
+	ctx := importer.WithUploadSource(r.Context(), destination)
+	if err = importProfileFile(ctx, store, mbzc, path.Join(fmt.Sprint(db.ProfileID(ctx)), name)); err != nil {
+		status := http.StatusInternalServerError
+		if errors.Is(err, importer.ErrInvalidFile) || errors.Is(err, db.ErrInvalidInput) {
+			status = http.StatusBadRequest
+		}
+		utils.WriteError(w, "import failed; some records may have been saved. Check the file before retrying", status)
 		return
 	}
 	w.WriteHeader(http.StatusNoContent)

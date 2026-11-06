@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"slices"
 
-	"github.com/gabehf/koito/imagecache"
 	"github.com/gabehf/koito/internal/db"
 	"github.com/gabehf/koito/internal/images"
 	"github.com/gabehf/koito/internal/logger"
@@ -131,26 +130,21 @@ func createOrUpdateAlbumWithMbzReleaseID(ctx context.Context, d db.AlbumStore, o
 
 		if err == nil && imgUrl != "" {
 			imgid = uuid.New()
-			if !opts.SkipCacheImage {
-				l.Debug().Msg("Downloading album image from source...")
-				err = imagecache.DownloadImage(imgid, imgUrl)
-				if err != nil {
-					l.Err(err).Msg("createOrUpdateAlbumWithMbzReleaseID: failed to cache image")
-				}
-			}
 		}
 
 		if err != nil {
 			l.Debug().Msgf("createOrUpdateAlbumWithMbzReleaseID: failed to get album images for %s: %s", release.Title, err.Error())
 		}
 
-		album, err = d.SaveAlbum(ctx, db.SaveAlbumOpts{
-			Title:          release.Title,
-			MusicBrainzID:  opts.ReleaseMbzID,
-			ArtistIDs:      utils.FlattenArtistIDs(opts.Artists),
-			VariousArtists: variousArtists,
-			Image:          imgid,
-			ImageSrc:       imgUrl,
+		album, err = saveWithAutomaticImage(ctx, imgid, imgUrl, opts.SkipCacheImage, func() (*models.Album, error) {
+			return d.SaveAlbum(ctx, db.SaveAlbumOpts{
+				Title:          release.Title,
+				MusicBrainzID:  opts.ReleaseMbzID,
+				ArtistIDs:      utils.FlattenArtistIDs(opts.Artists),
+				VariousArtists: variousArtists,
+				Image:          imgid,
+				ImageSrc:       imgUrl,
+			})
 		})
 		if err != nil {
 			return nil, fmt.Errorf("createOrUpdateAlbumWithMbzReleaseID: %w", err)
@@ -217,24 +211,19 @@ func matchAlbumByTitle(ctx context.Context, d db.AlbumStore, opts AssociateAlbum
 		})
 		if err == nil && imgUrl != "" {
 			imgid = uuid.New()
-			if !opts.SkipCacheImage {
-				l.Debug().Msg("Downloading album image from source...")
-				err = imagecache.DownloadImage(imgid, imgUrl)
-				if err != nil {
-					l.Err(err).Msg("createOrUpdateAlbumWithMbzReleaseID: failed to cache image")
-				}
-			}
 		}
 		if err != nil {
 			l.Debug().AnErr("error", err).Msgf("matchAlbumByTitle: failed to get album images for %s", opts.ReleaseName)
 		}
 
-		a, err = d.SaveAlbum(ctx, db.SaveAlbumOpts{
-			Title:         releaseName,
-			ArtistIDs:     utils.FlattenArtistIDs(opts.Artists),
-			Image:         imgid,
-			MusicBrainzID: opts.ReleaseMbzID,
-			ImageSrc:      imgUrl,
+		a, err = saveWithAutomaticImage(ctx, imgid, imgUrl, opts.SkipCacheImage, func() (*models.Album, error) {
+			return d.SaveAlbum(ctx, db.SaveAlbumOpts{
+				Title:         releaseName,
+				ArtistIDs:     utils.FlattenArtistIDs(opts.Artists),
+				Image:         imgid,
+				MusicBrainzID: opts.ReleaseMbzID,
+				ImageSrc:      imgUrl,
+			})
 		})
 		if err != nil {
 			return nil, fmt.Errorf("matchAlbumByTitle: %w", err)

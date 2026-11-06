@@ -22,10 +22,11 @@ func (s *Sqlite) GetExportPage(ctx context.Context, opts db.GetExportPageOpts) (
 		JOIN tracks t ON l.track_id = t.id
 		JOIN releases r ON t.release_id = r.id
 		WHERE l.profile_id = ?
-		  AND (l.listened_at > ? OR (l.listened_at = ? AND l.track_id > ?))
+		  AND (? OR l.listened_at > ? OR (l.listened_at = ? AND l.track_id > ?))
 		ORDER BY l.listened_at, l.track_id
 		LIMIT ?`,
 		opts.ProfileID,
+		opts.FirstPage,
 		opts.ListenedAt.Unix(), opts.ListenedAt.Unix(), opts.TrackID,
 		opts.Limit,
 	)

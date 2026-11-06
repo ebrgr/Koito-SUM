@@ -1,0 +1,47 @@
+{
+  "status": "modelo-nao-executado",
+  "execucao": {
+    "data_utc": null,
+    "commit": null,
+    "arvore_de_trabalho": null,
+    "fixture_versao": 1,
+    "fixture_sha256": null,
+    "build_comandos_e_resultados": [],
+    "navegador_e_versao": null,
+    "sistema_operacional": null,
+    "relogio_servidor": "nao controlado; registrar periodo absoluto",
+    "rede": "loopback; bloquear terceiros e registrar fontes locais ou fallback",
+    "arquivos_com_credenciais": false
+  },
+  "casos": [
+    {
+      "id": "substituir-pelo-id-da-matriz",
+      "status": "nao-executado",
+      "modo": null,
+      "ator": null,
+      "perfil": null,
+      "rota_query_sanitizada": null,
+      "estado_acao_e_resultado_esperado": null,
+      "resultado_observado": null,
+      "javascript": null,
+      "tema": null,
+      "viewport_css": {"largura": null, "altura": null},
+      "device_scale_factor": null,
+      "zoom": null,
+      "fuso": null,
+      "idioma": null,
+      "instante_e_periodo": null,
+      "fontes_esperadas_e_confirmadas": null,
+      "imagens_concluidas_e_falhas_esperadas": null,
+      "hydration_confirmada_por_interacao": null,
+      "movimento_reduzido": null,
+      "regiao_e_rolagem": null,
+      "transbordamento_e_recortes": null,
+      "imagem_arquivo_relativo": null,
+      "par_correspondente": null,
+      "diferenca_e_classificacao": null,
+      "dados_e_integridade_apos_acao": null,
+      "limitacoes": null
+    }
+  ]
+}

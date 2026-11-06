@@ -62,34 +62,31 @@ func NewLastFMClient() *LastFMClient {
 	return ret
 }
 
+// queue propagates caller and shutdown cancellation through the HTTP request.
+// Shutdown cancels pending provider requests.
+func (c *LastFMClient) Shutdown() { c.requestQueue.Shutdown() }
+
 func (c *LastFMClient) queue(ctx context.Context, req *http.Request) ([]byte, error) {
-	l := logger.FromContext(ctx)
 	req.Header.Set("User-Agent", c.userAgent)
 	req.Header.Set("Accept", "application/json")
-
-	resultChan := c.requestQueue.Enqueue(func(client *http.Client, done chan<- queue.RequestResult) {
-		resp, err := client.Do(req)
+	result := <-c.requestQueue.EnqueueContext(ctx, func(jobCtx context.Context, client *http.Client) queue.RequestResult {
+		resp, err := client.Do(req.WithContext(jobCtx))
 		if err != nil {
-			l.Debug().Err(err).Str("url", req.URL.String()).Msg("Failed to contact LastFM")
-			done <- queue.RequestResult{Err: err}
-			return
+			if jobCtx.Err() != nil {
+				return queue.RequestResult{Err: jobCtx.Err()}
+			}
+			return queue.RequestResult{Err: fmt.Errorf("upstream request failed")}
 		}
 		defer resp.Body.Close()
-
-		// LastFM might return 200 OK even for API errors (like "Artist not found"),
-		// so we rely on parsing the JSON body for logic errors later,
-		// but we still check for HTTP protocol failures here.
 		if resp.StatusCode >= 500 {
-			err = fmt.Errorf("received server error from LastFM: %s", resp.Status)
-			done <- queue.RequestResult{Body: nil, Err: err}
-			return
+			return queue.RequestResult{Err: fmt.Errorf("LastFM returned HTTP %d", resp.StatusCode)}
 		}
-
-		body, err := io.ReadAll(resp.Body)
-		done <- queue.RequestResult{Body: body, Err: err}
+		body, err := io.ReadAll(io.LimitReader(resp.Body, (8<<20)+1))
+		if err == nil && len(body) > 8<<20 {
+			err = fmt.Errorf("LastFM response exceeds 8 MiB")
+		}
+		return queue.RequestResult{Body: body, Err: err}
 	})
-
-	result := <-resultChan
 	return result.Body, result.Err
 }
 
@@ -104,7 +101,7 @@ func (c *LastFMClient) getEntity(ctx context.Context, params url.Values, result 
 	reqUrl, _ := url.Parse(c.baseUrl)
 	reqUrl.RawQuery = params.Encode()
 
-	l.Debug().Msgf("Sending request to LastFM: GET %s", reqUrl.String())
+	l.Debug().Msg("Sending request to LastFM")
 
 	req, err := http.NewRequest("GET", reqUrl.String(), nil)
 	if err != nil {
@@ -131,8 +128,8 @@ func (c *LastFMClient) getEntity(ctx context.Context, params url.Values, result 
 // Last.fm stopped serving real artist images years ago and returns this for nearly every artist.
 const lastFMPlaceholderHash = "2a96cbd8b46e442fc41c2b86b821562f"
 
-// selectBestImage picks the largest available image from the LastFM slice
-func (c *LastFMClient) selectBestImage(images []lastFMImage) string {
+// selectBestImage checks image candidates with the caller context.
+func (c *LastFMClient) selectBestImage(ctx context.Context, images []lastFMImage) string {
 	// Rank preference: mega > extralarge > large > medium > small
 	// Since LastFM usually returns them in order of size, we could take the last one,
 	// but a map lookup is safer against API changes.
@@ -145,21 +142,21 @@ func (c *LastFMClient) selectBestImage(images []lastFMImage) string {
 	}
 
 	if url, ok := imgMap["mega"]; ok {
-		if err := ValidateImageURL(overrideImgSize(url)); err == nil {
+		if err := ValidateImageURLContext(ctx, overrideImgSize(url)); err == nil {
 			return overrideImgSize(url)
 		} else {
 			return url
 		}
 	}
 	if url, ok := imgMap["extralarge"]; ok {
-		if err := ValidateImageURL(overrideImgSize(url)); err == nil {
+		if err := ValidateImageURLContext(ctx, overrideImgSize(url)); err == nil {
 			return overrideImgSize(url)
 		} else {
 			return url
 		}
 	}
 	if url, ok := imgMap["large"]; ok {
-		if err := ValidateImageURL(overrideImgSize(url)); err == nil {
+		if err := ValidateImageURLContext(ctx, overrideImgSize(url)); err == nil {
 			return overrideImgSize(url)
 		} else {
 			return url
@@ -202,7 +199,7 @@ func (c *LastFMClient) GetAlbumImage(ctx context.Context, mbid *uuid.UUID, artis
 
 		// If success and no API error code
 		if err == nil && resp.Error == 0 && len(resp.Album.Image) > 0 {
-			best := c.selectBestImage(resp.Album.Image)
+			best := c.selectBestImage(ctx, resp.Album.Image)
 			if best != "" {
 				return best, nil
 			}
@@ -232,7 +229,7 @@ func (c *LastFMClient) GetAlbumImage(ctx context.Context, mbid *uuid.UUID, artis
 		return "", fmt.Errorf("GetAlbumImage: LastFM API error %d: %s", resp.Error, resp.Message)
 	}
 
-	best := c.selectBestImage(resp.Album.Image)
+	best := c.selectBestImage(ctx, resp.Album.Image)
 	if best == "" {
 		return "", fmt.Errorf("GetAlbumImage: no suitable image found")
 	}
@@ -260,10 +257,10 @@ func (c *LastFMClient) GetArtistImage(ctx context.Context, mbid *uuid.UUID, arti
 		})
 
 		if err == nil && resp.Error == 0 && len(resp.Artist.Image) > 0 {
-			best := c.selectBestImage(resp.Artist.Image)
+			best := c.selectBestImage(ctx, resp.Artist.Image)
 			if best != "" {
 				// Validate to match Subsonic implementation behavior
-				if err := ValidateImageURL(best); err == nil {
+				if err := ValidateImageURLContext(ctx, best); err == nil {
 					return best, nil
 				}
 			}
@@ -287,12 +284,12 @@ func (c *LastFMClient) GetArtistImage(ctx context.Context, mbid *uuid.UUID, arti
 		return "", fmt.Errorf("GetArtistImage: LastFM API error %d: %s", resp.Error, resp.Message)
 	}
 
-	best := c.selectBestImage(resp.Artist.Image)
+	best := c.selectBestImage(ctx, resp.Artist.Image)
 	if best == "" {
 		return "", fmt.Errorf("GetArtistImage: no suitable image found")
 	}
 
-	if err := ValidateImageURL(best); err != nil {
+	if err := ValidateImageURLContext(ctx, best); err != nil {
 		return "", fmt.Errorf("GetArtistImage: failed to validate image url")
 	}
 

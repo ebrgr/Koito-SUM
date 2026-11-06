@@ -1,0 +1,127 @@
+[
+  {
+    "file": "comparison-cards-desktop.jpg",
+    "pixels": "1280x437",
+    "sha256": "d3815e5f2b5f183869a265d1c2ea17c9c05217e18b33c5ca376bbd7a4aab638e"
+  },
+  {
+    "file": "comparison-desktop.jpg",
+    "pixels": "1280x437",
+    "sha256": "d2fa553186faa4754c2a18ae1f9568aba92478072172469d63698af7c6575bd1"
+  },
+  {
+    "file": "comparison-empty-desktop.jpg",
+    "pixels": "1280x437",
+    "sha256": "e90ba495df7c5548c65c5551954569ef855ddeec5d079fbfb0036c4dfc7476bb"
+  },
+  {
+    "file": "comparison-mobile.jpg",
+    "pixels": "780x837",
+    "sha256": "4206c56970f7a878c4be33727c7c5c193146cf632dd6f7708a58240e43fc7db1"
+  },
+  {
+    "file": "comparison-pearl-desktop.jpg",
+    "pixels": "1280x437",
+    "sha256": "fd85624eaebb82536858144fd808c94aaecd02b00ebc995906f85f64b4ca2f39"
+  },
+  {
+    "file": "comparison-profiles-desktop.jpg",
+    "pixels": "1280x437",
+    "sha256": "d50e21858323e7e893770119b75ff55cc3bf79b496b5c0cdf44f89814eb9728b"
+  },
+  {
+    "file": "go-360-mobile.jpg",
+    "pixels": "360x801",
+    "sha256": "aa14e1de20fceae1e6ab55ebfe41420ce55fba1a624e6bdd9e2c8c0ab2dfecf7"
+  },
+  {
+    "file": "go-400-mobile.jpg",
+    "pixels": "400x801",
+    "sha256": "b65c6824efc8571291873ba1ee374c3fd924edba936375e63c02cf744e156fa7"
+  },
+  {
+    "file": "go-cards-desktop.jpg",
+    "pixels": "1280x801",
+    "sha256": "de30ca8b1a8d45061d9d81be6c0b742b7c11f1c55abb2e5991b0da29eaf41442"
+  },
+  {
+    "file": "go-desktop.jpg",
+    "pixels": "1280x801",
+    "sha256": "731b25778855580c6beb29573e7ac8c0231fca043138558ba341db0f0ba5e22c"
+  },
+  {
+    "file": "go-empty-desktop.jpg",
+    "pixels": "1280x801",
+    "sha256": "259bbbfff61eaff7dbd1136da26c8fb31afe9cb58f8eb4297696d1e580cafe41"
+  },
+  {
+    "file": "go-error-desktop.jpg",
+    "pixels": "1280x801",
+    "sha256": "315a7fb155934f7918c68836615a1057a5eb49c12659588ec6f91f3c5d5ea954"
+  },
+  {
+    "file": "go-long-360-mobile.jpg",
+    "pixels": "360x801",
+    "sha256": "1af89fe44eab49026c3cf95bb18fb078551a4f78144ed66b6c1f9cedf82a592b"
+  },
+  {
+    "file": "go-missing-images-desktop.jpg",
+    "pixels": "1280x801",
+    "sha256": "29d92bf80daf040b1fde88f253abaca6a019eefdc6ded52934b934ebadc759a1"
+  },
+  {
+    "file": "go-mobile.jpg",
+    "pixels": "390x801",
+    "sha256": "ccd080e9af4dadfdec19db29fd4a976f5fd603d44f518bbf3c47a2d4727c05aa"
+  },
+  {
+    "file": "go-pearl-desktop.jpg",
+    "pixels": "1280x801",
+    "sha256": "82bdebceb177c2a2af9d4338a73438019e164a031c13fd623c98b2459d653aa6"
+  },
+  {
+    "file": "go-profiles-desktop.jpg",
+    "pixels": "1280x801",
+    "sha256": "9291fc68605acbf1fd4892d39ef6fd23a027e645d08aa7fc2c5c612c3fa485e2"
+  },
+  {
+    "file": "go-settings-desktop.jpg",
+    "pixels": "1280x801",
+    "sha256": "a2f328ff0d3ac0cd8ab4d640c130b7f7377bf821ff6747fea2c212d8523cd936"
+  },
+  {
+    "file": "go-settings-mobile.jpg",
+    "pixels": "390x801",
+    "sha256": "88330985fedd3c080f2f9670ba9b8dd3a7f4f4b85fe5631a250d95abaade5e15"
+  },
+  {
+    "file": "react-cards-desktop.jpg",
+    "pixels": "1280x801",
+    "sha256": "eec5bc4d82659ba860fa44e989d05ef0a6453a5a935da9853111dab246a04622"
+  },
+  {
+    "file": "react-desktop.jpg",
+    "pixels": "1280x801",
+    "sha256": "b5106f8d2eca229f398478784573ce2de2b03b66dc8d54c65ad3e61a3cffb0dd"
+  },
+  {
+    "file": "react-empty-desktop.jpg",
+    "pixels": "1280x801",
+    "sha256": "ca4821ed16f13464d8f96c4a4ed20accb92baf1b7cef9f97332324c478cf17b9"
+  },
+  {
+    "file": "react-mobile.jpg",
+    "pixels": "390x801",
+    "sha256": "830982ecb5d134fe16d712ec4be95123a24e139258e7ad35f092afd5c9cea032"
+  },
+  {
+    "file": "react-pearl-desktop.jpg",
+    "pixels": "1280x801",
+    "sha256": "53862aaa2400973bab9033b6939ae28e1e9c28dffa970c44dca3155d8e7b171b"
+  },
+  {
+    "file": "react-profiles-desktop.jpg",
+    "pixels": "1280x801",
+    "sha256": "26f39d2d9a69f0fd1c078036214df6b3dff102e4d9b9c5b5ed7cfdc15b785f47"
+  }
+]

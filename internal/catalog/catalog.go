@@ -9,7 +9,6 @@ import (
 	"fmt"
 	"regexp"
 	"strings"
-	"sync"
 	"time"
 
 	"github.com/gabehf/koito/internal/db"
@@ -75,13 +74,31 @@ type submitListenStore interface {
 	db.ListenStore
 }
 
-var submitListenMu sync.Mutex
+var submitListenGate = make(chan struct{}, 1)
 
+// LockAssociations serializes read-then-create catalog operations with cancellation.
+func LockAssociations(ctx context.Context) (func(), error) {
+	select {
+	case submitListenGate <- struct{}{}:
+	case <-ctx.Done():
+		return nil, ctx.Err()
+	}
+	if err := ctx.Err(); err != nil {
+		<-submitListenGate
+		return nil, err
+	}
+	return func() { <-submitListenGate }, nil
+}
+
+// SubmitListen serializes shared associations and reports failures before saving a listen.
 func SubmitListen(ctx context.Context, store submitListenStore, opts SubmitListenOpts) error {
 	// Shared catalog association is a read-then-create sequence. Serialize it so
 	// simultaneous profiles do not create duplicate artists/albums/tracks.
-	submitListenMu.Lock()
-	defer submitListenMu.Unlock()
+	unlock, err := LockAssociations(ctx)
+	if err != nil {
+		return err
+	}
+	defer unlock()
 	if opts.ProfileID == 0 {
 		opts.ProfileID = db.ProfileID(ctx)
 	}
@@ -136,10 +153,12 @@ func SubmitListen(ctx context.Context, store submitListenStore, opts SubmitListe
 	l.Debug().Any("album", rg).Msg("Matched listen to release")
 
 	// ensure artists are associated with release group
-	store.AddArtistsToAlbum(ctx, db.AddArtistsToAlbumOpts{
+	if err := store.AddArtistsToAlbum(ctx, db.AddArtistsToAlbumOpts{
 		ArtistIDs: artistIDs,
 		AlbumID:   rg.ID,
-	})
+	}); err != nil {
+		return fmt.Errorf("SubmitListen: associate album artists: %w", err)
+	}
 
 	track, err := AssociateTrack(ctx, store, AssociateTrackOpts{
 		ArtistIDs:  artistIDs,

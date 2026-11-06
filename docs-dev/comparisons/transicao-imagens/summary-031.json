@@ -1,0 +1,3693 @@
+{
+  "samples": 184,
+  "expected_rejections": 21,
+  "unexpected_results": [],
+  "paired_operations": 61,
+  "dimension_mismatches": [],
+  "bytes_gate_failures": [],
+  "latency_gate_failures": [],
+  "worst_bytes_ratio": 1.455077246137693,
+  "worst_p95_ratio": 2.2892929292929294,
+  "quality": [
+    {
+      "mode": "vips",
+      "input": "natural.jpg",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 46.331640314367974,
+      "psnr_white_db": 46.331640314367974,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "pure",
+      "input": "natural.jpg",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 45.05811877573653,
+      "psnr_white_db": 45.05811877573653,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "vips",
+      "input": "000-vips-natural-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 39.14702201056923,
+      "psnr_white_db": 39.14702201056923,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "pure",
+      "input": "000-vips-natural-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 38.92637579101312,
+      "psnr_white_db": 38.92637579101312,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "vips",
+      "input": "001-pure-natural-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 39.29929950675839,
+      "psnr_white_db": 39.29929950675839,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "pure",
+      "input": "001-pure-natural-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 38.86642825062606,
+      "psnr_white_db": 38.86642825062606,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "vips",
+      "input": "natural.png",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 46.72686175892724,
+      "psnr_white_db": 46.72686175892724,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "pure",
+      "input": "natural.png",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 45.55501078782221,
+      "psnr_white_db": 45.55501078782221,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "vips",
+      "input": "006-vips-natural-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 39.38171824412058,
+      "psnr_white_db": 39.38171824412058,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "pure",
+      "input": "006-vips-natural-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 39.08537317695217,
+      "psnr_white_db": 39.08537317695217,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "vips",
+      "input": "007-pure-natural-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 39.53408672461033,
+      "psnr_white_db": 39.53408672461033,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "pure",
+      "input": "007-pure-natural-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 39.18263162769607,
+      "psnr_white_db": 39.18263162769607,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "vips",
+      "input": "texture.jpg",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 21.929891901195056,
+      "psnr_white_db": 21.929891901195056,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "pure",
+      "input": "texture.jpg",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 21.999502572971217,
+      "psnr_white_db": 21.999502572971217,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "vips",
+      "input": "012-vips-texture-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 20.82787556617776,
+      "psnr_white_db": 20.82787556617776,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "pure",
+      "input": "012-vips-texture-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 21.195621077243644,
+      "psnr_white_db": 21.195621077243644,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "vips",
+      "input": "013-pure-texture-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 20.821694722371547,
+      "psnr_white_db": 20.821694722371547,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "pure",
+      "input": "013-pure-texture-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 21.22223264687459,
+      "psnr_white_db": 21.22223264687459,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "vips",
+      "input": "texture.png",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 21.966861015418697,
+      "psnr_white_db": 21.966861015418697,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "pure",
+      "input": "texture.png",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 22.05554099814769,
+      "psnr_white_db": 22.05554099814769,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "vips",
+      "input": "018-vips-texture-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 20.806467538224112,
+      "psnr_white_db": 20.806467538224112,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "pure",
+      "input": "018-vips-texture-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 21.197152826247883,
+      "psnr_white_db": 21.197152826247883,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "vips",
+      "input": "019-pure-texture-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 20.827195756452245,
+      "psnr_white_db": 20.827195756452245,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "pure",
+      "input": "019-pure-texture-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 21.228488460875017,
+      "psnr_white_db": 21.228488460875017,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "vips",
+      "input": "alpha.png",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 27.51622358402703,
+      "psnr_white_db": 27.516223584027028,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "pure",
+      "input": "alpha.png",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 27.61028641204304,
+      "psnr_white_db": 27.61028641204304,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "vips",
+      "input": "024-vips-alpha-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 26.282448588217537,
+      "psnr_white_db": 26.282448588217537,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "pure",
+      "input": "024-vips-alpha-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 27.325679191159644,
+      "psnr_white_db": 27.325679191159644,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "vips",
+      "input": "025-pure-alpha-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 26.327401009743113,
+      "psnr_white_db": 26.327401009743113,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "pure",
+      "input": "025-pure-alpha-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 27.41600420293352,
+      "psnr_white_db": 27.416004202933518,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "vips",
+      "input": "small.png",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 26.757044512022617,
+      "psnr_white_db": 26.757044512022617,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "pure",
+      "input": "small.png",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 26.98906041718384,
+      "psnr_white_db": 26.98906041718384,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "vips",
+      "input": "030-vips-small-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 24.127722748613458,
+      "psnr_white_db": 24.127722748613458,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "pure",
+      "input": "030-vips-small-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 26.58402140269592,
+      "psnr_white_db": 26.58402140269592,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "vips",
+      "input": "031-pure-small-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 24.281329001361964,
+      "psnr_white_db": 24.281329001361964,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "pure",
+      "input": "031-pure-small-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 26.81709475447265,
+      "psnr_white_db": 26.81709475447265,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "vips",
+      "input": "thin.png",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 21.94765699632582,
+      "psnr_white_db": 21.94765699632582,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "pure",
+      "input": "thin.png",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 22.0709251148875,
+      "psnr_white_db": 22.0709251148875,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "vips",
+      "input": "036-vips-thin-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 20.734600014491043,
+      "psnr_white_db": 20.734600014491043,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "pure",
+      "input": "036-vips-thin-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 21.755353307096442,
+      "psnr_white_db": 21.755353307096442,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "vips",
+      "input": "037-pure-thin-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 20.776861227600882,
+      "psnr_white_db": 20.776861227600882,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "pure",
+      "input": "037-pure-thin-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 21.873010028245705,
+      "psnr_white_db": 21.873010028245705,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "vips",
+      "input": "large.png",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 22.3780663983125,
+      "psnr_white_db": 22.3780663983125,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "pure",
+      "input": "large.png",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 22.435886894464204,
+      "psnr_white_db": 22.435886894464204,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "vips",
+      "input": "042-vips-large-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 17.40559251124793,
+      "psnr_white_db": 17.40559251124793,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "pure",
+      "input": "042-vips-large-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 17.5031146064951,
+      "psnr_white_db": 17.5031146064951,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "vips",
+      "input": "043-pure-large-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 17.40401862301596,
+      "psnr_white_db": 17.40401862301596,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "pure",
+      "input": "043-pure-large-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 17.499237126779395,
+      "psnr_white_db": 17.499237126779395,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "vips",
+      "input": "icc.png",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 21.962843171798404,
+      "psnr_white_db": 21.962843171798404,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "pure",
+      "input": "icc.png",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 22.051374648879758,
+      "psnr_white_db": 22.051374648879758,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "vips",
+      "input": "048-vips-icc-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 20.726591205070406,
+      "psnr_white_db": 20.726591205070406,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "pure",
+      "input": "048-vips-icc-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 21.77257535341438,
+      "psnr_white_db": 21.77257535341438,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "vips",
+      "input": "049-pure-icc-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 20.766349331229076,
+      "psnr_white_db": 20.766349331229076,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "pure",
+      "input": "049-pure-icc-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 21.846558974736,
+      "psnr_white_db": 21.846558974736,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "vips",
+      "input": "cmyk.jpg",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 16.806870877907343,
+      "psnr_white_db": 16.806870877907343,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "pure",
+      "input": "cmyk.jpg",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 22.057781377170738,
+      "psnr_white_db": 22.057781377170738,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "vips",
+      "input": "054-vips-cmyk-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 16.664647530062933,
+      "psnr_white_db": 16.664647530062933,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "pure",
+      "input": "054-vips-cmyk-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 16.84401914799327,
+      "psnr_white_db": 16.84401914799327,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "vips",
+      "input": "055-pure-cmyk-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 20.91662381359268,
+      "psnr_white_db": 20.91662381359268,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "pure",
+      "input": "055-pure-cmyk-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 21.278464914521855,
+      "psnr_white_db": 21.278464914521855,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "vips",
+      "input": "exif-1.jpg",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 21.929891901195056,
+      "psnr_white_db": 21.929891901195056,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "pure",
+      "input": "exif-1.jpg",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 21.999502572971217,
+      "psnr_white_db": 21.999502572971217,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "vips",
+      "input": "060-vips-exif-1-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 20.82787556617776,
+      "psnr_white_db": 20.82787556617776,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "pure",
+      "input": "060-vips-exif-1-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 21.195621077243644,
+      "psnr_white_db": 21.195621077243644,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "vips",
+      "input": "061-pure-exif-1-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 20.821694722371547,
+      "psnr_white_db": 20.821694722371547,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "pure",
+      "input": "061-pure-exif-1-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 21.22223264687459,
+      "psnr_white_db": 21.22223264687459,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "vips",
+      "input": "exif-2.jpg",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 21.92585504375627,
+      "psnr_white_db": 21.92585504375627,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "pure",
+      "input": "exif-2.jpg",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 22.001081487421168,
+      "psnr_white_db": 22.001081487421168,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "vips",
+      "input": "066-vips-exif-2-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 20.76955608590358,
+      "psnr_white_db": 20.76955608590358,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "pure",
+      "input": "066-vips-exif-2-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 21.19789843466904,
+      "psnr_white_db": 21.19789843466904,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "vips",
+      "input": "067-pure-exif-2-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 20.800656168794465,
+      "psnr_white_db": 20.800656168794465,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "pure",
+      "input": "067-pure-exif-2-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 21.22711135920469,
+      "psnr_white_db": 21.22711135920469,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "vips",
+      "input": "exif-3.jpg",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 21.922153200102542,
+      "psnr_white_db": 21.922153200102542,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "pure",
+      "input": "exif-3.jpg",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 21.99874065150665,
+      "psnr_white_db": 21.99874065150665,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "vips",
+      "input": "072-vips-exif-3-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 20.787275089683202,
+      "psnr_white_db": 20.787275089683202,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "pure",
+      "input": "072-vips-exif-3-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 21.18760443947253,
+      "psnr_white_db": 21.18760443947253,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "vips",
+      "input": "073-pure-exif-3-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 20.84424923380886,
+      "psnr_white_db": 20.84424923380886,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "pure",
+      "input": "073-pure-exif-3-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 21.20515131019868,
+      "psnr_white_db": 21.20515131019868,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "vips",
+      "input": "exif-4.jpg",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 21.923762141501285,
+      "psnr_white_db": 21.923762141501285,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "pure",
+      "input": "exif-4.jpg",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 22.000943993233687,
+      "psnr_white_db": 22.000943993233687,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "vips",
+      "input": "078-vips-exif-4-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 20.78551003123173,
+      "psnr_white_db": 20.78551003123173,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "pure",
+      "input": "078-vips-exif-4-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 21.190845829384774,
+      "psnr_white_db": 21.190845829384774,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "vips",
+      "input": "079-pure-exif-4-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 20.82226067532237,
+      "psnr_white_db": 20.82226067532237,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "pure",
+      "input": "079-pure-exif-4-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 21.218711675324172,
+      "psnr_white_db": 21.218711675324172,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "vips",
+      "input": "exif-5.jpg",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 21.92814204470086,
+      "psnr_white_db": 21.92814204470086,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "pure",
+      "input": "exif-5.jpg",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 21.99963126242468,
+      "psnr_white_db": 21.99963126242468,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "vips",
+      "input": "084-vips-exif-5-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 20.819496025265366,
+      "psnr_white_db": 20.819496025265366,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "pure",
+      "input": "084-vips-exif-5-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 21.207610099509054,
+      "psnr_white_db": 21.207610099509054,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "vips",
+      "input": "085-pure-exif-5-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 20.834841138957035,
+      "psnr_white_db": 20.834841138957035,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "pure",
+      "input": "085-pure-exif-5-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 21.234111799323898,
+      "psnr_white_db": 21.234111799323898,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "vips",
+      "input": "exif-6.jpg",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 21.925531685752308,
+      "psnr_white_db": 21.925531685752308,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "pure",
+      "input": "exif-6.jpg",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 22.00109519725182,
+      "psnr_white_db": 22.00109519725182,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "vips",
+      "input": "090-vips-exif-6-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 20.78303338188634,
+      "psnr_white_db": 20.78303338188634,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "pure",
+      "input": "090-vips-exif-6-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 21.195002952599257,
+      "psnr_white_db": 21.195002952599257,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "vips",
+      "input": "091-pure-exif-6-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 20.80798578861041,
+      "psnr_white_db": 20.80798578861041,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "pure",
+      "input": "091-pure-exif-6-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 21.222354610189313,
+      "psnr_white_db": 21.222354610189313,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "vips",
+      "input": "exif-7.jpg",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 21.92259137562735,
+      "psnr_white_db": 21.92259137562735,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "pure",
+      "input": "exif-7.jpg",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 21.99903931332376,
+      "psnr_white_db": 21.99903931332376,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "vips",
+      "input": "096-vips-exif-7-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 20.780759802794137,
+      "psnr_white_db": 20.780759802794137,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "pure",
+      "input": "096-vips-exif-7-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 21.194196226418846,
+      "psnr_white_db": 21.194196226418846,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "vips",
+      "input": "097-pure-exif-7-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 20.829848886025005,
+      "psnr_white_db": 20.829848886025005,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "pure",
+      "input": "097-pure-exif-7-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 21.222257557136203,
+      "psnr_white_db": 21.222257557136203,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "vips",
+      "input": "exif-8.jpg",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 21.92388142799072,
+      "psnr_white_db": 21.92388142799072,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "pure",
+      "input": "exif-8.jpg",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 21.999961287755653,
+      "psnr_white_db": 21.999961287755653,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "vips",
+      "input": "102-vips-exif-8-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 20.759718484042466,
+      "psnr_white_db": 20.759718484042466,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "pure",
+      "input": "102-vips-exif-8-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 21.207150475001214,
+      "psnr_white_db": 21.207150475001214,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "vips",
+      "input": "103-pure-exif-8-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 20.790444365441488,
+      "psnr_white_db": 20.790444365441488,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "pure",
+      "input": "103-pure-exif-8-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 21.22776508427961,
+      "psnr_white_db": 21.22776508427961,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "vips",
+      "input": "small.png",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 28.640513997181532,
+      "psnr_white_db": 28.640513997181532,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "pure",
+      "input": "small.png",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 28.97530304628196,
+      "psnr_white_db": 28.97530304628196,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "vips",
+      "input": "thin.png",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 21.301316824116906,
+      "psnr_white_db": 21.301316824116906,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "pure",
+      "input": "thin.png",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 29.813765375909913,
+      "psnr_white_db": 29.813765375909913,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "vips",
+      "input": "012-vips-texture-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 17.12984568050688,
+      "psnr_white_db": 17.12984568050688,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "pure",
+      "input": "012-vips-texture-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 17.096821602320304,
+      "psnr_white_db": 17.096821602320304,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "vips",
+      "input": "012-vips-texture-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 17.917439253076548,
+      "psnr_white_db": 17.917439253076548,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "pure",
+      "input": "012-vips-texture-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 17.917322578211014,
+      "psnr_white_db": 17.917322578211014,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "vips",
+      "input": "012-vips-texture-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 20.82787556617776,
+      "psnr_white_db": 20.82787556617776,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "pure",
+      "input": "012-vips-texture-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 21.195621077243644,
+      "psnr_white_db": 21.195621077243644,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "vips",
+      "input": "012-vips-texture-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 20.672577255996906,
+      "psnr_white_db": 20.672577255996906,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "pure",
+      "input": "012-vips-texture-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 21.729396138848195,
+      "psnr_white_db": 21.729396138848195,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "vips",
+      "input": "012-vips-texture-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 20.672577255996906,
+      "psnr_white_db": 20.672577255996906,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "pure",
+      "input": "012-vips-texture-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 21.729396138848195,
+      "psnr_white_db": 21.729396138848195,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "pure",
+      "input": "natural.jpg",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 41.26559169486755,
+      "psnr_white_db": 41.26559169486755,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "pure",
+      "input": "000-vips-natural-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 37.68025402871291,
+      "psnr_white_db": 37.68025402871291,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "pure",
+      "input": "texture.jpg",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 21.922024334246053,
+      "psnr_white_db": 21.922024334246053,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "pure",
+      "input": "012-vips-texture-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 21.02333325674654,
+      "psnr_white_db": 21.02333325674654,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "pure",
+      "input": "alpha.png",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 27.548615387495627,
+      "psnr_white_db": 27.548615387495627,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "pure",
+      "input": "024-vips-alpha-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 27.264620098629834,
+      "psnr_white_db": 27.264620098629834,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "pure",
+      "input": "large.png",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 22.435278598765578,
+      "psnr_white_db": 22.435278598765578,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "pure",
+      "input": "042-vips-large-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 17.425738843526457,
+      "psnr_white_db": 17.425738843526457,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "pure",
+      "input": "natural.jpg",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 42.37988779817825,
+      "psnr_white_db": 42.37988779817825,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "pure",
+      "input": "000-vips-natural-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 38.42463877976509,
+      "psnr_white_db": 38.42463877976509,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "pure",
+      "input": "texture.jpg",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 21.949524052690155,
+      "psnr_white_db": 21.949524052690155,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "pure",
+      "input": "012-vips-texture-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 21.126840204638903,
+      "psnr_white_db": 21.126840204638903,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "pure",
+      "input": "alpha.png",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 27.563438047982704,
+      "psnr_white_db": 27.563438047982704,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "pure",
+      "input": "024-vips-alpha-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 27.27914218527483,
+      "psnr_white_db": 27.27914218527483,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "pure",
+      "input": "large.png",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 22.43908651786228,
+      "psnr_white_db": 22.43908651786228,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    },
+    {
+      "mode": "pure",
+      "input": "042-vips-large-source-e-1.webp",
+      "alpha_max_error": 0,
+      "dimension_match": true,
+      "psnr_black_db": 17.441911064222133,
+      "psnr_white_db": 17.441911064222133,
+      "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+    }
+  ],
+  "metadata_failures": [],
+  "resource_cases": [
+    {
+      "width": 1200,
+      "height": 1200,
+      "bytes": 1430128,
+      "times_ms": [
+        255.108
+      ],
+      "peak_rss_bytes": 176406528,
+      "wall_ms": 255.121,
+      "workers": 1,
+      "completed": 1,
+      "worker_exit_code": 0,
+      "mode": "vips",
+      "input": "limit40mp.png",
+      "operation": "max-pixels",
+      "size": 0,
+      "effort": -1,
+      "reps": 1,
+      "process_wall_ms": 313.107,
+      "p50_ms": 255.108,
+      "p95_ms": 255.108,
+      "operations_per_second": 3.9197086872503637,
+      "output_sha256": "c7e8549de43eaddc5cdb68c1d8bce9e689e6fa51585da6ec9b7bcee6c1b71f55"
+    },
+    {
+      "width": 1200,
+      "height": 1200,
+      "bytes": 1077268,
+      "times_ms": [
+        144.08,
+        146.037
+      ],
+      "peak_rss_bytes": 110411776,
+      "wall_ms": 290.122,
+      "workers": 1,
+      "completed": 2,
+      "worker_exit_code": 0,
+      "mode": "vips",
+      "input": "large.png",
+      "operation": "parallel",
+      "size": 0,
+      "effort": -1,
+      "reps": 2,
+      "process_wall_ms": 332.51,
+      "p50_ms": 145.0585,
+      "p95_ms": 146.037,
+      "operations_per_second": 6.893651636208216,
+      "output_sha256": "02fd02689663aeac1dc5ae1e4c7959137b9c2ce3725c13d25c41c68b6551a4e5"
+    },
+    {
+      "width": 1200,
+      "height": 1200,
+      "bytes": 1077268,
+      "times_ms": [
+        145.961,
+        146.085,
+        147.965,
+        147.965
+      ],
+      "peak_rss_bytes": 147718144,
+      "wall_ms": 294.067,
+      "workers": 2,
+      "completed": 4,
+      "worker_exit_code": 0,
+      "mode": "vips",
+      "input": "large.png",
+      "operation": "parallel",
+      "size": 0,
+      "effort": -1,
+      "reps": 2,
+      "process_wall_ms": 333.348,
+      "p50_ms": 147.025,
+      "p95_ms": 147.965,
+      "operations_per_second": 13.60234232334808,
+      "output_sha256": "02fd02689663aeac1dc5ae1e4c7959137b9c2ce3725c13d25c41c68b6551a4e5"
+    },
+    {
+      "width": 1200,
+      "height": 1200,
+      "bytes": 1077268,
+      "times_ms": [
+        155.584,
+        156.934,
+        158.728,
+        158.768,
+        159.2,
+        160.919,
+        161.571,
+        162.333
+      ],
+      "peak_rss_bytes": 284917760,
+      "wall_ms": 323.87,
+      "workers": 4,
+      "completed": 8,
+      "worker_exit_code": 0,
+      "mode": "vips",
+      "input": "large.png",
+      "operation": "parallel",
+      "size": 0,
+      "effort": -1,
+      "reps": 2,
+      "process_wall_ms": 365.845,
+      "p50_ms": 158.98399999999998,
+      "p95_ms": 162.333,
+      "operations_per_second": 24.7012690276963,
+      "output_sha256": "02fd02689663aeac1dc5ae1e4c7959137b9c2ce3725c13d25c41c68b6551a4e5"
+    },
+    {
+      "width": 1200,
+      "height": 1200,
+      "bytes": 1542566,
+      "times_ms": [
+        445.482
+      ],
+      "peak_rss_bytes": 321437696,
+      "wall_ms": 445.495,
+      "workers": 1,
+      "completed": 1,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "limit40mp.png",
+      "operation": "max-pixels",
+      "size": 0,
+      "effort": -1,
+      "reps": 1,
+      "process_wall_ms": 453.853,
+      "p50_ms": 445.482,
+      "p95_ms": 445.482,
+      "operations_per_second": 2.244694104310935,
+      "output_sha256": "e9cbdddd16165f677da4218c8168e75850746488f7953abc7229b88b05a4f8dd"
+    },
+    {
+      "width": 1200,
+      "height": 1200,
+      "bytes": 1299892,
+      "times_ms": [
+        204.088,
+        205.923
+      ],
+      "peak_rss_bytes": 57556992,
+      "wall_ms": 410.024,
+      "workers": 1,
+      "completed": 2,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "large.png",
+      "operation": "parallel",
+      "size": 0,
+      "effort": -1,
+      "reps": 2,
+      "process_wall_ms": 415.613,
+      "p50_ms": 205.00549999999998,
+      "p95_ms": 205.923,
+      "operations_per_second": 4.877763252882758,
+      "output_sha256": "e47158cf347db7f42fbef5016b96be78b30ac2d0d65075d7226941378c5e75b0"
+    },
+    {
+      "width": 1200,
+      "height": 1200,
+      "bytes": 1299892,
+      "times_ms": [
+        213.581,
+        220.833,
+        222.795,
+        233.573
+      ],
+      "peak_rss_bytes": 112640000,
+      "wall_ms": 454.418,
+      "workers": 2,
+      "completed": 4,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "large.png",
+      "operation": "parallel",
+      "size": 0,
+      "effort": -1,
+      "reps": 2,
+      "process_wall_ms": 460.149,
+      "p50_ms": 221.814,
+      "p95_ms": 233.573,
+      "operations_per_second": 8.80246821208667,
+      "output_sha256": "e47158cf347db7f42fbef5016b96be78b30ac2d0d65075d7226941378c5e75b0"
+    },
+    {
+      "width": 1200,
+      "height": 1200,
+      "bytes": 1299892,
+      "times_ms": [
+        368.087,
+        396.445,
+        398.766,
+        410.87,
+        426.849,
+        448.441,
+        467.645,
+        545.52
+      ],
+      "peak_rss_bytes": 213975040,
+      "wall_ms": 913.681,
+      "workers": 4,
+      "completed": 8,
+      "worker_exit_code": 0,
+      "mode": "pure",
+      "input": "large.png",
+      "operation": "parallel",
+      "size": 0,
+      "effort": -1,
+      "reps": 2,
+      "process_wall_ms": 921.178,
+      "p50_ms": 418.8595,
+      "p95_ms": 545.52,
+      "operations_per_second": 8.75579113498037,
+      "output_sha256": "e47158cf347db7f42fbef5016b96be78b30ac2d0d65075d7226941378c5e75b0"
+    }
+  ],
+  "comparisons": [
+    {
+      "input": "natural.jpg",
+      "operation": "source",
+      "size": 0,
+      "dimensions_equal": true,
+      "bytes_ratio": 1.187891737891738,
+      "p95_ratio": 1.3410311493018259
+    },
+    {
+      "input": "000-vips-natural-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "size": 300,
+      "dimensions_equal": true,
+      "bytes_ratio": 1.2184701492537313,
+      "p95_ratio": 1.4261149425287356
+    },
+    {
+      "input": "001-pure-natural-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "size": 300,
+      "dimensions_equal": true,
+      "bytes_ratio": 1.2168716438593452,
+      "p95_ratio": 1.4159788990045095
+    },
+    {
+      "input": "natural.png",
+      "operation": "source",
+      "size": 0,
+      "dimensions_equal": true,
+      "bytes_ratio": 1.1840262966401525,
+      "p95_ratio": 1.064841345643638
+    },
+    {
+      "input": "006-vips-natural-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "size": 300,
+      "dimensions_equal": true,
+      "bytes_ratio": 1.1786050009400264,
+      "p95_ratio": 1.4445949869350623
+    },
+    {
+      "input": "007-pure-natural-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "size": 300,
+      "dimensions_equal": true,
+      "bytes_ratio": 1.1843515541264737,
+      "p95_ratio": 1.4527462551066725
+    },
+    {
+      "input": "texture.jpg",
+      "operation": "source",
+      "size": 0,
+      "dimensions_equal": true,
+      "bytes_ratio": 1.2005960070088377,
+      "p95_ratio": 1.7494432989690722
+    },
+    {
+      "input": "012-vips-texture-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "size": 300,
+      "dimensions_equal": true,
+      "bytes_ratio": 1.1242862241256246,
+      "p95_ratio": 1.8593335490132643
+    },
+    {
+      "input": "013-pure-texture-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "size": 300,
+      "dimensions_equal": true,
+      "bytes_ratio": 1.145261253110156,
+      "p95_ratio": 1.786713498455762
+    },
+    {
+      "input": "texture.png",
+      "operation": "source",
+      "size": 0,
+      "dimensions_equal": true,
+      "bytes_ratio": 1.2612592950566668,
+      "p95_ratio": 1.2340363777089784
+    },
+    {
+      "input": "018-vips-texture-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "size": 300,
+      "dimensions_equal": true,
+      "bytes_ratio": 1.1428441905798088,
+      "p95_ratio": 1.6948716164497946
+    },
+    {
+      "input": "019-pure-texture-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "size": 300,
+      "dimensions_equal": true,
+      "bytes_ratio": 1.1443513697079466,
+      "p95_ratio": 1.7228464419475655
+    },
+    {
+      "input": "alpha.png",
+      "operation": "source",
+      "size": 0,
+      "dimensions_equal": true,
+      "bytes_ratio": 1.2268615587371952,
+      "p95_ratio": 1.5028519963974782
+    },
+    {
+      "input": "024-vips-alpha-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "size": 300,
+      "dimensions_equal": true,
+      "bytes_ratio": 1.2106028300058151,
+      "p95_ratio": 1.4330097087378642
+    },
+    {
+      "input": "025-pure-alpha-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "size": 300,
+      "dimensions_equal": true,
+      "bytes_ratio": 1.1839976891969959,
+      "p95_ratio": 1.4523101328574262
+    },
+    {
+      "input": "small.png",
+      "operation": "source",
+      "size": 0,
+      "dimensions_equal": true,
+      "bytes_ratio": 1.1516709511568124,
+      "p95_ratio": 0.6962209302325582
+    },
+    {
+      "input": "030-vips-small-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "size": 300,
+      "dimensions_equal": true,
+      "bytes_ratio": 1.2075471698113207,
+      "p95_ratio": 0.7014725568942437
+    },
+    {
+      "input": "031-pure-small-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "size": 300,
+      "dimensions_equal": true,
+      "bytes_ratio": 1.1777777777777778,
+      "p95_ratio": 0.7532467532467533
+    },
+    {
+      "input": "thin.png",
+      "operation": "source",
+      "size": 0,
+      "dimensions_equal": true,
+      "bytes_ratio": 1.2886567164179104,
+      "p95_ratio": 1.2559329920893438
+    },
+    {
+      "input": "036-vips-thin-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "size": 300,
+      "dimensions_equal": true,
+      "bytes_ratio": 1.337117472852912,
+      "p95_ratio": 1.3125695216907673
+    },
+    {
+      "input": "037-pure-thin-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "size": 300,
+      "dimensions_equal": true,
+      "bytes_ratio": 1.302154750244858,
+      "p95_ratio": 1.3116178067318132
+    },
+    {
+      "input": "large.png",
+      "operation": "source",
+      "size": 0,
+      "dimensions_equal": true,
+      "bytes_ratio": 1.2066560967187367,
+      "p95_ratio": 1.411316501030913
+    },
+    {
+      "input": "042-vips-large-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "size": 300,
+      "dimensions_equal": true,
+      "bytes_ratio": 1.050803452389306,
+      "p95_ratio": 2.2892929292929294
+    },
+    {
+      "input": "043-pure-large-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "size": 300,
+      "dimensions_equal": true,
+      "bytes_ratio": 1.0516063125264197,
+      "p95_ratio": 2.2390528646452816
+    },
+    {
+      "input": "icc.png",
+      "operation": "source",
+      "size": 0,
+      "dimensions_equal": true,
+      "bytes_ratio": 1.2329473873657688,
+      "p95_ratio": 1.6241417850870192
+    },
+    {
+      "input": "048-vips-icc-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "size": 300,
+      "dimensions_equal": true,
+      "bytes_ratio": 1.2332712844126579,
+      "p95_ratio": 1.5925570995048715
+    },
+    {
+      "input": "049-pure-icc-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "size": 300,
+      "dimensions_equal": true,
+      "bytes_ratio": 1.2066147859922178,
+      "p95_ratio": 1.599443468072642
+    },
+    {
+      "input": "cmyk.jpg",
+      "operation": "source",
+      "size": 0,
+      "dimensions_equal": true,
+      "bytes_ratio": 1.2308178965482337,
+      "p95_ratio": 0.9164543500897269
+    },
+    {
+      "input": "054-vips-cmyk-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "size": 300,
+      "dimensions_equal": true,
+      "bytes_ratio": 1.1396875599003258,
+      "p95_ratio": 1.721915763514829
+    },
+    {
+      "input": "055-pure-cmyk-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "size": 300,
+      "dimensions_equal": true,
+      "bytes_ratio": 1.1252275047720512,
+      "p95_ratio": 1.7169704195764492
+    },
+    {
+      "input": "exif-1.jpg",
+      "operation": "source",
+      "size": 0,
+      "dimensions_equal": true,
+      "bytes_ratio": 1.2005960070088377,
+      "p95_ratio": 1.402927335088139
+    },
+    {
+      "input": "060-vips-exif-1-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "size": 300,
+      "dimensions_equal": true,
+      "bytes_ratio": 1.1242862241256246,
+      "p95_ratio": 1.7961812896405922
+    },
+    {
+      "input": "061-pure-exif-1-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "size": 300,
+      "dimensions_equal": true,
+      "bytes_ratio": 1.145261253110156,
+      "p95_ratio": 1.7546208530805687
+    },
+    {
+      "input": "exif-2.jpg",
+      "operation": "source",
+      "size": 0,
+      "dimensions_equal": true,
+      "bytes_ratio": 1.203528300441676,
+      "p95_ratio": 1.1626456857432013
+    },
+    {
+      "input": "066-vips-exif-2-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "size": 300,
+      "dimensions_equal": true,
+      "bytes_ratio": 1.1567274065893614,
+      "p95_ratio": 1.771236665349664
+    },
+    {
+      "input": "067-pure-exif-2-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "size": 300,
+      "dimensions_equal": true,
+      "bytes_ratio": 1.1542932991578176,
+      "p95_ratio": 1.7457202505219205
+    },
+    {
+      "input": "exif-3.jpg",
+      "operation": "source",
+      "size": 0,
+      "dimensions_equal": true,
+      "bytes_ratio": 1.1955940404940788,
+      "p95_ratio": 1.1930322666844813
+    },
+    {
+      "input": "072-vips-exif-3-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "size": 300,
+      "dimensions_equal": true,
+      "bytes_ratio": 1.1330661503129644,
+      "p95_ratio": 1.737146529562982
+    },
+    {
+      "input": "073-pure-exif-3-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "size": 300,
+      "dimensions_equal": true,
+      "bytes_ratio": 1.1227571504707763,
+      "p95_ratio": 1.754788366043982
+    },
+    {
+      "input": "exif-4.jpg",
+      "operation": "source",
+      "size": 0,
+      "dimensions_equal": true,
+      "bytes_ratio": 1.2031144641925675,
+      "p95_ratio": 1.1630338877814452
+    },
+    {
+      "input": "078-vips-exif-4-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "size": 300,
+      "dimensions_equal": true,
+      "bytes_ratio": 1.1547416371416739,
+      "p95_ratio": 1.7632497201922444
+    },
+    {
+      "input": "079-pure-exif-4-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "size": 300,
+      "dimensions_equal": true,
+      "bytes_ratio": 1.154018674478213,
+      "p95_ratio": 1.7863418772344422
+    },
+    {
+      "input": "exif-5.jpg",
+      "operation": "source",
+      "size": 0,
+      "dimensions_equal": true,
+      "bytes_ratio": 1.1951421755603464,
+      "p95_ratio": 1.2143075408277595
+    },
+    {
+      "input": "084-vips-exif-5-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "size": 300,
+      "dimensions_equal": true,
+      "bytes_ratio": 1.1113035753941816,
+      "p95_ratio": 1.7677075894306304
+    },
+    {
+      "input": "085-pure-exif-5-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "size": 300,
+      "dimensions_equal": true,
+      "bytes_ratio": 1.1121946894809167,
+      "p95_ratio": 1.706611335341936
+    },
+    {
+      "input": "exif-6.jpg",
+      "operation": "source",
+      "size": 0,
+      "dimensions_equal": true,
+      "bytes_ratio": 1.2070033652865593,
+      "p95_ratio": 1.2319099403641929
+    },
+    {
+      "input": "090-vips-exif-6-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "size": 300,
+      "dimensions_equal": true,
+      "bytes_ratio": 1.1449428400899866,
+      "p95_ratio": 1.7267711598746083
+    },
+    {
+      "input": "091-pure-exif-6-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "size": 300,
+      "dimensions_equal": true,
+      "bytes_ratio": 1.1473462085416761,
+      "p95_ratio": 1.7891184411315881
+    },
+    {
+      "input": "exif-7.jpg",
+      "operation": "source",
+      "size": 0,
+      "dimensions_equal": true,
+      "bytes_ratio": 1.1983096505674926,
+      "p95_ratio": 1.1934222106326804
+    },
+    {
+      "input": "096-vips-exif-7-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "size": 300,
+      "dimensions_equal": true,
+      "bytes_ratio": 1.1213841820539188,
+      "p95_ratio": 1.7347617524784138
+    },
+    {
+      "input": "097-pure-exif-7-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "size": 300,
+      "dimensions_equal": true,
+      "bytes_ratio": 1.112585711125857,
+      "p95_ratio": 1.8023984249149814
+    },
+    {
+      "input": "exif-8.jpg",
+      "operation": "source",
+      "size": 0,
+      "dimensions_equal": true,
+      "bytes_ratio": 1.20530826298286,
+      "p95_ratio": 1.2008356004663816
+    },
+    {
+      "input": "102-vips-exif-8-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "size": 300,
+      "dimensions_equal": true,
+      "bytes_ratio": 1.1538070831601792,
+      "p95_ratio": 1.7761841014853064
+    },
+    {
+      "input": "103-pure-exif-8-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "size": 300,
+      "dimensions_equal": true,
+      "bytes_ratio": 1.1573886639676114,
+      "p95_ratio": 1.757705379116372
+    },
+    {
+      "input": "small.png",
+      "operation": "direct-small",
+      "size": 300,
+      "dimensions_equal": true,
+      "bytes_ratio": 1.257936507936508,
+      "p95_ratio": 0.8148148148148149
+    },
+    {
+      "input": "thin.png",
+      "operation": "direct-small",
+      "size": 300,
+      "dimensions_equal": true,
+      "bytes_ratio": 1.455077246137693,
+      "p95_ratio": 1.3684683335828718
+    },
+    {
+      "input": "012-vips-texture-source-e-1.webp",
+      "operation": "all-sizes",
+      "size": 64,
+      "dimensions_equal": true,
+      "bytes_ratio": 1.071791153009427,
+      "p95_ratio": 2.0568274734260017
+    },
+    {
+      "input": "012-vips-texture-source-e-1.webp",
+      "operation": "all-sizes",
+      "size": 128,
+      "dimensions_equal": true,
+      "bytes_ratio": 1.0603543743078627,
+      "p95_ratio": 1.9047407077676384
+    },
+    {
+      "input": "012-vips-texture-source-e-1.webp",
+      "operation": "all-sizes",
+      "size": 300,
+      "dimensions_equal": true,
+      "bytes_ratio": 1.1242862241256246,
+      "p95_ratio": 1.7298872180451128
+    },
+    {
+      "input": "012-vips-texture-source-e-1.webp",
+      "operation": "all-sizes",
+      "size": 640,
+      "dimensions_equal": true,
+      "bytes_ratio": 1.221790988262022,
+      "p95_ratio": 1.362900180422104
+    },
+    {
+      "input": "012-vips-texture-source-e-1.webp",
+      "operation": "all-sizes",
+      "size": 1000,
+      "dimensions_equal": true,
+      "bytes_ratio": 1.221790988262022,
+      "p95_ratio": 1.3738621038435601
+    }
+  ],
+  "quality_absolute_alerts": [
+    {
+      "row": 12,
+      "mode": "vips",
+      "input": "texture.jpg",
+      "operation": "source",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.929891901195056,
+        "psnr_white_db": 21.929891901195056,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 13,
+      "mode": "pure",
+      "input": "texture.jpg",
+      "operation": "source",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.999502572971217,
+        "psnr_white_db": 21.999502572971217,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 14,
+      "mode": "vips",
+      "input": "012-vips-texture-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 20.82787556617776,
+        "psnr_white_db": 20.82787556617776,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 15,
+      "mode": "pure",
+      "input": "012-vips-texture-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.195621077243644,
+        "psnr_white_db": 21.195621077243644,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 16,
+      "mode": "vips",
+      "input": "013-pure-texture-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 20.821694722371547,
+        "psnr_white_db": 20.821694722371547,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 17,
+      "mode": "pure",
+      "input": "013-pure-texture-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.22223264687459,
+        "psnr_white_db": 21.22223264687459,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 18,
+      "mode": "vips",
+      "input": "texture.png",
+      "operation": "source",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.966861015418697,
+        "psnr_white_db": 21.966861015418697,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 19,
+      "mode": "pure",
+      "input": "texture.png",
+      "operation": "source",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 22.05554099814769,
+        "psnr_white_db": 22.05554099814769,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 20,
+      "mode": "vips",
+      "input": "018-vips-texture-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 20.806467538224112,
+        "psnr_white_db": 20.806467538224112,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 21,
+      "mode": "pure",
+      "input": "018-vips-texture-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.197152826247883,
+        "psnr_white_db": 21.197152826247883,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 22,
+      "mode": "vips",
+      "input": "019-pure-texture-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 20.827195756452245,
+        "psnr_white_db": 20.827195756452245,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 23,
+      "mode": "pure",
+      "input": "019-pure-texture-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.228488460875017,
+        "psnr_white_db": 21.228488460875017,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 24,
+      "mode": "vips",
+      "input": "alpha.png",
+      "operation": "source",
+      "threshold_db": 28,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 27.51622358402703,
+        "psnr_white_db": 27.516223584027028,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 25,
+      "mode": "pure",
+      "input": "alpha.png",
+      "operation": "source",
+      "threshold_db": 28,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 27.61028641204304,
+        "psnr_white_db": 27.61028641204304,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 26,
+      "mode": "vips",
+      "input": "024-vips-alpha-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "threshold_db": 28,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 26.282448588217537,
+        "psnr_white_db": 26.282448588217537,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 27,
+      "mode": "pure",
+      "input": "024-vips-alpha-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "threshold_db": 28,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 27.325679191159644,
+        "psnr_white_db": 27.325679191159644,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 28,
+      "mode": "vips",
+      "input": "025-pure-alpha-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "threshold_db": 28,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 26.327401009743113,
+        "psnr_white_db": 26.327401009743113,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 29,
+      "mode": "pure",
+      "input": "025-pure-alpha-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "threshold_db": 28,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 27.41600420293352,
+        "psnr_white_db": 27.416004202933518,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 30,
+      "mode": "vips",
+      "input": "small.png",
+      "operation": "source",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 26.757044512022617,
+        "psnr_white_db": 26.757044512022617,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 31,
+      "mode": "pure",
+      "input": "small.png",
+      "operation": "source",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 26.98906041718384,
+        "psnr_white_db": 26.98906041718384,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 32,
+      "mode": "vips",
+      "input": "030-vips-small-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 24.127722748613458,
+        "psnr_white_db": 24.127722748613458,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 33,
+      "mode": "pure",
+      "input": "030-vips-small-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 26.58402140269592,
+        "psnr_white_db": 26.58402140269592,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 34,
+      "mode": "vips",
+      "input": "031-pure-small-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 24.281329001361964,
+        "psnr_white_db": 24.281329001361964,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 35,
+      "mode": "pure",
+      "input": "031-pure-small-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 26.81709475447265,
+        "psnr_white_db": 26.81709475447265,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 36,
+      "mode": "vips",
+      "input": "thin.png",
+      "operation": "source",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.94765699632582,
+        "psnr_white_db": 21.94765699632582,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 37,
+      "mode": "pure",
+      "input": "thin.png",
+      "operation": "source",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 22.0709251148875,
+        "psnr_white_db": 22.0709251148875,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 38,
+      "mode": "vips",
+      "input": "036-vips-thin-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 20.734600014491043,
+        "psnr_white_db": 20.734600014491043,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 39,
+      "mode": "pure",
+      "input": "036-vips-thin-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.755353307096442,
+        "psnr_white_db": 21.755353307096442,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 40,
+      "mode": "vips",
+      "input": "037-pure-thin-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 20.776861227600882,
+        "psnr_white_db": 20.776861227600882,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 41,
+      "mode": "pure",
+      "input": "037-pure-thin-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.873010028245705,
+        "psnr_white_db": 21.873010028245705,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 42,
+      "mode": "vips",
+      "input": "large.png",
+      "operation": "source",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 22.3780663983125,
+        "psnr_white_db": 22.3780663983125,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 43,
+      "mode": "pure",
+      "input": "large.png",
+      "operation": "source",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 22.435886894464204,
+        "psnr_white_db": 22.435886894464204,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 44,
+      "mode": "vips",
+      "input": "042-vips-large-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 17.40559251124793,
+        "psnr_white_db": 17.40559251124793,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 45,
+      "mode": "pure",
+      "input": "042-vips-large-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 17.5031146064951,
+        "psnr_white_db": 17.5031146064951,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 46,
+      "mode": "vips",
+      "input": "043-pure-large-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 17.40401862301596,
+        "psnr_white_db": 17.40401862301596,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 47,
+      "mode": "pure",
+      "input": "043-pure-large-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 17.499237126779395,
+        "psnr_white_db": 17.499237126779395,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 48,
+      "mode": "vips",
+      "input": "icc.png",
+      "operation": "source",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.962843171798404,
+        "psnr_white_db": 21.962843171798404,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 49,
+      "mode": "pure",
+      "input": "icc.png",
+      "operation": "source",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 22.051374648879758,
+        "psnr_white_db": 22.051374648879758,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 50,
+      "mode": "vips",
+      "input": "048-vips-icc-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 20.726591205070406,
+        "psnr_white_db": 20.726591205070406,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 51,
+      "mode": "pure",
+      "input": "048-vips-icc-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.77257535341438,
+        "psnr_white_db": 21.77257535341438,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 52,
+      "mode": "vips",
+      "input": "049-pure-icc-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 20.766349331229076,
+        "psnr_white_db": 20.766349331229076,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 53,
+      "mode": "pure",
+      "input": "049-pure-icc-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.846558974736,
+        "psnr_white_db": 21.846558974736,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 54,
+      "mode": "vips",
+      "input": "cmyk.jpg",
+      "operation": "source",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 16.806870877907343,
+        "psnr_white_db": 16.806870877907343,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 55,
+      "mode": "pure",
+      "input": "cmyk.jpg",
+      "operation": "source",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 22.057781377170738,
+        "psnr_white_db": 22.057781377170738,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 56,
+      "mode": "vips",
+      "input": "054-vips-cmyk-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 16.664647530062933,
+        "psnr_white_db": 16.664647530062933,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 57,
+      "mode": "pure",
+      "input": "054-vips-cmyk-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 16.84401914799327,
+        "psnr_white_db": 16.84401914799327,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 58,
+      "mode": "vips",
+      "input": "055-pure-cmyk-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 20.91662381359268,
+        "psnr_white_db": 20.91662381359268,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 59,
+      "mode": "pure",
+      "input": "055-pure-cmyk-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.278464914521855,
+        "psnr_white_db": 21.278464914521855,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 60,
+      "mode": "vips",
+      "input": "exif-1.jpg",
+      "operation": "source",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.929891901195056,
+        "psnr_white_db": 21.929891901195056,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 61,
+      "mode": "pure",
+      "input": "exif-1.jpg",
+      "operation": "source",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.999502572971217,
+        "psnr_white_db": 21.999502572971217,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 62,
+      "mode": "vips",
+      "input": "060-vips-exif-1-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 20.82787556617776,
+        "psnr_white_db": 20.82787556617776,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 63,
+      "mode": "pure",
+      "input": "060-vips-exif-1-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.195621077243644,
+        "psnr_white_db": 21.195621077243644,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 64,
+      "mode": "vips",
+      "input": "061-pure-exif-1-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 20.821694722371547,
+        "psnr_white_db": 20.821694722371547,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 65,
+      "mode": "pure",
+      "input": "061-pure-exif-1-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.22223264687459,
+        "psnr_white_db": 21.22223264687459,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 66,
+      "mode": "vips",
+      "input": "exif-2.jpg",
+      "operation": "source",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.92585504375627,
+        "psnr_white_db": 21.92585504375627,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 67,
+      "mode": "pure",
+      "input": "exif-2.jpg",
+      "operation": "source",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 22.001081487421168,
+        "psnr_white_db": 22.001081487421168,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 68,
+      "mode": "vips",
+      "input": "066-vips-exif-2-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 20.76955608590358,
+        "psnr_white_db": 20.76955608590358,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 69,
+      "mode": "pure",
+      "input": "066-vips-exif-2-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.19789843466904,
+        "psnr_white_db": 21.19789843466904,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 70,
+      "mode": "vips",
+      "input": "067-pure-exif-2-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 20.800656168794465,
+        "psnr_white_db": 20.800656168794465,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 71,
+      "mode": "pure",
+      "input": "067-pure-exif-2-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.22711135920469,
+        "psnr_white_db": 21.22711135920469,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 72,
+      "mode": "vips",
+      "input": "exif-3.jpg",
+      "operation": "source",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.922153200102542,
+        "psnr_white_db": 21.922153200102542,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 73,
+      "mode": "pure",
+      "input": "exif-3.jpg",
+      "operation": "source",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.99874065150665,
+        "psnr_white_db": 21.99874065150665,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 74,
+      "mode": "vips",
+      "input": "072-vips-exif-3-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 20.787275089683202,
+        "psnr_white_db": 20.787275089683202,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 75,
+      "mode": "pure",
+      "input": "072-vips-exif-3-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.18760443947253,
+        "psnr_white_db": 21.18760443947253,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 76,
+      "mode": "vips",
+      "input": "073-pure-exif-3-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 20.84424923380886,
+        "psnr_white_db": 20.84424923380886,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 77,
+      "mode": "pure",
+      "input": "073-pure-exif-3-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.20515131019868,
+        "psnr_white_db": 21.20515131019868,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 78,
+      "mode": "vips",
+      "input": "exif-4.jpg",
+      "operation": "source",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.923762141501285,
+        "psnr_white_db": 21.923762141501285,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 79,
+      "mode": "pure",
+      "input": "exif-4.jpg",
+      "operation": "source",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 22.000943993233687,
+        "psnr_white_db": 22.000943993233687,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 80,
+      "mode": "vips",
+      "input": "078-vips-exif-4-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 20.78551003123173,
+        "psnr_white_db": 20.78551003123173,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 81,
+      "mode": "pure",
+      "input": "078-vips-exif-4-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.190845829384774,
+        "psnr_white_db": 21.190845829384774,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 82,
+      "mode": "vips",
+      "input": "079-pure-exif-4-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 20.82226067532237,
+        "psnr_white_db": 20.82226067532237,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 83,
+      "mode": "pure",
+      "input": "079-pure-exif-4-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.218711675324172,
+        "psnr_white_db": 21.218711675324172,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 84,
+      "mode": "vips",
+      "input": "exif-5.jpg",
+      "operation": "source",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.92814204470086,
+        "psnr_white_db": 21.92814204470086,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 85,
+      "mode": "pure",
+      "input": "exif-5.jpg",
+      "operation": "source",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.99963126242468,
+        "psnr_white_db": 21.99963126242468,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 86,
+      "mode": "vips",
+      "input": "084-vips-exif-5-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 20.819496025265366,
+        "psnr_white_db": 20.819496025265366,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 87,
+      "mode": "pure",
+      "input": "084-vips-exif-5-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.207610099509054,
+        "psnr_white_db": 21.207610099509054,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 88,
+      "mode": "vips",
+      "input": "085-pure-exif-5-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 20.834841138957035,
+        "psnr_white_db": 20.834841138957035,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 89,
+      "mode": "pure",
+      "input": "085-pure-exif-5-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.234111799323898,
+        "psnr_white_db": 21.234111799323898,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 90,
+      "mode": "vips",
+      "input": "exif-6.jpg",
+      "operation": "source",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.925531685752308,
+        "psnr_white_db": 21.925531685752308,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 91,
+      "mode": "pure",
+      "input": "exif-6.jpg",
+      "operation": "source",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 22.00109519725182,
+        "psnr_white_db": 22.00109519725182,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 92,
+      "mode": "vips",
+      "input": "090-vips-exif-6-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 20.78303338188634,
+        "psnr_white_db": 20.78303338188634,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 93,
+      "mode": "pure",
+      "input": "090-vips-exif-6-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.195002952599257,
+        "psnr_white_db": 21.195002952599257,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 94,
+      "mode": "vips",
+      "input": "091-pure-exif-6-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 20.80798578861041,
+        "psnr_white_db": 20.80798578861041,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 95,
+      "mode": "pure",
+      "input": "091-pure-exif-6-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.222354610189313,
+        "psnr_white_db": 21.222354610189313,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 96,
+      "mode": "vips",
+      "input": "exif-7.jpg",
+      "operation": "source",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.92259137562735,
+        "psnr_white_db": 21.92259137562735,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 97,
+      "mode": "pure",
+      "input": "exif-7.jpg",
+      "operation": "source",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.99903931332376,
+        "psnr_white_db": 21.99903931332376,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 98,
+      "mode": "vips",
+      "input": "096-vips-exif-7-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 20.780759802794137,
+        "psnr_white_db": 20.780759802794137,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 99,
+      "mode": "pure",
+      "input": "096-vips-exif-7-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.194196226418846,
+        "psnr_white_db": 21.194196226418846,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 100,
+      "mode": "vips",
+      "input": "097-pure-exif-7-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 20.829848886025005,
+        "psnr_white_db": 20.829848886025005,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 101,
+      "mode": "pure",
+      "input": "097-pure-exif-7-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.222257557136203,
+        "psnr_white_db": 21.222257557136203,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 102,
+      "mode": "vips",
+      "input": "exif-8.jpg",
+      "operation": "source",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.92388142799072,
+        "psnr_white_db": 21.92388142799072,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 103,
+      "mode": "pure",
+      "input": "exif-8.jpg",
+      "operation": "source",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.999961287755653,
+        "psnr_white_db": 21.999961287755653,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 104,
+      "mode": "vips",
+      "input": "102-vips-exif-8-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 20.759718484042466,
+        "psnr_white_db": 20.759718484042466,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 105,
+      "mode": "pure",
+      "input": "102-vips-exif-8-source-e-1.webp",
+      "operation": "derive-from-vips",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.207150475001214,
+        "psnr_white_db": 21.207150475001214,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 106,
+      "mode": "vips",
+      "input": "103-pure-exif-8-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 20.790444365441488,
+        "psnr_white_db": 20.790444365441488,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 107,
+      "mode": "pure",
+      "input": "103-pure-exif-8-source-e-1.webp",
+      "operation": "derive-from-pure",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.22776508427961,
+        "psnr_white_db": 21.22776508427961,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 108,
+      "mode": "vips",
+      "input": "small.png",
+      "operation": "direct-small",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 28.640513997181532,
+        "psnr_white_db": 28.640513997181532,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 109,
+      "mode": "pure",
+      "input": "small.png",
+      "operation": "direct-small",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 28.97530304628196,
+        "psnr_white_db": 28.97530304628196,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 110,
+      "mode": "vips",
+      "input": "thin.png",
+      "operation": "direct-small",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.301316824116906,
+        "psnr_white_db": 21.301316824116906,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 111,
+      "mode": "pure",
+      "input": "thin.png",
+      "operation": "direct-small",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 29.813765375909913,
+        "psnr_white_db": 29.813765375909913,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 112,
+      "mode": "vips",
+      "input": "012-vips-texture-source-e-1.webp",
+      "operation": "all-sizes",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 17.12984568050688,
+        "psnr_white_db": 17.12984568050688,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 113,
+      "mode": "pure",
+      "input": "012-vips-texture-source-e-1.webp",
+      "operation": "all-sizes",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 17.096821602320304,
+        "psnr_white_db": 17.096821602320304,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 114,
+      "mode": "vips",
+      "input": "012-vips-texture-source-e-1.webp",
+      "operation": "all-sizes",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 17.917439253076548,
+        "psnr_white_db": 17.917439253076548,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 115,
+      "mode": "pure",
+      "input": "012-vips-texture-source-e-1.webp",
+      "operation": "all-sizes",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 17.917322578211014,
+        "psnr_white_db": 17.917322578211014,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 116,
+      "mode": "vips",
+      "input": "012-vips-texture-source-e-1.webp",
+      "operation": "all-sizes",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 20.82787556617776,
+        "psnr_white_db": 20.82787556617776,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 117,
+      "mode": "pure",
+      "input": "012-vips-texture-source-e-1.webp",
+      "operation": "all-sizes",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.195621077243644,
+        "psnr_white_db": 21.195621077243644,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 118,
+      "mode": "vips",
+      "input": "012-vips-texture-source-e-1.webp",
+      "operation": "all-sizes",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 20.672577255996906,
+        "psnr_white_db": 20.672577255996906,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 119,
+      "mode": "pure",
+      "input": "012-vips-texture-source-e-1.webp",
+      "operation": "all-sizes",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.729396138848195,
+        "psnr_white_db": 21.729396138848195,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 120,
+      "mode": "vips",
+      "input": "012-vips-texture-source-e-1.webp",
+      "operation": "all-sizes",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 20.672577255996906,
+        "psnr_white_db": 20.672577255996906,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 121,
+      "mode": "pure",
+      "input": "012-vips-texture-source-e-1.webp",
+      "operation": "all-sizes",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.729396138848195,
+        "psnr_white_db": 21.729396138848195,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 124,
+      "mode": "pure",
+      "input": "texture.jpg",
+      "operation": "effort-source",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.922024334246053,
+        "psnr_white_db": 21.922024334246053,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 125,
+      "mode": "pure",
+      "input": "012-vips-texture-source-e-1.webp",
+      "operation": "effort-derived",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.02333325674654,
+        "psnr_white_db": 21.02333325674654,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 126,
+      "mode": "pure",
+      "input": "alpha.png",
+      "operation": "effort-source",
+      "threshold_db": 28,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 27.548615387495627,
+        "psnr_white_db": 27.548615387495627,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 127,
+      "mode": "pure",
+      "input": "024-vips-alpha-source-e-1.webp",
+      "operation": "effort-derived",
+      "threshold_db": 28,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 27.264620098629834,
+        "psnr_white_db": 27.264620098629834,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 128,
+      "mode": "pure",
+      "input": "large.png",
+      "operation": "effort-source",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 22.435278598765578,
+        "psnr_white_db": 22.435278598765578,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 129,
+      "mode": "pure",
+      "input": "042-vips-large-source-e-1.webp",
+      "operation": "effort-derived",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 17.425738843526457,
+        "psnr_white_db": 17.425738843526457,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 132,
+      "mode": "pure",
+      "input": "texture.jpg",
+      "operation": "effort-source",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.949524052690155,
+        "psnr_white_db": 21.949524052690155,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 133,
+      "mode": "pure",
+      "input": "012-vips-texture-source-e-1.webp",
+      "operation": "effort-derived",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 21.126840204638903,
+        "psnr_white_db": 21.126840204638903,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 134,
+      "mode": "pure",
+      "input": "alpha.png",
+      "operation": "effort-source",
+      "threshold_db": 28,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 27.563438047982704,
+        "psnr_white_db": 27.563438047982704,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 135,
+      "mode": "pure",
+      "input": "024-vips-alpha-source-e-1.webp",
+      "operation": "effort-derived",
+      "threshold_db": 28,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 27.27914218527483,
+        "psnr_white_db": 27.27914218527483,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 136,
+      "mode": "pure",
+      "input": "large.png",
+      "operation": "effort-source",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 22.43908651786228,
+        "psnr_white_db": 22.43908651786228,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    },
+    {
+      "row": 137,
+      "mode": "pure",
+      "input": "042-vips-large-source-e-1.webp",
+      "operation": "effort-derived",
+      "threshold_db": 30,
+      "quality": {
+        "alpha_max_error": 0,
+        "dimension_match": true,
+        "psnr_black_db": 17.441911064222133,
+        "psnr_white_db": 17.441911064222133,
+        "oracle": "original \u2192 lossless geometry source PNG \u2192 lossless geometry derivative PNG; no codec recompression in oracle"
+      }
+    }
+  ],
+  "quality_relative_regressions_over_0_5db": [
+    {
+      "input": "natural.jpg",
+      "operation": "source",
+      "delta_db": -1.2735215386314422
+    },
+    {
+      "input": "natural.png",
+      "operation": "source",
+      "delta_db": -1.1718509711050302
+    }
+  ],
+  "quality_coverage": 138,
+  "resource_gate_failures": [],
+  "calibrated_quality_gate_failures": [],
+  "independent_alpha": {
+    "alpha_max_error": 0,
+    "dimension_match": true,
+    "psnr_black_db": 46.4362331986242,
+    "psnr_white_db": 46.436233198624194
+  }
+}

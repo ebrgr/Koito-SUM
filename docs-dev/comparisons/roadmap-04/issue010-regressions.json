@@ -1,0 +1,20 @@
+{
+  "album_merge_single_connection": {
+    "after_listens": 4,
+    "before_listens": 4,
+    "elapsed_ms": 0,
+    "error": "\u003cnil\u003e",
+    "from": 1,
+    "to": 2
+  },
+  "artist_self_merge": {
+    "after_listens": 4,
+    "before_listens": 4,
+    "error": "invalid input",
+    "from": 1,
+    "remaining_artists": 2,
+    "to": 1
+  },
+  "database": "SQLite v3 in memory; no production database opened",
+  "date": "2026-11-05"
+}

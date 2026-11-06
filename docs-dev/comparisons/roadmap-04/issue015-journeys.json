@@ -1,0 +1,33 @@
+{
+  "schema": 3,
+  "formats": [
+    "spotify",
+    "maloja",
+    "lastfm",
+    "koito",
+    "listenbrainz"
+  ],
+  "checks": [
+    "HTML login/return",
+    "HEAD",
+    "CSRF/origin",
+    "profiles",
+    "keys/revocation",
+    "local relay",
+    "five import formats",
+    "export/round-trip",
+    "metadata/form state",
+    "DST",
+    "personal deletion",
+    "stale merge/repetition",
+    "zero profiles",
+    "password revocation",
+    "SQLite integrity",
+    "shared HTML/JSON login budget both orders",
+    "submission token missing/replay rejected",
+    "merge destination search",
+    "ISO week/exact-record return/pagination"
+  ],
+  "validation_date": "2026-11-05",
+  "data": "fictional SQLite v3 databases; no operational database"
+}

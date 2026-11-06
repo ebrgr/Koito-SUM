@@ -80,7 +80,7 @@ See the [configuration reference](https://koito.io/reference/configuration/) in 
 
 ## Contributing
 
-For local editing, running, and debugging (Go API + React frontend), see
+For local editing, running, and debugging (Go interface and API), see
 [DEVELOPMENT.md](DEVELOPMENT.md).
 
 There are currently some known issues that I am actively working on, in addition to adding new features. If you want to contribute (especially more and more robust testing) feel free to fork the repository and make a pull request with your changes.

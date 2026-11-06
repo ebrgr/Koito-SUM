@@ -1,0 +1,1065 @@
+{
+  "date": "2026-11-05",
+  "data": "fictional SQLite v3 copies",
+  "capture": "viewport crops; full-page tiling avoided",
+  "entries": [
+    {
+      "file": "go-login-yuu-desktop.png",
+      "mode": "go",
+      "theme": "yuu",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "region": "top",
+      "profile": {
+        "id": 1,
+        "slug": "mara",
+        "fictional": true
+      },
+      "route": "/admin",
+      "timezone": "America/Sao_Paulo",
+      "overflow": false,
+      "secretFields": "closed or empty"
+    },
+    {
+      "file": "go-profiles-yuu-desktop.png",
+      "mode": "go",
+      "theme": "yuu",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "region": "top",
+      "profile": {
+        "id": 1,
+        "slug": "mara",
+        "fictional": true
+      },
+      "route": "/admin?profile=1",
+      "timezone": "America/Sao_Paulo",
+      "overflow": false,
+      "secretFields": "closed or empty"
+    },
+    {
+      "file": "go-account-yuu-desktop.png",
+      "mode": "go",
+      "theme": "yuu",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "region": "account section",
+      "profile": {
+        "id": 1,
+        "slug": "mara",
+        "fictional": true
+      },
+      "route": "/admin?section=account",
+      "timezone": "America/Sao_Paulo",
+      "overflow": false,
+      "secretFields": "closed or empty"
+    },
+    {
+      "file": "go-keys-yuu-desktop.png",
+      "mode": "go",
+      "theme": "yuu",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "region": "below fold: keys, values concealed",
+      "profile": {
+        "id": 1,
+        "slug": "mara",
+        "fictional": true
+      },
+      "route": "/admin?profile=1",
+      "timezone": "America/Sao_Paulo",
+      "overflow": false,
+      "secretFields": "closed or empty"
+    },
+    {
+      "file": "go-import-yuu-desktop.png",
+      "mode": "go",
+      "theme": "yuu",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "region": "below fold: import/export",
+      "profile": {
+        "id": 1,
+        "slug": "mara",
+        "fictional": true
+      },
+      "route": "/admin?profile=1",
+      "timezone": "America/Sao_Paulo",
+      "overflow": false,
+      "secretFields": "closed or empty"
+    },
+    {
+      "file": "go-relay-yuu-desktop.png",
+      "mode": "go",
+      "theme": "yuu",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "region": "below fold: relay",
+      "profile": {
+        "id": 1,
+        "slug": "mara",
+        "fictional": true
+      },
+      "route": "/admin?profile=1",
+      "timezone": "America/Sao_Paulo",
+      "overflow": false,
+      "secretFields": "closed or empty"
+    },
+    {
+      "file": "go-profile-delete-yuu-desktop.png",
+      "mode": "go",
+      "theme": "yuu",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "region": "deletion confirmation",
+      "profile": {
+        "id": 1,
+        "slug": "mara",
+        "fictional": true
+      },
+      "route": "/admin/profile/1/delete-review",
+      "timezone": "America/Sao_Paulo",
+      "overflow": false,
+      "secretFields": "closed or empty"
+    },
+    {
+      "file": "go-artist-edit-yuu-desktop.png",
+      "mode": "go",
+      "theme": "yuu",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "region": "editor",
+      "profile": {
+        "id": 1,
+        "slug": "mara",
+        "fictional": true
+      },
+      "route": "/mara/manage/artist/1",
+      "timezone": "America/Sao_Paulo",
+      "overflow": false,
+      "secretFields": "closed or empty"
+    },
+    {
+      "file": "go-album-edit-yuu-desktop.png",
+      "mode": "go",
+      "theme": "yuu",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "region": "editor",
+      "profile": {
+        "id": 1,
+        "slug": "mara",
+        "fictional": true
+      },
+      "route": "/mara/manage/album/1",
+      "timezone": "America/Sao_Paulo",
+      "overflow": false,
+      "secretFields": "closed or empty"
+    },
+    {
+      "file": "go-track-edit-yuu-desktop.png",
+      "mode": "go",
+      "theme": "yuu",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "region": "editor",
+      "profile": {
+        "id": 1,
+        "slug": "mara",
+        "fictional": true
+      },
+      "route": "/mara/manage/track/1",
+      "timezone": "America/Sao_Paulo",
+      "overflow": false,
+      "secretFields": "closed or empty"
+    },
+    {
+      "file": "go-merge-yuu-desktop.png",
+      "mode": "go",
+      "theme": "yuu",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "region": "merge review/direction",
+      "profile": {
+        "id": 1,
+        "slug": "mara",
+        "fictional": true
+      },
+      "route": "/mara/manage/track/1/review?action=merge&to=2&reverse=1",
+      "timezone": "America/Sao_Paulo",
+      "overflow": false,
+      "secretFields": "closed or empty"
+    },
+    {
+      "file": "react-login-yuu-desktop.png",
+      "mode": "react",
+      "theme": "yuu",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "region": "top",
+      "profile": {
+        "id": 1,
+        "slug": "mara",
+        "fictional": true
+      },
+      "route": "/admin",
+      "timezone": "America/Sao_Paulo",
+      "overflow": false,
+      "secretFields": "closed or empty"
+    },
+    {
+      "file": "react-profiles-yuu-desktop.png",
+      "mode": "react",
+      "theme": "yuu",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "region": "top",
+      "profile": {
+        "id": 1,
+        "slug": "mara",
+        "fictional": true
+      },
+      "route": "/admin?profile=1",
+      "timezone": "America/Sao_Paulo",
+      "overflow": false,
+      "secretFields": "closed or empty"
+    },
+    {
+      "file": "react-account-yuu-desktop.png",
+      "mode": "react",
+      "theme": "yuu",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "region": "account section",
+      "profile": {
+        "id": 1,
+        "slug": "mara",
+        "fictional": true
+      },
+      "route": "/admin?profile=1",
+      "timezone": "America/Sao_Paulo",
+      "overflow": false,
+      "secretFields": "closed or empty"
+    },
+    {
+      "file": "react-keys-yuu-desktop.png",
+      "mode": "react",
+      "theme": "yuu",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "region": "below fold: keys, values concealed",
+      "profile": {
+        "id": 1,
+        "slug": "mara",
+        "fictional": true
+      },
+      "route": "/admin?profile=1",
+      "timezone": "America/Sao_Paulo",
+      "overflow": false,
+      "secretFields": "closed or empty"
+    },
+    {
+      "file": "react-import-yuu-desktop.png",
+      "mode": "react",
+      "theme": "yuu",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "region": "below fold: import/export",
+      "profile": {
+        "id": 1,
+        "slug": "mara",
+        "fictional": true
+      },
+      "route": "/admin?profile=1",
+      "timezone": "America/Sao_Paulo",
+      "overflow": false,
+      "secretFields": "closed or empty"
+    },
+    {
+      "file": "react-relay-yuu-desktop.png",
+      "mode": "react",
+      "theme": "yuu",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "region": "below fold: relay",
+      "profile": {
+        "id": 1,
+        "slug": "mara",
+        "fictional": true
+      },
+      "route": "/admin?profile=1",
+      "timezone": "America/Sao_Paulo",
+      "overflow": false,
+      "secretFields": "closed or empty"
+    },
+    {
+      "file": "react-profile-delete-yuu-desktop.png",
+      "mode": "react",
+      "theme": "yuu",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "region": "deletion confirmation",
+      "profile": {
+        "id": 1,
+        "slug": "mara",
+        "fictional": true
+      },
+      "route": "/admin?profile=1",
+      "timezone": "America/Sao_Paulo",
+      "overflow": false,
+      "secretFields": "closed or empty"
+    },
+    {
+      "file": "react-artist-edit-yuu-desktop.png",
+      "mode": "react",
+      "theme": "yuu",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "region": "editor",
+      "profile": {
+        "id": 1,
+        "slug": "mara",
+        "fictional": true
+      },
+      "route": "/mara/manage/artist/1",
+      "timezone": "America/Sao_Paulo",
+      "overflow": false,
+      "secretFields": "closed or empty"
+    },
+    {
+      "file": "react-album-edit-yuu-desktop.png",
+      "mode": "react",
+      "theme": "yuu",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "region": "editor",
+      "profile": {
+        "id": 1,
+        "slug": "mara",
+        "fictional": true
+      },
+      "route": "/mara/manage/album/1",
+      "timezone": "America/Sao_Paulo",
+      "overflow": false,
+      "secretFields": "closed or empty"
+    },
+    {
+      "file": "react-track-edit-yuu-desktop.png",
+      "mode": "react",
+      "theme": "yuu",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "region": "editor",
+      "profile": {
+        "id": 1,
+        "slug": "mara",
+        "fictional": true
+      },
+      "route": "/mara/manage/track/1",
+      "timezone": "America/Sao_Paulo",
+      "overflow": false,
+      "secretFields": "closed or empty"
+    },
+    {
+      "file": "react-merge-yuu-desktop.png",
+      "mode": "react",
+      "theme": "yuu",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "region": "merge review/direction",
+      "profile": {
+        "id": 1,
+        "slug": "mara",
+        "fictional": true
+      },
+      "route": "/mara/manage/track/1",
+      "timezone": "America/Sao_Paulo",
+      "overflow": false,
+      "secretFields": "closed or empty"
+    },
+    {
+      "file": "go-login-yuu-mobile.png",
+      "mode": "go",
+      "theme": "yuu",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "region": "top",
+      "profile": {
+        "id": 1,
+        "slug": "mara",
+        "fictional": true
+      },
+      "route": "/admin",
+      "timezone": "America/Sao_Paulo",
+      "overflow": false,
+      "secretFields": "closed or empty"
+    },
+    {
+      "file": "go-profiles-yuu-mobile.png",
+      "mode": "go",
+      "theme": "yuu",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "region": "top",
+      "profile": {
+        "id": 1,
+        "slug": "mara",
+        "fictional": true
+      },
+      "route": "/admin?profile=1",
+      "timezone": "America/Sao_Paulo",
+      "overflow": false,
+      "secretFields": "closed or empty"
+    },
+    {
+      "file": "go-account-yuu-mobile.png",
+      "mode": "go",
+      "theme": "yuu",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "region": "account section",
+      "profile": {
+        "id": 1,
+        "slug": "mara",
+        "fictional": true
+      },
+      "route": "/admin?section=account",
+      "timezone": "America/Sao_Paulo",
+      "overflow": false,
+      "secretFields": "closed or empty"
+    },
+    {
+      "file": "go-keys-yuu-mobile.png",
+      "mode": "go",
+      "theme": "yuu",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "region": "below fold: keys, values concealed",
+      "profile": {
+        "id": 1,
+        "slug": "mara",
+        "fictional": true
+      },
+      "route": "/admin?profile=1",
+      "timezone": "America/Sao_Paulo",
+      "overflow": false,
+      "secretFields": "closed or empty"
+    },
+    {
+      "file": "go-import-yuu-mobile.png",
+      "mode": "go",
+      "theme": "yuu",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "region": "below fold: import/export",
+      "profile": {
+        "id": 1,
+        "slug": "mara",
+        "fictional": true
+      },
+      "route": "/admin?profile=1",
+      "timezone": "America/Sao_Paulo",
+      "overflow": false,
+      "secretFields": "closed or empty"
+    },
+    {
+      "file": "go-relay-yuu-mobile.png",
+      "mode": "go",
+      "theme": "yuu",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "region": "below fold: relay",
+      "profile": {
+        "id": 1,
+        "slug": "mara",
+        "fictional": true
+      },
+      "route": "/admin?profile=1",
+      "timezone": "America/Sao_Paulo",
+      "overflow": false,
+      "secretFields": "closed or empty"
+    },
+    {
+      "file": "go-profile-delete-yuu-mobile.png",
+      "mode": "go",
+      "theme": "yuu",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "region": "deletion confirmation",
+      "profile": {
+        "id": 1,
+        "slug": "mara",
+        "fictional": true
+      },
+      "route": "/admin/profile/1/delete-review",
+      "timezone": "America/Sao_Paulo",
+      "overflow": false,
+      "secretFields": "closed or empty"
+    },
+    {
+      "file": "go-artist-edit-yuu-mobile.png",
+      "mode": "go",
+      "theme": "yuu",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "region": "editor",
+      "profile": {
+        "id": 1,
+        "slug": "mara",
+        "fictional": true
+      },
+      "route": "/mara/manage/artist/1",
+      "timezone": "America/Sao_Paulo",
+      "overflow": false,
+      "secretFields": "closed or empty"
+    },
+    {
+      "file": "go-album-edit-yuu-mobile.png",
+      "mode": "go",
+      "theme": "yuu",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "region": "editor",
+      "profile": {
+        "id": 1,
+        "slug": "mara",
+        "fictional": true
+      },
+      "route": "/mara/manage/album/1",
+      "timezone": "America/Sao_Paulo",
+      "overflow": false,
+      "secretFields": "closed or empty"
+    },
+    {
+      "file": "go-track-edit-yuu-mobile.png",
+      "mode": "go",
+      "theme": "yuu",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "region": "editor",
+      "profile": {
+        "id": 1,
+        "slug": "mara",
+        "fictional": true
+      },
+      "route": "/mara/manage/track/1",
+      "timezone": "America/Sao_Paulo",
+      "overflow": false,
+      "secretFields": "closed or empty"
+    },
+    {
+      "file": "go-merge-yuu-mobile.png",
+      "mode": "go",
+      "theme": "yuu",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "region": "merge review/direction",
+      "profile": {
+        "id": 1,
+        "slug": "mara",
+        "fictional": true
+      },
+      "route": "/mara/manage/track/1/review?action=merge&to=2&reverse=1",
+      "timezone": "America/Sao_Paulo",
+      "overflow": false,
+      "secretFields": "closed or empty"
+    },
+    {
+      "file": "react-login-yuu-mobile.png",
+      "mode": "react",
+      "theme": "yuu",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "region": "top",
+      "profile": {
+        "id": 1,
+        "slug": "mara",
+        "fictional": true
+      },
+      "route": "/admin",
+      "timezone": "America/Sao_Paulo",
+      "overflow": false,
+      "secretFields": "closed or empty"
+    },
+    {
+      "file": "react-profiles-yuu-mobile.png",
+      "mode": "react",
+      "theme": "yuu",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "region": "top",
+      "profile": {
+        "id": 1,
+        "slug": "mara",
+        "fictional": true
+      },
+      "route": "/admin?profile=1",
+      "timezone": "America/Sao_Paulo",
+      "overflow": false,
+      "secretFields": "closed or empty"
+    },
+    {
+      "file": "react-account-yuu-mobile.png",
+      "mode": "react",
+      "theme": "yuu",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "region": "account section",
+      "profile": {
+        "id": 1,
+        "slug": "mara",
+        "fictional": true
+      },
+      "route": "/admin?profile=1",
+      "timezone": "America/Sao_Paulo",
+      "overflow": false,
+      "secretFields": "closed or empty"
+    },
+    {
+      "file": "react-keys-yuu-mobile.png",
+      "mode": "react",
+      "theme": "yuu",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "region": "below fold: keys, values concealed",
+      "profile": {
+        "id": 1,
+        "slug": "mara",
+        "fictional": true
+      },
+      "route": "/admin?profile=1",
+      "timezone": "America/Sao_Paulo",
+      "overflow": false,
+      "secretFields": "closed or empty"
+    },
+    {
+      "file": "react-import-yuu-mobile.png",
+      "mode": "react",
+      "theme": "yuu",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "region": "below fold: import/export",
+      "profile": {
+        "id": 1,
+        "slug": "mara",
+        "fictional": true
+      },
+      "route": "/admin?profile=1",
+      "timezone": "America/Sao_Paulo",
+      "overflow": false,
+      "secretFields": "closed or empty"
+    },
+    {
+      "file": "react-relay-yuu-mobile.png",
+      "mode": "react",
+      "theme": "yuu",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "region": "below fold: relay",
+      "profile": {
+        "id": 1,
+        "slug": "mara",
+        "fictional": true
+      },
+      "route": "/admin?profile=1",
+      "timezone": "America/Sao_Paulo",
+      "overflow": false,
+      "secretFields": "closed or empty"
+    },
+    {
+      "file": "react-profile-delete-yuu-mobile.png",
+      "mode": "react",
+      "theme": "yuu",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "region": "deletion confirmation",
+      "profile": {
+        "id": 1,
+        "slug": "mara",
+        "fictional": true
+      },
+      "route": "/admin?profile=1",
+      "timezone": "America/Sao_Paulo",
+      "overflow": false,
+      "secretFields": "closed or empty"
+    },
+    {
+      "file": "react-artist-edit-yuu-mobile.png",
+      "mode": "react",
+      "theme": "yuu",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "region": "editor",
+      "profile": {
+        "id": 1,
+        "slug": "mara",
+        "fictional": true
+      },
+      "route": "/mara/manage/artist/1",
+      "timezone": "America/Sao_Paulo",
+      "overflow": false,
+      "secretFields": "closed or empty"
+    },
+    {
+      "file": "react-album-edit-yuu-mobile.png",
+      "mode": "react",
+      "theme": "yuu",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "region": "editor",
+      "profile": {
+        "id": 1,
+        "slug": "mara",
+        "fictional": true
+      },
+      "route": "/mara/manage/album/1",
+      "timezone": "America/Sao_Paulo",
+      "overflow": false,
+      "secretFields": "closed or empty"
+    },
+    {
+      "file": "react-track-edit-yuu-mobile.png",
+      "mode": "react",
+      "theme": "yuu",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "region": "editor",
+      "profile": {
+        "id": 1,
+        "slug": "mara",
+        "fictional": true
+      },
+      "route": "/mara/manage/track/1",
+      "timezone": "America/Sao_Paulo",
+      "overflow": false,
+      "secretFields": "closed or empty"
+    },
+    {
+      "file": "react-merge-yuu-mobile.png",
+      "mode": "react",
+      "theme": "yuu",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "region": "merge review/direction",
+      "profile": {
+        "id": 1,
+        "slug": "mara",
+        "fictional": true
+      },
+      "route": "/mara/manage/track/1",
+      "timezone": "America/Sao_Paulo",
+      "overflow": false,
+      "secretFields": "closed or empty"
+    },
+    {
+      "file": "go-profiles-pearl-desktop.png",
+      "mode": "go",
+      "theme": "pearl",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "region": "top",
+      "profile": {
+        "id": 1,
+        "slug": "mara",
+        "fictional": true
+      },
+      "route": "/admin?profile=1",
+      "timezone": "America/Sao_Paulo",
+      "overflow": false,
+      "secretFields": "closed or empty"
+    },
+    {
+      "file": "go-track-edit-pearl-desktop.png",
+      "mode": "go",
+      "theme": "pearl",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "region": "editor",
+      "profile": {
+        "id": 1,
+        "slug": "mara",
+        "fictional": true
+      },
+      "route": "/mara/manage/track/1",
+      "timezone": "America/Sao_Paulo",
+      "overflow": false,
+      "secretFields": "closed or empty"
+    },
+    {
+      "file": "react-profiles-pearl-desktop.png",
+      "mode": "react",
+      "theme": "pearl",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "region": "top",
+      "profile": {
+        "id": 1,
+        "slug": "mara",
+        "fictional": true
+      },
+      "route": "/admin?profile=1",
+      "timezone": "America/Sao_Paulo",
+      "overflow": false,
+      "secretFields": "closed or empty"
+    },
+    {
+      "file": "react-track-edit-pearl-desktop.png",
+      "mode": "react",
+      "theme": "pearl",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "region": "editor",
+      "profile": {
+        "id": 1,
+        "slug": "mara",
+        "fictional": true
+      },
+      "route": "/mara/manage/track/1",
+      "timezone": "America/Sao_Paulo",
+      "overflow": false,
+      "secretFields": "closed or empty"
+    },
+    {
+      "file": "go-profiles-pearl-mobile.png",
+      "mode": "go",
+      "theme": "pearl",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "region": "top",
+      "profile": {
+        "id": 1,
+        "slug": "mara",
+        "fictional": true
+      },
+      "route": "/admin?profile=1",
+      "timezone": "America/Sao_Paulo",
+      "overflow": false,
+      "secretFields": "closed or empty"
+    },
+    {
+      "file": "go-track-edit-pearl-mobile.png",
+      "mode": "go",
+      "theme": "pearl",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "region": "editor",
+      "profile": {
+        "id": 1,
+        "slug": "mara",
+        "fictional": true
+      },
+      "route": "/mara/manage/track/1",
+      "timezone": "America/Sao_Paulo",
+      "overflow": false,
+      "secretFields": "closed or empty"
+    },
+    {
+      "file": "react-profiles-pearl-mobile.png",
+      "mode": "react",
+      "theme": "pearl",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "region": "top",
+      "profile": {
+        "id": 1,
+        "slug": "mara",
+        "fictional": true
+      },
+      "route": "/admin?profile=1",
+      "timezone": "America/Sao_Paulo",
+      "overflow": false,
+      "secretFields": "closed or empty"
+    },
+    {
+      "file": "react-track-edit-pearl-mobile.png",
+      "mode": "react",
+      "theme": "pearl",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "region": "editor",
+      "profile": {
+        "id": 1,
+        "slug": "mara",
+        "fictional": true
+      },
+      "route": "/mara/manage/track/1",
+      "timezone": "America/Sao_Paulo",
+      "overflow": false,
+      "secretFields": "closed or empty"
+    }
+  ],
+  "checks": [
+    "no-JavaScript public \u2192 login \u2192 editor \u2192 alias \u2192 redirect",
+    "no-JavaScript historical record confirmation",
+    "keyboard skip link focused",
+    "two tabs retain their profile and one-use ticket",
+    "clipboard failure preserves manual key selection",
+    "artwork drag/drop populates file input",
+    "dropped artwork submitted by protected form"
+  ],
+  "additionalFiles": [
+    "go-nojs-editor-mobile.png",
+    "go-nojs-listen-confirm-mobile.png",
+    "go-keyboard-focus-desktop.png"
+  ],
+  "additionalEntries": [
+    {
+      "file": "go-nojs-editor-mobile.png",
+      "mode": "go",
+      "theme": "yuu",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "region": "editor after alias submission without JavaScript",
+      "profile": {
+        "id": 1,
+        "slug": "mara",
+        "fictional": true
+      },
+      "route": "/mara/manage/track/1",
+      "timezone": "America/Sao_Paulo",
+      "secretFields": "closed or empty"
+    },
+    {
+      "file": "go-nojs-listen-confirm-mobile.png",
+      "mode": "go",
+      "theme": "yuu",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "region": "selected historical listen confirmation without JavaScript",
+      "profile": {
+        "id": 1,
+        "slug": "mara",
+        "fictional": true
+      },
+      "route": "/mara/manage/track/1",
+      "timezone": "America/Sao_Paulo",
+      "secretFields": "closed or empty"
+    },
+    {
+      "file": "go-keyboard-focus-desktop.png",
+      "mode": "go",
+      "theme": "yuu",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "region": "keyboard skip link focus",
+      "profile": {
+        "id": 1,
+        "slug": "mara",
+        "fictional": true
+      },
+      "route": "/mara/manage/track/1",
+      "timezone": "America/Sao_Paulo",
+      "secretFields": "closed or empty"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "date": "2026-11-04",
+  "command": "python3 scripts/validate_multiuser.py --binary .local/koito-webui-final --work-dir .local/webui-multiuser-final",
+  "exit_code": 0,
+  "results": {
+    "fresh": "PASS",
+    "migrated-v2": "PASS"
+  },
+  "checks": [
+    "administration",
+    "keys",
+    "concurrent ingestion",
+    "public reads",
+    "import/export",
+    "revocation/deletion",
+    "restart",
+    "SQLite integrity"
+  ],
+  "schema_after_migration": 3
+}

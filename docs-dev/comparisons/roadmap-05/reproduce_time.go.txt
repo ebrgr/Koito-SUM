@@ -1,0 +1,13 @@
+package main
+import("context";"fmt";"time";"github.com/gabehf/koito/internal/db";"github.com/gabehf/koito/internal/db/sqlite")
+func must(e error){if e!=nil {panic(e)}}
+func main(){ctx:=db.WithProfile(context.Background(),1); s,e:=sqlite.NewInMemory();must(e);defer s.Close(ctx)
+for _,q:=range []string{`INSERT INTO listening_profiles(id,slug,display_name,created_at) VALUES(1,'a','A',1)`,`INSERT INTO releases(id) VALUES(1)`,`INSERT INTO tracks(id,release_id,duration) VALUES(1,1,180)`}{must(s.Exec(q))}
+loc,e:=time.LoadLocation("Asia/Kathmandu");must(e)
+at:=time.Date(2024,5,1,0,5,0,0,loc);must(s.SaveListen(ctx,db.SaveListenOpts{ProfileID:1,TrackID:1,Time:at}))
+opts:=db.ListenActivityOpts{Year:2024,Month:5,Step:db.StepDay,Timezone:loc}; items,e:=s.GetListenActivity(ctx,opts);must(e);fmt.Printf("activity expected_day=2024-05-01 actual=%+v\n",items)
+last:=time.Date(2024,5,31,23,59,59,0,loc);must(s.SaveListen(ctx,db.SaveListenOpts{ProfileID:1,TrackID:1,Time:last})); items,e=s.GetListenActivity(ctx,opts);must(e);var total int64;for _,i:=range items{total+=i.Listens};fmt.Printf("month_final_second expected_total=2 actual=%d\n",total)
+must(s.Exec(`DELETE FROM listens`));for _,at:=range []time.Time{time.Date(2024,4,30,23,55,0,0,loc),time.Date(2024,5,1,0,5,0,0,loc)}{must(s.SaveListen(ctx,db.SaveListenOpts{ProfileID:1,TrackID:1,Time:at}))};days,e:=s.GetActiveDays(ctx,loc);must(e);fmt.Printf("active_days expected=2 actual=%d\n",days)
+now:=time.Date(2024,12,31,23,30,0,0,time.UTC);start,_:=db.TimeframeToTimeRangeAt(db.Timeframe{Month:1,Timezone:loc},now);fmt.Printf("implicit_month local_now=%s expected=2025-01-01 actual=%s\n",now.In(loc).Format(time.RFC3339),start.Format("2006-01-02"))
+now=time.Date(2021,1,1,12,0,0,0,time.UTC);start,_=db.TimeframeToTimeRangeAt(db.Timeframe{Week:53,Timezone:time.UTC},now);fmt.Printf("implicit_ISO_week now=2021-01-01 expected=2020-12-28 actual=%s\n",start.Format("2006-01-02"))
+}

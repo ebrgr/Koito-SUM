@@ -123,6 +123,7 @@ func (s *Sqlite) SaveUser(ctx context.Context, opts db.SaveUserOpts) (*models.Us
 	}, nil
 }
 
+// UpdateUser revokes sessions atomically with a successful password change.
 func (s *Sqlite) UpdateUser(ctx context.Context, opts db.UpdateUserOpts) error {
 	if opts.ID == 0 {
 		return errors.New("UpdateUser: user id is required")
@@ -155,6 +156,9 @@ func (s *Sqlite) UpdateUser(ctx context.Context, opts db.UpdateUserOpts) error {
 		if _, err := tx.ExecContext(ctx,
 			`UPDATE users SET password = ? WHERE id = ?`, hash, opts.ID); err != nil {
 			return fmt.Errorf("UpdateUser: password: %w", err)
+		}
+		if _, err := tx.ExecContext(ctx, `DELETE FROM sessions WHERE user_id = ?`, opts.ID); err != nil {
+			return fmt.Errorf("UpdateUser: revoke sessions: %w", err)
 		}
 	}
 	return tx.Commit()

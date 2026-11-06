@@ -149,6 +149,8 @@ type ListenActivityOpts struct {
 	AlbumID  int32
 	ArtistID int32
 	TrackID  int32
+	// Now freezes the clock shared by activity queries and presentation when set.
+	Now time.Time
 }
 
 type TimeListenedOpts struct {
@@ -159,6 +161,7 @@ type TimeListenedOpts struct {
 }
 
 type GetExportPageOpts struct {
+	FirstPage  bool
 	ProfileID  int32
 	UserID     int32
 	ListenedAt time.Time

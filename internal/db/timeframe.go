@@ -14,14 +14,25 @@ type Timeframe struct {
 	From     time.Time
 	To       time.Time
 	Timezone *time.Location
+	// Resolved preserves both exact bounds, including a zero start for all_time.
+	Resolved bool
 }
 
 func TimeframeToTimeRange(tf Timeframe) (t1, t2 time.Time) {
-	now := time.Now()
+	return TimeframeToTimeRangeAt(tf, time.Now())
+}
+
+// TimeframeToTimeRangeAt resolves a timeframe against one captured clock value.
+func TimeframeToTimeRangeAt(tf Timeframe, now time.Time) (t1, t2 time.Time) {
+	if tf.Resolved {
+		return tf.From, tf.To
+	}
 	loc := tf.Timezone
 	if loc == nil {
 		loc, _ = time.LoadLocation("UTC")
 	}
+	// Infer omitted calendar fields using the requested zone; rolling periods keep their existing clock.
+	calendarNow := now.In(loc)
 
 	// ---------------------------------------------------------------------
 	// 1. Explicit From / To (time.Time) — highest precedence
@@ -51,8 +62,8 @@ func TimeframeToTimeRange(tf Timeframe) (t1, t2 time.Time) {
 
 	// YEAR only
 	if tf.Year != 0 && tf.Month == 0 && tf.Week == 0 {
-		start := time.Date(tf.Year, 1, 1, 0, 0, 0, 0, loc)
-		end := time.Date(tf.Year+1, 1, 1, 0, 0, 0, 0, loc).Add(-time.Second)
+		start := CivilDayStart(time.Date(tf.Year, 1, 1, 12, 0, 0, 0, loc))
+		end := CivilDayStart(time.Date(tf.Year+1, 1, 1, 12, 0, 0, 0, loc)).Add(-time.Second)
 		return start, end
 	}
 
@@ -60,13 +71,13 @@ func TimeframeToTimeRange(tf Timeframe) (t1, t2 time.Time) {
 	if tf.Month != 0 {
 		year := tf.Year
 		if year == 0 {
-			year = now.Year()
-			if int(now.Month()) < tf.Month {
+			year = calendarNow.Year()
+			if int(calendarNow.Month()) < tf.Month {
 				year--
 			}
 		}
 
-		start := time.Date(year, time.Month(tf.Month), 1, 0, 0, 0, 0, loc)
+		start := CivilDayStart(time.Date(year, time.Month(tf.Month), 1, 12, 0, 0, 0, loc))
 		end := endOfMonth(year, time.Month(tf.Month), loc)
 		return start, end
 	}
@@ -75,18 +86,18 @@ func TimeframeToTimeRange(tf Timeframe) (t1, t2 time.Time) {
 	if tf.Week != 0 {
 		year := tf.Year
 		if year == 0 {
-			year = now.Year()
-			_, currentWeek := now.ISOWeek()
+			var currentWeek int
+			year, currentWeek = calendarNow.ISOWeek()
 			if currentWeek < tf.Week {
 				year--
 			}
 		}
 
 		// ISO week 1 contains Jan 4
-		jan4 := time.Date(year, 1, 4, 0, 0, 0, 0, loc)
+		jan4 := time.Date(year, 1, 4, 12, 0, 0, 0, loc)
 		week1Start := startOfWeek(jan4)
 
-		start := week1Start.AddDate(0, 0, (tf.Week-1)*7)
+		start := CivilDayStart(time.Date(week1Start.Year(), week1Start.Month(), week1Start.Day()+(tf.Week-1)*7, 12, 0, 0, 0, loc))
 		end := endOfWeek(start)
 		return start, end
 	}
@@ -96,7 +107,7 @@ func TimeframeToTimeRange(tf Timeframe) (t1, t2 time.Time) {
 	// ---------------------------------------------------------------------
 
 	if !tf.Period.IsZero() {
-		return StartTimeFromPeriod(tf.Period), now
+		return StartTimeFromPeriodAt(tf.Period, now), now
 	}
 
 	// ---------------------------------------------------------------------
@@ -106,17 +117,21 @@ func TimeframeToTimeRange(tf Timeframe) (t1, t2 time.Time) {
 }
 
 func startOfWeek(t time.Time) time.Time {
+	// Resolve the first existing instant on the ISO Monday.
 	// ISO week: Monday = 1
 	weekday := int(t.Weekday())
 	if weekday == 0 { // Sunday
 		weekday = 7
 	}
-	return time.Date(t.Year(), t.Month(), t.Day()-weekday+1, 0, 0, 0, 0, t.Location())
+	return CivilDayStart(time.Date(t.Year(), t.Month(), t.Day()-weekday+1, 12, 0, 0, 0, t.Location()))
 }
 func endOfWeek(t time.Time) time.Time {
-	return startOfWeek(t).AddDate(0, 0, 7).Add(-time.Second)
+	// The next week's local boundary is not always 168 elapsed hours away.
+	monday := startOfWeek(t)
+	return CivilDayStart(time.Date(monday.Year(), monday.Month(), monday.Day()+7, 12, 0, 0, 0, monday.Location())).Add(-time.Second)
 }
 func endOfMonth(year int, month time.Month, loc *time.Location) time.Time {
-	startNextMonth := time.Date(year, month+1, 1, 0, 0, 0, 0, loc)
+	// Use the first real instant of the next month, even if midnight is skipped.
+	startNextMonth := CivilDayStart(time.Date(year, month+1, 1, 12, 0, 0, 0, loc))
 	return startNextMonth.Add(-time.Second)
 }

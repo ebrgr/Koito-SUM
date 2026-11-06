@@ -1,25 +1,7 @@
-FROM --platform=$BUILDPLATFORM node:24-bookworm-slim AS frontend
-
-ENV BUILD_TARGET=docker
-WORKDIR /client
-
-RUN npm install --global --force corepack@0.34.6 && corepack enable
-COPY client/package.json client/yarn.lock client/.yarnrc.yml ./
-RUN yarn install --immutable
-COPY client/ ./
-COPY internal/version/VERSION /internal/version/VERSION
-ARG KOITO_VERSION=0.3.2-SUM-RC2
-ENV VITE_KOITO_VERSION=$KOITO_VERSION
-RUN yarn build && \
-    find build/client -type f \( -name "*.js" -o -name "*.css" -o -name "*.html" -o -name "*.svg" \) -exec gzip -kf -9 {} \;
-
 FROM golang:1.25-bookworm AS backend
 
-ENV CGO_ENABLED=1
+ENV CGO_ENABLED=0
 WORKDIR /app
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends libvips-dev pkg-config && \
-    rm -rf /var/lib/apt/lists/*
 COPY go.mod go.sum ./
 RUN go mod download
 COPY cmd/ ./cmd/
@@ -35,11 +17,9 @@ FROM debian:bookworm-slim AS final
 
 WORKDIR /app
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends libvips42 curl ca-certificates tzdata && \
+    apt-get install -y --no-install-recommends curl ca-certificates tzdata && \
     rm -rf /var/lib/apt/lists/*
 COPY --from=backend /koito ./app
-COPY --from=frontend /client/build/client ./client/build/client
-COPY client/public/ ./client/public/
 COPY assets/ ./assets/
 ARG KOITO_VERSION=0.3.2-SUM-RC2
 LABEL org.opencontainers.image.title="Koito SUM" \
