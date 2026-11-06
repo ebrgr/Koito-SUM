@@ -10,7 +10,7 @@ _Koito (小糸) is a Japanese surname. It is also homophonous with the words 恋
 >
 > [Listening profiles and upgrade guide](docs/src/content/docs/guides/profiles.md) · [Player keys and per-profile forwarding](docs/src/content/docs/guides/scrobbler.md)
 >
-> Current source version: **Koito 0.3.2-SUM-RC2**. Run `make version.bump` once before each subsequent commit; `make version.check` checks synchronized versions.
+> Current source version: **Koito 0.3.2-SUM-RC3**. Run `make version.bump` once before each subsequent commit; `make version.check` checks synchronized versions.
 >
 > This version adds multiuser scrobble submissions while keeping the experience simple. Approximately 70% of the work on these changes was done with assistance from OpenAI Codex.
 >
@@ -52,7 +52,7 @@ You can view my public instance with my listening data at https://koito.mnrva.de
 ## Installation
 
 For this multiuser fork, see [DEPLOYMENT.md](DEPLOYMENT.md). The release image is
-`ghcr.io/ebrgr/koito-sum:0.3.2-SUM-RC2`, targeting Linux amd64 and arm64. This source version requires a matching published image; until publication, follow the local build instructions in [DEPLOYMENT.md](DEPLOYMENT.md).
+`ghcr.io/ebrgr/koito-sum:0.3.2-SUM-RC3`, targeting Linux amd64 and arm64. This source version requires a matching published image; until publication, follow the local build instructions in [DEPLOYMENT.md](DEPLOYMENT.md).
 
 ```sh
 cp deploy/.env.example deploy/.env

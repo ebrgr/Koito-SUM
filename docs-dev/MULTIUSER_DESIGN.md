@@ -1,6 +1,6 @@
 # Estudo: perfis de escuta com administração única
 
-Versão atual: **Koito 0.3.2-SUM-RC2**.
+Versão atual: **Koito 0.3.2-SUM-RC3**.
 
 Status: passos 1 a 5 implementados e validados para o MVP local. O fluxo completo
 foi exercitado em instalação nova, migração consolidada v2 → v3 e cópia do banco
@@ -1030,8 +1030,8 @@ a serviços externos nem alterar a configuração real de relay.
 
 ## Numeração SUM
 
-O nome apresentado é **Koito 0.3.2-SUM-RC2**; a versão técnica e a tag Docker/Git
-são `0.3.2-SUM-RC2` (sem espaços). Mantida a base original 0.3.2, incrementa-se o número
+O nome apresentado é **Koito 0.3.2-SUM-RC3**; a versão técnica e a tag Docker/Git
+são `0.3.2-SUM-RC3` (sem espaços). Mantida a base original 0.3.2, incrementa-se o número
 RC uma vez a cada novo commit. A base corresponde ao [release original v0.3.2](https://github.com/gabehf/Koito/releases/tag/v0.3.2). Somente o número após `SUM-RC` avança entre commits; a base muda apenas ao incorporar deliberadamente outra versão original. A identificação anterior do fork `v0.1.0-rc.1` é histórica.
 `internal/version/VERSION` fornece a versão padrão do Go e da compilação Vite.
 Os metadados do pacote frontend, defaults Docker, exemplos de instalação e

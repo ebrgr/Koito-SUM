@@ -2,7 +2,7 @@ name: koito-sum
 
 services:
   koito:
-    image: ghcr.io/ebrgr/koito-sum:${KOITO_IMAGE_TAG:-0.3.2-SUM-RC2}
+    image: ghcr.io/ebrgr/koito-sum:${KOITO_IMAGE_TAG:-0.3.2-SUM-RC3}
     restart: unless-stopped
     ports:
       - "${KOITO_HOST_BIND:-127.0.0.1}:${KOITO_HOST_PORT:-4110}:4110"

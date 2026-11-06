@@ -1,6 +1,6 @@
 # Design study: listening profiles with a single administrator
 
-Current version: **Koito 0.3.2-SUM-RC2**.
+Current version: **Koito 0.3.2-SUM-RC3**.
 
 [Portuguese version](MULTIUSER_DESIGN.md)
 
@@ -1030,8 +1030,8 @@ to external services or changing the real relay configuration.
 
 ## SUM versioning
 
-The display name is **Koito 0.3.2-SUM-RC2**; the machine version and Docker/Git
-tag are `0.3.2-SUM-RC2` (without spaces). The upstream base remains 0.3.2, with the RC
+The display name is **Koito 0.3.2-SUM-RC3**; the machine version and Docker/Git
+tag are `0.3.2-SUM-RC3` (without spaces). The upstream base remains 0.3.2, with the RC
 number incremented once per new commit. The base matches [upstream v0.3.2](https://github.com/gabehf/Koito/releases/tag/v0.3.2). Only the number after `SUM-RC` advances between commits; change the base only when deliberately adopting another upstream version. The previous fork tag `v0.1.0-rc.1` is historical.
 `internal/version/VERSION` supplies the Go default and Vite build version.
 Frontend package metadata, Docker defaults, deployment examples and current
