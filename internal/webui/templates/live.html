@@ -1,7 +1,7 @@
 {{define "live.html"}}<!doctype html>
 <html lang="en" data-theme="{{.Theme}}"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>{{.Title}} - Koito</title><link rel="icon" href="/favicon.svg">
+<title>{{.Title}} - TuneTrail</title><link rel="icon" type="image/png" href="/public/favicon-96x96.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&family=League+Spartan:wght@100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap">
 <link rel="stylesheet" href="/web-assets/themes.css"><script src="/web-assets/theme.js"></script>
@@ -15,12 +15,12 @@
 {{else if .Media}}{{template "live-media-page" .}}
 {{else if .Rewind}}{{template "live-rewind" .}}
 {{else if eq .Section "search"}}<main class="listing"><h1>Search</h1><form method="get" class="listing-filters"><label>Search your listening history<input type="search" name="q" value="{{.Search}}" maxlength="200" required></label><button class="large-button">Search</button></form>{{template "live-ranking" .Items}}</main>{{else}}{{template "live-listing" .}}{{end}}
-<footer><div>Koito {{.Version}}</div><a href="https://github.com/ebrgr/Koito-SUM" target="_blank" rel="noopener">View the source on GitHub {{icon "ExternalLink"}}</a></footer>
+<footer><div>TuneTrail {{.Version}} · Your music. Your journey.<br><small>A self-hosted listening history, based on <img src="/public/koito-original.svg" alt="" width="16" height="16" style="vertical-align:middle"> Koito 0.3.2</small></div><a href="https://github.com/ebrgr/TuneTrail" target="_blank" rel="noopener">View the source on GitHub {{icon "ExternalLink"}}</a></footer>
 <noscript><p class="noscript">Appearance settings require JavaScript.</p></noscript>
 </div></div>{{template "dialogs" .}}
 </body></html>{{end}}
 
-{{define "live-profiles"}}<main class="profile-selection"><p class="eyebrow">Koito</p><h1>Choose a listening profile</h1><p class="intro">Explore a listening history. No login needed.</p>
+{{define "live-profiles"}}<main class="profile-selection"><p class="eyebrow">TuneTrail</p><h1>Choose a listening profile</h1><p class="intro">Explore a listening history. No login needed.</p>
 <div class="profile-grid">{{$page:=.}}{{range .Profiles}}<a href="/{{.Slug}}{{$page.Next}}" class="card profile-card">{{template "avatar" .}}<div class="profile-identity"><strong>{{.Name}}</strong><span>/{{.Slug}}</span></div></a>{{else}}<div class="card profile-card"><div><h2>No listening profiles yet</h2><p>An administrator can prepare a listening profile for this instance.</p></div></div>{{end}}</div><a class="text-link admin-entry" href="/admin">Administration</a></main>{{end}}
 
 {{define "live-periods"}}<nav class="card period-selector" aria-label="Time period">{{$period:=.Period}}{{range .Periods}}<a href="{{.URL}}" {{if eq .Label $period}}aria-current="true"{{end}}>{{if eq .Label "all_time"}}All{{else}}{{.Label}}{{end}}</a>{{end}}</nav>{{end}}

@@ -17,6 +17,12 @@
 
 ### Changed
 
+- Update project links and the target container image for the TuneTrail repository.
+
+- Adopt TuneTrail 0.x versioning, starting at 0.3, independently of the Koito engine version.
+
+- Rebrand the application as TuneTrail with updated browser icons and project documentation.
+
 - The application builds and runs without CGO or libvips, including in Docker;
   the optional race detector still requires a C compiler.
 

@@ -18,16 +18,16 @@ export default defineConfig({
           },
         },
       ],
-      title: "Koito",
+      title: "TuneTrail",
       logo: {
-        src: "./src/assets/logo_text.png",
-        replacesTitle: true,
+        src: "./src/assets/tunetrail.png",
+        replacesTitle: false,
       },
       social: [
         {
           icon: "github",
           label: "GitHub",
-          href: "https://github.com/gabehf/koito",
+          href: "https://github.com/ebrgr/TuneTrail",
         },
       ],
       sidebar: [

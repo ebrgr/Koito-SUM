@@ -1,101 +1,51 @@
 <div align="center">
-  
-![Koito logo](https://github.com/user-attachments/assets/bd69a050-b40f-4da7-8ff1-4607554bfd6d)
+  <img src="assets/icon.png" alt="TuneTrail logo" width="180">
 
-_Koito (小糸) is a Japanese surname. It is also homophonous with the words 恋と (koi to), meaning "and/with love"._
+# TuneTrail
 
+**Your music. Your journey.**
+
+A self-hosted listening history, based on
+<img src="assets/koito-original.svg" alt="" width="18"> [Koito](https://github.com/gabehf/Koito) engine version [0.3.2](https://github.com/gabehf/Koito/releases/tag/v0.3.2).
 </div>
 
-> **S**imple **U**ser **M**anager
->
-> [Listening profiles and upgrade guide](docs/src/content/docs/guides/profiles.md) · [Player keys and per-profile forwarding](docs/src/content/docs/guides/scrobbler.md)
->
-> Current source version: **Koito 0.3.2-SUM-RC3**. Run `make version.bump` once before each subsequent commit; `make version.check` checks synchronized versions.
->
-> This version adds multiuser scrobble submissions while keeping the experience simple. Approximately 70% of the work on these changes was done with assistance from OpenAI Codex.
->
-> **Back up your database before testing. This version can upgrade an existing installation that has already migrated to SQLite; use its existing data directory so the database is migrated automatically on startup.**
+TuneTrail records your listening history and presents statistics for artists, albums and tracks. It accepts scrobbles from ListenBrainz-compatible players and lets you manage separate listening profiles.
 
-
-<div align="center">
-  
-  [![Ko-Fi](https://img.shields.io/badge/Ko--fi-F16061?style=for-the-badge&logo=ko-fi&logoColor=white)](https://ko-fi.com/gabehf)
-  
-</div>
-
-Koito is a modern, themeable ListenBrainz-compatible scrobbler for self-hosters who want control over their data and insights into their listening habits.
-It supports relaying to other compatible scrobblers, so you can try it safely without replacing your current setup.
-
-> This project is under active development and still considered "unstable", which means the main branch can be unusable at times, and some breaking changes may occur. If you don't want to replace your current scrobbler
-> with Koito quite yet, you can [set up a relay](https://koito.io/guides/scrobbler/#set-up-a-relay) from Koito to another ListenBrainz-compatible
-> scrobbler. This is what I've been doing for the entire development of this app and it hasn't failed me once. Or, you can always use something
-> like [multi-scrobbler](https://github.com/FoxxMD/multi-scrobbler).
+TuneTrail simplifies Koito's architecture into a single Go application with server-rendered HTML, CSS and minimal JavaScript. The React frontend and native image-processing dependencies have been removed; the application runs without CGO or libvips. SQLite stores your data locally.
 
 ## Features
 
-- ⚡ More performant than similar software
-- 🖌️ Sleek UI
-- 🔁 Compatible with anything that scrobbles to ListenBrainz
-- 🔌 Easy relay to your existing setup
-- 📂 Import support for Maloja, ListenBrainz, LastFM, and Spotify
+- Listening profiles, history, rankings and retrospectives.
+- ListenBrainz-compatible submissions, profile-specific keys and optional relay.
+- Import and export tools, and administration for profiles and music metadata.
+- Themeable interface and support for existing Koito SQLite data.
 
-## Demo
+## Roadmap
 
-You can view my public instance with my listening data at https://koito.mnrva.dev
-
-## Screenshots
-
-![screenshot one](assets/screenshot1_2.png)
-![screenshot two](assets/screenshot2.png)
-![screenshot three](assets/screenshot3.png)
+- [x] Simplify the architecture using Go, HTML, CSS and minimal JavaScript.
+- [ ] Restructure administration, improve user separation and refine the UI.
+- [ ] Make all configuration options available through `conf.toml` or the UI.
+- [ ] Add multilingual support to the UI.
+- [ ] Integrate listening history from Spotify, Deezer and Tidal, and review ListenBrainz for listens not submitted by TuneTrail.
+- [ ] Generate images for social media posts, such as Instagram feeds.
 
 ## Installation
 
-For this multiuser fork, see [DEPLOYMENT.md](DEPLOYMENT.md). The release image is
-`ghcr.io/ebrgr/koito-sum:0.3.2-SUM-RC3`, targeting Linux amd64 and arm64. This source version requires a matching published image; until publication, follow the local build instructions in [DEPLOYMENT.md](DEPLOYMENT.md).
+See [DEPLOYMENT.md](DEPLOYMENT.md) for setup and upgrades. The target image is `ghcr.io/ebrgr/tunetrail:0.4`, for Linux amd64 and arm64. Earlier SUM images retain their original tags. A matching image must be published before it can be pulled; use the local build instructions if it is unavailable.
 
 ```sh
 cp deploy/.env.example deploy/.env
-# Set the administrator password and your data directory in deploy/.env first.
+# Set the administrator password and data directory in deploy/.env.
 docker compose --env-file deploy/.env -f deploy/compose.yaml pull
 docker compose --env-file deploy/.env -f deploy/compose.yaml up -d
 ```
 
-Back up an existing SQLite v2 installation before pointing the volume at its
-existing data directory. Migration to schema v3 runs automatically at startup.
-The [English multiuser design](MULTIUSER_DESIGN.en.md) describes the model,
-permissions, migration, and validation results.
+Back up your data before upgrading. Existing configuration names, the data directory, `koito.db`, API routes and Koito import format remain compatible. See the [profile and upgrade guide](docs/src/content/docs/guides/profiles.md) and [player configuration](docs/src/content/docs/guides/scrobbler.md).
 
-Original Koito documentation: [installation guide](https://koito.io/guides/installation/).
+## Development
 
-## Importing Data
+See [DEVELOPMENT.md](DEVELOPMENT.md) and the [development roadmap](docs-dev/ROADMAP.md). The current source version is **TuneTrail 0.4**; run `make version.bump` before each new commit to advance 0.x (for example, 0.9 to 0.10), and `make version.check` to check synchronized versions. Version 1.0 is reserved for a later decision.
 
-See the [data importing guide](https://koito.io/guides/importing/) in the docs.
+## Credits
 
-Before importing, it is recommended you set up any image sources you want to have enabled. You can view the configuration options for image sources in the full list of configuration options.
-
-## Full list of configuration options
-
-See the [configuration reference](https://koito.io/reference/configuration/) in the docs.
-
-## Contributing
-
-For local editing, running, and debugging (Go interface and API), see
-[DEVELOPMENT.md](DEVELOPMENT.md).
-
-There are currently some known issues that I am actively working on, in addition to adding new features. If you want to contribute (especially more and more robust testing) feel free to fork the repository and make a pull request with your changes.
-
-If you have any feature ideas, open a GitHub issue to let me know. I'm sorting through ideas to decide which data visualizations and customization options to add next.
-
-You can also donate money to me, @gabehf, the primary developer, via the "sponsor" or "ko-fi" buttons, and I will spend that money on luxurious trips and fine cuisine in foreign countries, or rent.
-
-## Albums that fueled development + notes
-
-More relevant here than any of my other projects...
-
-Not just during development, you can see my complete listening data on my [live demo instance](https://koito.mnrva.dev).
-
-#### Random notes
-
-- I find it a little annoying when READMEs use emoji but everyone else is doing it so I felt like I had to...
-- About 50% of the reason I built this was minor/not-so-minor greivances with Maloja. Could I have just contributed to Maloja? Maybe, but I like building stuff and I like Koito's UI a lot more anyways.
+TuneTrail is based on [Koito](https://github.com/gabehf/Koito), created by @gabehf, and builds on its listening history, API, catalog and import functionality. See [LICENSE](LICENSE) for license details.

@@ -32,7 +32,7 @@ None linked.
 
 Migration and HTTP validation used disposable databases or copies. External relay delivery was simulated locally. The focused PR branch passed `make check`, the production frontend build, fresh/schema-2 HTTP journeys and migration/profile/admin tests with `-race`. Fork-specific GHCR publishing, deployment and SUM versioning changes are excluded.
 
-https://github.com/ebrgr/Koito-SUM/blob/main/MULTIUSER_DESIGN.en.md
+https://github.com/ebrgr/TuneTrail/blob/main/docs-dev/MULTIUSER_DESIGN.en.md
 
 
 ## Checklist
@@ -55,20 +55,20 @@ All screenshots use a fresh disposable database with fictitious profiles, music,
 
 **Public profile selection**
 
-![Public profile selection](https://raw.githubusercontent.com/ebrgr/Koito-SUM/c37e37c9560aef3af33a3a0f4971930ffb67f88f/docs/screenshots/multiuser/01-profile-selection.png?download=1)
+![Public profile selection](https://raw.githubusercontent.com/ebrgr/TuneTrail/c37e37c9560aef3af33a3a0f4971930ffb67f88f/docs/screenshots/multiuser/01-profile-selection.png?download=1)
 
 **Profile dashboard**
 
-![Profile dashboard](https://raw.githubusercontent.com/ebrgr/Koito-SUM/c37e37c9560aef3af33a3a0f4971930ffb67f88f/docs/screenshots/multiuser/02-profile-dashboard.png?download=1)
+![Profile dashboard](https://raw.githubusercontent.com/ebrgr/TuneTrail/c37e37c9560aef3af33a3a0f4971930ffb67f88f/docs/screenshots/multiuser/02-profile-dashboard.png?download=1)
 
 **Sidebar profile selector**
 
-![Sidebar profile selector](https://raw.githubusercontent.com/ebrgr/Koito-SUM/c37e37c9560aef3af33a3a0f4971930ffb67f88f/docs/screenshots/multiuser/03-profile-selector.png?download=1)
+![Sidebar profile selector](https://raw.githubusercontent.com/ebrgr/TuneTrail/c37e37c9560aef3af33a3a0f4971930ffb67f88f/docs/screenshots/multiuser/03-profile-selector.png?download=1)
 
 **Administration inside Settings**
 
-![Administration inside Settings](https://raw.githubusercontent.com/ebrgr/Koito-SUM/c37e37c9560aef3af33a3a0f4971930ffb67f88f/docs/screenshots/multiuser/04-profile-administration.png?download=1)
+![Administration inside Settings](https://raw.githubusercontent.com/ebrgr/TuneTrail/c37e37c9560aef3af33a3a0f4971930ffb67f88f/docs/screenshots/multiuser/04-profile-administration.png?download=1)
 
 **Per-profile ListenBrainz forwarding**
 
-![Per-profile ListenBrainz forwarding](https://raw.githubusercontent.com/ebrgr/Koito-SUM/c37e37c9560aef3af33a3a0f4971930ffb67f88f/docs/screenshots/multiuser/05-profile-forwarding.png?download=1)
+![Per-profile ListenBrainz forwarding](https://raw.githubusercontent.com/ebrgr/TuneTrail/c37e37c9560aef3af33a3a0f4971930ffb67f88f/docs/screenshots/multiuser/05-profile-forwarding.png?download=1)

@@ -1,6 +1,6 @@
 # Estudo: perfis de escuta com administração única
 
-Versão atual: **Koito 0.3.2-SUM-RC3**.
+Versão histórica deste documento: **Koito 0.3.2-SUM-RC3**. A versão atual do TuneTrail é controlada por `internal/version/VERSION`.
 
 Status: passos 1 a 5 implementados e validados para o MVP local. O fluxo completo
 foi exercitado em instalação nova, migração consolidada v2 → v3 e cópia do banco
@@ -1028,27 +1028,12 @@ typecheck, quatro testes do frontend e build de produção passaram. Os testes
 usaram bancos descartáveis e servidores locais simulados, sem enviar dados
 a serviços externos nem alterar a configuração real de relay.
 
-## Numeração SUM
+## Numeração do TuneTrail
 
-O nome apresentado é **Koito 0.3.2-SUM-RC3**; a versão técnica e a tag Docker/Git
-são `0.3.2-SUM-RC3` (sem espaços). Mantida a base original 0.3.2, incrementa-se o número
-RC uma vez a cada novo commit. A base corresponde ao [release original v0.3.2](https://github.com/gabehf/Koito/releases/tag/v0.3.2). Somente o número após `SUM-RC` avança entre commits; a base muda apenas ao incorporar deliberadamente outra versão original. A identificação anterior do fork `v0.1.0-rc.1` é histórica.
-`internal/version/VERSION` fornece a versão padrão do Go e da compilação Vite.
-Os metadados do pacote frontend, defaults Docker, exemplos de instalação e
-documentos atuais são sincronizados por `make version.bump`, executado antes
-de cada próximo commit. `make version.check` verifica sincronização; o CI também
-exige versão maior que a do commit anterior quando ele já contém esse arquivo.
-Recompilar ou reiniciar não incrementa a numeração.
+A versão atual usa `0.x`, a partir de TuneTrail 0.3. `make version.bump` avança o segundo número, inclusive de 0.9 para 0.10; 1.0 depende de decisão futura. O CI valida o incremento e aceita a migração inicial da numeração SUM. O Koito original usado como base permanece na versão 0.3.2, independente da numeração do TuneTrail. Tags e notas SUM existentes são registros históricos.
 
-Rodapé e About exibem Koito seguido da versão. A consulta de atualizações inclui
-pré-releases publicados e compara RC numericamente (RC10 é posterior a RC9).
-Notas de releases antigos e tags publicadas são preservadas. A versão dos fontes
-não significa que sua imagem ou release GitHub já tenha sido publicada.
+A validação histórica de SUM confirmou os assets em RC2 e exercitou RC2 → RC3 em uma cópia temporária.
 
-Validação da numeração: suíte Go completa, typecheck, seis testes frontend e
-build de produção aprovados. Confirmada a versão RC2 nos assets compilados.
-O incremento RC2 → RC3 foi exercitado em cópia temporária, preservando as notas
-antigas e mantendo os fontes reais em RC2.
 
 ## Checklist do PR: documentação e avisos
 

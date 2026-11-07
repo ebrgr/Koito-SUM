@@ -1,10 +1,10 @@
-# Deploying Koito SUM
+# Deploying TuneTrail
 
-Koito SUM adds public listening profiles and administrator-only management to
+TuneTrail adds public listening profiles and administrator-only management to
 [Koito](https://github.com/gabehf/Koito). The current source version is
-**Koito 0.3.2-SUM-RC3**, a prerelease intended for testing with a backup of your data.
+**TuneTrail 0.4**, a prerelease intended for testing with a backup of your data.
 
-The target image is `ghcr.io/ebrgr/koito-sum:0.3.2-SUM-RC3`, built for Linux amd64
+The target image is `ghcr.io/ebrgr/tunetrail:0.4`, built for Linux amd64
 and arm64. Publish the matching image before pulling this tag, or build it locally. The image serves both the API and compiled interface on port 4110;
 Node.js, Go, and Vite are not required on the deployment host.
 
@@ -101,7 +101,7 @@ when you intentionally choose a different version.
 ## Build locally
 
 ```sh
-docker build --build-arg KOITO_VERSION=0.3.2-SUM-RC3 -t koito-sum:local .
+docker build --build-arg KOITO_VERSION=0.4 -t tunetrail:local .
 ```
 
 .dockerignore excludes local databases, credentials, caches, and development
@@ -111,4 +111,4 @@ timezone data and curl for the healthcheck.
 
 For local development and validation, see [DEVELOPMENT.md](DEVELOPMENT.md).
 
-Current source: **Koito 0.3.2-SUM-RC3**. A matching image must be published before pulling this tag. For an unpublished version, use the local build instructions above. Version numbers advance once per commit using `make version.bump`; historical tags remain unchanged.
+Current source: **TuneTrail 0.4**. A matching image must be published before pulling this tag. For an unpublished version, use the local build instructions above. Version numbers advance once per commit using `make version.bump` (0.9 becomes 0.10); 1.0 is reserved for a later decision. Historical SUM tags remain unchanged.

@@ -1,6 +1,6 @@
 # Design study: listening profiles with a single administrator
 
-Current version: **Koito 0.3.2-SUM-RC3**.
+Historical document version: **Koito 0.3.2-SUM-RC3**. The current TuneTrail version is controlled by `internal/version/VERSION`.
 
 [Portuguese version](MULTIUSER_DESIGN.md)
 
@@ -1028,27 +1028,12 @@ Frontend type checking, all four frontend tests and the production build passed.
 Tests used disposable databases and local mock servers without submitting data
 to external services or changing the real relay configuration.
 
-## SUM versioning
+## TuneTrail versioning
 
-The display name is **Koito 0.3.2-SUM-RC3**; the machine version and Docker/Git
-tag are `0.3.2-SUM-RC3` (without spaces). The upstream base remains 0.3.2, with the RC
-number incremented once per new commit. The base matches [upstream v0.3.2](https://github.com/gabehf/Koito/releases/tag/v0.3.2). Only the number after `SUM-RC` advances between commits; change the base only when deliberately adopting another upstream version. The previous fork tag `v0.1.0-rc.1` is historical.
-`internal/version/VERSION` supplies the Go default and Vite build version.
-Frontend package metadata, Docker defaults, deployment examples and current
-documentation are kept synchronized using `make version.bump` before each next
-commit. `make version.check` verifies synchronization; CI additionally checks
-that the committed version is higher than its parent when the parent has the
-version file. Rebuilding or restarting does not increment the number.
+The current version uses `0.x`, starting with TuneTrail 0.3. `make version.bump` increments the second number, including 0.9 to 0.10; 1.0 is reserved for a future decision. CI checks increments and permits the initial migration from SUM numbering. The original Koito engine base remains 0.3.2, independently of TuneTrail versioning. Existing SUM tags and release notes are historical records.
 
-The footer and About dialog display Koito followed by the version. Release
-checking includes published prereleases and compares RC numbers numerically
-(RC10 is newer than RC9). Historical release notes and published tags stay intact.
-This source version does not imply its image or GitHub release has been published.
+Historical SUM validation confirmed RC2 in compiled assets and exercised RC2 → RC3 in a temporary copy.
 
-Version validation: the full Go suite, type checking, six frontend tests and
-production build passed. RC2 was confirmed in the compiled assets. Incrementing
-RC2 → RC3 was exercised in a temporary copy, preserving historical notes and
-leaving the actual source tree at RC2.
 
 ## PR documentation and warnings checklist
 

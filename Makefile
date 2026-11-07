@@ -79,7 +79,7 @@ build: api.build
 multiuser.check: api.build
 	python3 scripts/validate_multiuser.py --binary ./koito
 
-# Increment once per new commit, then include the synchronized version files.
+# Increment the TuneTrail 0.x version once per new commit.
 .PHONY: version.check version.bump
 version.check:
 	python3 scripts/version.py

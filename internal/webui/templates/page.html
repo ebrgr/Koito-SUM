@@ -1,8 +1,8 @@
 {{define "page.html"}}<!doctype html>
 <html lang="en" data-theme="{{.Theme}}">
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Koito · Go visual preview</title>
-<link rel="icon" href="/preview-assets/icons/Disc3.svg" type="image/svg+xml">
+<title>TuneTrail · Go visual preview</title>
+<link rel="icon" href="/preview-assets/public/favicon-96x96.png" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&family=League+Spartan:wght@100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap">
 <link rel="stylesheet" href="/preview-assets/themes.css"><script src="/preview-assets/theme.js"></script>
@@ -13,7 +13,7 @@
 <div class="app-content">
 {{if .Profile}}<header class="profile-header">{{template "avatar" .Profile}}<div class="profile-identity"><strong>{{.Profile.Name}}</strong><span>Listening profile · /{{.Profile.Slug}}</span></div></header>{{end}}
 {{if .Selection}}{{template "profiles" .}}{{else}}{{template "home" .}}{{end}}
-<footer><div>Koito {{.Version}}</div><a href="https://github.com/ebrgr/Koito-SUM" target="_blank" rel="noopener">View the source on GitHub {{icon "ExternalLink"}}</a>
+<footer><div>TuneTrail {{.Version}}</div><a href="https://github.com/ebrgr/TuneTrail" target="_blank" rel="noopener">View the source on GitHub {{icon "ExternalLink"}}</a>
 <details class="preview-tools"><summary>Go visual preview · fictional data</summary><p>Roadmap 1 — no database or administration. Periods and media are visual demonstrations.</p><nav aria-label="Preview states"><a href="/demo">Normal</a><a href="/demo?state=empty">Empty</a><a href="/demo?state=error">Error</a><a href="/demo?state=long">Long names</a><a href="/demo?state=broken">Missing images</a><a href="/">Profiles</a></nav></details></footer>
 </div></div>
 {{template "dialogs" .}}
@@ -29,9 +29,9 @@
 {{if .Profile}}<button class="nav-button" data-dialog="search-dialog" aria-label="Search" data-tip="Search /">{{icon "Search"}}</button>{{end}}
 <span class="nav-spacer"></span><a class="nav-button" href="{{if .Profile}}/{{.Profile.Slug}}{{else}}/{{end}}" aria-label="Home" data-tip="Home">{{icon "House"}}</a>
 {{if .Profile}}{{if .Live}}<a class="nav-button" href="/{{.Profile.Slug}}/rewind" aria-label="Rewind" data-tip="Rewind">{{icon "History"}}</a>{{else}}<button class="nav-button" data-dialog="feature-dialog" aria-label="Rewind" data-tip="Rewind">{{icon "History"}}</button>{{end}}{{end}}
-</div><div class="nav-group"><a class="nav-button" href="https://koito.io" target="_blank" rel="noopener" aria-label="About" data-tip="About ↗">{{icon "Info"}}</a><button class="nav-button" data-dialog="settings-dialog" aria-label="Settings" data-tip="Settings \">{{icon "Settings2"}}</button></div></nav>{{end}}
+</div><div class="nav-group"><a class="nav-button" href="https://github.com/ebrgr/TuneTrail" target="_blank" rel="noopener" aria-label="About" data-tip="About ↗">{{icon "Info"}}</a><button class="nav-button" data-dialog="settings-dialog" aria-label="Settings" data-tip="Settings \">{{icon "Settings2"}}</button></div></nav>{{end}}
 
-{{define "profiles"}}<main class="profile-selection"><p class="eyebrow">Koito</p><h1>Choose a listening profile</h1><p class="intro">Explore a listening history. No login needed.</p>
+{{define "profiles"}}<main class="profile-selection"><p class="eyebrow">TuneTrail</p><h1>Choose a listening profile</h1><p class="intro">Explore a listening history. No login needed.</p>
 <div class="profile-grid">{{range .Profiles}}<a href="/{{.Slug}}" class="card profile-card">{{template "avatar" .}}<div class="profile-identity"><strong>{{.Name}}</strong><span>/{{.Slug}}</span></div></a>{{end}}</div><button class="text-link admin-entry" data-dialog="feature-dialog">Administration</button></main>{{end}}
 
 {{define "section-title"}}<h3 class="section-title">{{.}}</h3>{{end}}

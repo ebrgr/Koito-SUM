@@ -68,7 +68,7 @@ sem publicação. As issues 031 a 037 foram concluídas.
 ## Roadmap atual — configuração TOML e administração
 
 [Estudo do item 2](../ROADMAP_02_CONFIGURACAO_TOML.md). Issues planejadas
-localmente, sem publicação e ainda não implementadas.
+localmente, sem publicação e ainda não implementadas; etapa em espera.
 
 | Issue | Assunto | Status |
 | --- | --- | --- |
@@ -77,3 +77,17 @@ localmente, sem publicação e ainda não implementadas.
 | [040](040-persistencia-configuracao.md) | Persistência segura e concorrência | Aberta |
 | [041](041-administracao-configuracao.md) | Edição pelo master | Aberta |
 | [042](042-aceite-migracao-configuracao.md) | Integração e aceite | Aberta |
+
+## Roadmap atual — identidade TuneTrail
+
+| Issue | Assunto | Status |
+| --- | --- | --- |
+| [043](043-identidade-tunetrail.md) | Identidade visual e nome TuneTrail | Aberta |
+
+| Issue | Assunto | Status |
+| --- | --- | --- |
+| [044](044-versionamento-tunetrail.md) | Versionamento próprio do TuneTrail | Aberta |
+
+| Issue | Assunto | Status |
+| --- | --- | --- |
+| [045](045-links-diretorio-tunetrail.md) | Links e diretório do TuneTrail | Aberta |

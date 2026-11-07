@@ -1,7 +1,7 @@
 # Koito-SUM — análise de arquitetura e integração com ListenBrainz
 
 **Consolidação da conversa até 4 de novembro de 2026.**  
-**Repositório:** https://github.com/ebrgr/Koito-SUM  
+**Repositório:** https://github.com/ebrgr/TuneTrail
 **Base inicial analisada:** commit a936c1c1b050db486a67c6d429a4c0960d83f790, de 31/10/2026.
 
 Este documento reúne as conclusões, verificações de código e propostas discutidas. Não constitui uma implementação: não foram realizadas a migração da interface nem a sincronização com ListenBrainz. Não houve execução completa da aplicação, teste de desempenho ou consulta à conta pessoal do usuário no ListenBrainz. Alterações posteriores do repositório podem exigir nova conferência.
@@ -323,14 +323,14 @@ A frequência da sincronização ainda não foi definida. Ela deve respeitar lim
 
 ### Repositório
 
-- [Koito-SUM](https://github.com/ebrgr/Koito-SUM)
-- [Base inicial analisada](https://github.com/ebrgr/Koito-SUM/tree/a936c1c1b050db486a67c6d429a4c0960d83f790)
-- [Configuração React Router](https://github.com/ebrgr/Koito-SUM/blob/a936c1c1b050db486a67c6d429a4c0960d83f790/client/react-router.config.ts)
-- [Rotas do servidor](https://github.com/ebrgr/Koito-SUM/blob/a936c1c1b050db486a67c6d429a4c0960d83f790/engine/routes.go)
-- [Dockerfile](https://github.com/ebrgr/Koito-SUM/blob/a936c1c1b050db486a67c6d429a4c0960d83f790/Dockerfile)
-- [Importador ListenBrainz — branch principal](https://github.com/ebrgr/Koito-SUM/blob/main/internal/importer/listenbrainz.go)
-- [Ingestão e relay — branch principal](https://github.com/ebrgr/Koito-SUM/blob/main/engine/handlers/lbz_submit_listen.go)
-- [Persistência de escutas — branch principal](https://github.com/ebrgr/Koito-SUM/blob/main/internal/db/sqlite/listen.go)
+- [Koito-SUM](https://github.com/ebrgr/TuneTrail)
+- [Base inicial analisada](https://github.com/ebrgr/TuneTrail/tree/a936c1c1b050db486a67c6d429a4c0960d83f790)
+- [Configuração React Router](https://github.com/ebrgr/TuneTrail/blob/a936c1c1b050db486a67c6d429a4c0960d83f790/client/react-router.config.ts)
+- [Rotas do servidor](https://github.com/ebrgr/TuneTrail/blob/a936c1c1b050db486a67c6d429a4c0960d83f790/engine/routes.go)
+- [Dockerfile](https://github.com/ebrgr/TuneTrail/blob/a936c1c1b050db486a67c6d429a4c0960d83f790/Dockerfile)
+- [Importador ListenBrainz — branch principal](https://github.com/ebrgr/TuneTrail/blob/main/internal/importer/listenbrainz.go)
+- [Ingestão e relay — branch principal](https://github.com/ebrgr/TuneTrail/blob/main/engine/handlers/lbz_submit_listen.go)
+- [Persistência de escutas — branch principal](https://github.com/ebrgr/TuneTrail/blob/main/internal/db/sqlite/listen.go)
 
 Links para main podem mudar. A conferência posterior sobre client foi feita durante a conversa, sem registrar um segundo hash no relatório original.
 

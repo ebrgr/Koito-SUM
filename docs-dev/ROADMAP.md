@@ -10,16 +10,29 @@ ROADMAP.md
 
 2. Listar todas as variavies de ambiente que são passadas e podem ser usadas. Após começar a estudar a migração de todos estes valores para um arquivo `conf.toml` por examplo que mora no mesmo diretório do banco de dados. 
    - Após fazer com que todos estes dados sejam possíveis de serem editados com a senha e usuário master
-   - [Estudo, inventário e issues 038–042](ROADMAP_02_CONFIGURACAO_TOML.md) — planejamento concluído; implementação pendente.
+   - [Estudo, inventário e issues 038–042](ROADMAP_02_CONFIGURACAO_TOML.md) — planejamento concluído; implementação em espera por decisão do usuário.
 
 3. Melhorar o layout de adiminstração e separar opções por usuários de forma mais efetiva, senha simples para cada usuário para deixar perfil público/privado
     - Colocar badge do lado do nome do usuário sempre que conta de administração estiver logada somente esta conta pode apagar dados e adicionar / deletar novos perfis.
     - Senha simples em cada perfil somente para deixar as visualizações públicas ou não
   
-4. Renomear o projeto para outro como TuneTrail, MuseTrail, Songtrail. O `icon.png`atualizado da nova identidade visual já está em `/assets`
-5. Começar a desenvolver a UI multilingual
-6. Integrar Escutas do spotify / deezer / tidal ou de outros serviços ao koito.
-7.  Gerar imagens que podem ser postadas em FEEDs de midias sociais como instagram
+4. Renomear o projeto para outro como TuneTrail. O `icon.png` e `icon.svg`, atualizar a nova identidade visual que já está em `/assets`
+   - Como a segunda identidade visual "  TuneTrail
+    Your music. Your journey.
+    A self-hosted listening history, based on Koito `icone original pequeno` engine version `versão publicada do koito usada como base para o projeto`"
+   - Criar um novo Readme.md com o novo logo, trocar o logo do projeto que aparece no browser
+   - retire os links do ko-fi
+   - retire o link para o demo
+   - Enfaze do projeto é a simplificação mudança da arquiterura GO/BAckend-React/Front para monolitico simplificando e retirando dependencias externas, mantendo código puro em GO/HTML/CSS/Minimal JScript
+   - Links e diretório local alinhados ao novo repositório: [issue 045](issues/045-links-diretorio-tunetrail.md).
+   - Versionamento próprio TuneTrail 0.x: [issue 044](issues/044-versionamento-tunetrail.md).
+   - [Estudo e implementação](IDENTIDADE_TUNETRAIL.md) · [Issue 043](issues/043-identidade-tunetrail.md): identidade aplicada; SVG e novo PNG aceitos pelo usuário; comparação da interface pendente.
+
+A pesquisa acima identifica u
+
+1. Começar a desenvolver a UI multilingual
+2. Integrar Escutas do spotify / deezer / tidal ou de outros serviços ao koito.
+3.  Gerar imagens que podem ser postadas em FEEDs de midias sociais como instagram
 
 
 **Base de dados vigente: SQLite com esquema consolidado v3.** Referências a v4

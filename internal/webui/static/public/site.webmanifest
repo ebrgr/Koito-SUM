@@ -1,6 +1,6 @@
 {
-  "name": "Koito",
-  "short_name": "Koito",
+  "name": "TuneTrail",
+  "short_name": "TuneTrail",
   "icons": [
     {
       "src": "/public/web-app-manifest-192x192.png",
