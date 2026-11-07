@@ -10,7 +10,7 @@ COPY imagecache/ ./imagecache/
 COPY internal/ ./internal/
 COPY queue/ ./queue/
 COPY db/ ./db/
-ARG KOITO_VERSION=0.4
+ARG KOITO_VERSION=0.5
 RUN go build -trimpath -ldflags "-s -w -X main.Version=$KOITO_VERSION" -o /koito ./cmd/api
 
 FROM debian:bookworm-slim AS final
@@ -21,7 +21,7 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 COPY --from=backend /koito ./app
 COPY assets/ ./assets/
-ARG KOITO_VERSION=0.4
+ARG KOITO_VERSION=0.5
 LABEL org.opencontainers.image.title="TuneTrail" \
       org.opencontainers.image.description="ListenBrainz-compatible scrobbling with simple public listening profiles" \
       org.opencontainers.image.source="https://github.com/ebrgr/TuneTrail" \

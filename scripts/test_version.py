@@ -72,6 +72,16 @@ class VersionTests(unittest.TestCase):
         self.commit()
         self.assertNotEqual(self.run_version("--check-parent").returncode, 0)
 
+    def test_legacy_migration_after_bump(self):
+        # A first TuneTrail commit may already have been bumped to 0.4.
+        self.files("0.3.2-SUM-RC3")
+        self.commit()
+        self.files("0.4")
+        self.commit()
+        self.assertEqual(self.run_version("--check-parent").returncode, 0)
+        self.files("0.2")
+        self.assertNotEqual(self.run_version("--check-parent").returncode, 0)
+
     def test_invalid_version_rejected(self):
         for version in ["0.03", "0.3.2", "1.0", "0.3-SUM-RC3"]:
             with self.subTest(version=version):

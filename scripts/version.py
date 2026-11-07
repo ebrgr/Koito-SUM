@@ -38,8 +38,8 @@ def main():
             previous = re.fullmatch(PATTERN, parent_version)
             if previous and int(match[1]) <= int(previous[1]):
                 raise SystemExit("Increment the version before committing: make version.bump")
-            # Allow exactly the initial migration from the prior SUM numbering.
-            if not previous and not (re.fullmatch(LEGACY_PATTERN, parent_version) and current == "0.3"):
+            # Allow the first TuneTrail commit to advance beyond the initial 0.3.
+            if not previous and not (re.fullmatch(LEGACY_PATTERN, parent_version) and int(match[1]) >= 3):
                 raise SystemExit("Unsupported previous version or invalid SUM migration: " + parent_version)
     if args.bump:
         next_version = f"0.{int(match[1]) + 1}"
